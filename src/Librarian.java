@@ -63,10 +63,17 @@ public class Librarian extends User {
 	}
 	
 	public void authoriseLoan (Integer userID, Integer copyID) {
-		
+		//if the user has negative balance set negative balance to true
+		Boolean negativeBalance = false;
+		if (negativeBalance) {
+			throw new IllegalArgumentException ("That user has unpaid fines and hence cannot take out a book"); 
+		}
+		else {
+			//update database to give that copy to the user, changing the status of copy to unavailable and -1 from the available copies in the resource table
+		}
 	}
 
 	public void authoriseReturn (Integer loanReferance) {
-		
+		//update database to say user has returned copy, changing the status of copy to unavailable and -1 from the available copies in the resource table
 	}
 }
