@@ -37,7 +37,16 @@ public class Copy {
 		this.dueDate = dueDate;
 		this.loanDuration = loanDuration;
 	}
-
+	
+	/**
+	 * Constructor when Copy exists in database 
+	 * @param ID the identifier for the copy
+	*/
+	public Copy(Integer ID) {
+		//Object[] data = getDataFromDatabase ();
+		//Copy(ID,data)
+	}
+	
 	/**
 	 * gets the ID
 	 * @return the Copy ID
@@ -119,5 +128,9 @@ public class Copy {
 	 */
 	public Integer getloanDuration() {
 		return loanDuration;
+	}
+	
+	public void save () {
+		//commit attributes to database 
 	}
 }

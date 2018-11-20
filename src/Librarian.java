@@ -58,4 +58,15 @@ public class Librarian extends User {
 		return staffNumber;
 	}
 
+	public void payfine (Integer userID, Float amount) {
+		//update db to reduce fine by amount where userID 
+	}
+	
+	public void authoriseLoan (Integer userID, Integer copyID) {
+		
+	}
+
+	public void authoriseReturn (Integer loanReferance) {
+		
+	}
 }

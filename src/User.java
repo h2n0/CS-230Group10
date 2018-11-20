@@ -20,7 +20,7 @@ public class User {
 
 	/**
 	 * Constructor
-	 * @param userID the identifier for the copy
+	 * @param userID the identifier for the user
 	 * @param name the name of the user
 	 * @param address the address of the user
 	 * @param balance how much money the user owes the library
@@ -34,6 +34,15 @@ public class User {
 		this.avatarFilePath = avatarFilePath;
 	}
 
+	/**
+	 * Constructor when User exists in database 
+	 * @param userID the identifier for the User
+	 */
+	public User(Integer userID) {
+		//Object[] data = getDataFromDatabase ();
+		//User(ID,data)
+	}
+	
 	/**
 	 * gets the user ID
 	 * @return the user ID
@@ -62,7 +71,12 @@ public class User {
 	 * @param address the user's address
 	 */
 	public void setaddress(String address) {
-		this.address = address;
+		if (validAddress(address)) {
+			this.address = address;
+		}
+		else {
+			throw new IllegalArgumentException ("Address not valid"); 
+		}
 	}
 	/**
 	 * gets the user's address
@@ -102,4 +116,11 @@ public class User {
 		return avatarFilePath;
 	}
 
+	//drawAvatar
+	
+	//pickAvatar
+	
+	private Boolean validAddress(String address) {
+		return true;
+	}
 }
