@@ -23,11 +23,11 @@ public class Copy {
 	/**
 	 * Constructor 
 	 * @param ID the identifier for the copy
-         * @param resourceID the identifier for the resource
-         * @param status says if the copy is available, on loan, or overdue
-         * @param resourceType if the copy is a Book, DVD, or Laptop
-         * @param dueDate date the resource is due
-         * @param loanDuration how long you can borrow the copy for
+     * @param resourceID the identifier for the resource
+     * @param status says if the copy is available, on loan, or overdue
+     * @param resourceType if the copy is a Book, DVD, or Laptop
+     * @param dueDate date the resource is due
+     * @param loanDuration how long you can borrow the copy for
 	 */
 	public Copy(Integer ID, Integer resourceID, String status, String resourceType, Date dueDate, Integer loanDuration) {
 		this.ID = ID;
@@ -38,13 +38,6 @@ public class Copy {
 		this.loanDuration = loanDuration;
 	}
 
-	/**
-	 * sets the ID
-	 * @param ID the identifier for the copy 
-	 */
-	public void setID(Integer ID) {
-		this.ID = ID;
-	}
 	/**
 	 * gets the ID
 	 * @return the Copy ID

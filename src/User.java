@@ -1,29 +1,32 @@
 //Imports go here
 
 /**
- * Class Desc
- * @author 
- * @version 
+ * User stores the info for each user
+ * @author 963257
+ * @version 1.0
  */
 
 public class User {
-	//CommentHere
-	private String userID;
-	//CommentHere
+	//Uniquely identify each user
+	private Integer userID;
+	//The user's name
 	private String name;
-	//CommentHere
+	//The user's address
 	private String address;
-	//CommentHere
+	//The user's balance 
 	private Float balance;
-	//CommentHere
+	//The filepath to the user's avatar
 	private String avatarFilePath;
 
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * Constructor
+	 * @param userID the identifier for the copy
+	 * @param name the name of the user
+	 * @param address the address of the user
+	 * @param balance how much money the user owes the library
+	 * @param avatarFilePath the file path to the user's avatar
 	 */
-	public User(String userID, String name, String address, Float balance, String avatarFilePath) {
+	public User(Integer userID, String name, String address, Float balance, String avatarFilePath) {
 		this.userID = userID;
 		this.name = name;
 		this.address = address;
@@ -32,85 +35,68 @@ public class User {
 	}
 
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * gets the user ID
+	 * @return the user ID
 	 */
-	public void setuserID(String userID) {
-		this.userID = userID;
-	}
-	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
-	 */
-	public String getuserID() {
+	public Integer getuserID() {
 		return userID;
 	}
 
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * sets the user's name
+	 * @param name the new name of the user
 	 */
 	public void setname(String name) {
 		this.name = name;
 	}
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * gets the user's name
+	 * @return the users name
 	 */
 	public String getname() {
 		return name;
 	}
 
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * sets the user's address
+	 * @param address the user's address
 	 */
 	public void setaddress(String address) {
 		this.address = address;
 	}
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * gets the user's address
+	 * @return the user's address
 	 */
 	public String getaddress() {
 		return address;
 	}
 
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * sets the user's balance
+	 * @param balance the user's balance
 	 */
 	public void setbalance(Float balance) {
 		this.balance = balance;
 	}
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * gets the user's balance
+	 * @return the user's balance
 	 */
 	public Float getbalance() {
 		return balance;
 	}
 
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * sets the file path for the users avatar
+	 * @param avatarFilePath the file path to the user's avatar
 	 */
 	public void setavatarFilePath(String avatarFilePath) {
 		this.avatarFilePath = avatarFilePath;
 	}
 	/**
-	 * Method Desc
-	 * @param 
-	 * @return 
+	 * gets the file path for the users avatar
+	 * @return the file path for the users avatar
 	 */
 	public String getavatarFilePath() {
 		return avatarFilePath;
