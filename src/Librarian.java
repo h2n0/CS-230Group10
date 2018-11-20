@@ -22,7 +22,7 @@ public class Librarian extends User {
 	 * @param employmentDate the date the librarian started working in the library
 	 * @param staffnumber the identifier for each librarian
 	 */
-	public Librarian(Integer userID, String name, String address, Float balance, String avatarFilePath,Date employmentDate, Integer staffNumber) {
+	public Librarian(Integer userID, String name, Address address, Float balance, String avatarFilePath,Date employmentDate, Integer staffNumber) {
 		super(userID, name, address, balance, avatarFilePath);
 		this.employmentDate = employmentDate;
 		this.staffNumber = staffNumber;

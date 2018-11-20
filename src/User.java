@@ -1,5 +1,3 @@
-import java.util.regex.Pattern;
-
 
 /**
  * User stores the info for each user
@@ -13,7 +11,7 @@ public class User {
 	//The user's name
 	private String name;
 	//The user's address
-	private String address;
+	private Address address;
 	//The user's balance 
 	private Float balance;
 	//The filepath to the user's avatar
@@ -27,7 +25,7 @@ public class User {
 	 * @param balance how much money the user owes the library
 	 * @param avatarFilePath the file path to the user's avatar
 	 */
-	public User(Integer userID, String name, String address, Float balance, String avatarFilePath) {
+	public User(Integer userID, String name, Address address, Float balance, String avatarFilePath) {
 		this.userID = userID;
 		this.name = name;
 		this.address = address;
@@ -71,8 +69,8 @@ public class User {
 	 * sets the user's address
 	 * @param address the user's address
 	 */
-	public void setaddress(String houseNumorName, String roadName, String city, String postcode) {
-		if (validAddress(houseNumorName, roadName, city, postcode)) {
+	public void setaddress(Address address) {
+		if (address.validAddress()) {
 			this.address = address;
 		}
 		else {
@@ -83,7 +81,7 @@ public class User {
 	 * gets the user's address
 	 * @return the user's address
 	 */
-	public String getaddress() {
+	public Address getaddress() {
 		return address;
 	}
 
@@ -117,31 +115,4 @@ public class User {
 		return avatarFilePath;
 	}
 	
-	//https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom
-	private Boolean validPostcode(String postcode) {
-		//1/2 uppercase then 1/2 digits then space then 1 digit then 2 uppercase letters
-		String validpostcode = "(\\p{Upper}){1,2}?\\d{1,2}? \\d\\\\p{Upper}){2}?";
-		Boolean match = Pattern.matches(validpostcode, postcode);
-		return match;
-	}
-	
-	// house number/house name, road name, City, Postcode 
-	private Boolean validAddress(String houseNumorName, String roadName, String city, String postcode) {
-		//a lower or upper case letter or a space any amount of times
-		String letterOrSpace = "([a-zA-Z[\\p{Blank}]])*";
-		
-		//letterOrSpace or a number any amount of times
-		Boolean validHouseNumorName = Pattern.matches(letterOrSpace, houseNumorName) || Pattern.matches("\\d*", houseNumorName);
-		
-		//letterOrSpace
-		Boolean validRoadName = Pattern.matches(letterOrSpace, roadName);
-		
-		//letterOrSpace
-		Boolean validCity = Pattern.matches(letterOrSpace, city);
-		
-		//only valid if all parts are valid
-		Boolean validAddress = validHouseNumorName && validRoadName && validCity && validPostcode(postcode);
-		
-		return validAddress;
-	}
 }
