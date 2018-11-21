@@ -39,7 +39,29 @@ public class Resource {
 	}
 	
 	
-
+	/**
+	 * The constructor for a Resource that already exists in the database
+	 * @param id The id of the Resource
+	 */
+	// public Resource (int id) {
+		// String sId = Integer.toString(id);
+		// String[][] Data =new String[1][6];
+		// Data = DatabaseManager.Search("Resource",sId);
+		// String[][] queryResult = DatabaseManager.Search("Queue",sId);
+		// Queue<Integer> queue = toQueue(queryResult);
+		// String title = Data[0][1];
+		// String thumbnail =Data [0][2];
+		// int year =  Integer.parseInt(Data [0][3]);
+		// int numCopies = Integer.parseInt(Data [0][4]);
+		// int availableCopiesNum = Integer.parseInt(Data [0][5]);
+		// this.id= id;
+		// this.title= title;
+		// this.year=year;
+		// this.thumbnail=thumbnail;
+		// this.numCopies=numCopies;
+		// this.requestQ=queue;
+		// this.availableCopiesNum=availableCopiesNum;
+	// }
 	/**
 	 * Sets the unique id for this resource
 	 * @param id of the resource
@@ -106,14 +128,19 @@ public class Resource {
 	 * @param a
 	 */
 	public void addToQueue (Integer a) {
-
+		this.requestQ.add(a);
+		String sId = Integer.toString(this.id);
+		String queueData[] =  {sId,a.toString()};
+//		DatabaseManager.Create("Queue",queueData);
 	}
 	
 	/**
 	 * Removes the front user is from the queue
 	 */
 	public void removeFromQueue () {
-		
+		String sId = Integer.toString(this.id);
+//		DatabaseManager.Delete("Queue",this.requestQ.peek());
+		this.requestQ.remove();
 		
 	}
 	
@@ -132,7 +159,21 @@ public class Resource {
 		return this.requestQ.peek();
 	}
 	
-
+	/**
+	 * Takes the query result from the database and constructs the queue based on that
+	 * @param queryResult The result of a query to the database, to the Queue table 
+	 * @return The request queue for a resource
+	 */
+	public Queue<Integer> toQueue (String[][] queryResult ){
+		int i=0;
+		Queue<Integer> queue = new LinkedList<>();
+		while (i!=queryResult.length) {
+			Integer iInteger = new Integer(Integer.parseInt(queryResult[i][i+1]));
+			queue.add(iInteger);
+			i++;
+		}
+		return queue;
+	}
 	
 	/**
 	 * Updates a specific attribute in the Resource table of the Database
@@ -141,7 +182,7 @@ public class Resource {
 	 */
 	public void update (String field , String attribute) {
 		String sId = Integer.toString(this.id);
-	//	DatabaseManager.Update("Resource", field,sId,attribute);
+//		DatabaseManager.Update("Resource", field,sId,attribute);
 	}
 	
 	public void create () {
