@@ -6,10 +6,15 @@ import java.util.Calendar;
  * @
  */
 public class Fine {
+	// ID of the associated loan
 	private int historyID;
+	// The fixed fine of the resource
 	private int fixedFine;
-	private int totalFine;
+	// The total fine accumulated so far
+	private int totalFine = 0;
+	// Days the book has been overdue for
 	private int overdueDays;
+	// Last day the fine was checked + updated
 	private int lastDay;
 	
 	/**
@@ -29,8 +34,37 @@ public class Fine {
 	 */
 	public void payFine(int amount) {
 		totalFine -= amount;
+		updateFine();
+		lastDay = Calendar.DAY_OF_YEAR;
 	}
 	
+	/**
+	 * Updates the total fine accumulated
+	 */
 	public void updateFine() {
+		totalFine += fixedFine * calcDays(lastDay);
+	}
+	
+	/**
+	 * Calculates difference between last day recorded and current day
+	 * @param lastDay The last day recorded
+	 * @return Difference between current and last recorded day
+	 */
+	private static int calcDays(int lastDay) {
+		int DaysInYear = 365;
+		
+		if (lastDay < Calendar.DAY_OF_YEAR) {
+			int x = lastDay;
+			lastDay = Calendar.DAY_OF_YEAR;
+			return Calendar.DAY_OF_YEAR - lastDay;
+			
+		} else if (Calendar.DAY_OF_YEAR < lastDay) {
+			// In case it's a new year
+			lastDay = Calendar.DAY_OF_YEAR;
+			return (DaysInYear - lastDay) + Calendar.DAY_OF_YEAR;
+			
+		} else {
+			return 0;
+		}
 	}
 }
