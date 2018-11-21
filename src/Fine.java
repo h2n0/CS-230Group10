@@ -87,4 +87,28 @@ public class Fine {
 		
 		return false;
 	}
+	
+	/**
+	 * Returns accumulated fine
+	 * @return fine
+	 */
+	public int getFine() {
+		return totalFine;
+	}
+	
+	/**
+	 * Returns associated ID
+	 * @return ID
+	 */
+	public int getID() {
+		return historyID;
+	}
+	
+	/**
+	 * Returns days overdue for
+	 * @return Days overdue
+	 */
+	public int getOverdueDays() {
+		return overdueDays;
+	}
 }
