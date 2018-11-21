@@ -13,7 +13,7 @@ public class Fine {
 	// The total fine accumulated so far
 	private int totalFine = 0;
 	// Days the book has been overdue for
-	private int overdueDays;
+	private int overdueDays = 0;
 	// Last day the fine was checked + updated
 	private int lastDay;
 	
@@ -39,10 +39,12 @@ public class Fine {
 	}
 	
 	/**
-	 * Updates the total fine accumulated
+	 * Updates the total fine accumulated and overdue days
 	 */
 	public void updateFine() {
-		totalFine += fixedFine * calcDays(lastDay);
+		int DaysPassed = calcDays(lastDay);
+		totalFine += fixedFine * DaysPassed;
+		overdueDays += DaysPassed;
 	}
 	
 	/**
