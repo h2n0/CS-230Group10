@@ -42,9 +42,9 @@ public class Fine {
 	 * Updates the total fine accumulated and overdue days
 	 */
 	public void updateFine() {
-		int DaysPassed = calcDays(lastDay);
-		totalFine += fixedFine * DaysPassed;
-		overdueDays += DaysPassed;
+		int daysPassed = calcDays(lastDay);
+		totalFine += fixedFine * daysPassed;
+		overdueDays += daysPassed;
 	}
 	
 	/**
@@ -53,20 +53,38 @@ public class Fine {
 	 * @return Difference between current and last recorded day
 	 */
 	private static int calcDays(int lastDay) {
-		int DaysInYear = 365;
+		int daysInYear = 365;
+		int leapYear = 366;
+		int currentDay = Calendar.DAY_OF_YEAR;
 		
-		if (lastDay < Calendar.DAY_OF_YEAR) {
-			int x = lastDay;
-			lastDay = Calendar.DAY_OF_YEAR;
-			return Calendar.DAY_OF_YEAR - lastDay;
+		if (lastDay < currentDay) {
+			return currentDay - lastDay;
 			
-		} else if (Calendar.DAY_OF_YEAR < lastDay) {
+		} else if (currentDay < lastDay) {
 			// In case it's a new year
-			lastDay = Calendar.DAY_OF_YEAR;
-			return (DaysInYear - lastDay) + Calendar.DAY_OF_YEAR;
-			
-		} else {
-			return 0;
+			if (isLeapYear(Calendar.YEAR)) {
+				// Leap year
+				return (leapYear - lastDay) + currentDay;
+			} else {
+				// Non leap year
+				return (daysInYear - lastDay) + currentDay;
+			}
 		}
+		
+		// If no difference
+		return 0;
+	}
+	
+	/**
+	 * Determines if year is a leap year
+	 * @param year Year to check
+	 * @return True for leap year, false otherwise
+	 */
+	private static boolean isLeapYear(int year) {
+		if (year % 4 == 0) {
+			return true;
+		}
+		
+		return false;
 	}
 }
