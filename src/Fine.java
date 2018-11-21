@@ -3,7 +3,7 @@ import java.util.Calendar;
 /**
  * This class models and handles a fine attached to a user's loan of a resource.
  * @author Scott (960689)
- * @
+ *
  */
 public class Fine {
 	// ID of the associated loan
