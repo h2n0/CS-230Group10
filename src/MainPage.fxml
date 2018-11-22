@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -22,9 +23,9 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="75.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink styleClass="mainSideLink" text="Homepage" />
-            <Hyperlink styleClass="mainSideLink" text="Hyperlink 1" />
-            <Hyperlink styleClass="mainSideLink" text="Hyperlink 2" />
+            <Hyperlink styleClass="mainSideLink" text="Dashboard" />
+            <TreeView prefHeight="29.0" prefWidth="75.0" />
+            <Hyperlink id="Fine" styleClass="mainSideLink" text="Fine" />
          </children>
       </VBox>
    </left>
@@ -36,8 +37,8 @@
                   <ImageView fitHeight="30.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true" />
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="Label" />
-                        <Label text="Label" />
+                        <Label text="Username" />
+                        <Label text="Balance" />
                      </children>
                   </VBox>
                </children>
@@ -47,7 +48,7 @@
                   <Insets />
                </opaqueInsets>
             </TextField>
-            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Search" />
          </children>
       </HBox>
    </top>
