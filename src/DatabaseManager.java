@@ -165,8 +165,27 @@ public class DatabaseManager {
 		}
 	}
 
-	public static Object searchRecord() {
-		return null;
+	/**
+	 * Takes a record object and searches for it in the specified table
+	 * @param record The record to look for
+	 * @param table The table to search in
+	 * @return The full object from the table
+	 */
+	public static Object searchRecord(Object record, String table) {
+		String filePath = compilePath(table);
+
+		try {
+			//Load file
+			ArrayList<Object> data =
+				getTable(new FileInputStream(filePath));
+
+			//Find and return record
+			return data.get(data.indexOf(record));
+
+		} catch (FileNotFoundException e) {
+			displayFileError();
+			return null;
+		}
 	}
 
 	public static void main(String[] args) throws FileNotFoundException{
@@ -177,6 +196,9 @@ public class DatabaseManager {
 		saveRecord(fine2, "test");
 		test = getTable(new FileInputStream("Database//test.dat"));
 		System.out.println("Amount of data: " + test.size());
+
+		System.out.println("Object found: " + searchRecord(fine1,
+			"test"));
 
 		deleteRecord(fine1, "test");
 		test = getTable(new FileInputStream("Database//test.dat"));

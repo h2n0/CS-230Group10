@@ -47,12 +47,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="4402" />
+          <entry key="java" value="4945" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="4402" />
+          <entry key="JAVA" value="4945" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -91,8 +91,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="142" column="54" selection-start-line="142" selection-start-column="54" selection-end-line="142" selection-end-column="54" />
+            <state relative-caret-position="159">
+              <caret line="171" column="49" selection-start-line="171" selection-start-column="49" selection-end-line="171" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#displayFileError#0;class#DatabaseManager#0" />
@@ -107,9 +107,8 @@
                 <element signature="method#compilePath#0;class#DatabaseManager#0" />
                 <element signature="docComment;method#saveRecord#0;class#DatabaseManager#0" />
                 <element signature="method#saveRecord#0;class#DatabaseManager#0" />
+                <element signature="docComment;method#deleteRecord#0;class#DatabaseManager#0" />
                 <element signature="method#deleteRecord#0;class#DatabaseManager#0" />
-                <element signature="e#4338#4339#0" expanded="true" />
-                <element signature="e#4356#4357#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -167,7 +166,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542979817885" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542981462646" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
@@ -285,8 +284,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="142" column="54" selection-start-line="142" selection-start-column="54" selection-end-line="142" selection-end-column="54" />
+        <state relative-caret-position="159">
+          <caret line="171" column="49" selection-start-line="171" selection-start-column="49" selection-end-line="171" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#displayFileError#0;class#DatabaseManager#0" />
@@ -301,9 +300,8 @@
             <element signature="method#compilePath#0;class#DatabaseManager#0" />
             <element signature="docComment;method#saveRecord#0;class#DatabaseManager#0" />
             <element signature="method#saveRecord#0;class#DatabaseManager#0" />
+            <element signature="docComment;method#deleteRecord#0;class#DatabaseManager#0" />
             <element signature="method#deleteRecord#0;class#DatabaseManager#0" />
-            <element signature="e#4338#4339#0" expanded="true" />
-            <element signature="e#4356#4357#0" expanded="true" />
           </folding>
         </state>
       </provider>
