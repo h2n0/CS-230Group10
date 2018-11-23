@@ -188,6 +188,17 @@ public class DatabaseManager {
 		}
 	}
 
+	public static void editRecord(Object record, String table) {
+
+		try {
+			// Obtain record to edit
+			Object edit = searchRecord(record, table);
+
+		} catch (FileNotFoundException e) {
+			displayFileError();
+		}
+	}
+
 	public static void main(String[] args) throws FileNotFoundException{
 		ArrayList<Object> test;
 		Fine fine1 = new Fine(1, 20);
