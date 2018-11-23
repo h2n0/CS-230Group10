@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -6,7 +7,8 @@ import java.util.Calendar;
  * NEEDS REVIEWING PLEASE
  *
  */
-public class Fine {
+public class Fine implements Serializable {
+	private static final long serialVersionUID = 1L;
 	// ID of the associated loan
 	private int historyID;
 	// The fixed fine of the resource
@@ -59,7 +61,33 @@ public class Fine {
 		
 		return false;
 	}
-	
+
+	/**
+	 * Checks if this fine is equal to another object
+	 * @param obj The object to check against
+	 * @return True if equal, false otherwise
+	 */
+	public boolean equals(Object obj) {
+		// If object is null, can't be equal
+		if (obj == null) {
+			return false;
+		}
+
+		// If object is exactly this, they must be equal
+		if (obj == this) {
+			return true;
+		}
+
+		// If object is not of type Fine, cannot be this
+		if (!(obj instanceof Fine)) {
+			return false;
+		}
+
+		// If all checks passed, compared historyIDs
+		Fine checkFine = (Fine) obj;
+		return checkFine.historyID == this.historyID;
+	}
+
 	/**
 	 * Takes in ID of the history to attach to and the resource's fixed fine
 	 * @param historyID ID of the history
