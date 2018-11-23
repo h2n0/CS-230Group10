@@ -35,18 +35,18 @@ public class DatabaseManager {
 
 	/**
 	 * Gets all records from a specified table
-	 * @param fileWrite File input stream open on desired table
+	 * @param fileRead File input stream open on desired table
 	 * @return The table in the form of an array list
 	 */
-	private static ArrayList<Object> getTable(FileInputStream fileWrite) {
+	private static ArrayList<Object> getTable(FileInputStream fileRead) {
 		ArrayList<Object> output = new ArrayList<>();
 		// Check variable for end of file
 
 		try {
 			// Check if file is empty to prevent IOException
-			if (fileWrite.available() != 0) {
+			if (fileRead.available() != 0) {
 				ObjectInputStream objI =
-					new ObjectInputStream(fileWrite);
+					new ObjectInputStream(fileRead);
 				// Cast file content to an arraylist of objects
 				output = (ArrayList<Object>) objI.readObject();
 				objI.close();
@@ -68,18 +68,11 @@ public class DatabaseManager {
 	}
 
 	/**
-	 * Writes an arraylist of objects to a specified file
-	 * @param objI ObjectOutputStream opened on specified file
-	 * @param data Objects to be written to file
-	 * @throws IOException Thrown if file is not serialised
+	 * Writes an arraylist to a specified file
+	 * @param objO ObjectInputStream open on specified file
+	 * @param data The arraylist to write to the file
+	 * @return True if succeeded, false otherwise
 	 */
-	private static void rewrite(ObjectOutputStream objI,
-				    ArrayList<Object> data) throws IOException{
-		for (Object item : data) {
-			objI.writeObject(item);
-		}
-	}
-
 	private static boolean writeToFile(ObjectOutputStream objO,
 					ArrayList<Object> data) {
 		try {
@@ -91,6 +84,15 @@ public class DatabaseManager {
 			displayIOError("writeToFile");
 			return false;
 		}
+	}
+
+	/**
+	 * Compiles the file path of the table passed in
+	 * @param table The destination table
+	 * @return Compiled file path to the table
+	 */
+	private static String compilePath(String table) {
+		return DB_PATH + table + EXTENSION;
 	}
 
 	/**
@@ -109,16 +111,13 @@ public class DatabaseManager {
 			// Check if file is empty to prevent EOFException
 			if (fileWrite.available() != 0) {
 				// Get table
-				data =
-					getTable( new FileInputStream(DB_PATH + table + EXTENSION));
+				data = getTable(fileWrite);
 			} else {
 				data = new ArrayList<>();
 			}
 
 			// Add new record to list
 			data.add(record);
-
-			System.out.println("Amount of data: " + data.size());
 
 			// Write data to file
 			writeToFile(new ObjectOutputStream(
@@ -137,43 +136,50 @@ public class DatabaseManager {
 		}
 	}
 
+	/**
+	 * Deletes a specific record from the specified table
+	 * @param record The record to delete
+	 * @param table The table to delete from
+	 * @return True if successful, false otherwise
+	 */
 	public static boolean deleteRecord(Object record, String table) {
+		String filePath = compilePath(table);
+
 		try {
-			FileInputStream fileWrite =
-				new FileInputStream(DB_PATH + table + EXTENSION);
+			FileInputStream fileRead =
+				new FileInputStream(filePath);
 
 			// Get table and place in an array
-			ArrayList<Object> tableArray = getTable(fileWrite);
+			ArrayList<Object> tableArray = getTable(fileRead);
 
-			ArrayList<Object> newTable = new ArrayList<>();
+			// Remove record from the array
+			tableArray.remove(record);
 
-			// Add all objects aside from object to delete to list
-			for (Object item: tableArray) {
-				if (!item.equals(record)) {
-					newTable.add(item);
-				}
-			}
-
-			// Clear and rewrite file using new array
-			fileWrite.close();
-			ObjectInputStream newObjI =
-				new ObjectInputStream(new FileInputStream(DB_PATH + table + EXTENSION));
-
-
-
+			// Write new array to file
+			writeToFile(new ObjectOutputStream(
+				new FileOutputStream(filePath)), tableArray);
+			return true;
 		} catch (IOException e) {
 			displayIOError("deleteRecord");
+			return false;
 		}
-
-
-		return true;
 	}
 
 	public static Object searchRecord() {
 		return null;
 	}
 
-	public static void main(String[] args) {
-		saveRecord(new Fine(1, 20), "test");
+	public static void main(String[] args) throws FileNotFoundException{
+		ArrayList<Object> test;
+		Fine fine1 = new Fine(1, 20);
+		Fine fine2 = new Fine(2, 30);
+		saveRecord(fine1, "test");
+		saveRecord(fine2, "test");
+		test = getTable(new FileInputStream("Database//test.dat"));
+		System.out.println("Amount of data: " + test.size());
+
+		deleteRecord(fine1, "test");
+		test = getTable(new FileInputStream("Database//test.dat"));
+		System.out.println("Amount of data: " + test.size());
 	}
 }
