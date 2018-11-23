@@ -1,4 +1,9 @@
 
+/**
+ * The class handles all of the user functions and responsibilities
+ * @author Elliot Lee-Cerrino (964552)
+ *
+ */
 public class User {
 
 	// User properties
@@ -42,6 +47,7 @@ public class User {
 	
 	/**
 	 * Check to see if the provided address is a valid one
+	 * 
 	 * @param newAddress - The address to check
 	 * @return boolean - True if address is valid and False otherwise
 	 */
