@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -5,7 +6,7 @@ import java.util.Calendar;
  * @author Scott (960689)
  *
  */
-public class Fine {
+public class Fine implements Serializable {
 	// ID of the associated loan
 	private int historyID;
 	// The fixed fine of the resource
