@@ -7,6 +7,7 @@ import java.util.Calendar;
  *
  */
 public class Fine implements Serializable {
+	private static final long serialVersionUID = 1L;
 	// ID of the associated loan
 	private int historyID;
 	// The fixed fine of the resource

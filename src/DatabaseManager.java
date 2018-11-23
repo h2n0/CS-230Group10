@@ -13,49 +13,48 @@ public class DatabaseManager {
 	private static final String DB_PATH = "Database//";
 	// Extension for the database files
 	private static final String EXTENSION = ".dat";
-	
-	
+
+
 	/**
 	 * Displays the file not found error message using a JOptionPane
 	 */
 	private static void displayFileError() {
-		JOptionPane.showMessageDialog(null, "File not found, check file path and try again", 
-				"File not found", JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, "File not found, check file path and try again",
+			"File not found", JOptionPane.ERROR_MESSAGE);
 	}
-	
+
 	/**
 	 * Displays the input/output error message using a JOptionPane
 	 */
 	private static void displayIOError() {
 		JOptionPane.showMessageDialog(null, "Error while writing to file, try again",
-				"I/O Error", JOptionPane.ERROR_MESSAGE);
+			"I/O Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
 	 * Gets all records from a specified table
-	 * @param ObjI Object input stream open on desired table
-	 * @return Table in the form of an array list
+	 * @param objI Object input stream open on desired table
+	 * @return The table in the form of an array list
 	 */
-	private static ArrayList<Object> getTable(ObjectInputStream ObjI) {
-                ArrayList<Object> output = new ArrayList<>();
-                Object record;
+	private static ArrayList<Object> getTable(ObjectInputStream objI) {
+		ArrayList<Object> output = new ArrayList<>();
+		// Check variable for end of file
 
 		try {
-                        while ((record = ObjI.readObject()) != null) {
-				output.add(record);
-                        }
-
-                        return output;
+			// Cast file content to an arraylist of objects
+			output = (ArrayList<Object>) objI.readObject();
+			objI.close();
+			return output;
 
 		} catch (IOException e) {
-		        displayIOError();
-		        return null;
+			displayIOError();
+			return null;
 
-                } catch (ClassNotFoundException e) {
-		        // ADD HANDLE CODE HERE
-                        return null;
+		} catch (ClassNotFoundException e) {
+			// ADD HANDLE CODE HERE
+			return null;
 
-                }
+		}
 	}
 
 	/**
@@ -64,9 +63,23 @@ public class DatabaseManager {
 	 * @param data Objects to be written to file
 	 * @throws IOException Thrown if file is not serialised
 	 */
-	private void rewrite(ObjectOutputStream objI, ArrayList<Object> data) throws IOException{
+	private static void rewrite(ObjectOutputStream objI,
+				    ArrayList<Object> data) throws IOException{
 		for (Object item : data) {
 			objI.writeObject(item);
+		}
+	}
+
+	private static boolean writeToFile(ObjectOutputStream objO,
+					ArrayList<Object> data) {
+		try {
+			objO.writeObject(data);
+			objO.flush();
+			objO.close();
+			return true;
+		} catch (IOException e) {
+			displayIOError();
+			return false;
 		}
 	}
 
@@ -77,22 +90,24 @@ public class DatabaseManager {
 	 * @return True if saved successfully, false otherwise
 	 */
 	public static boolean saveRecord(Object record, String table) {
-		ArrayList<Object> data = new ArrayList<>();
 
 		try {
-			// Get table
-			data = getTable(new ObjectInputStream(new FileInputStream(DB_PATH + table + "")));
-			FileOutputStream fileWrite = 
-					new FileOutputStream(DB_PATH +
-                                                table + ".dat");
-			ObjectOutputStream objO =
-					new ObjectOutputStream(fileWrite);
+			ArrayList<Object> data;
 
-			// Write object then close writer
-			objO.writeObject(record);
-			objO.flush();
-			objO.close();
-			
+			// Get table
+			data =
+				getTable(new ObjectInputStream(
+					new FileInputStream(DB_PATH + table + EXTENSION)));
+
+			// Add new record to list
+			data.add(record);
+
+			System.out.println("Amount of data: " + data.size());
+
+			// Write data to file
+			writeToFile(new ObjectOutputStream(
+				new FileOutputStream(DB_PATH + table + EXTENSION)), data);
+
 			return true;
 		} catch (FileNotFoundException e) {
 			// If the file is not found, display an error pane
@@ -104,7 +119,7 @@ public class DatabaseManager {
 			return false;
 		}
 	}
-	
+
 	public static boolean deleteRecord(Object record, String table) {
 		try {
 			FileInputStream fileWrite =
@@ -126,24 +141,23 @@ public class DatabaseManager {
 
 			// Clear and rewrite file using new array
 			fileWrite.close();
-			FileInputStream newWrite =
-				new FileInputStream(DB_PATH + table + EXTENSION);
 			ObjectInputStream newObjI =
-				new ObjectInputStream(fileWrite);
+				new ObjectInputStream(new FileInputStream(DB_PATH + table + EXTENSION));
 
-			
+
+
 		} catch (IOException e) {
 			displayIOError();
 		}
-		
-		
+
+
 		return true;
 	}
-	
+
 	public static Object searchRecord() {
 		return null;
 	}
-	
+
 	public static void main(String[] args) {
 		saveRecord(new Fine(1, 20), "test");
 	}
