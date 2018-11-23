@@ -26,28 +26,38 @@ public class DatabaseManager {
 	/**
 	 * Displays the input/output error message using a JOptionPane
 	 */
-	private static void displayIOError() {
-		JOptionPane.showMessageDialog(null, "Error while writing to file, try again",
+	private static void displayIOError(String methodName) {
+		JOptionPane.showMessageDialog(null,
+			"Error in " + methodName + " while " +
+				"writing to file, try again",
 			"I/O Error", JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
 	 * Gets all records from a specified table
-	 * @param objI Object input stream open on desired table
+	 * @param fileWrite File input stream open on desired table
 	 * @return The table in the form of an array list
 	 */
-	private static ArrayList<Object> getTable(ObjectInputStream objI) {
+	private static ArrayList<Object> getTable(FileInputStream fileWrite) {
 		ArrayList<Object> output = new ArrayList<>();
 		// Check variable for end of file
 
 		try {
-			// Cast file content to an arraylist of objects
-			output = (ArrayList<Object>) objI.readObject();
-			objI.close();
-			return output;
+			// Check if file is empty to prevent IOException
+			if (fileWrite.available() != 0) {
+				ObjectInputStream objI =
+					new ObjectInputStream(fileWrite);
+				// Cast file content to an arraylist of objects
+				output = (ArrayList<Object>) objI.readObject();
+				objI.close();
+				return output;
+			} else {
+				return output;
+			}
 
 		} catch (IOException e) {
-			displayIOError();
+			displayIOError("getTable");
+			System.out.println("WHy am I here");
 			return null;
 
 		} catch (ClassNotFoundException e) {
@@ -78,7 +88,7 @@ public class DatabaseManager {
 			objO.close();
 			return true;
 		} catch (IOException e) {
-			displayIOError();
+			displayIOError("writeToFile");
 			return false;
 		}
 	}
@@ -93,11 +103,17 @@ public class DatabaseManager {
 
 		try {
 			ArrayList<Object> data;
+			FileInputStream fileWrite =
+				new FileInputStream(DB_PATH + table + EXTENSION);
 
-			// Get table
-			data =
-				getTable(new ObjectInputStream(
-					new FileInputStream(DB_PATH + table + EXTENSION)));
+			// Check if file is empty to prevent EOFException
+			if (fileWrite.available() != 0) {
+				// Get table
+				data =
+					getTable( new FileInputStream(DB_PATH + table + EXTENSION));
+			} else {
+				data = new ArrayList<>();
+			}
 
 			// Add new record to list
 			data.add(record);
@@ -115,7 +131,8 @@ public class DatabaseManager {
 			return false;
 		} catch (IOException e) {
 			// If there is an error writing to file, display an error
-			displayIOError();
+			displayIOError("saveRecord");
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -124,11 +141,9 @@ public class DatabaseManager {
 		try {
 			FileInputStream fileWrite =
 				new FileInputStream(DB_PATH + table + EXTENSION);
-			ObjectInputStream objI =
-				new ObjectInputStream(fileWrite);
 
 			// Get table and place in an array
-			ArrayList<Object> tableArray = getTable(objI);
+			ArrayList<Object> tableArray = getTable(fileWrite);
 
 			ArrayList<Object> newTable = new ArrayList<>();
 
@@ -147,7 +162,7 @@ public class DatabaseManager {
 
 
 		} catch (IOException e) {
-			displayIOError();
+			displayIOError("deleteRecord");
 		}
 
 
