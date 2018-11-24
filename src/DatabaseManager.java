@@ -171,16 +171,22 @@ public class DatabaseManager {
 	 * @param table The table to search in
 	 * @return The full object from the table
 	 */
-	public static Object searchRecord(Object record, String table) {
+	public static ArrayList<Object> searchRecord(Object record,
+						   String table) {
 		String filePath = compilePath(table);
+		ArrayList<Object> output = new ArrayList<>();
 
 		try {
 			//Load file
 			ArrayList<Object> data =
 				getTable(new FileInputStream(filePath));
 
-			//Find and return record
-			return data.get(data.indexOf(record));
+			//Find and return all matching records
+			for (Object item : data) {
+				output.add(item);
+			}
+
+			return output;
 
 		} catch (FileNotFoundException e) {
 			displayFileError();
@@ -190,13 +196,13 @@ public class DatabaseManager {
 
 	public static void editRecord(Object record, String table) {
 
-		try {
+		//try {
 			// Obtain record to edit
 			Object edit = searchRecord(record, table);
 
-		} catch (FileNotFoundException e) {
-			displayFileError();
-		}
+		//} catch (FileNotFoundException e) {
+		//	displayFileError();
+		//}
 	}
 
 	public static void main(String[] args) throws FileNotFoundException{
