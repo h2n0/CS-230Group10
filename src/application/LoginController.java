@@ -32,10 +32,15 @@ public class LoginController {
 	private void handleLoginAction(ActionEvent event ) {
 		//DatabaseManager.searchpartial()
 		String inputUsername = usernameField.getText();
-		if(inputUsername == "test")
-		{
+		System.out.println(inputUsername);
+	    if(inputUsername.equals("test")) {
 			changeToMainPage();
+			userNotFound.setVisible(false);
 		}
+	    else
+	    {
+	    	userNotFound.setVisible(true);
+	    }
 	}
 	
 	private void changeToMainPage() {
