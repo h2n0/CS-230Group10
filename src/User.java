@@ -115,4 +115,20 @@ public class User {
 		return avatarFilePath;
 	}
 	
+	@Override 
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		
+		final User PERSON = (User) obj;
+		if (this.name == PERSON.getname()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	
 }
