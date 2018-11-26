@@ -29,41 +29,24 @@
  	 * @param author The author of the Book
  	 * @param language The spoken language of the Book
  	 */
- 	public Book (int id, String title , int year, String thumbnail , String author , String publisher ,String language ) {
+ 	public Book (int id, String title , int year, String thumbnail , String author , String publisher, String genre, String ISBN ,String language ) {
  		super(id,title,year,thumbnail);
  		this.author=author;
  		this.publisher=publisher;
  		this.language=language;
  		this.genre=genre;
  		this.ISBN=ISBN;
+ 		this.type = "Book";
+ //		create();
 		
 	}
-	/**
-	 * The constructor of a Book that already exists in the Database
-	 * @param id The id of the Resource
-	 */
-	// public Book (int id) {
-		// super(id);
-		// String sId = Integer.toString(id);
-		// String[][] Data =new String[1][5];
-		// Data = DatabaseManager.Search("Book",sId);
-		// String author = Data [0][1];
-		// String publisher = Data [0][1];
-		// String language = Data [0] [3];
-		// this.author=author;
-		// this.publisher=publisher;
-		// this.language=language;
-	
-		
-	// }
- 	
+	 	
  	/**
 	 * Sets the author
  	 * @param author
  	 */
  	public  void setAuthor (String author) {
  		this.author=author;
- 		this.update("Author",author);
  	}
  	/**
  	 */
@@ -74,7 +57,6 @@
  	 */
  	public  void setPublisher (String publisher) {
  		this.publisher=publisher;
- 		this.update("Publisher",publisher);
  	}
  	/**
  	 */
@@ -85,7 +67,6 @@
  	 */
  	public  void setLanguage (String language) {
  		this.language=language;
- 		this.update("Language",language);
  	}
  	
  	/**
@@ -94,7 +75,6 @@
  	 */
  	public  void setGenre (String genre) {
  		this.genre=genre;
- 		this.update("Genre",genre);
  	}
  	
  	/**
@@ -103,7 +83,6 @@
  	 */
  	public  void setISBN (String ISBN) {
  		this.ISBN=ISBN;
- 		this.update("ISBN",ISBN);
  	}
  	
 
@@ -149,43 +128,25 @@
  	 * @param attribute The new value of the attribute
  	 */
  	@Override
- 	public void update (String field , String attribute) {
- 		String sId = Integer.toString(this.id);
- //		DatabaseManager.Update("Book", field,sId,attribute);
- 	}
+ 	public void update () {
  	
+ 	}
  	
  	/** 
 	 * Creates a new entry in the database for a new Book 
 	 */
-	public void create () {
+//	public void create () {
 		
-		String sId = Integer.toString(this.id);
-		String sYear = Integer.toString(this.year);
-		String sNumCopies = Integer.toString(this.numCopies);
-		String sAvailableCopies = Integer.toString(this.availableCopiesNum);
-		String bookData[] = {this.author,this.publisher,this.language, this.genre,this.ISBN};
-		String resourceData[] = {sId,this.title,sYear,this.thumbnail,sNumCopies,sAvailableCopies};
-//		DatabaseManager.Create("Book",bookData);
-//		DatabaseManager.Create("Resource",resourceData);
-		Queue<Integer> queue = this.requestQ;
-		while (!queue.isEmpty()) {
-			String queueData[] =  {sId,queue.peek().toString()};
-//			DatabaseManager.Create("Queue",queueData);
-			queue.remove();
-		}
-	}
+//		DatabaseManagaer.saveRecord(this,"Book");
+//	}
  	
 	/**
 	 * Deletes all the information associated with this Book from the Database
 	 */
-	public void delete () {
+//	public void delete () {
 		
-		String sId = Integer.toString(this.id);
-//		DatabaseManager.Delete("Resource",sId);
-//		DatabaseManager.Delete("Book",sId);
-//		DatabaseManager.Delete("Queue",sId);
-	}
+//	DatabaseManager.deleteRecord(this,"Book");
+//	}
  	
 	
  }
