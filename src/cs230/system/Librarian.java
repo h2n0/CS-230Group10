@@ -1,7 +1,9 @@
+package cs230.system;
+
 import java.util.Date;
 
 /**
- * Librarian stores the information for each librarian
+ * cs230.system.Librarian stores the information for each librarian
  * @author 963257	
  * @version 1.0
  */
