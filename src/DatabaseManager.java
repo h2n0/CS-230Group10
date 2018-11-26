@@ -33,39 +33,6 @@ public class DatabaseManager {
 			"I/O Error", JOptionPane.ERROR_MESSAGE);
 	}
 
-	/**
-	 * Gets all records from a specified table
-	 * @param fileRead File input stream open on desired table
-	 * @return The table in the form of an array list
-	 */
-	private static ArrayList<Object> getTable(FileInputStream fileRead) {
-		ArrayList<Object> output = new ArrayList<>();
-		// Check variable for end of file
-
-		try {
-			// Check if file is empty to prevent IOException
-			if (fileRead.available() != 0) {
-				ObjectInputStream objI =
-					new ObjectInputStream(fileRead);
-				// Cast file content to an arraylist of objects
-				output = (ArrayList<Object>) objI.readObject();
-				objI.close();
-				return output;
-			} else {
-				return output;
-			}
-
-		} catch (IOException e) {
-			displayIOError("getTable");
-			System.out.println("WHy am I here");
-			return null;
-
-		} catch (ClassNotFoundException e) {
-			// ADD HANDLE CODE HERE
-			return null;
-
-		}
-	}
 
 	/**
 	 * Writes an arraylist to a specified file
@@ -93,6 +60,40 @@ public class DatabaseManager {
 	 */
 	private static String compilePath(String table) {
 		return DB_PATH + table + EXTENSION;
+	}
+
+	/**
+	 * Gets all records from a specified table
+	 * @param fileRead File input stream open on desired table
+	 * @return The table in the form of an array list
+	 */
+	public static ArrayList<Object> getTable(FileInputStream fileRead) {
+		ArrayList<Object> output = new ArrayList<>();
+		// Check variable for end of file
+
+		try {
+			// Check if file is empty to prevent IOException
+			if (fileRead.available() != 0) {
+				ObjectInputStream objI =
+					new ObjectInputStream(fileRead);
+				// Cast file content to an arraylist of objects
+				output = (ArrayList<Object>) objI.readObject();
+				objI.close();
+				return output;
+			} else {
+				return output;
+			}
+
+		} catch (IOException e) {
+			displayIOError("getTable");
+			System.out.println("WHy am I here");
+			return null;
+
+		} catch (ClassNotFoundException e) {
+			// ADD HANDLE CODE HERE
+			return null;
+
+		}
 	}
 
 	/**
