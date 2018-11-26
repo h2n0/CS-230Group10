@@ -1,7 +1,9 @@
+package cs230.system;
+
 import java.util.Date;
 
 /**
- * Copy class stores the information for each copy 
+ * cs230.system.Copy class stores the information for each copy
  * @author 963257
  * @version 1.0
  */
@@ -39,17 +41,17 @@ public class Copy {
 	}
 	
 	/**
-	 * Constructor when Copy exists in database 
+	 * Constructor when cs230.system.Copy exists in database
 	 * @param ID the identifier for the copy
 	*/
 	public Copy(Integer ID) {
 		//Object[] data = getDataFromDatabase ();
-		//Copy(ID,data)
+		//cs230.system.Copy(ID,data)
 	}
 	
 	/**
 	 * gets the ID
-	 * @return the Copy ID
+	 * @return the cs230.system.Copy ID
 	 */
 	public Integer getID() {
 		return ID;

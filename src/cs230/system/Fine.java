@@ -1,3 +1,5 @@
+package cs230.system;
+
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -78,7 +80,7 @@ public class Fine implements Serializable {
 			return true;
 		}
 
-		// If object is not of type Fine, cannot be this
+		// If object is not of type cs230.system.Fine, cannot be this
 		if (!(obj instanceof Fine)) {
 			return false;
 		}

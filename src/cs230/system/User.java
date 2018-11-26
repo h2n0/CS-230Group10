@@ -1,6 +1,7 @@
+package cs230.system;
 
 /**
- * User stores the info for each user
+ * cs230.system.User stores the info for each user
  * @author 963257
  * @version 1.0
  */
@@ -34,12 +35,12 @@ public class User {
 	}
 
 	/**
-	 * Constructor when User exists in database 
-	 * @param userID the identifier for the User
+	 * Constructor when cs230.system.User exists in database
+	 * @param userID the identifier for the cs230.system.User
 	 */
 	public User(Integer userID) {
 		//Object[] data = getDataFromDatabase ();
-		//User(ID,data)
+		//cs230.system.User(ID,data)
 	}
 	
 	/**
@@ -74,7 +75,7 @@ public class User {
 			this.address = address;
 		}
 		else {
-			throw new IllegalArgumentException ("Address not valid"); 
+			throw new IllegalArgumentException ("cs230.system.Address not valid");
 		}
 	}
 	/**

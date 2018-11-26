@@ -1,4 +1,4 @@
-package application;
+package cs230.application;
 
 import java.io.IOException;
 
@@ -30,7 +30,7 @@ public class LoginController {
 	
 	@FXML
 	private void handleLoginAction(ActionEvent event ) {
-		//DatabaseManager.searchpartial()
+		//cs230.system.DatabaseManager.searchpartial()
 		String inputUsername = usernameField.getText();
 		System.out.println(inputUsername);
 	    if(inputUsername.equals("test")) {
@@ -46,12 +46,12 @@ public class LoginController {
 	private void changeToMainPage() {
 		BorderPane root = null;
 		try {
-			root = (BorderPane)FXMLLoader.load(getClass().getClassLoader().getResource("MainPage.fxml"));
+			root = (BorderPane)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/MainPage.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root,400,400);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 		Stage stage = (Stage)loginButton.getScene().getWindow();
 		stage.setScene(scene);
 		stage.show();
