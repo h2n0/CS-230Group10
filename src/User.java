@@ -115,6 +115,11 @@ public class User {
 		return avatarFilePath;
 	}
 	
+	/*
+	 * overrides the equal function to compare only names
+	 * @param obj the User to compare too
+	 */
+	
 	@Override 
 	public boolean equals(Object obj) {
 		if (obj == null) {
