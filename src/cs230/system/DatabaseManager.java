@@ -36,11 +36,42 @@ public class DatabaseManager {
 	}
 
 	/**
+	 * Writes an arraylist to a specified file
+	 * @param fileOut Fileoutputstream open on the specified file
+	 * @param data The arraylist to write to the file
+	 * @return True if succeeded, false otherwise
+	 */
+	private static boolean writeToFile(FileOutputStream fileOut,
+					ArrayList<Object> data) {
+		try {
+			ObjectOutputStream objO =
+				new ObjectOutputStream(fileOut);
+			objO.writeObject(data);
+			objO.flush();
+			objO.close();
+			return true;
+		} catch (IOException e) {
+			displayIOError("writeToFile");
+			return false;
+		}
+	}
+
+	/**
+	 * Compiles the file path of the table passed in
+	 * @param table The destination table
+	 * @return Compiled file path to the table
+	 */
+	private static String compilePath(String table) {
+		return DB_PATH + table + EXTENSION;
+	}
+
+	/**
 	 * Gets all records from a specified table
 	 * @param fileRead File input stream open on desired table
 	 * @return The table in the form of an array list
 	 */
-	private static ArrayList<Object> getTable(FileInputStream fileRead) {
+
+	public static ArrayList<Object> getTable(FileInputStream fileRead) {
 		ArrayList<Object> output = new ArrayList<>();
 		// Check variable for end of file
 
@@ -70,34 +101,6 @@ public class DatabaseManager {
 	}
 
 	/**
-	 * Writes an arraylist to a specified file
-	 * @param objO ObjectInputStream open on specified file
-	 * @param data The arraylist to write to the file
-	 * @return True if succeeded, false otherwise
-	 */
-	private static boolean writeToFile(ObjectOutputStream objO,
-					ArrayList<Object> data) {
-		try {
-			objO.writeObject(data);
-			objO.flush();
-			objO.close();
-			return true;
-		} catch (IOException e) {
-			displayIOError("writeToFile");
-			return false;
-		}
-	}
-
-	/**
-	 * Compiles the file path of the table passed in
-	 * @param table The destination table
-	 * @return Compiled file path to the table
-	 */
-	private static String compilePath(String table) {
-		return DB_PATH + table + EXTENSION;
-	}
-
-	/**
 	 * Saves a record in object form to the specified table in the database
 	 * @param record The object to save to the database
 	 * @param table The table to save to
@@ -118,12 +121,18 @@ public class DatabaseManager {
 				data = new ArrayList<>();
 			}
 
+
+			// Prevent null pointer exception
+			if (data == null) {
+				data = new ArrayList<>();
+			}
+
 			// Add new record to list
 			data.add(record);
 
 			// Write data to file
-			writeToFile(new ObjectOutputStream(
-				new FileOutputStream(DB_PATH + table + EXTENSION)), data);
+			writeToFile(
+				new FileOutputStream(DB_PATH + table + EXTENSION), data);
 
 			return true;
 		} catch (FileNotFoundException e) {
@@ -158,8 +167,8 @@ public class DatabaseManager {
 			tableArray.remove(record);
 
 			// Write new array to file
-			writeToFile(new ObjectOutputStream(
-				new FileOutputStream(filePath)), tableArray);
+			writeToFile(
+				new FileOutputStream(filePath), tableArray);
 			return true;
 		} catch (IOException e) {
 			displayIOError("deleteRecord");
@@ -173,20 +182,47 @@ public class DatabaseManager {
 	 * @param table The table to search in
 	 * @return The full object from the table
 	 */
-	public static Object searchRecord(Object record, String table) {
+	public static ArrayList<Object> searchRecord(Object record,
+						   String table) {
 		String filePath = compilePath(table);
+		ArrayList<Object> output = new ArrayList<>();
 
 		try {
 			//Load file
 			ArrayList<Object> data =
 				getTable(new FileInputStream(filePath));
 
-			//Find and return record
-			return data.get(data.indexOf(record));
+			//Find and return all matching records
+			for (Object item : data) {
+				output.add(item);
+			}
+
+			return output;
 
 		} catch (FileNotFoundException e) {
 			displayFileError();
 			return null;
+		}
+	}
+
+	public static boolean editRecord(int recordID,
+				      Object newRecord, String table) {
+		String filePath = DB_PATH + table + EXTENSION;
+
+		try {
+			// Obtain record to edit
+			ArrayList<Object> tableCont =
+				getTable(new FileInputStream(filePath));
+			tableCont.set(recordID - 1, newRecord);
+
+			// Re write to table
+			writeToFile(new FileOutputStream(filePath), tableCont);
+
+			return true;
+
+		} catch (FileNotFoundException e) {
+			displayFileError();
+			return false;
 		}
 	}
 
