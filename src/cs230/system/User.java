@@ -7,8 +7,8 @@ import java.io.Serializable;
  * @author 963257
  * @version 1.0
  */
-
 public class User implements Serializable {
+	//Default serial ID
 	private static final long serialVersionUID = 1L;
 	//Uniquely identify each user
 	private Integer userID;
@@ -40,7 +40,7 @@ public class User implements Serializable {
 
 	/**
 	 * Constructor when User exists in database 
-	 * @param userID the identifier for the User
+	 * @param userID The identifier for the User
 	 */
 	public User(Integer userID) {
 		//Object[] data = getDataFromDatabase ();
@@ -48,33 +48,33 @@ public class User implements Serializable {
 	}
 	
 	/**
-	 * gets the user ID
-	 * @return the user ID
+	 * Gets the user ID
+	 * @return The user ID
 	 */
-	public Integer getuserID() {
+	public Integer getUserID() {
 		return userID;
 	}
 
 	/**
-	 * sets the user's name
-	 * @param name the new name of the user
+	 * Sets the user's name
+	 * @param name The new name of the user
 	 */
-	public void setname(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	/**
-	 * gets the user's name
-	 * @return the users name
+	 * Gets the user's name
+	 * @return The users name
 	 */
-	public String getname() {
+	public String getName() {
 		return name;
 	}
 
 	/**
-	 * sets the user's address
-	 * @param address the user's address
+	 * Sets the user's address
+	 * @param address The user's new address
 	 */
-	public void setaddress(Address address) {
+	public void setAddress(Address address) {
 		if (address.validAddress()) {
 			this.address = address;
 		}
@@ -83,48 +83,50 @@ public class User implements Serializable {
 		}
 	}
 	/**
-	 * gets the user's address
-	 * @return the user's address
+	 * Gets the user's address
+	 * @return The user's address
 	 */
-	public Address getaddress() {
+	public Address getAddress() {
 		return address;
 	}
 
 	/**
-	 * sets the user's balance
-	 * @param balance the user's balance
+	 * Sets the user's balance
+	 * @param balance The user's new balance
 	 */
-	public void setbalance(Double balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 	/**
-	 * gets the user's balance
-	 * @return the user's balance
+	 * Gets the user's balance
+	 * @return The user's balance
 	 */
-	public Double getbalance() {
+	public Double getBalance() {
 		return balance;
 	}
 
 	/**
-	 * sets the file path for the users avatar
-	 * @param avatarFilePath the file path to the user's avatar
+	 * Sets the file path for the users avatar
+	 * @param avatarFilePath The new file path to the user's avatar
 	 */
-	public void setavatarFilePath(String avatarFilePath) {
+	public void setAvatarFilePath(String avatarFilePath) {
 		this.avatarFilePath = avatarFilePath;
 	}
+
 	/**
-	 * gets the file path for the users avatar
-	 * @return the file path for the users avatar
+	 * Gets the file path for the users avatar
+	 * @return The file path for the users avatar
 	 */
-	public String getavatarFilePath() {
+	public String getAvatarFilePath() {
 		return avatarFilePath;
 	}
-	
-	/*
-	 * overrides the equal function to compare only names
-	 * @param obj the User to compare too
+
+	/**
+	 * Equals method defines two user objects as equal if the name is the
+	 * same
+	 * @param obj Object to compare to
+	 * @return True if they are equal, False otherwise
 	 */
-	
 	@Override 
 	public boolean equals(Object obj) {
 		if (obj == null) {
@@ -133,11 +135,14 @@ public class User implements Serializable {
 		
 		User PERSON = (User) obj;
 
-		if (this.name.equals(PERSON.getname())) {
+		if (this.name.equals(PERSON.name)) {
 			return true;
 		}
-		else {
-			return false;
+
+		if (this.userID == PERSON.userID) {
+			return true;
 		}
+
+		return false;
 	}
 }
