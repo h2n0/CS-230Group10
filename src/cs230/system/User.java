@@ -1,3 +1,4 @@
+package cs230.system;
 
 /**
  * User stores the info for each user
@@ -134,6 +135,4 @@ public class User {
 			return false;
 		}
 	}
-	
-	
 }
