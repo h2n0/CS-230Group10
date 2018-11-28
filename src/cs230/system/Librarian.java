@@ -1,9 +1,8 @@
 package cs230.system;
-
 import java.util.Date;
 
 /**
- * cs230.system.Librarian stores the information for each librarian
+ * Librarian stores the information for each librarian
  * @author 963257	
  * @version 1.0
  */
@@ -60,8 +59,9 @@ public class Librarian extends User {
 		return staffNumber;
 	}
 
-	public void payfine (Integer userID, Float amount) {
-		//update db to reduce fine by amount where userID 
+	public void payfine (Integer userID, Float paid) {
+		//Select amount where id = UserID
+		//update amount = amount - paid where id = UserID
 	}
 	
 	public void authoriseLoan (Integer userID, Integer copyID) {
@@ -71,7 +71,9 @@ public class Librarian extends User {
 			throw new IllegalArgumentException ("That user has unpaid fines and hence cannot take out a book"); 
 		}
 		else {
-			//update database to give that copy to the user, changing the status of copy to unavailable and -1 from the available copies in the resource table
+			//update copy where id = CopyID, set status to unavailable
+			//update resource where id = ResourceID, set availablecopies to -1
+			//insert into history where id = copyID, add info
 		}
 	}
 

@@ -1,5 +1,5 @@
-package cs230.system;
 
+package cs230.system;
 import java.util.Date;
 
 /**
@@ -41,17 +41,17 @@ public class Copy {
 	}
 	
 	/**
-	 * Constructor when cs230.system.Copy exists in database
+	 * Constructor when Copy exists in database 
 	 * @param ID the identifier for the copy
 	*/
 	public Copy(Integer ID) {
 		//Object[] data = getDataFromDatabase ();
-		//cs230.system.Copy(ID,data)
+		//Copy(ID,data)
 	}
 	
 	/**
 	 * gets the ID
-	 * @return the cs230.system.Copy ID
+	 * @return the Copy ID
 	 */
 	public Integer getID() {
 		return ID;

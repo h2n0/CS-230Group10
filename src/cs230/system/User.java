@@ -1,7 +1,7 @@
 package cs230.system;
 
 /**
- * cs230.system.User stores the info for each user
+ * User stores the info for each user
  * @author 963257
  * @version 1.0
  */
@@ -35,12 +35,12 @@ public class User {
 	}
 
 	/**
-	 * Constructor when cs230.system.User exists in database
-	 * @param userID the identifier for the cs230.system.User
+	 * Constructor when User exists in database 
+	 * @param userID the identifier for the User
 	 */
 	public User(Integer userID) {
 		//Object[] data = getDataFromDatabase ();
-		//cs230.system.User(ID,data)
+		//User(ID,data)
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class User {
 			this.address = address;
 		}
 		else {
-			throw new IllegalArgumentException ("cs230.system.Address not valid");
+			throw new IllegalArgumentException ("Address not valid"); 
 		}
 	}
 	/**
@@ -116,4 +116,23 @@ public class User {
 		return avatarFilePath;
 	}
 	
+	/*
+	 * overrides the equal function to compare only names
+	 * @param obj the User to compare too
+	 */
+	
+	@Override 
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		
+		final User PERSON = (User) obj;
+		if (this.name == PERSON.getname()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
