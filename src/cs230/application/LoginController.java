@@ -2,6 +2,7 @@ package cs230.application;
 
 import java.io.IOException;
 
+import cs230.system.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,9 +32,13 @@ public class LoginController {
 	@FXML
 	private void handleLoginAction(ActionEvent event ) {
 		//cs230.system.DatabaseManager.searchpartial()
+		Boolean exists = false;
 		String inputUsername = usernameField.getText();
 		System.out.println(inputUsername);
-	    if(inputUsername.equals("test")) {
+		User tempUser = new User(null, inputUsername, null, null, null);
+
+		exists = DatabaseManager.checkForRecord(tempUser, "user");
+	    if(exists) {
 			changeToMainPage();
 			userNotFound.setVisible(false);
 		}

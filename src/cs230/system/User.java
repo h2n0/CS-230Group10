@@ -1,12 +1,15 @@
 package cs230.system;
 
+import java.io.Serializable;
+
 /**
  * User stores the info for each user
  * @author 963257
  * @version 1.0
  */
 
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
 	//Uniquely identify each user
 	private Integer userID;
 	//The user's name
@@ -14,7 +17,7 @@ public class User {
 	//The user's address
 	private Address address;
 	//The user's balance 
-	private Float balance;
+	private Double balance;
 	//The filepath to the user's avatar
 	private String avatarFilePath;
 
@@ -26,7 +29,8 @@ public class User {
 	 * @param balance how much money the user owes the library
 	 * @param avatarFilePath the file path to the user's avatar
 	 */
-	public User(Integer userID, String name, Address address, Float balance, String avatarFilePath) {
+	public User(Integer userID, String name, Address address,
+		    Double balance, String avatarFilePath) {
 		this.userID = userID;
 		this.name = name;
 		this.address = address;
@@ -90,14 +94,14 @@ public class User {
 	 * sets the user's balance
 	 * @param balance the user's balance
 	 */
-	public void setbalance(Float balance) {
+	public void setbalance(Double balance) {
 		this.balance = balance;
 	}
 	/**
 	 * gets the user's balance
 	 * @return the user's balance
 	 */
-	public Float getbalance() {
+	public Double getbalance() {
 		return balance;
 	}
 
@@ -127,8 +131,9 @@ public class User {
 			return false;
 		}
 		
-		final User PERSON = (User) obj;
-		if (this.name == PERSON.getname()) {
+		User PERSON = (User) obj;
+
+		if (this.name.equals(PERSON.getname())) {
 			return true;
 		}
 		else {

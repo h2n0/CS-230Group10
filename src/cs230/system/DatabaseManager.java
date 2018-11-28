@@ -90,7 +90,7 @@ public class DatabaseManager {
 
 		} catch (IOException e) {
 			displayIOError("getTable");
-			System.out.println("WHy am I here");
+			e.printStackTrace();
 			return null;
 
 		} catch (ClassNotFoundException e) {
@@ -205,6 +205,36 @@ public class DatabaseManager {
 		}
 	}
 
+	/**
+	 * Takes a record object and searches for it in the specified table
+	 * @param record The record to look for
+	 * @param table The table to search in
+	 * @return The full object from the table
+	 */
+	public static boolean checkForRecord(Object record,
+						     String table) {
+		String filePath = compilePath(table);
+
+		try {
+			//Load file
+			ArrayList<Object> data =
+				getTable(new FileInputStream(filePath));
+
+			//Find and return all matching records
+			for (Object item : data) {
+				if (record.equals(item)) {
+					return true;
+				}
+			}
+
+			return false;
+
+		} catch (FileNotFoundException e) {
+			displayFileError();
+			return false;
+		}
+	}
+
 	public static boolean editRecord(int recordID,
 				      Object newRecord, String table) {
 		String filePath = DB_PATH + table + EXTENSION;
@@ -227,6 +257,7 @@ public class DatabaseManager {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException{
+		/*
 		ArrayList<Object> test;
 		Fine fine1 = new Fine(1, 20);
 		Fine fine2 = new Fine(2, 30);
@@ -241,5 +272,10 @@ public class DatabaseManager {
 		deleteRecord(fine1, "test");
 		test = getTable(new FileInputStream("Database//test.dat"));
 		System.out.println("Amount of data: " + test.size());
+		*/
+
+		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
+		User user = new User(1, "Scott", address, 0.0, null);
+		saveRecord(user, "user");
 	}
 }
