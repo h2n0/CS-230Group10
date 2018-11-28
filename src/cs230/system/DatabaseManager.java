@@ -16,61 +16,11 @@ public class DatabaseManager {
 	// Extension for the database files
 	private static final String EXTENSION = ".dat";
 
-
-	/**
-	 * Displays the file not found error message using a JOptionPane
-	 */
-	private static void displayFileError() {
-		JOptionPane.showMessageDialog(null, "File not found, check file path and try again",
-			"File not found", JOptionPane.ERROR_MESSAGE);
-	}
-
-	/**
-	 * Displays the input/output error message using a JOptionPane
-	 */
-	private static void displayIOError(String methodName) {
-		JOptionPane.showMessageDialog(null,
-			"Error in " + methodName + " while " +
-				"writing to file, try again",
-			"I/O Error", JOptionPane.ERROR_MESSAGE);
-	}
-
-	/**
-	 * Writes an arraylist to a specified file
-	 * @param fileOut Fileoutputstream open on the specified file
-	 * @param data The arraylist to write to the file
-	 * @return True if succeeded, false otherwise
-	 */
-	private static boolean writeToFile(FileOutputStream fileOut,
-					ArrayList<Object> data) {
-		try {
-			ObjectOutputStream objO =
-				new ObjectOutputStream(fileOut);
-			objO.writeObject(data);
-			objO.flush();
-			objO.close();
-			return true;
-		} catch (IOException e) {
-			displayIOError("writeToFile");
-			return false;
-		}
-	}
-
-	/**
-	 * Compiles the file path of the table passed in
-	 * @param table The destination table
-	 * @return Compiled file path to the table
-	 */
-	private static String compilePath(String table) {
-		return DB_PATH + table + EXTENSION;
-	}
-
 	/**
 	 * Gets all records from a specified table
 	 * @param fileRead File input stream open on desired table
 	 * @return The table in the form of an array list
 	 */
-
 	public static ArrayList<Object> getTable(FileInputStream fileRead) {
 		ArrayList<Object> output = new ArrayList<>();
 		// Check variable for end of file
@@ -254,6 +204,54 @@ public class DatabaseManager {
 			displayFileError();
 			return false;
 		}
+	}
+
+	/**
+	 * Displays the file not found error message using a JOptionPane
+	 */
+	private static void displayFileError() {
+		JOptionPane.showMessageDialog(null, "File not found, check file path and try again",
+			"File not found", JOptionPane.ERROR_MESSAGE);
+	}
+
+	/**
+	 * Displays the input/output error message using a JOptionPane
+	 */
+	private static void displayIOError(String methodName) {
+		JOptionPane.showMessageDialog(null,
+			"Error in " + methodName + " while " +
+				"writing to file, try again",
+			"I/O Error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	/**
+	 * Writes an arraylist to a specified file
+	 * @param fileOut Fileoutputstream open on the specified file
+	 * @param data The arraylist to write to the file
+	 * @return True if succeeded, false otherwise
+	 */
+	private static boolean writeToFile(FileOutputStream fileOut,
+					   ArrayList<Object> data) {
+		try {
+			ObjectOutputStream objO =
+				new ObjectOutputStream(fileOut);
+			objO.writeObject(data);
+			objO.flush();
+			objO.close();
+			return true;
+		} catch (IOException e) {
+			displayIOError("writeToFile");
+			return false;
+		}
+	}
+
+	/**
+	 * Compiles the file path of the table passed in
+	 * @param table The destination table
+	 * @return Compiled file path to the table
+	 */
+	private static String compilePath(String table) {
+		return DB_PATH + table + EXTENSION;
 	}
 
 	public static void main(String[] args) throws FileNotFoundException{

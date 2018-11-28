@@ -31,21 +31,19 @@ public class LoginController {
 	
 	@FXML
 	private void handleLoginAction(ActionEvent event ) {
-		//cs230.system.DatabaseManager.searchpartial()
-		Boolean exists = false;
+		Boolean exists;
 		String inputUsername = usernameField.getText();
-		System.out.println(inputUsername);
-		User tempUser = new User(null, inputUsername, null, null, null);
 
+		//Create a temporary user to check in DB
+		User tempUser = new User(null, inputUsername, null, null, null);
 		exists = DatabaseManager.checkForRecord(tempUser, "user");
-	    if(exists) {
+
+	    	if(exists) {
 			changeToMainPage();
 			userNotFound.setVisible(false);
-		}
-	    else
-	    {
-	    	userNotFound.setVisible(true);
-	    }
+		} else {
+	    		userNotFound.setVisible(true);
+	    	}
 	}
 	
 	private void changeToMainPage() {
