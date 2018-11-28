@@ -206,10 +206,10 @@ public class DatabaseManager {
 	}
 
 	/**
-	 * Takes a record object and searches for it in the specified table
+	 * Takes a record object and checks if it exists in the specified table
 	 * @param record The record to look for
 	 * @param table The table to search in
-	 * @return The full object from the table
+	 * @return True if it exists, False otherwise
 	 */
 	public static boolean checkForRecord(Object record,
 						     String table) {
@@ -220,7 +220,7 @@ public class DatabaseManager {
 			ArrayList<Object> data =
 				getTable(new FileInputStream(filePath));
 
-			//Find and return all matching records
+			//Check if any record matches
 			for (Object item : data) {
 				if (record.equals(item)) {
 					return true;

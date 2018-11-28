@@ -135,7 +135,7 @@ public class User implements Serializable {
 		
 		User PERSON = (User) obj;
 
-		if (this.name.equals(PERSON.name)) {
+		if (this.name.equalsIgnoreCase(PERSON.name)) {
 			return true;
 		}
 
