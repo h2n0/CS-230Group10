@@ -17,3 +17,28 @@
   <li>Be fully documented using javadoc comments</li>
   <li>Abide by standard set out by Liam</li>
 </ul>
+
+<p>Please remember: </p>
+<ul>
+  <li>camel case for method names</li>
+  <li>There is a <b>80 Character Limit</b> on the length of lines, try to follow it</li>
+  <li>Javadoc comments must be full sentences</li>
+  <li>Methods can not be longer than 75 lines, and no more than 5 levels of indentation (Don't think these have been broken)</li>
+  <li>Order of a class MUST be: </li>
+  <ol>
+    <li>Javadoc for class</li>
+    <li>Class declaration</li>
+    <li>Class constants (static & final) variables</li>
+    <li>Class (static) variables</li>
+    <li>Instance variables</li>
+    <li>Constructors</li>
+    <li>Methods, in the order: </li>
+  </ol>
+  <li>Within each item, they must appear in the order: </li>
+  <ol>
+    <li>Public</li>
+    <li>Protected</li>
+    <li>Package Level</li>
+    <li>Private</li>
+  </ol>
+</ul>
