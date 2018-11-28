@@ -35,7 +35,6 @@ public class DatabaseManager {
 			"I/O Error", JOptionPane.ERROR_MESSAGE);
 	}
 
-
 	/**
 	 * Writes an arraylist to a specified file
 	 * @param fileOut Fileoutputstream open on the specified file
@@ -71,6 +70,7 @@ public class DatabaseManager {
 	 * @param fileRead File input stream open on desired table
 	 * @return The table in the form of an array list
 	 */
+
 	public static ArrayList<Object> getTable(FileInputStream fileRead) {
 		ArrayList<Object> output = new ArrayList<>();
 		// Check variable for end of file
@@ -120,6 +120,7 @@ public class DatabaseManager {
 			} else {
 				data = new ArrayList<>();
 			}
+
 
 			// Prevent null pointer exception
 			if (data == null) {
