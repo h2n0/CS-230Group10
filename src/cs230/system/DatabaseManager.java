@@ -2,6 +2,7 @@ package cs230.system;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JOptionPane;
 
 /**
@@ -57,11 +58,12 @@ public class DatabaseManager {
 	 * @return True if saved successfully, false otherwise
 	 */
 	public static boolean saveRecord(Object record, String table) {
+		String path = compilePath(table);
 
 		try {
 			ArrayList<Object> data;
 			FileInputStream fileWrite =
-				new FileInputStream(DB_PATH + table + EXTENSION);
+				new FileInputStream(path);
 
 			// Check if file is empty to prevent EOFException
 			if (fileWrite.available() != 0) {
@@ -71,10 +73,19 @@ public class DatabaseManager {
 				data = new ArrayList<>();
 			}
 
-
+			/* PRETTY SURE THIS ISN'T NEEDED MAYBE IDK... HOPEFULLY
 			// Prevent null pointer exception
 			if (data == null) {
 				data = new ArrayList<>();
+			}
+			*/
+
+			// Make sure no record with duplicate name exists
+			for (Object item : data) {
+				if (item.toString().equalsIgnoreCase(record.toString())) {
+					displayDupError(record.toString());
+					return false;
+				}
 			}
 
 			// Add new record to list
@@ -225,6 +236,18 @@ public class DatabaseManager {
 	}
 
 	/**
+	 * Displays an error pane informing of an already existing record
+	 * with the same primary key in the database.
+	 * @param name Existing parameter in the database
+	 */
+	private static void displayDupError(String name) {
+		JOptionPane.showMessageDialog(null,
+			"Sorry but '" + name + "' already exists in the " +
+				"database",
+			"Duplicate Entry", JOptionPane.ERROR_MESSAGE);
+	}
+
+	/**
 	 * Writes an arraylist to a specified file
 	 * @param fileOut Fileoutputstream open on the specified file
 	 * @param data The arraylist to write to the file
@@ -254,6 +277,15 @@ public class DatabaseManager {
 		return DB_PATH + table + EXTENSION;
 	}
 
+	/**
+	 * Sorts a given list
+	 * @param list The list to be sorted
+	 * @return The sorted list
+	 */
+	private static ArrayList<Object> sortList(ArrayList<Object> list) {
+		return null;
+	}
+
 	public static void main(String[] args) throws FileNotFoundException{
 		/*
 		ArrayList<Object> test;
@@ -273,7 +305,7 @@ public class DatabaseManager {
 		*/
 
 		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-		User user = new User(1, "Scott", address, 0.0, null);
+		User user = new User(2, "Ed", address, 0.0, null);
 		saveRecord(user, "user");
 	}
 }
