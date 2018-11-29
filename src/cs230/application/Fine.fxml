@@ -19,8 +19,8 @@
                </font>
             </Label>
             <TextField />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" text="Search" />
+            <Button mnemonicParsing="false" text="Cancel" />
          </children>
       </HBox>
       <TableView editable="true" prefHeight="200.0" prefWidth="200.0">
