@@ -93,7 +93,7 @@ public class DatabaseManager {
 
 			// Write data to file
 			writeToFile(
-				new FileOutputStream(DB_PATH + table + EXTENSION), data);
+				new FileOutputStream(path), data);
 
 			return true;
 		} catch (FileNotFoundException e) {
@@ -198,7 +198,7 @@ public class DatabaseManager {
 
 	public static boolean editRecord(int recordID,
 				      Object newRecord, String table) {
-		String filePath = DB_PATH + table + EXTENSION;
+		String filePath = compilePath(table);
 
 		try {
 			// Obtain record to edit
@@ -305,7 +305,7 @@ public class DatabaseManager {
 		*/
 
 		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-		User user = new User(2, "Ed", address, 0.0, null);
+		User user = new User(2, "Morgan", address, 0.0, null);
 		saveRecord(user, "user");
 	}
 }
