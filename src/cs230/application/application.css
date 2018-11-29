@@ -1,0 +1,15 @@
+.mainTopBox {
+	-fx-background-color: skyblue;
+}
+
+.mainSideBox {
+	-fx-background-color: skyblue;
+}
+
+.mainSideLink {
+	-fx-text-fill: black;
+}
+
+.mainSideLink:hover {
+	-fx-underline:false;
+}

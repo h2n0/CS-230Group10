@@ -1,7 +1,9 @@
+
+package cs230.system;
 import java.util.Date;
 
 /**
- * Copy class stores the information for each copy 
+ * cs230.system.Copy class stores the information for each copy
  * @author 963257
  * @version 1.0
  */

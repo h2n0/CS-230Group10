@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+         <children>
+            <TableView editable="true" prefHeight="102.0" prefWidth="600.0">
+               <columns>
+                  <TableColumn prefWidth="70.39996337890625" text="ResourceID" />
+                  <TableColumn prefWidth="78.39996337890625" text="Title" />
+                  <TableColumn prefWidth="37.60003662109375" text="Year" />
+                  <TableColumn prefWidth="77.60003662109375" text="Thumbnail" />
+                  <TableColumn prefWidth="64.0" text="Subject" />
+                  <TableColumn prefWidth="60.0" text="Queue" />
+                  <TableColumn prefWidth="68.79998779296875" text="# of Copies" />
+                  <TableColumn prefWidth="146.39996337890625" text="# of available Copies" />
+                  <TableColumn prefWidth="75.0" text="Replacement price" />
+               </columns>
+            </TableView>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+         <children>
+            <Button mnemonicParsing="false" text="Save changes" />
+            <Button mnemonicParsing="false" text="Cancel" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
