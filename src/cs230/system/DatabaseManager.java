@@ -198,20 +198,36 @@ public class DatabaseManager {
 		}
 	}
 
-	public static boolean editRecord(int recordID,
+	/**
+	 * Takes in the old object and the new version then replaces it in
+	 * the database
+	 * @param oldRecord Record to replace
+	 * @param newRecord Updated verison of the record
+	 * @param table Name of the table to perform this on
+	 * @return True if successful, false otherwise
+	 */
+	public static boolean editRecord(Object oldRecord,
 				      Object newRecord, String table) {
 		String filePath = compilePath(table);
+		int index;
 
 		try {
 			// Obtain record to edit
 			ArrayList<Object> tableCont =
 				getTable(new FileInputStream(filePath));
-			tableCont.set(recordID - 1, newRecord);
+
+			for(Object item : tableCont) {
+				if (item.toString().equals(oldRecord.toString())) {
+					index = tableCont.indexOf(item);
+					tableCont.set(index, newRecord);
+					return true;
+				}
+			}
 
 			// Re write to table
 			writeToFile(new FileOutputStream(filePath), tableCont);
 
-			return true;
+			return false;
 
 		} catch (FileNotFoundException e) {
 			displayFileError();
