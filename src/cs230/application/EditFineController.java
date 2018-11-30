@@ -17,10 +17,8 @@ public class EditFineController  {
 
 	@FXML private TextField newAmount;
 	@FXML private Label invalidLabel;
-    @FXML private TableView<User> tableView;
-    @FXML private TableColumn<User, String> User;
-    @FXML private TableColumn<User, Double> Amount;
-	@FXML private TableColumn<User, Double> NewAmount;	
+	@FXML private Label UserName;
+	@FXML private Label Amount;
 	
 	@FXML
 	private void handleSaveButton(ActionEvent event) {
@@ -28,8 +26,10 @@ public class EditFineController  {
 		invalidLabel.setVisible(false);
 		
 		//get new amount and user
-		String newAmountTxt = NewAmount.getText();
-		String user = User.getText();
+		String newAmountTxt = newAmount.getText();
+		String user = UserName.getText();
+		
+		System.out.println(newAmountTxt);
 		
 		//set to -1 so it is caught if not changed in try catch below
 		Double newAmountDbl= -1.00;
@@ -39,7 +39,8 @@ public class EditFineController  {
 			newAmountDbl = Double.parseDouble(newAmountTxt);
 		}
 		catch(NumberFormatException e){
-			//newAmount wasnt a number hence handle exception
+			//newAmount wasnt a number
+			invalidNewAmount();
 		}
 		
 		//* by 100 to move 2dp to 0 dp
@@ -51,11 +52,20 @@ public class EditFineController  {
 			//was more than 2dp therefore invalid
 			invalidNewAmount();
 		}
-		else if (newAmountDbl<0.01 || newAmountDbl > Amount.getCellData(0)) {
+		else if (newAmountDbl<0.01 || newAmountDbl > Double.parseDouble(Amount.getText())) {
 			//outside of bounds
 			invalidNewAmount();
 		}
 		else {
+			System.out.println(user);
+			System.out.println(newAmountDbl);
+			
+			User tempUser = User(user);
+			tempUser.setBalance(newAmountDbl);
+			//have to instantiate User to set new amount and then use as record for db?
+			
+			//Waiting for scott to update editRecord			
+			DatabaseManager.editRecord( ,tempUser,"user");
 			//save record
 		}
 	}
@@ -70,7 +80,6 @@ public class EditFineController  {
 		//remove popup from screen here, thanks Jack
 	}
 	
-	
 	@FXML
     public void initialize() {
     	ArrayList<User> allUsers = new ArrayList<User>();
@@ -80,19 +89,18 @@ public class EditFineController  {
     	catch(Exception e){
 			e.printStackTrace();
 		}
+		
 		//how to get selected user here??
-		allUsers.removeIf(s -> !(s.getName()=="USERSEARCHINGFOR"));
+		allUsers.removeIf(s -> !(s.getName().contains("Joe")));
 		System.out.println(allUsers);
-		PopulateFineTable(allUsers);
+		//only expect 1 row at a time so only display first row
+		PopulateEditFine(allUsers.get(0));
     }
     
-    private void PopulateFineTable(ArrayList<User> fineList) {
-    	User.setCellValueFactory(new PropertyValueFactory<User, String>("User"));
-        Amount.setCellValueFactory(new PropertyValueFactory<User, Double>("Amount"));
-		NewAmount.setCellValueFactory(new PropertyValueFactory<User, Double>("NewAmount"));
-		    	
-        if (fineList != null){
-        	tableView.getItems().setAll(fineList);
+    private void PopulateEditFine(User fineRow) {
+        if (fineRow != null){
+        	UserName.setText(fineRow.getName());
+        	Amount.setText(fineRow.getBalance().toString());
         }
         
     }
