@@ -58,7 +58,7 @@ public class LoginController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Scene scene = new Scene(root,400,400);
+		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 		Stage stage = (Stage)loginButton.getScene().getWindow();
 		stage.setScene(scene);

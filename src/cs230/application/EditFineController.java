@@ -15,7 +15,7 @@ public class EditFineController  {
 	@FXML private TableColumn<Fine, String> NewAmount;	
 	
 	private void handleSaveButton(ActionEvent event) {
-		float newAmount = Float.parseFloat();
+		//float newAmount = Float.parseFloat();
 		String fineID = FineID.getText();
 		
 		
