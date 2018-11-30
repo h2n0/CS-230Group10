@@ -1,5 +1,6 @@
 
 package cs230.system;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,9 @@ import java.util.Date;
  * @version 1.0
  */
 
-public class Copy {
+public class Copy implements Serializable {
+	//Default serial ID
+	private static final long serialVersionUID = 1L;
 	//Uniquely identify each resource
 	private Integer ID;
 	//identify which resource the copy is
