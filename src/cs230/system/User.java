@@ -1,6 +1,7 @@
 package cs230.system;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * User stores the info for each user
@@ -10,8 +11,6 @@ import java.io.Serializable;
 public class User implements Serializable {
 	//Default serial ID
 	private static final long serialVersionUID = 1L;
-	//Uniquely identify each user
-	private Integer userID;
 	//The user's name
 	private String name;
 	//The user's address
@@ -22,16 +21,14 @@ public class User implements Serializable {
 	private String avatarFilePath;
 
 	/**
-	 * Constructor
+	 * Constructor for a new user
 	 * @param userID the identifier for the user
 	 * @param name the name of the user
 	 * @param address the address of the user
 	 * @param balance how much money the user owes the library
 	 * @param avatarFilePath the file path to the user's avatar
 	 */
-	public User(Integer userID, String name, Address address,
-		    Double balance, String avatarFilePath) {
-		this.userID = userID;
+	public User(String name, Address address, Double balance, String avatarFilePath) {
 		this.name = name;
 		this.address = address;
 		this.balance = balance;
@@ -42,19 +39,13 @@ public class User implements Serializable {
 	 * Constructor when User exists in database 
 	 * @param userID The identifier for the User
 	 */
-	public User(Integer userID) {
-		//Object[] data = getDataFromDatabase ();
-		//User(ID,data)
+	public User(String userName) {
+		ArrayList<User> allUsers= (ArrayList<User>) DatabaseManager.getTable("user");
+		allUsers.removeIf(s -> !(s.getName().contains(userName)));
+		User u = allUsers.get(0);
+		this(u.getName(), u.getAddress(), u.getBalance(), u.getAvatarFilePath());
 	}
 	
-	/**
-	 * Gets the user ID
-	 * @return The user ID
-	 */
-	public Integer getUserID() {
-		return userID;
-	}
-
 	/**
 	 * Sets the user's name
 	 * @param name The new name of the user

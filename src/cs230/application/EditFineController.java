@@ -60,13 +60,15 @@ public class EditFineController  {
 			System.out.println(user);
 			System.out.println(newAmountDbl);
 			
-			//have to instantiate User to set new amount and then use as record for db?
-			User tempUser = User(user);
-			tempUser.setBalance(newAmountDbl);
 			
-			//Waiting for scott to update editRecord			
-			DatabaseManager.editRecord( ,tempUser,"user");
-			//save record
+			//have to instantiate User to set new amount and then use as record for db
+			ArrayList<User> allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
+			allUsers.removeIf(s -> !(s.getName().contains(user)));
+			User unchangedUser = allUsers.get(0);
+			User changedUser = allUsers.get(0);
+			changedUser.setBalance(newAmountDbl);
+						
+			DatabaseManager.editRecord(unchangedUser, changedUser, "user");
 		}
 	}
 	
@@ -92,6 +94,7 @@ public class EditFineController  {
 		
 		//how to get selected user here??
 		allUsers.removeIf(s -> !(s.getName().contains("Joe")));
+		
 		System.out.println(allUsers);
 		//only expect 1 row at a time so only display first row
 		PopulateEditFine(allUsers.get(0));
