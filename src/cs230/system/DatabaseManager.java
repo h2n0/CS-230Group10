@@ -19,18 +19,20 @@ public class DatabaseManager {
 
 	/**
 	 * Gets all records from a specified table
-	 * @param fileRead File input stream open on desired table
+	 * @param table The table to retrieve
 	 * @return The table in the form of an array list
 	 */
-	public static ArrayList<Object> getTable(FileInputStream fileRead) {
+	public static ArrayList<Object> getTable(String table) {
 		ArrayList<Object> output = new ArrayList<>();
 		// Check variable for end of file
+		String filePath = compilePath(table);
 
 		try {
+			ObjectInputStream objI =
+				new ObjectInputStream(new FileInputStream(filePath));
+
 			// Check if file is empty to prevent IOException
-			if (fileRead.available() != 0) {
-				ObjectInputStream objI =
-					new ObjectInputStream(fileRead);
+			if (objI.available() != 0) {
 				// Cast file content to an arraylist of objects
 				output = (ArrayList<Object>) objI.readObject();
 				objI.close();
@@ -214,6 +216,40 @@ public class DatabaseManager {
 		} catch (FileNotFoundException e) {
 			displayFileError();
 			return false;
+		}
+	}
+
+	/**
+	 * Gets all records from a specified table
+	 * @param fileRead File input stream open on desired table
+	 * @return The table in the form of an array list
+	 */
+	private static ArrayList<Object> getTable(FileInputStream fileRead) {
+		ArrayList<Object> output = new ArrayList<>();
+		// Check variable for end of file
+
+		try {
+			// Check if file is empty to prevent IOException
+			if (fileRead.available() != 0) {
+				ObjectInputStream objI =
+					new ObjectInputStream(fileRead);
+				// Cast file content to an arraylist of objects
+				output = (ArrayList<Object>) objI.readObject();
+				objI.close();
+				return output;
+			} else {
+				return output;
+			}
+
+		} catch (IOException e) {
+			displayIOError("getTable");
+			e.printStackTrace();
+			return null;
+
+		} catch (ClassNotFoundException e) {
+			// ADD HANDLE CODE HERE
+			return null;
+
 		}
 	}
 
