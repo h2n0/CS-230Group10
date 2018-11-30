@@ -1,14 +1,18 @@
+package cs230.application;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import cs230.system.Fine;
+
 
 public class EditFineController  {
 
-    @FXML private TableView<User> tableView;
-    @FXML private TableColumn<User, String> FineID;
-    @FXML private TableColumn<User, String> User;
-    @FXML private TableColumn<User, String> Amount;
-	@FXML private TableColumn<User, String> NewAmount;	
+    @FXML private TableView<Fine> tableView;
+    @FXML private TableColumn<Fine, String> FineID;
+    @FXML private TableColumn<Fine, String> User;
+    @FXML private TableColumn<Fine, String> Amount;
+	@FXML private TableColumn<Fine, String> NewAmount;	
 	
 	private void handleSaveButton(ActionEvent event) {
 		float newAmount = Float.parseFloat();
