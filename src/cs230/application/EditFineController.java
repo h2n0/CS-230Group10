@@ -16,6 +16,7 @@ import cs230.system.User;
 public class EditFineController  {
 
 	@FXML private TextField newAmount;
+	@FXML private Label invalidLabel;
     @FXML private TableView<User> tableView;
     @FXML private TableColumn<User, String> User;
     @FXML private TableColumn<User, Double> Amount;
@@ -23,12 +24,17 @@ public class EditFineController  {
 	
 	@FXML
 	private void handleSaveButton(ActionEvent event) {
+		//remove invalid label from screen
+		invalidLabel.setVisible(false);
+		
+		//get new amount and user
 		String newAmountTxt = NewAmount.getText();
 		String user = User.getText();
 		
-		//set to -1 so it is caught if not changed
+		//set to -1 so it is caught if not changed in try catch below
 		Double newAmountDbl= -1.00;
 		
+		//try casting to double to make sure only numbers input
 		try {
 			newAmountDbl = Double.parseDouble(newAmountTxt);
 		}
@@ -42,16 +48,21 @@ public class EditFineController  {
 		foo = foo - foo.intValue();
 		
 		if (foo > 0){
-			//was more than 2dp
+			//was more than 2dp therefore invalid
+			invalidNewAmount();
 		}
 		else if (newAmountDbl<0.01 || newAmountDbl > Amount.getCellData(0)) {
 			//outside of bounds
+			invalidNewAmount();
 		}
 		else {
-			//save
+			//save record
 		}
-		
-		//then visible label "invalid details"
+	}
+	
+	@FXML
+	private void invalidNewAmount() {
+		invalidLabel.setVisible(true);
 	}
 	
 	@FXML
@@ -69,7 +80,9 @@ public class EditFineController  {
     	catch(Exception e){
 			e.printStackTrace();
 		}
+		//how to get selected user here??
 		allUsers.removeIf(s -> !(s.getName()=="USERSEARCHINGFOR"));
+		System.out.println(allUsers);
 		PopulateFineTable(allUsers);
     }
     
