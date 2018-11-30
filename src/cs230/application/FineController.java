@@ -14,7 +14,12 @@ public class FineController  {
     @FXML private TableView<User> tableView;
     @FXML private TableColumn<User, String> UserName;
     @FXML private TableColumn<User, Double> Amount;
-	
+
+    @FXML
+    private void handleBackButton(ActionEvent even) {
+    	// Code that either closes window or returns to main menu
+    }
+
     @FXML
 	private void handleSearchButton(ActionEvent event) {
 		String student = studentBox.getText();
