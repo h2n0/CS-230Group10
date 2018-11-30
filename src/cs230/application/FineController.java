@@ -55,8 +55,10 @@ public class FineController  {
     private void PopulateFineTable(ArrayList<User> fineList) {
     	UserName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         Amount.setCellValueFactory(new PropertyValueFactory<User, Double>("balance"));
-
-        tableView.getItems().setAll(fineList);
+        if (fineList != null){
+        	tableView.getItems().setAll(fineList);
+        }
+       
     	
     }
         
