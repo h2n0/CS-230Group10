@@ -60,9 +60,9 @@ public class EditFineController  {
 			System.out.println(user);
 			System.out.println(newAmountDbl);
 			
+			//have to instantiate User to set new amount and then use as record for db?
 			User tempUser = User(user);
 			tempUser.setBalance(newAmountDbl);
-			//have to instantiate User to set new amount and then use as record for db?
 			
 			//Waiting for scott to update editRecord			
 			DatabaseManager.editRecord( ,tempUser,"user");
