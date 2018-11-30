@@ -22,10 +22,10 @@ public class DatabaseManager {
 	 * @param table The table to retrieve
 	 * @return The table in the form of an array list
 	 */
-	public static ArrayList<Object> getTable(String table) {
-		ArrayList<Object> output = new ArrayList<>();
+	public static Object getTable(String table) {
 		// Check variable for end of file
 		String filePath = compilePath(table);
+		Object data;
 
 		try {
 			ObjectInputStream objI =
@@ -34,11 +34,11 @@ public class DatabaseManager {
 			// Check if file is empty to prevent IOException
 			if (objI.available() != 0) {
 				// Cast file content to an arraylist of objects
-				output = (ArrayList<Object>) objI.readObject();
+				data = objI.readObject();
 				objI.close();
-				return output;
+				return data;
 			} else {
-				return output;
+				return null;
 			}
 
 		} catch (IOException e) {
