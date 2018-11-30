@@ -1,4 +1,5 @@
 package cs230.system;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,8 @@ import java.util.Date;
  * @version 1.0
  */
 
-public class Librarian extends User {
+public class Librarian extends User implements Serializable {
+	private static final long serialVersionUID = 1L;
 	//Date the librarian started working in the library
 	private Date employmentDate;
 	//Uniquely identify each librarian
@@ -21,9 +23,11 @@ public class Librarian extends User {
 	 * @param balance how much money the user owes the library
 	 * @param avatarFilePath the file path to the user's avatar
 	 * @param employmentDate the date the librarian started working in the library
-	 * @param staffnumber the identifier for each librarian
+	 * @param staffNumber the identifier for each librarian
 	 */
-	public Librarian(Integer userID, String name, Address address, Float balance, String avatarFilePath,Date employmentDate, Integer staffNumber) {
+	public Librarian(Integer userID, String name, Address address,
+			 Double balance, String avatarFilePath,
+			 Date employmentDate, Integer staffNumber) {
 		super(userID, name, address, balance, avatarFilePath);
 		this.employmentDate = employmentDate;
 		this.staffNumber = staffNumber;
