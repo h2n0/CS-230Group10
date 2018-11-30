@@ -1,9 +1,13 @@
 package cs230.application;
 
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import cs230.system.User;
@@ -27,7 +31,8 @@ public class FineController  {
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		allUsers.removeIf(s -> (s.getBalance()==0.0 && !s.getName().contains(student)));
+		allUsers.removeIf(s -> (s.getBalance()==0.0 || !s.getName().contains(student)));
+		System.out.println(allUsers.toString());
 		PopulateFineTable(allUsers);
 	}
     
@@ -42,24 +47,22 @@ public class FineController  {
     	ArrayList<User> allUsers = new ArrayList<User>();
 		try {
 			allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
-			System.out.println(allUsers.toString());
-			allUsers.removeIf(s -> (s.getBalance()==0.0));
-			PopulateFineTable(allUsers);
 		}
     	catch(Exception e){
 			e.printStackTrace();
 		}
-		
+		allUsers.removeIf(s -> (s.getBalance()==0.0));
+		PopulateFineTable(allUsers);
     }
     
     private void PopulateFineTable(ArrayList<User> fineList) {
     	UserName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         Amount.setCellValueFactory(new PropertyValueFactory<User, Double>("balance"));
+    	
         if (fineList != null){
         	tableView.getItems().setAll(fineList);
         }
-       
-    	
+        
     }
         
 }

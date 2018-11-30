@@ -17,6 +17,14 @@ public class EditFineController  {
 	private void handleSaveButton(ActionEvent event) {
 		float newAmount = Float.parseFloat();
 		String fineID = FineID.getText();
+		
+		
+		//cast to double to check no text
+		//convert to 2 dp and then check if its the same
+		//see if between 0.01 & balance
+		//then save
+		
+		//then visible label "invalid details"
 	}
 	
 	private void handleCancelButton(ActionEvent event) {

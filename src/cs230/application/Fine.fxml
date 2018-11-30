@@ -18,12 +18,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField />
+            <TextField fx:id="studentBox"/>
             <Button mnemonicParsing="false" text="Search" onAction="#handleSearchButton"/>
             <Button mnemonicParsing="false" text="Cancel" onAction="#handleCancelButton"/>
          </children>
       </HBox>
-      <TableView editable="true" prefHeight="200.0" prefWidth="200.0">
+      <TableView editable="true" prefHeight="200.0" prefWidth="200.0" fx:id="tableView">
         <columns>
           <TableColumn prefWidth="75.0" text="UserName" fx:id="UserName"/>
           <TableColumn prefWidth="75.0" text="Amount" fx:id="Amount"/>
