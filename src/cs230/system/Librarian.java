@@ -1,3 +1,5 @@
+package cs230.system;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -6,7 +8,8 @@ import java.util.Date;
  * @version 1.0
  */
 
-public class Librarian extends User {
+public class Librarian extends User implements Serializable {
+	private static final long serialVersionUID = 1L;
 	//Date the librarian started working in the library
 	private Date employmentDate;
 	//Uniquely identify each librarian
@@ -20,9 +23,11 @@ public class Librarian extends User {
 	 * @param balance how much money the user owes the library
 	 * @param avatarFilePath the file path to the user's avatar
 	 * @param employmentDate the date the librarian started working in the library
-	 * @param staffnumber the identifier for each librarian
+	 * @param staffNumber the identifier for each librarian
 	 */
-	public Librarian(Integer userID, String name, Address address, Float balance, String avatarFilePath,Date employmentDate, Integer staffNumber) {
+	public Librarian(Integer userID, String name, Address address,
+			 Double balance, String avatarFilePath,
+			 Date employmentDate, Integer staffNumber) {
 		super(userID, name, address, balance, avatarFilePath);
 		this.employmentDate = employmentDate;
 		this.staffNumber = staffNumber;
@@ -58,8 +63,9 @@ public class Librarian extends User {
 		return staffNumber;
 	}
 
-	public void payfine (Integer userID, Float amount) {
-		//update db to reduce fine by amount where userID 
+	public void payfine (Integer userID, Float paid) {
+		//Select amount where id = UserID
+		//update amount = amount - paid where id = UserID
 	}
 	
 	public void authoriseLoan (Integer userID, Integer copyID) {
@@ -69,7 +75,9 @@ public class Librarian extends User {
 			throw new IllegalArgumentException ("That user has unpaid fines and hence cannot take out a book"); 
 		}
 		else {
-			//update database to give that copy to the user, changing the status of copy to unavailable and -1 from the available copies in the resource table
+			//update copy where id = CopyID, set status to unavailable
+			//update resource where id = ResourceID, set availablecopies to -1
+			//insert into history where id = copyID, add info
 		}
 	}
 

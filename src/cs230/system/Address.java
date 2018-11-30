@@ -1,3 +1,5 @@
+package cs230.system;
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 
@@ -7,7 +9,8 @@ import java.util.regex.Pattern;
  * @version 1.0
  */
 
-public class Address {
+public class Address implements Serializable {
+	private static final long serialVersionUID = 1L;
 	//the house name or number
 	private String houseNumorName;
 	//The road name
