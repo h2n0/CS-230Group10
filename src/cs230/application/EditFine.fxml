@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="cs230.application.EditFineController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
          <children>
-            <TableView prefHeight="100.0" prefWidth="314.0">
+            <TableView prefHeight="100.0" prefWidth="314.0" fx:id="tableView">
               <columns>
                 <TableColumn prefWidth="75.0" text="FineID" />
                 <TableColumn prefWidth="75.0" text="User" />
-                  <TableColumn prefWidth="75.0" text="Amount" />
-                  <TableColumn prefWidth="88.0000061035156" text="NewAmount" />
+                <TableColumn prefWidth="75.0" text="Amount" />
+                <TableColumn prefWidth="88.0000061035156" text="NewAmount" />
               </columns>
             </TableView>
             <Button mnemonicParsing="false" text="Reduce by amount" />
@@ -24,8 +24,8 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" text="Save" />
-            <Button mnemonicParsing="false" text="Cancel" />
+            <Button mnemonicParsing="false" text="Save" onAction="#handleSaveButton"/>
+            <Button mnemonicParsing="false" text="Cancel" onAction="#handleCancelButton" />
          </children>
       </HBox>
    </children>

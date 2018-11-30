@@ -1,15 +1,10 @@
 package cs230.application;
 
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
-
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import cs230.system.User;
 import cs230.system.DatabaseManager;
 
@@ -38,7 +33,7 @@ public class FineController  {
     
     @FXML
 	private void handleCancelButton(ActionEvent event) {
-		//delete popup here, thanks Jack
+		//remove popup from screen here, thanks Jack
 	}
 	
 	
