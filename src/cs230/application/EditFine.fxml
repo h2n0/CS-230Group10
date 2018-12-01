@@ -32,10 +32,10 @@
                   <Label fx:id="Amount" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="147.0" text="&lt;Amount&gt;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" text="Reduce by amount" />
          </children>
       </HBox>
       <Label fx:id="invalidLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="690.0" text="invalid New Amount" textAlignment="CENTER" textFill="RED" visible="false" />
+      <Label fx:id="saveLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="690.0" text="save successful" textAlignment="CENTER" textFill="RED" visible="false" />
       <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" spacing="15.0">
          <children>
             <Button mnemonicParsing="false" onAction="#handleSaveButton" text="Save" />

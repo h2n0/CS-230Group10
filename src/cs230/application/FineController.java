@@ -15,11 +15,20 @@ public class FineController  {
     @FXML private TableColumn<User, String> UserName;
     @FXML private TableColumn<User, Double> Amount;
 
+    /**
+     * not sure why this is here, same as cancel button?
+     * @param event
+     */
     @FXML
-    private void handleBackButton(ActionEvent even) {
+    private void handleBackButton(ActionEvent event) {
     	// Code that either closes window or returns to main menu
     }
-
+    
+    /**
+	 * gets the user input and searches for usernames matching the input
+	 * then displays these users in the table
+	 * @param event ?????
+	 */
     @FXML
 	private void handleSearchButton(ActionEvent event) {
 		String student = studentBox.getText();
@@ -36,12 +45,19 @@ public class FineController  {
 		PopulateFineTable(allUsers);
 	}
     
+    /**
+	 * handles the cancel button
+	 * @param event ?????
+	 */
     @FXML
 	private void handleCancelButton(ActionEvent event) {
 		//remove popup from screen here, thanks Jack
 	}
 	
-	
+    /**
+	 * overides the initialize function so when the window is open the
+	 * info for all users with fines are displayed
+	 */
     @FXML
     public void initialize() {
     	ArrayList<User> allUsers = new ArrayList<User>();
@@ -55,6 +71,10 @@ public class FineController  {
 		PopulateFineTable(allUsers);
     }
     
+    /**
+     * Populates the appropriate features on the window for a user
+     * @param fineList a list of users to be displayed in the table
+     */
     private void PopulateFineTable(ArrayList<User> fineList) {
     	UserName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         Amount.setCellValueFactory(new PropertyValueFactory<User, Double>("balance"));
