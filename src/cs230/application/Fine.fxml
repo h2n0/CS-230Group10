@@ -33,7 +33,7 @@
             </Label>
             <TextField fx:id="studentBox" />
             <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" text="TEMPEditFine Cancel" />
             <Button mnemonicParsing="false" text="Back" />
          </children>
       </HBox>
