@@ -21,30 +21,9 @@
       <ScrollPane prefHeight="323.0" prefWidth="488.0" BorderPane.alignment="CENTER" />
    </center>
    <left>
-      <VBox prefHeight="200.0" prefWidth="75.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="75.0" styleClass="mainSideBox" fx:id="sideOptions" BorderPane.alignment="CENTER">
          <children>
             <Hyperlink fx:id="dashboardLink" styleClass="mainSideLink" text="Dashboard" />
-            <Accordion>
-              <panes>
-                <TitledPane animated="false" collapsible="false" prefHeight="0.0" prefWidth="87.0" text="Resources">
-                     <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <VBox prefHeight="200.0" prefWidth="73.0">
-                                 <children>
-                                    <Hyperlink text="All" />
-                                    <Hyperlink text="Laptops" />
-                                    <Hyperlink text="Books" />
-                                    <Hyperlink text="DVDs" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                </TitledPane>
-              </panes>
-            </Accordion>
-            
             <Hyperlink id="cs230.system.Fine" fx:id="fineLink" styleClass="mainSideLink" text="Fines" />
          </children>
       </VBox>
