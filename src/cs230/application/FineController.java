@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -21,7 +20,7 @@ public class FineController  {
     @FXML private TableView<User> tableView;
     @FXML private TableColumn<User, String> UserName;
     @FXML private TableColumn<User, Double> Amount;
-    @FXML private TableColumn<User, Hyperlink> Edit;
+    @FXML private TableColumn<User, Button> Edit;
     @FXML private Button cancelButton;
     
     /**
@@ -90,7 +89,10 @@ public class FineController  {
     private void PopulateFineTable(ArrayList<User> fineList) {
     	UserName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         Amount.setCellValueFactory(new PropertyValueFactory<User, Double>("balance"));
-    	//Edit.setCellValueFactory(new PropertyValueFactory<User, Hyperlink>("edit"));
+        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
+    		tableView.getItems().remove(u);
+    		return u;
+    	}));
         
         if (fineList != null){
         	tableView.getItems().setAll(fineList);

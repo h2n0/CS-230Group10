@@ -19,7 +19,7 @@ public class User implements Serializable {
 	private Double balance;
 	//The filepath to the user's avatar
 	private String avatarFilePath;
-
+		
 	/**
 	 * Constructor for a new user
 	 * @param userID the identifier for the user
