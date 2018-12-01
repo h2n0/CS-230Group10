@@ -43,12 +43,12 @@ public class LoginController {
 		User tempUser = new User(null, inputUsername, null, null, null);
 		exists = DatabaseManager.checkForRecord(tempUser, "user");
 
-	    	if(exists) {
+//	    	if(exists) {
 			changeToMainPage();
 			userNotFound.setVisible(false);
-		} else {
-	    		userNotFound.setVisible(true);
-	    	}
+//		} else {
+//	    		userNotFound.setVisible(true);
+//	    	}
 	}
 	
 	private void changeToMainPage() {
