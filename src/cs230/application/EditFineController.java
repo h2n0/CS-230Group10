@@ -73,6 +73,10 @@ public class EditFineController  {
 			User changedUser = allUsers.get(0);
 			changedUser.setBalance(newAmountDbl);
 			
+			System.out.println("Old amount:");
+			System.out.println(unchangedUser.getBalance());
+			System.out.println("New amount:");
+			System.out.println(changedUser.getBalance());
 			//save new balance amount and display label for success/error
 			if (DatabaseManager.editRecord(unchangedUser, changedUser, "user")) {
 				saveSuccessful();
@@ -81,7 +85,6 @@ public class EditFineController  {
 			else {
 				saveUnsuccessful();
 			}
-			
 		}
 	}
 	
