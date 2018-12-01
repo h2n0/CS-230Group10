@@ -19,7 +19,13 @@ public class EditFineController  {
 	@FXML private Label invalidLabel;
 	@FXML private Label UserName;
 	@FXML private Label Amount;
+	@FXML private Label saveLabel;
 	
+	/**
+	 * gets the user input and validates it, if valid then use the 
+	 * database manager to save the changes
+	 * @param event ?????
+	 */
 	@FXML
 	private void handleSaveButton(ActionEvent event) {
 		//remove invalid label from screen
@@ -57,31 +63,64 @@ public class EditFineController  {
 			invalidNewAmount();
 		}
 		else {
-			System.out.println(user);
-			System.out.println(newAmountDbl);
-			
-			
 			//have to instantiate User to set new amount and then use as record for db
 			ArrayList<User> allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
 			allUsers.removeIf(s -> !(s.getName().contains(user)));
 			User unchangedUser = allUsers.get(0);
 			User changedUser = allUsers.get(0);
 			changedUser.setBalance(newAmountDbl);
-						
-			DatabaseManager.editRecord(unchangedUser, changedUser, "user");
+			
+			//save new balance amount and display label for success/error
+			if (DatabaseManager.editRecord(unchangedUser, changedUser, "user")) {
+				saveSuccessful();
+				PopulateEditFine(changedUser);
+			}
+			else {
+				saveUnsuccessful();
+			}
+			
 		}
 	}
 	
+	/**
+	 * shows a label saying "invalid New Amount" in red
+	 */
 	@FXML
 	private void invalidNewAmount() {
 		invalidLabel.setVisible(true);
 	}
 	
+	/**
+	 * shows a label saying "save successful" in red
+	 */
+	@FXML
+	private void saveSuccessful() {
+		saveLabel.setText("save successful");
+		saveLabel.setVisible(true);
+	}
+	
+	/**
+	 * shows a label saying "save unsuccessful" in red
+	 */
+	@FXML
+	private void saveUnsuccessful() {
+		saveLabel.setText("save unsuccessful");
+		saveLabel.setVisible(true);
+	}
+	
+	/**
+	 * handles the cancel button
+	 * @param event ?????
+	 */
 	@FXML
 	private void handleCancelButton(ActionEvent event) {
 		//remove popup from screen here, thanks Jack
 	}
 	
+	/**
+	 * overides the initialize function so when the window is open the
+	 * info for a user is displayed
+	 */
 	@FXML
     public void initialize() {
     	ArrayList<User> allUsers = new ArrayList<User>();
@@ -97,19 +136,22 @@ public class EditFineController  {
 		
 		System.out.println(allUsers);
 		//only expect 1 row at a time so only display first row
+		User u = allUsers.get(0);
+		System.out.println(u.toString());
+		System.out.println(u.getName());
 		PopulateEditFine(allUsers.get(0));
     }
-    
-    private void PopulateEditFine(User fineRow) {
-        if (fineRow != null){
-        	UserName.setText(fineRow.getName());
-        	Amount.setText(fineRow.getBalance().toString());
+	
+    /**
+     * Populates the appropriate features on the window for a user
+     * @param u the user who's info will be displayed on the screen
+     */
+    private void PopulateEditFine(User u) {
+        if (u != null){
+        	UserName.setText(u.getName());
+        	Amount.setText(u.getBalance().toString());
         }
         
     }
-	/*
-        
-		
     
-    */
 }

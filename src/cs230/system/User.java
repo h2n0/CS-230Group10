@@ -34,17 +34,6 @@ public class User implements Serializable {
 		this.balance = balance;
 		this.avatarFilePath = avatarFilePath;
 	}
-
-	/**
-	 * Constructor when User exists in database 
-	 * @param userID The identifier for the User
-	 */
-	public User(String userName) {
-		ArrayList<User> allUsers= (ArrayList<User>) DatabaseManager.getTable("user");
-		allUsers.removeIf(s -> !(s.getName().contains(userName)));
-		User u = allUsers.get(0);
-		this(u.getName(), u.getAddress(), u.getBalance(), u.getAvatarFilePath());
-	}
 	
 	/**
 	 * Sets the user's name
