@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**This controllers the ui for the login page
@@ -44,9 +44,9 @@ public class LoginController {
 	}
 	
 	private void changeToMainPage() {
-		BorderPane root = null;
+		AnchorPane root = null;
 		try {
-			root = (BorderPane)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/MainPage.fxml"));
+			root = (AnchorPane)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/UserInfo.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
