@@ -119,7 +119,7 @@ public class User implements Serializable {
 			return true;
 		}
 
-		if (this.userID == PERSON.userID) {
+		if (this.name.equals(PERSON.name)) {
 			return true;
 		}
 

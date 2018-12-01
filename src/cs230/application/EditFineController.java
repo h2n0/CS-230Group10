@@ -2,14 +2,15 @@ package cs230.application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-import java.text.DecimalFormat;
+import java.io.IOException;
 import java.util.ArrayList;
-
 import cs230.system.DatabaseManager;
-import cs230.system.Fine;
 import cs230.system.User;
 
 
@@ -20,12 +21,14 @@ public class EditFineController  {
 	@FXML private Label UserName;
 	@FXML private Label Amount;
 	@FXML private Label saveLabel;
+	@FXML private Button cancelButton;
 	
 	/**
 	 * gets the user input and validates it, if valid then use the 
 	 * database manager to save the changes
 	 * @param event ?????
 	 */
+	@SuppressWarnings("unchecked")
 	@FXML
 	private void handleSaveButton(ActionEvent event) {
 		//remove invalid label from screen
@@ -110,17 +113,30 @@ public class EditFineController  {
 	
 	/**
 	 * handles the cancel button
-	 * @param event ?????
+	 * @param event the button clicked
 	 */
 	@FXML
-	private void handleCancelButton(ActionEvent event) {
-		//remove popup from screen here, thanks Jack
+	private void handleBackButton(ActionEvent event) {
+		VBox root = null;
+    	try {
+			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Fine.fxml"));
+		} 
+    	catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    	Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+		Stage stage = (Stage)cancelButton.getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	/**
 	 * overides the initialize function so when the window is open the
 	 * info for a user is displayed
 	 */
+	@SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
     	ArrayList<User> allUsers = new ArrayList<User>();

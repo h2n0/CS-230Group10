@@ -32,15 +32,16 @@
                </font>
             </Label>
             <TextField fx:id="studentBox" />
-            <Button mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
-            <Button mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" />
             <Button mnemonicParsing="false" text="Back" />
          </children>
       </HBox>
       <TableView fx:id="tableView" editable="true" prefHeight="352.0" prefWidth="546.0">
         <columns>
-          <TableColumn fx:id="UserName" prefWidth="75.0" text="UserName" />
-          <TableColumn fx:id="Amount" prefWidth="75.0" text="Amount" />
+          <TableColumn fx:id="UserName" prefWidth="240" text="UserName" />
+          <TableColumn fx:id="Amount" prefWidth="168" text="Amount" />
+          <TableColumn fx:id="EditColumn" prefWidth="135" text="Edit" />
         </columns>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" />
