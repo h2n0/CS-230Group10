@@ -1,5 +1,7 @@
 import java.util.LinkedList; 
-import java.util.Queue; 
+import java.util.Queue;
+
+
 
 /**
  * @author 959470
@@ -37,7 +39,8 @@ public class Resource {
 		this.title= title;
 		this.year=year;
 		this.thumbnail=thumbnail;
-		//to-do add numcopies and availablecopies
+		this.numCopies = 0;
+		this.availableCopiesNum = 0;
 	}
 	
 	
@@ -55,6 +58,7 @@ public class Resource {
 	 */
 	public  void setTitle (String title) {
 		this.title=title;
+		this.update();
 	}
 	/**
 	 * Sets the year
@@ -62,13 +66,15 @@ public class Resource {
 	 */
 	public  void setYear (int year) {
 		this.year=year;
+		this.update();
 	}
 	/**
 	 * Sets the thumbnail
-	 * @param thumbnail
+	 * @param the filepath to the thumbnail
 	 */
 	public  void setThumbnail (String thumbnail) {
 		this.thumbnail=thumbnail;
+		this.update();
 	}
 	
 	/**
@@ -89,11 +95,62 @@ public class Resource {
 	public  int getYear () {
 		return this.year;
 	}
+	
+	/**
+	 * @return The number of copies for that resource
+	 */
+	public  int getNumCopies () {
+		return this.numCopies;
+	}
+	
+	/**
+	 * Increments the number of copies by 1
+	 */
+	public void incNumCopies() {
+		this.numCopies ++;	
+	}
+	
+	/**
+	 * Decrements the number of copies by 1
+	 */
+	public void decNumCopies() {
+		this.numCopies --;	
+	}
+	
+	
+	
+	/**
+	 * @return The number of available copies for that resource
+	 */
+	public  int getAvailableNumCopies () {
+		return this.availableCopiesNum;
+	}
+	
+	/**
+	 * Increments the number of available copies by 1
+	 */
+	public void incAvailableNumCopies() {
+		this.availableCopiesNum ++;	
+	}
+	
+	/**
+	 * Decrements the number of available copies by 1
+	 */
+	public void decAvailableNumCopies() {
+		this.availableCopiesNum --;	
+	}
+	
 	/**
 	 * @return The thumbanil
 	 */
 	public  String getThumbnail () {
 		return this.thumbnail;
+	}
+	/**
+	 * @return The type of the Resource(Book,Dvd or Laptop)
+	 */
+	public String getType() {
+		return this.type;
 	}
 	
 	/**
@@ -102,6 +159,7 @@ public class Resource {
 	 */
 	public void addToQueue (Integer a) {
 		this.requestQ.add(a);
+		this.update();
 	}
 	
 	/**
@@ -109,7 +167,7 @@ public class Resource {
 	 */
 	public void removeFromQueue () {
 		this.requestQ.remove();
-		
+		this.update();
 	}
 	
 	/**
@@ -149,6 +207,7 @@ public class Resource {
 	 * @param attribute The new value of the attribute
 	 */
 	public void update () {
+//		DatabaseManager.editRecord(this.id,this,type);
 	}
 	
 	public void create () {
@@ -156,6 +215,11 @@ public class Resource {
 	
 	public void delete () {
 	}
+	
+	public String toString() {
+		return this.title;
+	}
+	
 	
 	
 }

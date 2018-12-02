@@ -101,15 +101,17 @@ public class CreateResourceViewController {
 		if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
 			unfinishedLb.setVisible(true);
 		}else {
+			int year =Integer.parseInt(this.year.getText());
 			String choice = resourceChoice.getValue();
 			switch (choice) {
 				case "Book" :
 					if (bookLanguage.getText().equals("") || isbn.getText().equals("") || genre.getText().equals("")){
 						unfinishedLb.setVisible(true);
 					} else {
+						
 						unfinishedLb.setVisible(false);
 						
-						//Book book1 = new Book(id.getText(),title.getText(),year.getText(),thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
+						//Book book1 = new Book(id.getText(),title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
 					}
 					break;
 				case "Laptop" :
@@ -117,7 +119,7 @@ public class CreateResourceViewController {
 						unfinishedLb.setVisible(true);
 					} else {
 						unfinishedLb.setVisible(false);
-						//Laptop laptop1 = new Laptop(id.getText(),title.getText(),year.getText(),thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
+						//Laptop laptop1 = new Laptop(id.getText(),title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
 					}
 					break;
 				case "Dvd" :
@@ -133,7 +135,8 @@ public class CreateResourceViewController {
 							subLang.add(subArray[i]);
 							i++;
 						}
-						//Dvd dvd1 = new Dvd(id.getText(),title.getText(),year.getText(),thumbnail.getText(),director.getText(),runtime.getText(),dvdLanguage.getText(),subLang);
+						int runtime = Integer.parseInt(this.runtime.getText());
+						Dvd dvd1 = new Dvd(5,title.getText(),year,thumbnail.getText(),director.getText(),runtime,dvdLanguage.getText(),subLang);
 					}
 					break;
 			}
