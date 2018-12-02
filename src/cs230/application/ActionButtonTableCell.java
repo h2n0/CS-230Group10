@@ -13,7 +13,7 @@ public class ActionButtonTableCell<S> extends TableCell<S, Button> {
     private final Button actionButton;
 
     public ActionButtonTableCell(String label, Function< S, S> function) {
-        this.getStyleClass().add("action-button-table-cell");
+        //this.getStyleClass().add("action-button-table-cell");
 
         this.actionButton = new Button(label);
         this.actionButton.setOnAction((ActionEvent e) -> {

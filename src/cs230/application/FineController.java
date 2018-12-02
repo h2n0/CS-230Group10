@@ -21,10 +21,10 @@ public class FineController  {
     @FXML private TableColumn<User, String> UserName;
     @FXML private TableColumn<User, Double> Amount;
     @FXML private TableColumn<User, Button> Edit;
-    @FXML private Button cancelButton;
+    @FXML private Button backButton;
     
     /**
-     * not sure why this is here, same as cancel button?
+     * takes the user back to the main menu
      * @param event
      */
     @FXML
@@ -55,16 +55,6 @@ public class FineController  {
 	}
     
     /**
-	 * handles the cancel button
-	 * @param event ?????
-	 */
-    @FXML
-	private void handleCancelButton(ActionEvent event) {
-    	changeToEditfine();
-		//remove popup from screen here, thanks Jack
-	}
-	
-    /**
 	 * overides the initialize function so when the window is open the
 	 * info for all users with fines are displayed
 	 */
@@ -89,6 +79,27 @@ public class FineController  {
     private void PopulateFineTable(ArrayList<User> fineList) {
     	UserName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         Amount.setCellValueFactory(new PropertyValueFactory<User, Double>("balance"));
+        
+        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
+        	VBox root = null;
+        	try {
+    			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
+    		} 
+        	catch (IOException e) {
+    			e.printStackTrace();
+    		}
+        	
+        	Scene scene = new Scene(root);
+    		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+    		
+    		//backbutton isnt right but it still works???
+    		Stage stage = (Stage)backButton.getScene().getWindow();
+    		stage.setScene(scene);
+    		stage.show();
+    		return u;
+    	}));
+        
+        //working but removes row from table
         /*
         Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
     		tableView.getItems().remove(u);
@@ -101,8 +112,9 @@ public class FineController  {
         }
         
     }
-    
-    private void changeToEditfine() {
+}  
+    /*
+    private User changeToEditfine(User u) {
     	VBox root = null;
     	try {
 			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
@@ -116,5 +128,6 @@ public class FineController  {
 		Stage stage = (Stage)cancelButton.getScene().getWindow();
 		stage.setScene(scene);
 		stage.show();
+		return u;
     }
-}
+    */
