@@ -22,6 +22,8 @@ public class EditFineController  {
 	@FXML private Label Amount;
 	@FXML private Label saveLabel;
 	@FXML private Button cancelButton;
+	@FXML private VBox editFineVBox;
+	private String currentUser;
 	
 	/**
 	 * gets the user input and validates it, if valid then use the 
@@ -142,16 +144,18 @@ public class EditFineController  {
 	@SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
+		Scene window = editFineVBox.getScene();
+		String currentUser = window.getTitle();
+		currentUser = currentUser.substring(currentUser.length()-14);
+		
     	ArrayList<User> allUsers = new ArrayList<User>();
 		try {
 			allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
 		}
     	catch(Exception e){
 			e.printStackTrace();
-		}
-		
-		//how to get selected user here??
-		allUsers.removeIf(s -> !(s.getName().contains("Joe")));
+		}		
+		allUsers.removeIf(s -> !(s.getName().contains(currentUser)));
 		
 		System.out.println(allUsers);
 		//only expect 1 row at a time so only display first row

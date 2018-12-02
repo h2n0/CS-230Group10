@@ -86,7 +86,7 @@ public class FineController  {
     			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
     		} 
         	catch (IOException e) {
-    			e.printStackTrace();
+        		System.out.println("Next window failed to load");
     		}
         	
         	Scene scene = new Scene(root);
@@ -95,6 +95,7 @@ public class FineController  {
     		//backbutton isnt right but it still works???
     		Stage stage = (Stage)backButton.getScene().getWindow();
     		stage.setScene(scene);
+    		stage.setTitle("Edit Fine for " + u.getName());
     		stage.show();
     		return u;
     	}));
