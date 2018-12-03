@@ -8,26 +8,20 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="369.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.MainPageController">
    <center>
-      <ScrollPane prefHeight="323.0" prefWidth="488.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
-         <content>
-            <Label prefHeight="51.0" prefWidth="74.0" text="HomePage" />
-         </content>
-      </ScrollPane>
+      <ScrollPane fx:id="mainContent" prefHeight="323.0" prefWidth="488.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER" />
    </center>
    <left>
       <VBox fx:id="sideOptions" prefHeight="200.0" prefWidth="75.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
          <children>
             <Hyperlink fx:id="dashboardLink" styleClass="mainSideLink" text="Dashboard" />
-            <Hyperlink id="cs230.system.Fine" fx:id="fineLink" styleClass="mainSideLink" onAction="#handleFineAction" text="Fines" />
+            <Hyperlink id="cs230.system.Fine" fx:id="fineLink" onAction="#handleFineAction" styleClass="mainSideLink" text="Fines" />
          </children>
       </VBox>
    </left>
@@ -71,6 +65,6 @@
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
-      </HBox>
+      </StackPane>
    </top>
 </BorderPane>

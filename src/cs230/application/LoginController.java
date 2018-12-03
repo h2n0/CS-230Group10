@@ -45,21 +45,22 @@ public class LoginController {
 		User tempUser = new User(inputUsername, null, null, null);
 		exists = DatabaseManager.checkForRecord(tempUser, "user");
 
-//	    	if(exists) {
+	    	if(exists) {
 			changeToMainPage();
 			userNotFound.setVisible(false);
-//		} else {
-//	    		userNotFound.setVisible(true);
-//	    	}
+		} else {
+	    		userNotFound.setVisible(true);
+	    	}
 	}
 	
 	private void changeToMainPage() {
 		try {
-			AnchorPane root =
+			BorderPane root =
 				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/MainPage.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-			Stage stage = (Stage)loginButton.getScene().getWindow();
+			Stage stage =
+				(Stage) loginButton.getScene().getWindow();
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
