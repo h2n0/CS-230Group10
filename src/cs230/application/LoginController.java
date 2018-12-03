@@ -2,6 +2,7 @@ package cs230.application;
 
 import java.io.IOException;
 
+import cs230.system.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,30 +28,38 @@ public class LoginController {
 	
 	@FXML
 	private Button loginButton;
+
 	
 	@FXML
+	private void handExitAction(ActionEvent event) {
+		System.exit(0);
+	}
+
+	@FXML
 	private void handleLoginAction(ActionEvent event ) {
-		//cs230.system.DatabaseManager.searchpartial()
+		Boolean exists;
 		String inputUsername = usernameField.getText();
-		System.out.println(inputUsername);
-	    if(inputUsername.equals("test")) {
+
+		//Create a temporary user to check in DB
+		User tempUser = new User(inputUsername, null, null, null);
+		exists = DatabaseManager.checkForRecord(tempUser, "user");
+
+//	    	if(exists) {
 			changeToMainPage();
 			userNotFound.setVisible(false);
-		}
-	    else
-	    {
-	    	userNotFound.setVisible(true);
-	    }
+//		} else {
+//	    		userNotFound.setVisible(true);
+//	    	}
 	}
 	
 	private void changeToMainPage() {
 		AnchorPane root = null;
 		try {
-			root = (AnchorPane)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/UserInfo.fxml"));
+			root = (BorderPane)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/MainPage.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Scene scene = new Scene(root,400,400);
+		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 		Stage stage = (Stage)loginButton.getScene().getWindow();
 		stage.setScene(scene);
