@@ -29,6 +29,7 @@ public class LoginController {
 	@FXML
 	private Button loginButton;
 
+	
 	@FXML
 	private void handExitAction(ActionEvent event) {
 		System.exit(0);
