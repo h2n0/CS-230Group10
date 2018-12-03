@@ -15,26 +15,24 @@ import cs230.system.DatabaseManager;
 import cs230.system.PassInfo;
 import cs230.system.User;
 
-
+/**
+ * Controller behind the Edit Fine page
+ * @author 963257
+ * @version 1.2
+ */
 public class EditFineController  {
-
-	@FXML private TextField newAmount;
+	
+	//the textField for the librarian to type in the amount paid
+	@FXML private TextField amountPaid;
 	@FXML private Label invalidLabel;
 	@FXML private Label UserName;
 	@FXML private Label Amount;
 	@FXML private Label saveLabel;
 	@FXML private Button cancelButton;
 	@FXML private VBox editFineVBox;
-	private User currentUser;
 	
-	/*
-	public EditFineController(User u) {
-		setCurrentUser(u);
-	}
-	*/
-	public void setCurrentUser(User u ) {
-		this.currentUser = u;
-	}
+	//the user to be edited, set when the page is opened
+	private User currentUser;
 	
 	/**
 	 * gets the user input and validates it, if valid then use the 
@@ -48,48 +46,42 @@ public class EditFineController  {
 		invalidLabel.setVisible(false);
 		
 		//get new amount and user
-		String newAmountTxt = newAmount.getText();
+		String amountPaidTxt = amountPaid.getText();
 		String user = UserName.getText();
-		
-		System.out.println(newAmountTxt);
-		
-		//set to -1 so it is caught if not changed in try catch below
-		Double newAmountDbl= -1.00;
+				
+		//set to -1 so it is invalid if not changed in try catch below
+		Double amountPaidDbl= -1.00;
 		
 		//try casting to double to make sure only numbers input
 		try {
-			newAmountDbl = Double.parseDouble(newAmountTxt);
+			amountPaidDbl = Double.parseDouble(amountPaidTxt);
 		}
 		catch(NumberFormatException e){
-			//newAmount wasnt a number
-			invalidNewAmount();
+			//amountPaid wasnt a number
+			invalidAmountPaid();
 		}
 		
 		//* by 100 to move 2dp to 0 dp
-		Double foo = newAmountDbl * 100;
+		Double foo = amountPaidDbl * 100;
 		//if more than 2dp foo will != 0
 		foo = foo - foo.intValue();
 		
 		if (foo > 0){
 			//was more than 2dp therefore invalid
-			invalidNewAmount();
+			invalidAmountPaid();
 		}
-		else if (newAmountDbl<0.01 || newAmountDbl > Double.parseDouble(Amount.getText())) {
+		else if (amountPaidDbl<0.01 || amountPaidDbl > Double.parseDouble(Amount.getText())) {
 			//outside of bounds
-			invalidNewAmount();
+			invalidAmountPaid();
 		}
 		else {
 			//have to instantiate User to set new amount and then use as record for db
 			ArrayList<User> allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
-			allUsers.removeIf(s -> !(s.getName().contains(user)));
+			allUsers.removeIf(s -> !(s.getName().equals(user)));
 			User unchangedUser = allUsers.get(0);
 			User changedUser = allUsers.get(0);
-			changedUser.setBalance(newAmountDbl);
+			changedUser.setBalance(amountPaidDbl);
 			
-			System.out.println("Old amount:");
-			System.out.println(unchangedUser.getBalance());
-			System.out.println("New amount:");
-			System.out.println(changedUser.getBalance());
 			//save new balance amount and display label for success/error
 			if (DatabaseManager.editRecord(unchangedUser, changedUser, "user")) {
 				saveSuccessful();
@@ -105,7 +97,7 @@ public class EditFineController  {
 	 * shows a label saying "invalid New Amount" in red
 	 */
 	@FXML
-	private void invalidNewAmount() {
+	private void invalidAmountPaid() {
 		invalidLabel.setVisible(true);
 	}
 	
@@ -133,6 +125,7 @@ public class EditFineController  {
 	 */
 	@FXML
 	private void handleBackButton(ActionEvent event) {
+		//load fine page fxml
 		VBox root = null;
     	try {
 			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Fine.fxml"));
@@ -141,6 +134,7 @@ public class EditFineController  {
 			e.printStackTrace();
 		}
     	
+    	//show fine page
     	Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 		Stage stage = (Stage)cancelButton.getScene().getWindow();
@@ -154,13 +148,9 @@ public class EditFineController  {
 	 */
 	@FXML
     public void initialize() {
+		//get the user from PassInfo
 		currentUser = PassInfo.getEditFineUser();
-		/*
-		//test data to make not error
-		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-		User user = new User("Joe", address, 10.0, null);
-		currentUser = user;
-		*/
+		//populate page with user info
 		PopulateEditFine(currentUser);
     }
 	
