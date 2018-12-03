@@ -80,54 +80,45 @@ public class FineController  {
     private void PopulateFineTable(ArrayList<User> fineList) {
     	UserName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         Amount.setCellValueFactory(new PropertyValueFactory<User, Double>("balance"));
-        
-        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
-        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Main.fxml"));     
-
-        	Parent root = null;
-			try {
-				root = (Parent)fxmlLoader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}          
-        	EditFineController controller = fxmlLoader.<EditFineController>getController();
-        	controller.setCurrentUser(u);
-        	Scene scene = new Scene(root); 
-        	Stage stage = (Stage)backButton.getScene().getWindow();
-        	stage.setScene(scene);    
-    		stage.show();  
-    		return u;
-    	}));
-        
-        /*
-        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
-        	VBox root = null;
-        	try {
-    			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
-    		} 
-        	catch (IOException e) {
-        		System.out.println("Next window failed to load");
-    		}
-        	
-        	root = 
-        	EditFineController controller = root.<EditFineController>getController(); 
-        	Scene scene = new Scene(root);
-    		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-    		
-    		//backbutton isnt right but it still works???
-    		Stage stage = (Stage)backButton.getScene().getWindow();
-    		stage.setScene(scene);
-    		stage.setTitle("Edit Fine for " + u.getName());
-    		stage.show();
-    		return u;
-    	}));
-        */
+        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> loadEditFine(u)));
         
         if (fineList != null){
         	tableView.getItems().setAll(fineList);
         }
         
     }
+    
+    private User loadEditFine(User u){
+    	
+    	System.out.println("here");
+    	System.out.println(u.getName());
+    	
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("EditFine.fxml"));
+    	loader.getController();
+    	
+        VBox vbox;
+		try {
+			vbox = loader.load();
+
+	        EditFineController controller = loader.getController();
+	        if(controller == null){
+	        	System.out.println("Failed to load EditFine controller");
+	        }
+	        
+	        controller.setCurrentUser(u);
+            Scene scene = new Scene(vbox);
+    		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+            
+    		Stage stage = (Stage)backButton.getScene().getWindow();
+    		stage.setScene(scene);
+    		stage.show(); 		
+    		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
+		return u;
+	}
 }  
     /*
     private User changeToEditfine(User u) {

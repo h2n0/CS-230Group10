@@ -56,14 +56,14 @@ public class LoginController {
 		BorderPane root = null;
 		try {
 			root = (BorderPane)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/MainPage.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+			Stage stage = (Stage)loginButton.getScene().getWindow();
+			stage.setScene(scene);
+			stage.show();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-		Stage stage = (Stage)loginButton.getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
 	}
 }

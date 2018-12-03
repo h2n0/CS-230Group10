@@ -28,11 +28,13 @@ public class DatabaseManager {
 		Object data;
 
 		try {
-			FileInputStream fileIn = new FileInputStream(filePath);
-			ObjectInputStream objI = new ObjectInputStream(fileIn);
+			FileInputStream fileWrite =
+				new FileInputStream(filePath);
+			ObjectInputStream objI =
+				new ObjectInputStream(fileWrite);
 
 			// Check if file is empty to prevent IOException
-			if (fileIn.available() != 0) {
+			if (fileWrite.available() != 0) {
 				// Cast file content to an arraylist of objects
 				data = objI.readObject();
 				objI.close();
@@ -347,10 +349,8 @@ public class DatabaseManager {
 		saveRecord(fine2, "test");
 		test = getTable(new FileInputStream("Database//test.dat"));
 		System.out.println("Amount of data: " + test.size());
-
 		System.out.println("Object found: " + searchRecord(fine1,
 			"test"));
-
 		deleteRecord(fine1, "test");
 		test = getTable(new FileInputStream("Database//test.dat"));
 		System.out.println("Amount of data: " + test.size());

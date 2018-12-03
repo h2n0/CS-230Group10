@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import cs230.system.Address;
 import cs230.system.DatabaseManager;
 import cs230.system.User;
 
@@ -146,26 +148,15 @@ public class EditFineController  {
 	 * overides the initialize function so when the window is open the
 	 * info for a user is displayed
 	 */
-	@SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
-		String loadUser = currentUser.getName();
-		
-    	ArrayList<User> allUsers = new ArrayList<User>();
-		try {
-			allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
-		}
-    	catch(Exception e){
-			e.printStackTrace();
-		}		
-		allUsers.removeIf(s -> !(s.getName().contains(loadUser)));
-		
-		System.out.println(allUsers);
-		//only expect 1 row at a time so only display first row
-		User u = allUsers.get(0);
-		System.out.println(u.toString());
-		System.out.println(u.getName());
-		PopulateEditFine(allUsers.get(0));
+		/*
+		//test data to make not error
+		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
+		User user = new User("Joe", address, 10.0, null);
+		currentUser = user;
+		*/
+		PopulateEditFine(currentUser);
     }
 	
     /**
@@ -176,6 +167,9 @@ public class EditFineController  {
         if (u != null){
         	UserName.setText(u.getName());
         	Amount.setText(u.getBalance().toString());
+        }
+        else {
+        	System.out.println("failed to load the user into the window");
         }
         
     }
