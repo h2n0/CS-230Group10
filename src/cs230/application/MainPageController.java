@@ -10,6 +10,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -35,6 +36,9 @@ public class MainPageController {
 	private Button searchButton;
 	
 	@FXML
+	private TextField searchBox;
+	
+	@FXML
 	private ImageView userImage;
 	
 	@FXML
@@ -52,6 +56,7 @@ public class MainPageController {
 		setResourceLinks();
 		username.textProperty().set(currentUser.getName());
 		balance.textProperty().set(currentUser.getBalance().toString());
+		updateComboBox();
 	}
 	
 	public void setCurrentUser(User currentUser)
@@ -60,6 +65,15 @@ public class MainPageController {
 	}
 	
 	private User currentUser;
+	
+	private void updateComboBox()
+	{
+		
+		Label allresources = new Label();
+		allresources.setText("All");
+		allresources.addEventHandler(changeSearchToAll());
+		resourcePicker.getItems().add(arg0);
+	}
 	
 	private void setResourceLinks()
 	{
@@ -84,6 +98,11 @@ public class MainPageController {
 		resourceChoices.getChildren().add(dvdChoice);
 		resources.setContent(resourceChoices);
 		sideOptions.getChildren().add(resources);
+	}
+	
+	private void changeSearchToAll()
+	{
+		searchBox.removeEventHandler(eventType, eventHandler);
 	}
 	
 	private void loadAllPage()
