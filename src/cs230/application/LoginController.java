@@ -29,6 +29,7 @@ public class LoginController {
 	@FXML
 	private Button loginButton;
 
+	
 	@FXML
 	private void handExitAction(ActionEvent event) {
 		System.exit(0);
@@ -43,12 +44,12 @@ public class LoginController {
 		User tempUser = new User(inputUsername, null, null, null);
 		exists = DatabaseManager.checkForRecord(tempUser, "user");
 
-	    	if(exists) {
+//	    	if(exists) {
 			changeToMainPage();
 			userNotFound.setVisible(false);
-		} else {
-	    		userNotFound.setVisible(true);
-	    	}
+//		} else {
+//	    		userNotFound.setVisible(true);
+//	    	}
 	}
 	
 	private void changeToMainPage() {
