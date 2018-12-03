@@ -22,7 +22,7 @@
       <VBox fx:id="sideOptions" prefHeight="200.0" prefWidth="75.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
          <children>
             <Hyperlink fx:id="dashboardLink" styleClass="mainSideLink" text="Dashboard" />
-            <Hyperlink id="cs230.system.Fine" fx:id="fineLink" styleClass="mainSideLink" text="Fines" />
+            <Hyperlink id="cs230.system.Fine" fx:id="fineLink" styleClass="mainSideLink" onAction="#handleFineAction" text="Fines" />
          </children>
       </VBox>
    </left>
