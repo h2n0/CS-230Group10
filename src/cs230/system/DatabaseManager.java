@@ -357,7 +357,7 @@ public class DatabaseManager {
 		*/
 
 		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-		User user = new User("Different Joe", address, 10.0, null);
+		User user = new User("Joeseph", address, 10.0, null);
 		saveRecord(user, "user");
 	}
 }
