@@ -30,7 +30,11 @@ public class FineController  {
      */
     @FXML
     private void handleBackButton(ActionEvent event) {
-    	// Code that either closes window or returns to main menu
+    	//Jack implement here
+    	
+    	//Temp code to close the window
+    	Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.close();
     }
     
     /**
@@ -93,11 +97,9 @@ public class FineController  {
     	System.out.println("here");
     	System.out.println(u.getName());
     	
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("EditFine.fxml"));
-    	loader.getController();
-    	
         VBox vbox;
 		try {
+	    	FXMLLoader loader = new FXMLLoader(getClass().getResource("EditFine.fxml"));
 			vbox = loader.load();
 
 	        EditFineController controller = loader.getController();
