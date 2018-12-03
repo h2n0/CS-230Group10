@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import cs230.system.Address;
 import cs230.system.DatabaseManager;
+import cs230.system.PassInfo;
 import cs230.system.User;
 
 
@@ -27,11 +27,11 @@ public class EditFineController  {
 	@FXML private VBox editFineVBox;
 	private User currentUser;
 	
-	
+	/*
 	public EditFineController(User u) {
 		setCurrentUser(u);
 	}
-	
+	*/
 	public void setCurrentUser(User u ) {
 		this.currentUser = u;
 	}
@@ -154,6 +154,7 @@ public class EditFineController  {
 	 */
 	@FXML
     public void initialize() {
+		currentUser = PassInfo.getEditFineUser();
 		/*
 		//test data to make not error
 		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");

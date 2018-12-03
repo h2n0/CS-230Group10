@@ -3,10 +3,10 @@ package cs230.application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import cs230.system.User;
 import cs230.system.DatabaseManager;
+import cs230.system.PassInfo;
 
 public class FineController  {
 
@@ -93,24 +94,36 @@ public class FineController  {
     }
     
     private User loadEditFine(User u){
-    	
-    	System.out.println("here");
-    	System.out.println(u.getName());
-    	
-        VBox vbox;
+    	try {
+    		PassInfo.setEditFineUser(u);
+			VBox root =
+				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+			Stage stage = (Stage)backButton.getScene().getWindow();
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return u;
+    }   
+}
+    	/*   	
 		try {
+			
 	    	FXMLLoader loader = new FXMLLoader(getClass().getResource("EditFine.fxml"));
-			vbox = loader.load();
-
+			VBox root = (VBox) loader.load();
 	        EditFineController controller = loader.getController();
+	        
 	        if(controller == null){
 	        	System.out.println("Failed to load EditFine controller");
 	        }
 	        
 	        controller.setCurrentUser(u);
-            Scene scene = new Scene(vbox);
+            Scene scene = new Scene(root);
     		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-            
+    		
     		Stage stage = (Stage)backButton.getScene().getWindow();
     		stage.setScene(scene);
     		stage.show(); 		
@@ -121,22 +134,4 @@ public class FineController  {
         
 		return u;
 	}
-}  
-    /*
-    private User changeToEditfine(User u) {
-    	VBox root = null;
-    	try {
-			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
-		} 
-    	catch (IOException e) {
-			e.printStackTrace();
-		}
-    	
-    	Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-		Stage stage = (Stage)cancelButton.getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
-		return u;
-    }
-    */
+}  */
