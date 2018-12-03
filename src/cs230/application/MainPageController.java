@@ -1,5 +1,8 @@
 package cs230.application;
 
+public class MainPageController {
+
+
 import java.util.ArrayList;
 import cs230.system.*;
 import javafx.event.ActionEvent;
@@ -138,9 +141,11 @@ public class MainPageController {
 		
 	}
 	
-	private void getDVDList()
+	private void getDVDList() {
 	{
-		
+ 
+		public void handleExit(ActionEvent event) {
+		changeToLogin();
 	}
 	
 	@FXML

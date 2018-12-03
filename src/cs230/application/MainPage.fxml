@@ -13,10 +13,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="369.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.MainPageController">
    <center>
-      <ScrollPane fx:id="mainContent" prefHeight="323.0" prefWidth="488.0" BorderPane.alignment="CENTER" />
+      <ScrollPane prefHeight="323.0" prefWidth="488.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER">
+         <content>
+            <Label prefHeight="51.0" prefWidth="74.0" text="HomePage" />
+         </content>
+      </ScrollPane>
    </center>
    <left>
       <VBox fx:id="sideOptions" prefHeight="200.0" prefWidth="75.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
@@ -51,12 +56,21 @@
                   <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
                </children>
             </HBox>
-            <AnchorPane prefHeight="46.0" prefWidth="117.0">
-               <children>
-                  <Button fx:id="logOutButton" layoutX="564.0" layoutY="11.0" mnemonicParsing="false" text="Logout" />
-               </children>
-            </AnchorPane>
+            <TextField>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+            <Button mnemonicParsing="false" text="Search" />
+            <Button mnemonicParsing="false" onAction="#handleExit" text="Exit">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
          </children>
-      </StackPane>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
    </top>
 </BorderPane>
