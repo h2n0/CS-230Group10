@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -53,17 +54,16 @@ public class LoginController {
 	}
 	
 	private void changeToMainPage() {
-		BorderPane root = null;
 		try {
-			root = (BorderPane)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/MainPage.fxml"));
-			
+			AnchorPane root =
+				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/MainPage.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+			Stage stage = (Stage)loginButton.getScene().getWindow();
+			stage.setScene(scene);
+			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-		Stage stage = (Stage)loginButton.getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
 	}
 }
