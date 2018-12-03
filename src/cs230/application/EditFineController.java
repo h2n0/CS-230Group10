@@ -23,7 +23,12 @@ public class EditFineController  {
 	@FXML private Label saveLabel;
 	@FXML private Button cancelButton;
 	@FXML private VBox editFineVBox;
-	private String currentUser;
+	private User currentUser;
+	
+	
+	public void setCurrentUser(User u ) {
+		this.currentUser = u;
+	}
 	
 	/**
 	 * gets the user input and validates it, if valid then use the 
@@ -144,9 +149,7 @@ public class EditFineController  {
 	@SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
-		Scene window = editFineVBox.getScene();
-		String currentUser = window.getTitle();
-		currentUser = currentUser.substring(currentUser.length()-14);
+		String loadUser = currentUser.getName();
 		
     	ArrayList<User> allUsers = new ArrayList<User>();
 		try {
@@ -155,7 +158,7 @@ public class EditFineController  {
     	catch(Exception e){
 			e.printStackTrace();
 		}		
-		allUsers.removeIf(s -> !(s.getName().contains(currentUser)));
+		allUsers.removeIf(s -> !(s.getName().contains(loadUser)));
 		
 		System.out.println(allUsers);
 		//only expect 1 row at a time so only display first row

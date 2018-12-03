@@ -3,6 +3,7 @@ package cs230.application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -81,6 +82,25 @@ public class FineController  {
         Amount.setCellValueFactory(new PropertyValueFactory<User, Double>("balance"));
         
         Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Main.fxml"));     
+
+        	Parent root = null;
+			try {
+				root = (Parent)fxmlLoader.load();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}          
+        	EditFineController controller = fxmlLoader.<EditFineController>getController();
+        	controller.setCurrentUser(u);
+        	Scene scene = new Scene(root); 
+        	Stage stage = (Stage)backButton.getScene().getWindow();
+        	stage.setScene(scene);    
+    		stage.show();  
+    		return u;
+    	}));
+        
+        /*
+        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
         	VBox root = null;
         	try {
     			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
@@ -89,6 +109,8 @@ public class FineController  {
         		System.out.println("Next window failed to load");
     		}
         	
+        	root = 
+        	EditFineController controller = root.<EditFineController>getController(); 
         	Scene scene = new Scene(root);
     		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
     		
@@ -97,13 +119,6 @@ public class FineController  {
     		stage.setScene(scene);
     		stage.setTitle("Edit Fine for " + u.getName());
     		stage.show();
-    		return u;
-    	}));
-        
-        //working but removes row from table
-        /*
-        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
-    		tableView.getItems().remove(u);
     		return u;
     	}));
         */
