@@ -1,5 +1,10 @@
+package cs230.application;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import cs230.system.Address;
+import cs230.system.Librarian;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,12 +12,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class LibrarianAccountViewController {
+	
+	private Librarian librarian ;
+	@FXML
+	private Label emptyFieldLb;
 
-    @FXML
+	@FXML
+	private Label incorrectadressLb;
+	
+	@FXML
     private Label firstName;
-
-    @FXML
-    private Label lastName;
 
     @FXML
     private Label mobileNumber;
@@ -29,8 +38,6 @@ public class LibrarianAccountViewController {
     @FXML
     private TextField firstNametxt;
 
-    @FXML
-    private TextField lastNametxt;
 
     @FXML
     private TextField mobNumtxt;
@@ -45,9 +52,6 @@ public class LibrarianAccountViewController {
     private Button editFirstName;
 
     @FXML
-    private Button editLastName;
-
-    @FXML
     private Button editMobNum;
 
     @FXML
@@ -59,8 +63,6 @@ public class LibrarianAccountViewController {
     @FXML
     private Button saveFn;
 
-    @FXML
-    private Button saveLn;
 
     @FXML
     private Button saveMobNum;
@@ -75,9 +77,6 @@ public class LibrarianAccountViewController {
     private Button cancell1;
 
     @FXML
-    private Button cancell2;
-
-    @FXML
     private Button cancell3;
 
     @FXML
@@ -89,32 +88,32 @@ public class LibrarianAccountViewController {
     @FXML
     void cancell(MouseEvent event) {
 		editFirstName.setVisible(true);
-		editLastName.setVisible(true);
+
 		editAddress.setVisible(true);
 		editMobNum.setVisible(true);
 		editStaffNum.setVisible(true);
 		saveFn.setVisible(false);
-		saveLn.setVisible(false);
+
 		saveAdr.setVisible(false);
 		saveMobNum.setVisible(false);
 		saveStaffNum.setVisible(false);
 		cancell1.setVisible(false);
-		cancell2.setVisible(false);
+
 		cancell3.setVisible(false);
 		cancell4.setVisible(false);
 		cancell5.setVisible(false);
 		firstNametxt.setVisible(false);
-		lastNametxt.setVisible(false);
 		mobNumtxt.setVisible(false);
 		addresstxt.setVisible(false);
 		staffNumtxt.setVisible(false);
+		emptyFieldLb.setVisible(false);
+		incorrectadressLb.setVisible(false);
     }
 
     @FXML
     void editFieldAddress(MouseEvent event) {
 		addresstxt.setVisible(true);
 		addresstxt.setText(address.getText());
-		editLastName.setVisible(false);
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
@@ -127,7 +126,6 @@ public class LibrarianAccountViewController {
     void editFieldFname(MouseEvent event) {
 		firstNametxt.setVisible(true);
 		firstNametxt.setText(firstName.getText());
-		editLastName.setVisible(false);
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
@@ -136,24 +134,11 @@ public class LibrarianAccountViewController {
 		cancell1.setVisible(true);
     }
 
-    @FXML
-    void editFieldLastName(MouseEvent event) {
-		lastNametxt.setVisible(true);
-		lastNametxt.setText(lastName.getText());
-		editLastName.setVisible(false);
-		editAddress.setVisible(false);
-		editMobNum.setVisible(false);
-		editFirstName.setVisible(false);
-		editStaffNum.setVisible(false);
-		saveLn.setVisible(true);
-		cancell2.setVisible(true);
-    }
 
     @FXML
     void editFieldMbNum(MouseEvent event) {
 		mobNumtxt.setVisible(true);
 		mobNumtxt.setText(mobileNumber.getText());
-		editLastName.setVisible(false);
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
@@ -167,7 +152,6 @@ public class LibrarianAccountViewController {
     void editFieldStaffNum(MouseEvent event) {
 		staffNumtxt.setVisible(true);
 		staffNumtxt.setText(staffNum.getText());
-		editLastName.setVisible(false);
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
@@ -178,35 +162,62 @@ public class LibrarianAccountViewController {
 
     @FXML
     void saveAdress(MouseEvent event) {
-		address.setText(addresstxt.getText());
-		cancell(event);
+    	if (!addresstxt.getText().equals("")) {
+    		try {
+    			String[] adComp = addresstxt.getText().split(" ");
+    			Address address1 = new Address(adComp[0],adComp[1],adComp[2],adComp[3]);
+    			librarian.setAddress(address1);
+    			address.setText(addresstxt.getText());
+    			cancell(event);
+    		}
+    		catch (Exception e) {
+    			incorrectadressLb.setVisible(true);
+    		}
+    	}else {
+    		emptyFieldLb.setVisible(true);
+    	}
     }
 
     @FXML
     void saveFirstName(MouseEvent event) {
-		firstName.setText(firstNametxt.getText());
-		cancell(event);
+    	if (!firstNametxt.getText().equals("")) {
+    		firstName.setText(firstNametxt.getText());
+    		librarian.setName(firstNametxt.getText());
+    		cancell(event);
+    	} else {
+    		emptyFieldLb.setVisible(true);
+    	}
     }
 
-    @FXML
-    void saveLastName(MouseEvent event) {
-		lastName.setText(lastNametxt.getText());
-		cancell(event);
-    }
 
     @FXML
     void saveMobNum(MouseEvent event) {
-		mobileNumber.setText(mobNumtxt.getText());
-		cancell(event);
+    	if (!mobNumtxt.getText().equals("")) {
+			mobileNumber.setText(mobNumtxt.getText());
+//			librarian.setMobileNum(mobNumtxt.getText());
+			cancell(event);
+    	} else {
+    		emptyFieldLb.setVisible(true);
+    	}
     }
 	
 	@FXML
     void saveStaffNum(MouseEvent event) {
-		staffNum.setText(staffNumtxt.getText());
-		cancell(event);
+		if (!staffNum.getText().equals("")) {
+			staffNum.setText(staffNumtxt.getText());
+			librarian.setstaffNumber(Integer.parseInt(staffNumtxt.getText()));
+			cancell(event);
+		} else {
+    		emptyFieldLb.setVisible(true);
+    	}
     }
 
     @FXML
     void initialize() {
+//    	firstName.setText(librarian.getName());
+//    	mobileNumber.setText(librarian.getMobileNum());
+//    	address.setText((librarian.getAddress().gethouseNumorName() + librarian.getAddress().getroadName() + librarian.getAddress().getcity() + librarian.getAddress().getpostcode() ));
+//    	staffNum.setText(librarian.getstaffNumber().toString());
+//    	emplDate.setText(librarian.getemploymentDate().toString());
     }
 }

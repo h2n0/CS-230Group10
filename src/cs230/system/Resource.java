@@ -1,3 +1,7 @@
+package cs230.system;
+
+
+import java.io.Serializable;
 import java.util.LinkedList; 
 import java.util.Queue;
 
@@ -7,7 +11,8 @@ import java.util.Queue;
  * @author 959470
  *
  */
-public class Resource {
+public class Resource implements Serializable {
+	private static final long serialVersionUID = 1L;
 	//the  unique id of the resource
 	protected int id ;
 	//The title of the resource
@@ -207,7 +212,7 @@ public class Resource {
 	 * @param attribute The new value of the attribute
 	 */
 	public void update () {
-//		DatabaseManager.editRecord(this.id,this,type);
+		DatabaseManager.editRecord(this.id,this,type);
 	}
 	
 	public void create () {

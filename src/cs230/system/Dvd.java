@@ -1,3 +1,6 @@
+package cs230.system;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -6,7 +9,8 @@ import java.util.Queue;
  *
  */
 
-public class Dvd extends Resource {
+public class Dvd extends Resource implements Serializable {
+	private static final long serialVersionUID = 1L;
 	//The director of the Dvd
 	private String director;
 	//Its Runtime
@@ -34,7 +38,7 @@ public class Dvd extends Resource {
 		this.language=language;
 		this.subLanguages=subLanguages;
 		this.type = "Dvd";
-//		create();
+		create();
 	}
 	
 	
@@ -101,27 +105,27 @@ public class Dvd extends Resource {
 	 * @param field The field that will be updated
 	 * @param attribute The new value of the attribute
 	 */
-//	@Override
-//	public void update () {
-//		DatabaseManager.editRecord(this.getID(),this,"Dvd");
-//	}
+	@Override
+	public void update () {
+		DatabaseManager.editRecord(this.getID(),this,"Dvd");
+	}
 	
 	/** 
 	 * Creates a new entry in the database for a new Dvd 
 	 */
-//	public void create () {
-//		DatabseManager.saveRecord(this,"Dvd");
-//		DatabseManager.saveRecord(this.id,"ResourceIDs");
-//	
-//	}
+	public void create () {
+		DatabaseManager.saveRecord(this,"Dvd");
+		DatabaseManager.saveRecord(this.id,"ResourceIDs");
+	
+	}
 	
 	/**
 	 * Deletes all the information associated with this Dvd from the Database
 	 */
-//	public void delete () {
-//		DatabaseManager.deleteRecord(this,"Dvd");
-//		DatabseManager.deleteRecord(this.id,"ResourceIDs");
-//	}
+	public void delete () {
+		DatabaseManager.deleteRecord(this,"Dvd");
+		DatabaseManager.deleteRecord(this.id,"ResourceIDs");
+	}
 	
 	/** 
 	 * Overrides the defauls equeals method so that if any of the attributes of a Dvd are the same as another, then it returns true 
@@ -156,6 +160,14 @@ public class Dvd extends Resource {
 
 		if (this.language.equalsIgnoreCase(dvd.language)) {
 			return true;
+		}
+		
+		for (String subtitle1 : this.subLanguages) {
+		    for (String subtitle2 : dvd.subLanguages) {
+		    	if (subtitle1.equalsIgnoreCase(subtitle2)){
+		    		return true;
+		    	}
+		    }
 		}
 
 		return false;

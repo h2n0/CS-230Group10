@@ -1,3 +1,6 @@
+package cs230.application;
+
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -5,6 +8,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import cs230.system.DatabaseManager;
+import cs230.system.Dvd;
+//import cs230.system.Laptop;
+//import cs230.system.Book;
+
 import java.util.ArrayList;
 
 public class CreateResourceViewController {
@@ -95,6 +104,15 @@ public class CreateResourceViewController {
 	
 	@FXML
     private Label unfinishedLb;
+	
+	private int getNextId () {
+		ArrayList<Integer> ids = (ArrayList<Integer>)DatabaseManager.getTable("ResourceIDs");
+		int currentID = ids.get(ids.size()-1);
+		System.out.println(currentID);
+		int newID = currentID + 1;
+		System.out.println(newID);
+		return newID;
+	}
 
     @FXML
     void createResource(MouseEvent event) {
@@ -102,6 +120,8 @@ public class CreateResourceViewController {
 			unfinishedLb.setVisible(true);
 		}else {
 			int year =Integer.parseInt(this.year.getText());
+			int id = getNextId();
+			System.out.println(id);
 			String choice = resourceChoice.getValue();
 			switch (choice) {
 				case "Book" :
@@ -111,7 +131,7 @@ public class CreateResourceViewController {
 						
 						unfinishedLb.setVisible(false);
 						
-						//Book book1 = new Book(id.getText(),title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
+						//Book book1 = new Book(id,title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
 					}
 					break;
 				case "Laptop" :
@@ -119,7 +139,7 @@ public class CreateResourceViewController {
 						unfinishedLb.setVisible(true);
 					} else {
 						unfinishedLb.setVisible(false);
-						//Laptop laptop1 = new Laptop(id.getText(),title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
+						//Laptop laptop1 = new Laptop(id,title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
 					}
 					break;
 				case "Dvd" :
@@ -136,7 +156,7 @@ public class CreateResourceViewController {
 							i++;
 						}
 						int runtime = Integer.parseInt(this.runtime.getText());
-						Dvd dvd1 = new Dvd(5,title.getText(),year,thumbnail.getText(),director.getText(),runtime,dvdLanguage.getText(),subLang);
+						Dvd dvd1 = new Dvd(id,title.getText(),year,thumbnail.getText(),director.getText(),runtime,dvdLanguage.getText(),subLang);
 					}
 					break;
 			}
