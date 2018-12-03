@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * User stores the info for each user
  * @author 963257
- * @version 1.0
+ * @version 2.0
  */
 public class User implements Serializable {
 	//Default serial ID

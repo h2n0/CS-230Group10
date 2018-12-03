@@ -349,10 +349,8 @@ public class DatabaseManager {
 		saveRecord(fine2, "test");
 		test = getTable(new FileInputStream("Database//test.dat"));
 		System.out.println("Amount of data: " + test.size());
-
 		System.out.println("Object found: " + searchRecord(fine1,
 			"test"));
-
 		deleteRecord(fine1, "test");
 		test = getTable(new FileInputStream("Database//test.dat"));
 		System.out.println("Amount of data: " + test.size());

@@ -3,10 +3,10 @@ package cs230.application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -14,14 +14,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import cs230.system.User;
 import cs230.system.DatabaseManager;
+import cs230.system.PassInfo;
 
+/**
+ * Controller behind the Fine page
+ * @author 963257
+ * @version 1.2
+ */
 public class FineController  {
-
+	//TextField to search for a student
 	@FXML private TextField studentBox;
+	//Table containing all the students
     @FXML private TableView<User> tableView;
+    //Username column in table
     @FXML private TableColumn<User, String> UserName;
+    //Amount column in table
     @FXML private TableColumn<User, Double> Amount;
+    //column to put the edit buttons into
     @FXML private TableColumn<User, Button> Edit;
+    //button to go to the previous page
     @FXML private Button backButton;
     
     /**
@@ -30,7 +41,11 @@ public class FineController  {
      */
     @FXML
     private void handleBackButton(ActionEvent event) {
-    	// Code that either closes window or returns to main menu
+    	//Jack implement here
+    	
+    	//Temp code to close the window
+    	Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.close();
     }
     
     /**
@@ -41,27 +56,49 @@ public class FineController  {
     @SuppressWarnings("unchecked")
 	@FXML
 	private void handleSearchButton(ActionEvent event) {
+    	/*
+    	//implementation using searchRecord
+    	
+    	//get the text from the search button
+    	String student = studentBox.getText();
+    	//create a new student with the name
+    	User searchStudent = new User (student, null, null, null);
+    	
+    	//search the database for the student
+    	ArrayList<User> usersFound = new ArrayList<User>();
+    	usersFound = (ArrayList<User>) DatabaseManager.searchRecord(searchStudent, "User");
+    	
+    	//populate the table with the users found
+    	PopulateFineTable(allUsers);
+    	*/
+    	
+    	//get the text from the search button
 		String student = studentBox.getText();
+		
+		//get all the users
 		ArrayList<User> allUsers = new ArrayList<User>();
 		try {
 			allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
-			System.out.println(allUsers.toString());
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
+		
+		//remove users if their balance is 0 or their name doesnt contain the search value
 		allUsers.removeIf(s -> (s.getBalance()==0.0 || !s.getName().contains(student)));
-		System.out.println(allUsers.toString());
+		
+		//populate the table with the users found
 		PopulateFineTable(allUsers);
 	}
     
     /**
-	 * overides the initialize function so when the window is open the
+	 * Overrides the initialise function so when the window is open the
 	 * info for all users with fines are displayed
 	 */
     @SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
+    	//get all the users using the DatabaseManager
     	ArrayList<User> allUsers = new ArrayList<User>();
 		try {
 			allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
@@ -69,7 +106,11 @@ public class FineController  {
     	catch(Exception e){
 			e.printStackTrace();
 		}
+		
+		//remove users if they have a balance of 0
 		allUsers.removeIf(s -> (s.getBalance()==0.0));
+		
+		//populate the table with the users above
 		PopulateFineTable(allUsers);
     }
     
@@ -77,73 +118,43 @@ public class FineController  {
      * Populates the appropriate features on the window for a user
      * @param fineList a list of users to be displayed in the table
      */
-    private void PopulateFineTable(ArrayList<User> fineList) {
+    private void PopulateFineTable(ArrayList<User> userList) {
+    	//prepare the Username column to take names
     	UserName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
+    	//prepare the Amount column to take balances
         Amount.setCellValueFactory(new PropertyValueFactory<User, Double>("balance"));
+        //prepare the edit column to take ActionButtons where text = "Edit" and call loadEditFine when pressed, where u is the user from the row
+        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> loadEditFine(u)));
         
-        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
-        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Main.fxml"));     
-
-        	Parent root = null;
-			try {
-				root = (Parent)fxmlLoader.load();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}          
-        	EditFineController controller = fxmlLoader.<EditFineController>getController();
-        	controller.setCurrentUser(u);
-        	Scene scene = new Scene(root); 
-        	Stage stage = (Stage)backButton.getScene().getWindow();
-        	stage.setScene(scene);    
-    		stage.show();  
-    		return u;
-    	}));
-        
-        /*
-        Edit.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (User u) -> {
-        	VBox root = null;
-        	try {
-    			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
-    		} 
-        	catch (IOException e) {
-        		System.out.println("Next window failed to load");
-    		}
-        	
-        	root = 
-        	EditFineController controller = root.<EditFineController>getController(); 
-        	Scene scene = new Scene(root);
-    		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-    		
-    		//backbutton isnt right but it still works???
-    		Stage stage = (Stage)backButton.getScene().getWindow();
-    		stage.setScene(scene);
-    		stage.setTitle("Edit Fine for " + u.getName());
-    		stage.show();
-    		return u;
-    	}));
-        */
-        
-        if (fineList != null){
-        	tableView.getItems().setAll(fineList);
+        //if the list of users isnt null
+        if (userList != null){
+        	//populate the columns
+        	tableView.getItems().setAll(userList);
         }
         
     }
-}  
-    /*
-    private User changeToEditfine(User u) {
-    	VBox root = null;
+    
+    /**
+     * Loads the edit fine page, passing the user through the PassInfo class
+     * @param u the user to pass into the fine edit page
+     * @return the user that was edited //not sure why but it breaks when not returned so meh?
+     */
+    private User loadEditFine(User u){
     	try {
-			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
-		} 
-    	catch (IOException e) {
+    		//set the user to be passed to the Edit fine page
+    		PassInfo.setEditFineUser(u);
+    		
+    		//open the edit fine page
+			VBox root =
+				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+			Stage stage = (Stage)backButton.getScene().getWindow();
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
-    	Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-		Stage stage = (Stage)cancelButton.getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
-		return u;
-    }
-    */
+    	return u;
+    }   
+}
