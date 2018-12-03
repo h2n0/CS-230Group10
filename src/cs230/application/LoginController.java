@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -30,35 +29,56 @@ public class LoginController {
 	@FXML
 	private Button loginButton;
 
-	
+	/**
+	 * Handles the exit button being pressed
+	 * @param event The button being clicked
+	 */
 	@FXML
 	private void handExitAction(ActionEvent event) {
 		System.exit(0);
 	}
 
+	/**
+	 * Handles the login button being pressed
+	 * @param event The button being clicked
+	 */
 	@FXML
 	private void handleLoginAction(ActionEvent event ) {
-		Boolean exists;
+		boolean exists;
 		String inputUsername = usernameField.getText();
 
-		//Create a temporary user to check in DB
-		User tempUser = new User(inputUsername, null, null, null);
-		exists = DatabaseManager.checkForRecord(tempUser, "user");
+		//Create a user object to search in DB
+		User activeUser = new User(inputUsername, null, null, null);
+		exists = DatabaseManager.checkForRecord(activeUser, "user");
 
+		//If they exist log in, else show an error
 	    	if(exists) {
 			changeToMainPage();
 			userNotFound.setVisible(false);
+			SharedData.setUser(activeUser);
 		} else {
 	    		userNotFound.setVisible(true);
 	    	}
 	}
-	
+
+	/**
+	 * Loads and shows the main page of the program
+	 */
 	private void changeToMainPage() {
 		try {
-			BorderPane root =
-				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/MainPage.fxml"));
+			// Initalise and load FXML for the main page
+			BorderPane root;
+			root = FXMLLoader.load(
+				getClass().getClassLoader().getResource(
+					"cs230/application/MainPage.fxml"));
+
+			// Initalise and load CSS for scene
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+			scene.getStylesheets().add(
+				getClass().getClassLoader().getResource(
+					"cs230/application/application.css").toExternalForm());
+
+			// Initalise and display stage
 			Stage stage =
 				(Stage) loginButton.getScene().getWindow();
 			stage.setScene(scene);
