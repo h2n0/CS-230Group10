@@ -14,7 +14,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			primaryStage.initStyle(StageStyle.UNDECORATED);
-			VBox root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Fine.fxml"));
+			AnchorPane root =
+				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 			primaryStage.setScene(scene);
