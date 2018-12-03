@@ -142,4 +142,15 @@ public class MainPageController {
 	{
 		
 	}
+	
+	@FXML
+	private void handleFineAction(ActionEvent event ) {
+		try
+		{
+			finePage = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Fine.fxml"));	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		mainContent.setContent(finePage);
+	}
 }
