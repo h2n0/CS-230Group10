@@ -80,7 +80,7 @@ public class EditFineController  {
 			allUsers.removeIf(s -> !(s.getName().equals(user)));
 			User unchangedUser = allUsers.get(0);
 			User changedUser = allUsers.get(0);
-			changedUser.setBalance(amountPaidDbl);
+			changedUser.setBalance(unchangedUser.getBalance() - amountPaidDbl);
 			
 			//save new balance amount and display label for success/error
 			if (DatabaseManager.editRecord(unchangedUser, changedUser, "user")) {
