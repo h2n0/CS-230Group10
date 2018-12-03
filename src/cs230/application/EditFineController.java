@@ -28,6 +28,10 @@ public class EditFineController  {
 	private User currentUser;
 	
 	
+	public EditFineController(User u) {
+		setCurrentUser(u);
+	}
+	
 	public void setCurrentUser(User u ) {
 		this.currentUser = u;
 	}
