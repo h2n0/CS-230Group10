@@ -28,11 +28,13 @@ public class DatabaseManager {
 		Object data;
 
 		try {
+			FileInputStream fileWrite =
+				new FileInputStream(filePath);
 			ObjectInputStream objI =
-				new ObjectInputStream(new FileInputStream(filePath));
+				new ObjectInputStream(fileWrite);
 
 			// Check if file is empty to prevent IOException
-			if (objI.available() != 0) {
+			if (fileWrite.available() != 0) {
 				// Cast file content to an arraylist of objects
 				data = objI.readObject();
 				objI.close();
