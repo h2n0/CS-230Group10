@@ -28,11 +28,11 @@ public class DatabaseManager {
 		Object data;
 
 		try {
-			ObjectInputStream objI =
-				new ObjectInputStream(new FileInputStream(filePath));
+			FileInputStream fileIn = new FileInputStream(filePath);
+			ObjectInputStream objI = new ObjectInputStream(fileIn);
 
 			// Check if file is empty to prevent IOException
-			if (objI.available() != 0) {
+			if (fileIn.available() != 0) {
 				// Cast file content to an arraylist of objects
 				data = objI.readObject();
 				objI.close();
@@ -198,20 +198,36 @@ public class DatabaseManager {
 		}
 	}
 
-	public static boolean editRecord(int recordID,
+	/**
+	 * Takes in the old object and the new version then replaces it in
+	 * the database
+	 * @param oldRecord Record to replace
+	 * @param newRecord Updated verison of the record
+	 * @param table Name of the table to perform this on
+	 * @return True if successful, false otherwise
+	 */
+	public static boolean editRecord(Object oldRecord,
 				      Object newRecord, String table) {
 		String filePath = compilePath(table);
+		int index;
 
 		try {
 			// Obtain record to edit
 			ArrayList<Object> tableCont =
 				getTable(new FileInputStream(filePath));
-			tableCont.set(recordID - 1, newRecord);
+
+			for(Object item : tableCont) {
+				if (item.toString().equals(oldRecord.toString())) {
+					index = tableCont.indexOf(item);
+					tableCont.set(index, newRecord);
+					return true;
+				}
+			}
 
 			// Re write to table
 			writeToFile(new FileOutputStream(filePath), tableCont);
 
-			return true;
+			return false;
 
 		} catch (FileNotFoundException e) {
 			displayFileError();
@@ -341,7 +357,7 @@ public class DatabaseManager {
 		*/
 
 		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-		User user = new User(2, "Morgan", address, 0.0, null);
+		User user = new User("Different Joe", address, 10.0, null);
 		saveRecord(user, "user");
 	}
 }

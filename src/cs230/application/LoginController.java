@@ -41,7 +41,7 @@ public class LoginController {
 		String inputUsername = usernameField.getText();
 
 		//Create a temporary user to check in DB
-		User tempUser = new User(null, inputUsername, null, null, null);
+		User tempUser = new User(inputUsername, null, null, null);
 		exists = DatabaseManager.checkForRecord(tempUser, "user");
 
 //	    	if(exists) {
@@ -56,10 +56,11 @@ public class LoginController {
 		BorderPane root = null;
 		try {
 			root = (BorderPane)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/MainPage.fxml"));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Scene scene = new Scene(root,400,400);
+		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 		Stage stage = (Stage)loginButton.getScene().getWindow();
 		stage.setScene(scene);
