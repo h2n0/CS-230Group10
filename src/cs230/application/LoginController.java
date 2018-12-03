@@ -1,6 +1,7 @@
 package cs230.application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import cs230.system.*;
 import javafx.event.ActionEvent;
@@ -53,9 +54,13 @@ public class LoginController {
 
 		//If they exist log in, else show an error
 	    	if(exists) {
+			// Get all of user's details
+			activeUser = (User)
+				DatabaseManager.searchRecord(activeUser, "user").get(0);
+
+			SharedData.setUser(activeUser);
 			changeToMainPage();
 			userNotFound.setVisible(false);
-			SharedData.setUser(activeUser);
 		} else {
 	    		userNotFound.setVisible(true);
 	    	}

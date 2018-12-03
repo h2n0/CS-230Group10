@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="369.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.MainPageController">
+<BorderPane centerShape="false" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.MainPageController">
    <center>
       <ScrollPane fx:id="mainContent" prefHeight="323.0" prefWidth="488.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER" />
    </center>
