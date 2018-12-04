@@ -61,6 +61,7 @@ public class MainPageController {
 		//balance.textProperty().set(currentUser.getBalance()
 		// .toString());
 		updateComboBox();
+		username.setText(SharedData.getUsername());
 	}
 
 	public void setCurrentUser(User currentUser) {
