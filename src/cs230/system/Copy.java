@@ -92,7 +92,7 @@ public class Copy implements Serializable {
 	 * get the resource type
 	 * @return the resource type
 	 */
-	public String getresourceType() {
+	public String getResourceType() {
 		return resourceType;
 	}
 

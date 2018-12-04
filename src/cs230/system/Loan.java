@@ -85,4 +85,23 @@ public class Loan {
 	public String toString() {
 		return userName + ", " + copyID;
 	}
+
+	private String getCopyName() {
+		String name;
+		String type;
+
+		// Get resource ID from the copy
+		Copy copy = new Copy(this.copyID);
+		copy = (Copy) DatabaseManager.searchExact(copy, "copy");
+		type = copy.getResourceType();
+
+		// Get the resource name
+		switch (type.toLowerCase()) {
+			case "laptop" :
+
+
+		}
+
+		return null;
+	}
 }
