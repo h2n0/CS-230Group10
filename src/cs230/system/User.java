@@ -17,6 +17,8 @@ public class User implements Serializable {
 	private Address address;
 	//The user's balance 
 	private Double balance;
+	//The user's mobile number
+	private String mobileNum;
 	//The filepath to the user's avatar
 	private String avatarFilePath;
 		
@@ -28,9 +30,10 @@ public class User implements Serializable {
 	 * @param balance how much money the user owes the library
 	 * @param avatarFilePath the file path to the user's avatar
 	 */
-	public User(String name, Address address, Double balance, String avatarFilePath) {
+	public User(String name, Address address, String mobileNum, Double balance, String avatarFilePath) {
 		this.name = name;
 		this.address = address;
+		this.mobileNum = mobileNum;
 		this.balance = balance;
 		this.avatarFilePath = avatarFilePath;
 	}
@@ -42,6 +45,14 @@ public class User implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * Sets the user's mobie number
+	 * @param name The new mobile number of the user
+	 */
+	public void setMobileNum(String mobileNum) {
+		this.mobileNum = mobileNum;
+	}
 	/**
 	 * Gets the user's name
 	 * @return The users name
@@ -49,6 +60,15 @@ public class User implements Serializable {
 	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * Gets the user's mobileNumber
+	 * @return The users MobileNumber
+	 */
+	public String getMobileNum() {
+		return mobileNum;
+	}
+	
 
 	/**
 	 * Sets the user's address
