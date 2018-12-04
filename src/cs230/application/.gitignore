@@ -8,3 +8,6 @@
 /ResourceController.class
 /UserInfoController.class
 /ResourceDetailController.class
+/ActionButtonTableCell.class
+/ResourceCopyPageController.class
+/ResourceListPageController.class

@@ -1,5 +1,7 @@
 package cs230.application;
 
+import java.util.ArrayList;
+
 import cs230.system.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -117,6 +119,6 @@ public class ResourceDetailController {
 	
 	public ResourceDetailController(int resourceId)
 	{
-		DatabaseManager.
+		//ArrayList<Resource> allResources = DatabaseManager.getTable("Resource");
 	}
 }
