@@ -1,7 +1,7 @@
 package cs230.system;
 
 /**
- * This class stores session information such as username, etc. to be used
+ * This class stores session information such as username to be used
  * by each GUI form.
  */
 public class SharedData {

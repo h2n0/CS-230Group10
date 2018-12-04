@@ -3,6 +3,7 @@ package cs230.system;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
@@ -142,27 +143,66 @@ public class DatabaseManager {
 	}
 
 	/**
-	 * Takes a record object and searches for it in the specified table
-	 * @param record The record to look for
+	 * Takes a record object and returns all objects in the database that
+	 * contain part of that object
+	 * @param record The record to compare to
 	 * @param table The table to search in
-	 * @return The full object from the table
+	 * @return An arraylist of matching objects
 	 */
-	public static ArrayList<Object> searchRecord(Object record,
-						   String table) {
+	public static Object searchExact(Object record, String table) {
+		// Filepath of the database table
 		String filePath = compilePath(table);
+		// Arraylist to store matching objects
 		ArrayList<Object> output = new ArrayList<>();
+		// String to store result from table
+		String tableRec;
+		// String to store data from the object 'record'
+		String compRec = record.toString().toLowerCase();
 
 		try {
-			//Load file
 			ArrayList<Object> data =
 				getTable(new FileInputStream(filePath));
 
-			//Find and return all matching records
 			for (Object item : data) {
-				output.add(item);
+				tableRec = item.toString().toLowerCase();
+				if (compRec.contains(tableRec)) {
+					output.add(item);
+				}
 			}
 
 			return output;
+		} catch(FileNotFoundException e) {
+			displayFileError();
+			return null;
+		}
+
+
+	}
+
+	/**
+	 * Takes a record object and returns an object that is an exact match
+	 * to it
+	 * @param record The record to compare to
+	 * @param table The table to search in
+	 * @return The exact matching record, or null if it cannot be found
+	 */
+	public static Object searchRecord(Object record,
+						   String table) {
+		String filePath = compilePath(table);
+		ArrayList<Object> tableArray;
+
+		try {
+			//Load file
+			tableArray = getTable(new FileInputStream(filePath));
+
+			//Find and return the matching record if possible
+			for (Object item : tableArray) {
+				if (item.equals(record)) {
+					return item;
+				}
+			}
+
+			return null;
 
 		} catch (FileNotFoundException e) {
 			displayFileError();

@@ -115,18 +115,19 @@ public class User implements Serializable {
 		
 		User PERSON = (User) obj;
 
+		// If they are an exact match return true
 		if (this.name.equalsIgnoreCase(PERSON.name)) {
-			return true;
-		}
-
-		if (this.name.equals(PERSON.name)) {
 			return true;
 		}
 
 		return false;
 	}
 
+	/**
+	 * Returns the user
+	 * @return
+	 */
 	public String toString() {
-		return name;
+		return this.name;
 	}
 }
