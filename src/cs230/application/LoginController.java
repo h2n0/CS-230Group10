@@ -56,7 +56,8 @@ public class LoginController {
 	    	if(exists) {
 			// Get all of user's details
 			activeUser = (User)
-				DatabaseManager.searchRecord(activeUser, "user").get(0);
+				DatabaseManager.searchExact(activeUser,
+					"user");
 
 			SharedData.setUser(activeUser);
 			changeToMainPage();

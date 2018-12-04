@@ -149,7 +149,7 @@ public class DatabaseManager {
 	 * @param table The table to search in
 	 * @return An arraylist of matching objects
 	 */
-	public static Object searchExact(Object record, String table) {
+	public static Object searchRecord(Object record, String table) {
 		// Filepath of the database table
 		String filePath = compilePath(table);
 		// Arraylist to store matching objects
@@ -186,7 +186,7 @@ public class DatabaseManager {
 	 * @param table The table to search in
 	 * @return The exact matching record, or null if it cannot be found
 	 */
-	public static Object searchRecord(Object record,
+	public static Object searchExact(Object record,
 						   String table) {
 		String filePath = compilePath(table);
 		ArrayList<Object> tableArray;
