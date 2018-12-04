@@ -24,7 +24,7 @@
       <TableView fx:id="tableView" editable="true" prefHeight="352.0" prefWidth="546.0">
         <columns>
           <TableColumn fx:id="userBorrow" prefWidth="240" text="Borrowed by" />
-          <TableColumn fx:id="startDate" prefWidth="168" text="Start Date" />
+          <TableColumn fx:id="startDate" prefWidth="168" text="Borrow Date" />
           <TableColumn fx:id="returnDate" prefWidth="137.5999816894531" text="Return Date" />
         </columns>
          <VBox.margin>
