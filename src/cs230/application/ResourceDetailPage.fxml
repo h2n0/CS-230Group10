@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="14.0" layoutY="23.0" prefHeight="736.0" prefWidth="404.0">
@@ -37,7 +36,7 @@
                   <Label prefHeight="43.0" prefWidth="206.0" text="Number of Copies" GridPane.rowIndex="4" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Label id="resourceID" fx:id="resourceIdLabel" prefHeight="39.0" prefWidth="111.0" text="Label" />
+                        <Label id="resourceID" fx:id="resourceID" prefHeight="39.0" prefWidth="111.0" text="Label" />
                         <Button fx:id="editButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Edit Details" />
                      </children>
                   </HBox>
@@ -53,7 +52,7 @@
                         <TextField fx:id="yearTextBox" prefHeight="25.0" prefWidth="148.0" visible="false" />
                      </children>
                   </HBox>
-                  <HBox fx:id="imageSelectionBox" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <HBox fx:id="imageBox" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <ImageView fx:id="thumbnailShow" fitHeight="61.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
