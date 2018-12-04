@@ -8,6 +8,21 @@ package cs230.system;
 public class PassInfo {
 	//user to be passed from Fine page to EditFine page
 	private static User editFineUser;
+	private static Copy copyHistCopy;
+	/**
+	 * sets the user selected on the fine page
+	 * @param u user from the Fine page
+	 */
+	public static void setcopyHistCopy(Copy c){
+		copyHistCopy = c;
+	}
+	/**
+	 * gets the user selected on the fine page
+	 * @return the user to be loaded into the EditFine page
+	 */
+	public static Copy getcopyHistCopy(){
+		return(copyHistCopy);
+	}
 	
 	/**
 	 * sets the user selected on the fine page
