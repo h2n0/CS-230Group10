@@ -1,26 +1,25 @@
 package cs230.system;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 /**
  * This class models the attributes and functions of a loan in the system.
+ * @author Scott Simmons
+ * @version 1.0
  */
 public class Loan {
 	// ID to identify loan
-	private String loanID;
+	private final String loanID;
 	// Name of the user associated with the loan
-	private String userName;
+	private final String userName;
 	// ID of the copy the loan is attatched to
-	private String copyID;
+	private final String copyID;
 	// Due date
 	private LocalDate dueDate = null;
 	// Date the copy was borrowed
-	private LocalDate borrowDate;
+	private final LocalDate borrowDate;
 	// Date the copy was returned
 	private LocalDate returnedDate;
-	// Format for all date values
-	private static final String DATE_FORMAT = "dd-MM-yyyy";
 
 	/**
 	 * The constructor for a loan without a due date already set
@@ -41,7 +40,7 @@ public class Loan {
 		// Set all attributes
 		// Due date
 		int loanDuration = searchCopy.getLoanDuration();
-		this.dueDate = borrowDate.plusDays(loanDuration);
+		dueDate = borrowDate.plusDays(loanDuration);
 
 		// Others
 		this.loanID = loanID;
@@ -75,11 +74,8 @@ public class Loan {
 		Loan loan = (Loan) obj;
 
 		// If they are an exact match return true
-		if (this.loanID.equalsIgnoreCase(loan.loanID)) {
-			return true;
-		}
+		return loanID.equalsIgnoreCase(loan.loanID);
 
-		return false;
 	}
 
 	public String toString() {
@@ -144,7 +140,7 @@ public class Loan {
 		Book bookRes;
 
 		// Get resource ID from the copy
-		Copy copy = new Copy(this.copyID);
+		Copy copy = new Copy(copyID);
 		copy = (Copy) DatabaseManager.searchExact(copy, "copy");
 		type = copy.getResourceType();
 
@@ -159,9 +155,7 @@ public class Loan {
 					(Book) DatabaseManager.searchExact(new Book(copy.getResourceID()), "book");
 				return bookRes.getTitle();
 			default:
-				break;
+				return null;
 		}
-
-		return null;
 	}
 }
