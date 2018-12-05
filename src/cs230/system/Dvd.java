@@ -31,7 +31,8 @@ public class Dvd extends Resource implements Serializable {
 	 * @param language The spoken language of the Dvd
 	 * @param subLanguages The available subLanguages
 	 */
-	public Dvd (int id, String title , int year, String thumbnail , String director , int runtime ,String language ,ArrayList<String> subLanguages) {
+	public Dvd (String id, String title , int year, String thumbnail ,
+		    String director , int runtime ,String language ,ArrayList<String> subLanguages) {
 		super(id,title,year,thumbnail);
 		this.director=director;
 		this.runtime=runtime;
@@ -40,8 +41,16 @@ public class Dvd extends Resource implements Serializable {
 		this.type = "Dvd";
 		create();
 	}
-	
-	
+
+	/**
+	 * Constructs a Dvd using only the candidate key(s) to search the
+	 * database
+	 * @param id ID of the dvd
+	 */
+	public Dvd(String id) {
+		super(id);
+	}
+
 	/**
 	 * Sets the director
 	 * @param director
@@ -99,16 +108,17 @@ public class Dvd extends Resource implements Serializable {
 	public  ArrayList<String> getSubLanguages () {
 		return this.subLanguages;
 	}
-	
+
+	/* WHAT IS THIS?
 	/**
 	 * Updates a specific attribute in the Dvd table of the Database
 	 * @param field The field that will be updated
 	 * @param attribute The new value of the attribute
-	 */
 	@Override
 	public void update () {
 		DatabaseManager.editRecord(this.getID(),this,"Dvd");
 	}
+	*/
 	
 	/** 
 	 * Creates a new entry in the database for a new Dvd 

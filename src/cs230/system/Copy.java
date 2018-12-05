@@ -13,17 +13,15 @@ public class Copy implements Serializable {
 	//Default serial ID
 	private static final long serialVersionUID = 1L;
 	//Uniquely identify each resource
-	private Integer ID;
+	private String ID;
 	//identify which resource the copy is
-	private Integer resourceID;
+	private String resourceID;
 	//say whether the copy is available, on loan, or overdue
 	private String status;
 	//Book/DVD/Laptop
 	private String resourceType;
-	//date the resource is due
-	private Date dueDate;
 	//duration of the loan, in days
-	private Integer loanDuration;
+	private int loanDuration;
 
 	/**
 	 * Constructor 
@@ -31,15 +29,14 @@ public class Copy implements Serializable {
      * @param resourceID the identifier for the resource
      * @param status says if the copy is available, on loan, or overdue
      * @param resourceType if the copy is a Book, DVD, or Laptop
-     * @param dueDate date the resource is due
      * @param loanDuration how long you can borrow the copy for
 	 */
-	public Copy(Integer ID, Integer resourceID, String status, String resourceType, Date dueDate, Integer loanDuration) {
+	public Copy(String ID, String resourceID, String status,
+		    String resourceType, int loanDuration) {
 		this.ID = ID;
 		this.resourceID = resourceID;
 		this.status = status;
 		this.resourceType = resourceType;
-		this.dueDate = dueDate;
 		this.loanDuration = loanDuration;
 	}
 	
@@ -47,7 +44,7 @@ public class Copy implements Serializable {
 	 * Constructor when Copy exists in database 
 	 * @param ID the identifier for the copy
 	*/
-	public Copy(Integer ID) {
+	public Copy(String ID) {
 		//Object[] data = getDataFromDatabase ();
 		//Copy(ID,data)
 	}
@@ -56,22 +53,15 @@ public class Copy implements Serializable {
 	 * gets the ID
 	 * @return the Copy ID
 	 */
-	public Integer getID() {
+	public String getID() {
 		return ID;
 	}
 
 	/**
-	 * set resource ID
-	 * @param resourceID the identifier for the resource
-	 */
-	public void setresourceID(Integer resourceID) {
-		this.resourceID = resourceID;
-	}
-	/**
 	 * get resource ID
 	 * @return the Resource ID
 	 */
-	public Integer getresourceID() {
+	public String getResourceID() {
 		return resourceID;
 	}
 
@@ -97,27 +87,13 @@ public class Copy implements Serializable {
 	public void setresourceType(String resourceType) {
 		this.resourceType = resourceType;
 	}
+
 	/**
 	 * get the resource type
 	 * @return the resource type
 	 */
-	public String getresourceType() {
+	public String getResourceType() {
 		return resourceType;
-	}
-
-	/**
-	 * set due date
-	 * @param dueDate the date the copy is to be returned by
-	 */
-	public void setdueDate(Date dueDate) {
-		this.dueDate = dueDate;
-	}
-	/**
-	 * get due date
-	 * @return the date the copy is to be returned by
-	 */
-	public Date getdueDate() {
-		return dueDate;
 	}
 
 	/**
@@ -127,15 +103,31 @@ public class Copy implements Serializable {
 	public void setloanDuration(Integer loanDuration) {
 		this.loanDuration = loanDuration;
 	}
+
 	/**
 	 * get loan duration
 	 * @return the minimum time the resource is loaned for, in days
 	 */
-	public Integer getloanDuration() {
+	public Integer getLoanDuration() {
 		return loanDuration;
 	}
 	
 	public void save () {
 		//commit attributes to database 
+	}
+
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		Copy copy = (Copy) obj;
+
+		// If they are an exact match return true
+		if (this.ID.equalsIgnoreCase(copy.ID)) {
+			return true;
+		}
+
+		return false;
 	}
 }
