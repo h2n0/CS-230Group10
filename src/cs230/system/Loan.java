@@ -15,11 +15,13 @@ public class Loan {
 	// ID of the copy the loan is attatched to
 	private final String copyID;
 	// Due date
-	private LocalDate dueDate = null;
+	private LocalDate dueDate;
 	// Date the copy was borrowed
 	private final LocalDate borrowDate;
 	// Date the copy was returned
 	private LocalDate returnedDate;
+	// Status of the loan, True=Active False=Inactive
+	private boolean status = true;
 
 	/**
 	 * The constructor for a loan without a due date already set
@@ -64,6 +66,15 @@ public class Loan {
 		this.copyID = copyID;
 		this.userName = userName;
 		this.borrowDate = borrowDate;
+	}
+
+	/**
+	 * This method is used when the resource is returned, setting the
+	 * returned date for it
+	 */
+	public void returnResource() {
+		this.returnedDate = LocalDate.now();
+		this.status = false;
 	}
 
 	public boolean equals(Object obj) {
@@ -128,6 +139,14 @@ public class Loan {
 	 */
 	public LocalDate getReturnedDate() {
 		return returnedDate;
+	}
+
+	/**
+	 * Returns the status of the loan
+	 * @return True is Active, False is inactive
+	 */
+	public boolean getStatus() {
+		return status;
 	}
 
 	/**
