@@ -8,7 +8,25 @@ package cs230.system;
 public class PassInfo {
 	//user to be passed from Fine page to EditFine page
 	private static User editFineUser;
+	//copy to be passed to the copyHistory page
 	private static Copy copyHistCopy;
+	//Resource to be passed from the ResourceList page to the resourceDetail page
+	private static Resource resourceDetails;
+	/**
+	 * sets the user selected on the fine page
+	 * @param u user from the Fine page
+	 */
+	public static void setResourceDetails(Resource r){
+		resourceDetails = r;
+	}
+	/**
+	 * gets the user selected on the fine page
+	 * @return the user to be loaded into the EditFine page
+	 */
+	public static Resource getResourceDetails(){
+		return(resourceDetails);
+	}
+	
 	/**
 	 * sets the user selected on the fine page
 	 * @param u user from the Fine page
