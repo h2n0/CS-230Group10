@@ -17,6 +17,7 @@ import cs230.system.Resource;
 import cs230.system.Book;
 import cs230.system.DVD;
 import cs230.system.Laptop;
+import cs230.system.Librarian;
 import cs230.system.DatabaseManager;
 import cs230.system.PassInfo;
 
@@ -46,6 +47,17 @@ public class ResourceListController  {
     @SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
+    	
+    	// if user is a librarian then show add button
+    	User currentUser = PassInfo.getCurrentUser();
+    	ArrayList<Librarian> librarianList = (ArrayList<Librarian>) DatabaseManager.getTable("librarian");
+    	
+    	for( Librarian l : librarianList) {
+    		if (currentUser.getName().equals(l.getName())) {
+    			addResourceButton.setVisible(true);
+    		}
+    	}
+    	
     	//get all the books using the DatabaseManager
     	ArrayList<Book> allBooks = new ArrayList<Book>();
 		try {
