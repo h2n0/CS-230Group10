@@ -2,14 +2,13 @@ package cs230.system;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
  * This class communicates and interacts with the database system, providing data
  * through queries and organising it.
  * @author Scott
+ * @version 1.0
  *
  */
 public class DatabaseManager {
@@ -50,7 +49,6 @@ public class DatabaseManager {
 			return null;
 
 		} catch (ClassNotFoundException e) {
-			// ADD HANDLE CODE HERE
 			return null;
 
 		}
@@ -77,13 +75,6 @@ public class DatabaseManager {
 			} else {
 				data = new ArrayList<>();
 			}
-
-			/* PRETTY SURE THIS ISN'T NEEDED MAYBE IDK... HOPEFULLY
-			// Prevent null pointer exception
-			if (data == null) {
-				data = new ArrayList<>();
-			}
-			*/
 
 			// Make sure no record with duplicate name exists
 			for (Object item : data) {
@@ -163,6 +154,8 @@ public class DatabaseManager {
 			ArrayList<Object> data =
 				getTable(new FileInputStream(filePath));
 
+			// If any item in data is contained in the record add
+			// it to the output
 			for (Object item : data) {
 				tableRec = item.toString().toLowerCase();
 				if (compRec.contains(tableRec)) {
@@ -177,6 +170,37 @@ public class DatabaseManager {
 		}
 
 
+	}
+
+	/**
+	 * Takes an object and if it exists in the specified table return
+	 * True, else False
+	 * @param record The record to compare to
+	 * @param table The table to search in
+	 * @return True if it exists, False otherwise
+	 */
+	public static boolean exists(Object record,
+					 String table) {
+		String filePath = compilePath(table);
+		ArrayList<Object> tableArray;
+
+		try {
+			//Load file
+			tableArray = getTable(new FileInputStream(filePath));
+
+			//Find and return the matching record if possible
+			for (Object item : tableArray) {
+				if (item.equals(record)) {
+					return true;
+				}
+			}
+
+			return false;
+
+		} catch (FileNotFoundException e) {
+			displayFileError();
+			return false;
+		}
 	}
 
 	/**
@@ -305,7 +329,7 @@ public class DatabaseManager {
 			return null;
 
 		} catch (ClassNotFoundException e) {
-			// ADD HANDLE CODE HERE
+			// Class not found should never be thrown
 			return null;
 
 		}
@@ -380,7 +404,7 @@ public class DatabaseManager {
 		return null;
 	}
 
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) {
 		/*
 		ArrayList<Object> test;
 		Fine fine1 = new Fine(1, 20);

@@ -78,7 +78,7 @@
                   <Label prefHeight="29.0" prefWidth="206.0" text="Author" />
                   <Label prefHeight="29.0" prefWidth="95.0" text="Publisher" GridPane.rowIndex="1" />
                   <Label prefHeight="29.0" prefWidth="95.0" text="Genre" GridPane.rowIndex="2" />
-                  <Label prefHeight="29.0" prefWidth="95.0" text="ISBN" GridPane.rowIndex="3" />
+                  <Label prefHeight="29.0" prefWidth="95.0" text="isbn" GridPane.rowIndex="3" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
                         <Label id="resourceID" fx:id="authorLabel" prefHeight="39.0" prefWidth="111.0" text="Label" />

@@ -3,6 +3,8 @@ package cs230.system;
 /**
  * This class stores session information such as username to be used
  * by each GUI form.
+ * @author Scott Simmons
+ * @version 1.0
  */
 public class SharedData {
 	// User currently logged in
