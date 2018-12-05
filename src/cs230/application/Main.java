@@ -4,9 +4,6 @@ import java.util.Date;
 
 import java.util.Timer;
 
-import cs230.system.Copy;
-import cs230.system.DatabaseManager;
-import cs230.system.User;
 import cs230.system.UpdateDatabase;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -20,6 +17,8 @@ import javafx.stage.StageStyle;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
+		
+		//try setting up the scheduler for the database update
 		try {
 			//get todays date
 			Date today = new Date();
@@ -35,9 +34,10 @@ public class Main extends Application {
 			System.out.println("database update failed");
 		}
 		
+		//launch the login window to start the program
 		try {
 			primaryStage.initStyle(StageStyle.UNDECORATED);
-			VBox root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Fine.fxml"));
+			VBox root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 			primaryStage.setScene(scene);
