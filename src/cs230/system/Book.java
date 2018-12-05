@@ -1,4 +1,6 @@
- import java.util.ArrayList;
+package cs230.system;
+
+import java.util.ArrayList;
  import java.util.LinkedList;
  import java.util.Queue;
  /**
@@ -29,7 +31,8 @@
  	 * @param author The author of the Book
  	 * @param language The spoken language of the Book
  	 */
- 	public Book (int id, String title , int year, String thumbnail , String author , String publisher, String genre, String ISBN ,String language ) {
+ 	public Book (String id, String title , int year, String thumbnail ,
+		     String author , String publisher, String genre, String ISBN ,String language ) {
  		super(id,title,year,thumbnail);
  		this.author=author;
  		this.publisher=publisher;
@@ -39,6 +42,15 @@
  		this.type = "Book";
  //		create();
 		
+	}
+
+	 /**
+	  * Constructs a book using only its candidate keys for database
+	  * searching purposes
+	  * @param id The ID of the book
+	  */
+	public Book(String id) {
+ 		super(id);
 	}
 	 	
  	/**
@@ -120,16 +132,6 @@
  	 */
  	public  String getISBN () {
  		return this.ISBN;
- 	}
- 	
- 	/**
- 	 * Updates a specific attribute in the Book table of the Database
- 	 * @param field The field that will be updated
- 	 * @param attribute The new value of the attribute
- 	 */
- 	@Override
- 	public void update () {
- 	
  	}
  	
  	/** 

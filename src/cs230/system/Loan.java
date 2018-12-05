@@ -139,9 +139,9 @@ public class Loan {
 	 * @return The name of the copy
 	 */
 	private String getCopyName() {
-		String name;
 		String type;
-		Dvd resource;
+		Dvd dvdRes;
+		Book bookRes;
 
 		// Get resource ID from the copy
 		Copy copy = new Copy(this.copyID);
@@ -151,9 +151,13 @@ public class Loan {
 		// Get the resource name
 		switch (type.toLowerCase()) {
 			case "dvd":
-				resource =
-					(Dvd) DatabaseManager.searchExact(new Dvd(copy.getResourceID()), "Dvd");
-				return resource.getTitle();
+				dvdRes =
+					(Dvd) DatabaseManager.searchExact(new Dvd(copy.getResourceID()), "dvd");
+				return dvdRes.getTitle();
+			case "book":
+				bookRes =
+					(Book) DatabaseManager.searchExact(new Book(copy.getResourceID()), "book");
+				return bookRes.getTitle();
 			default:
 				break;
 		}
