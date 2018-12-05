@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="mainTable" prefHeight="408.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="copyIdColumn" prefWidth="116.0" text="Copy ID" />
+          <TableColumn fx:id="resourceIdColumn" minWidth="0.0" prefWidth="109.0" text="Resource ID" />
+            <TableColumn fx:id="borrowerColumn" prefWidth="127.0" text="Borrower" />
+            <TableColumn fx:id="overdueColumn" prefWidth="140.0" text="Day's overdue" />
+            <TableColumn prefWidth="107.0" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

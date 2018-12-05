@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -28,9 +30,18 @@ public class ResourceDetailController {
 
 	@FXML
 	private Button deleteButton;
+	
+	@FXML
+	private TableView copyTable;
 
 	@FXML
-	private TableColumn copyIdColumn;
+	private TableColumn <Copy, String> copyIdColumn;
+	
+	@FXML
+	private TableColumn <Copy, String> copyDurationColumn;
+	
+	@FXML
+	private TableColumn <Copy,Button> moreInfoColumn;
 	
 	@FXML
 	private Label resourceID;
@@ -134,6 +145,8 @@ public class ResourceDetailController {
 	private Resource originalResource;
 	
 	private Resource showedResource;
+	
+	private ArrayList<Copy> resourceCopies;
 
 	private Boolean isBook = false;
 
@@ -159,7 +172,7 @@ public class ResourceDetailController {
 	
 	private void setResourceInfo(int resourceId)
 	{
-		ArrayList<Resource> allResources = null;
+		ArrayList<Resource> allResources = new ArrayList<Resource>();
 		try {
 			allResources = (ArrayList<Resource>) DatabaseManager.getTable("Resource");
 		} catch (ClassCastException e) {
@@ -178,6 +191,14 @@ public class ResourceDetailController {
 			showedResource = (Book) showedResource;
 			isBook = true;
 		}
+		ArrayList<Copy> allCopies = new ArrayList<Copy>();
+		try {
+			allCopies = (ArrayList<Copy>) DatabaseManager.getTable("Copy");
+		} catch (ClassCastException e) {
+			// DBERROR
+		}
+		resourceCopies = allCopies;
+		resourceCopies.removeIf((s -> s.getresourceID() != resourceId));
 	}
 
 	private void initializeGui() {
@@ -188,8 +209,25 @@ public class ResourceDetailController {
 		Image thumbnail = new Image(showedResource.getThumbnail());
 		thumbnailShow.setImage(thumbnail);
 		numOfCopiesLabel.textProperty().set(Integer.toString(showedResource.getNumCopies()));
+		populateCopyTable();
+	}
+	
+	private void populateCopyTable() {
+    	copyIdColumn.setCellValueFactory(new PropertyValueFactory<Copy, String>("ID"));
+        copyDurationColumn.setCellValueFactory(new PropertyValueFactory<Copy, String>("loanDuration"));
+        moreInfoColumn.setCellFactory(ActionButtonTableCell.<Copy>forTableColumn("Edit", (Copy c) -> showCopyInfo(c)));
+        
+        //if the list of users isnt null
+        if (resourceCopies != null){
+        	//populate the columns
+        	copyTable.getItems().setAll(resourceCopies);
+        }
 	}
 
+	private Copy showCopyInfo(Copy c) {
+		return resourceCopies.get(0);
+	}
+	
 	private void addDvdGui() {
 		dvdGrid.setVisible(true);
 		Dvd currentDvd = (Dvd) showedResource;
