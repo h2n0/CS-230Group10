@@ -173,6 +173,37 @@ public class DatabaseManager {
 	}
 
 	/**
+	 * Takes an object and if it exists in the specified table return
+	 * True, else False
+	 * @param record The record to compare to
+	 * @param table The table to search in
+	 * @return True if it exists, False otherwise
+	 */
+	public static boolean exists(Object record,
+					 String table) {
+		String filePath = compilePath(table);
+		ArrayList<Object> tableArray;
+
+		try {
+			//Load file
+			tableArray = getTable(new FileInputStream(filePath));
+
+			//Find and return the matching record if possible
+			for (Object item : tableArray) {
+				if (item.equals(record)) {
+					return true;
+				}
+			}
+
+			return false;
+
+		} catch (FileNotFoundException e) {
+			displayFileError();
+			return false;
+		}
+	}
+
+	/**
 	 * Takes a record object and returns an object that is an exact match
 	 * to it
 	 * @param record The record to compare to
