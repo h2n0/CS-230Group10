@@ -16,6 +16,11 @@ import cs230.system.Dvd;
 
 import java.util.ArrayList;
 
+/**
+ * @author 959470
+ * This is the controller for the CreateResourceView.fxml. It purpose is to create a new Resource(Book,Laptop,Dvd)
+ *
+ */
 public class CreateResourceViewController {
 
     @FXML
@@ -99,12 +104,15 @@ public class CreateResourceViewController {
     @FXML
     private TextField subLanguages;
 
-    @FXML
+    @FXML //The choice for the type of Resource to create
     private ChoiceBox<String> resourceChoice = new ChoiceBox<>();
 	
 	@FXML
     private Label unfinishedLb;
 	
+	/**
+	 * @return The next Resource id for the Resource that is going to be created
+	 */
 	private int getNextId () {
 		ArrayList<Integer> ids = (ArrayList<Integer>)DatabaseManager.getTable("ResourceIDs");
 		int currentID = ids.get(ids.size()-1);
@@ -114,8 +122,13 @@ public class CreateResourceViewController {
 		return newID;
 	}
 
+    /**
+     * @param event On click of button "Create" reads the choice of the resource, performs the apropriate checks and
+     * then creates the Resource
+     */
     @FXML
     void createResource(MouseEvent event) {
+    	//Shows an error message when any of the requred fileds are left blank
 		if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
 			unfinishedLb.setVisible(true);
 		}else {
@@ -163,6 +176,10 @@ public class CreateResourceViewController {
 		}
     }
 
+    /**
+     * @param event On mouse click "Confirm" , reads the user's selection from the drop-down menu 
+     * displaying the appropriate fileds for the user to fill and hiding the rest.
+     */
     @FXML
     void showResourceFields(MouseEvent event) {
 		String value = resourceChoice.getValue();
@@ -258,6 +275,9 @@ public class CreateResourceViewController {
 		
     }
 	
+	/**
+	 * Intializes the page and sets the values for the resource drop-down menu
+	 */
 	@FXML
     void initialize() {
 		resourceChoice.getItems().add("Book");

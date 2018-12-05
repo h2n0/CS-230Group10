@@ -11,9 +11,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * @author 959470 This is the controller for LibrarianAccountView.fxm, which let's the currently logged in Librarian see and individually change their account details.
+ *
+ */
 public class LibrarianAccountViewController {
-	
-	private Librarian librarian ;
+	//The currently logged in Librarian
+	private static Librarian librarian ;
 	@FXML
 	private Label emptyFieldLb;
 
@@ -85,6 +89,9 @@ public class LibrarianAccountViewController {
     @FXML
     private Button cancell5;
 
+    /**
+     * Removes all the text fields and save & exit buttons , reverting the page to it's default state
+     */
     @FXML
     void cancell(MouseEvent event) {
 		editFirstName.setVisible(true);
@@ -110,6 +117,9 @@ public class LibrarianAccountViewController {
 		incorrectadressLb.setVisible(false);
     }
 
+    /**
+     * Shows the text field for address as well as the corresponding save and cancel buttons. Hides all the rest
+     */
     @FXML
     void editFieldAddress(MouseEvent event) {
 		addresstxt.setVisible(true);
@@ -121,7 +131,10 @@ public class LibrarianAccountViewController {
 		saveAdr.setVisible(true);
 		cancell4.setVisible(true);
     }
-
+    
+    /**
+     * Shows the text field for Full Name as well as the corresponding save and cancel buttons. Hides all the rest
+     */
     @FXML
     void editFieldFname(MouseEvent event) {
 		firstNametxt.setVisible(true);
@@ -135,6 +148,9 @@ public class LibrarianAccountViewController {
     }
 
 
+    /**
+     * Shows the text field for mobile number as well as the corresponding save and cancel buttons. Hides all the rest
+     */
     @FXML
     void editFieldMbNum(MouseEvent event) {
 		mobNumtxt.setVisible(true);
@@ -147,7 +163,10 @@ public class LibrarianAccountViewController {
 		cancell3.setVisible(true);
     }
 	
-	
+
+    /**
+     * Shows the text field for staff number as well as the corresponding save and cancel buttons. Hides all the rest
+     */
 	@FXML
     void editFieldStaffNum(MouseEvent event) {
 		staffNumtxt.setVisible(true);
@@ -160,6 +179,9 @@ public class LibrarianAccountViewController {
 		cancell5.setVisible(true);
     }
 
+    /**
+     * Checks if the field is empty or the address is entered wrong and shows the appropriate message, otherwise updates the address
+     */
     @FXML
     void saveAdress(MouseEvent event) {
     	if (!addresstxt.getText().equals("")) {
@@ -177,7 +199,11 @@ public class LibrarianAccountViewController {
     		emptyFieldLb.setVisible(true);
     	}
     }
-
+    
+    
+    /**
+     * Checks if the field is empty and shows the appropriate message, otherwise updates the FullName
+     */
     @FXML
     void saveFirstName(MouseEvent event) {
     	if (!firstNametxt.getText().equals("")) {
@@ -189,18 +215,24 @@ public class LibrarianAccountViewController {
     	}
     }
 
-
+    
+    /**
+     * Checks if the field is empty and shows the appropriate message, otherwise updates the mobile number
+     */
     @FXML
     void saveMobNum(MouseEvent event) {
     	if (!mobNumtxt.getText().equals("")) {
 			mobileNumber.setText(mobNumtxt.getText());
-//			librarian.setMobileNum(mobNumtxt.getText());
+			librarian.setMobileNum(mobNumtxt.getText());
 			cancell(event);
     	} else {
     		emptyFieldLb.setVisible(true);
     	}
     }
 	
+    /**
+     * Checks if the field is empty and shows the appropriate message, otherwise updates the staff number
+     */
 	@FXML
     void saveStaffNum(MouseEvent event) {
 		if (!staffNum.getText().equals("")) {
@@ -212,12 +244,16 @@ public class LibrarianAccountViewController {
     	}
     }
 
+    /**
+     * Intitializes the page, displaying the correct values depending on the currently logged in user.
+     */
     @FXML
+    
     void initialize() {
-//    	firstName.setText(librarian.getName());
-//    	mobileNumber.setText(librarian.getMobileNum());
-//    	address.setText((librarian.getAddress().gethouseNumorName() + librarian.getAddress().getroadName() + librarian.getAddress().getcity() + librarian.getAddress().getpostcode() ));
-//    	staffNum.setText(librarian.getstaffNumber().toString());
-//    	emplDate.setText(librarian.getemploymentDate().toString());
+    	firstName.setText(librarian.getName());
+    	mobileNumber.setText(librarian.getMobileNum());
+    	address.setText((librarian.getAddress().gethouseNumorName() + librarian.getAddress().getroadName() + librarian.getAddress().getcity() + librarian.getAddress().getpostcode() ));
+    	staffNum.setText(librarian.getstaffNumber().toString());
+    	emplDate.setText(librarian.getemploymentDate().toString());
     }
 }
