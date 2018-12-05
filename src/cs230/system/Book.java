@@ -18,7 +18,7 @@ public class Book extends Resource {
  	
  	/**
  	 * The constructor of a new Book
- 	 * @param id The resourceID of the book
+ 	 * @param ID The resourceID of the book
  	 * @param title The title of the book
  	 * @param year The year the book was published
  	 * @param thumbnail The cover of the book
@@ -27,9 +27,9 @@ public class Book extends Resource {
  	 * @param author The author of the Book
  	 * @param language The spoken language of the Book
  	 */
- 	public Book (String id, String title , int year, String thumbnail ,
+ 	public Book (String ID, String title , int year, String thumbnail ,
 		     String author , String publisher, String genre, String isbn ,String language ) {
- 		super(id,title,year,thumbnail);
+ 		super(ID,title,year,thumbnail);
  		this.author = author;
  		this.publisher = publisher;
  		this.language = language;
@@ -41,11 +41,11 @@ public class Book extends Resource {
 	/**
 	 * Constructs a book using only its candidate keys for database
 	 * searching purposes
-	 * @param id The ID of the book
+	 * @param ID The ID of the book
 	 *
 	 */
-	public Book(String id) {
- 		super(id);
+	public Book(String ID) {
+ 		super(ID);
 	}
 	 	
  	/**
@@ -91,7 +91,7 @@ public class Book extends Resource {
  	public  void setIsbn(String isbn) {
  		this.isbn = isbn;
  	}
- 	
+
 	/**
 	 * Gets the author of the book
  	 * @return The author of the book

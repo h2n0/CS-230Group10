@@ -1,14 +1,11 @@
-
 package cs230.system;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * cs230.system.Copy class stores the information for each copy
+ * Copy class stores the information for each copy
  * @author 963257
- * @version 1.0
+ * @version 1.1
  */
-
 public class Copy implements Serializable {
 	//Default serial ID
 	private static final long serialVersionUID = 1L;
@@ -17,21 +14,21 @@ public class Copy implements Serializable {
 	//identify which resource the copy is
 	private String resourceID;
 	//say whether the copy is available, on loan, or overdue
-	private String status;
+	private Status status;
 	//Book/DVD/Laptop
 	private String resourceType;
 	//duration of the loan, in days
 	private int loanDuration;
 
 	/**
-	 * Constructor 
+	 * Constructs a copy entity
 	 * @param ID the identifier for the copy
-     * @param resourceID the identifier for the resource
-     * @param status says if the copy is available, on loan, or overdue
-     * @param resourceType if the copy is a Book, DVD, or Laptop
-     * @param loanDuration how long you can borrow the copy for
+         * @param resourceID the identifier for the resource
+         * @param status says if the copy is available, on loan, or overdue
+         * @param resourceType if the copy is a Book, DVD, or Laptop
+         * @param loanDuration how long you can borrow the copy for
 	 */
-	public Copy(String ID, String resourceID, String status,
+	public Copy(String ID, String resourceID, Status status,
 		    String resourceType, int loanDuration) {
 		this.ID = ID;
 		this.resourceID = resourceID;
@@ -41,81 +38,95 @@ public class Copy implements Serializable {
 	}
 	
 	/**
-	 * Constructor when Copy exists in database 
-	 * @param ID the identifier for the copy
-	*/
-	public Copy(String ID) {
-		//Object[] data = getDataFromDatabase ();
-		//Copy(ID,data)
+	 * Constructs only the candidate keys of the copy for database
+	 * searching purposes
+	 * @param ID The ID of the copy
+	 * @param resourceID The ID of the resource the copy is of
+	 */
+	public Copy(String ID, String resourceID, Status status) {
+		this.ID = ID;
+		this.resourceID = resourceID;
+		this.status = status;
 	}
 	
 	/**
-	 * gets the ID
-	 * @return the Copy ID
+	 * Gets the ID
+	 * @return The copy ID
 	 */
 	public String getID() {
 		return ID;
 	}
 
 	/**
-	 * get resource ID
-	 * @return the Resource ID
+	 * Gets the resource ID
+	 * @return The resource ID
 	 */
 	public String getResourceID() {
 		return resourceID;
 	}
 
 	/**
-	 * set the status
-	 * @param status say whether the copy is available, on loan, or overdue 
+	 * Sets the status
+	 * @param status Either AVAILABLE, ON_LOAN or OVERDUE
 	 */
-	public void setstatus(String status) {
+	public void setstatus(Status status) {
 		this.status = status;
 	}
+
 	/**
-	 * get the status
-	 * @return the status of the copy
+	 * Gets the status
+	 * @return The status of the copy
 	 */
-	public String getstatus() {
+	public Status getstatus() {
 		return status;
 	}
 
 	/**
-	 * set the resource type
-	 * @param resourceType says whether the copy is a Book/DVD/Laptop
+	 * Set the resource type
+	 * @param resourceType Says whether the copy is a Book/DVD/Laptop
 	 */
 	public void setresourceType(String resourceType) {
 		this.resourceType = resourceType;
 	}
 
 	/**
-	 * get the resource type
-	 * @return the resource type
+	 * Gets the resource type
+	 * @return The type of resource
 	 */
 	public String getResourceType() {
 		return resourceType;
 	}
 
 	/**
-	 * set loan duration
-	 * @param loanDuration the minimum time the resource is loaned for, in days
+	 * Sets the loan duration
+	 * @param loanDuration The minimum time the resource can be loaned for,
+	 * in days
 	 */
-	public void setloanDuration(Integer loanDuration) {
+	public void setloanDuration(int loanDuration) {
 		this.loanDuration = loanDuration;
 	}
 
 	/**
-	 * get loan duration
-	 * @return the minimum time the resource is loaned for, in days
+	 * Gets the loan duration
+	 * @return The minimum time the resource can be loaned for, in days
 	 */
-	public Integer getLoanDuration() {
+	public int getLoanDuration() {
 		return loanDuration;
 	}
-	
-	public void save () {
-		//commit attributes to database 
+
+	/**
+	 * Saves this copy to the database
+	 */
+	public void save() {
+		DatabaseManager.saveRecord(this, "copy");
 	}
 
+	/**
+	 * Checks if another object is an exact match to this one, so it
+	 * compares the candidate keys
+	 * @param obj The object to compare this to
+	 * @return True if they match, False otherwise
+	 */
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -123,11 +134,17 @@ public class Copy implements Serializable {
 
 		Copy copy = (Copy) obj;
 
-		// If they are an exact match return true
-		if (this.ID.equalsIgnoreCase(copy.ID)) {
-			return true;
-		}
+		// If candidate keys match return true
+		return ID.equalsIgnoreCase(copy.getID()) && resourceID.equalsIgnoreCase(copy.getResourceID());
 
-		return false;
+	}
+
+	/**
+	 * The possible statuses a copy can be; Available, On_loan or overdue
+	 */
+	public enum Status {
+		AVAILABLE,
+		ON_LOAN,
+		OVERDUE
 	}
 }
