@@ -1,4 +1,5 @@
 package cs230.system;
+import java.io.Serializable;
 import java.util.regex.Pattern;
 
 
@@ -8,7 +9,8 @@ import java.util.regex.Pattern;
  * @version 1.0
  */
 
-public class Address {
+public class Address implements Serializable {
+	private static final long serialVersionUID = 1L;
 	//the house name or number
 	private String houseNumorName;
 	//The road name
@@ -92,7 +94,12 @@ public class Address {
 		return postcode;
 	}
 	
-	//https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom
+	/**
+	 * pattern extracted from wiki article below
+	 * https://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom
+	 * @param postcode the postcode to be validated
+	 * @return true if valid, false otherwise
+	 */
 	private Boolean validPostcode(String postcode) {
 		//1/2 uppercase then 1/2 digits then space then 1 digit then 2 uppercase letters
 		String validpostcode = "([A-Z]{1,2}\\d{1,2}? \\d\\\\p{Upper}){2}?";
@@ -101,6 +108,10 @@ public class Address {
 	}
 	
 	// house number/house name, road name, City, Postcode 
+	/**
+	 * validates the address
+	 * @return true if valid, false otherwise
+	 */
 	public Boolean validAddress() {
 		//a lower or upper case letter or a space any amount of times
 		String letterOrSpace = "([a-zA-Z[\\p{Blank}]])*";
@@ -116,7 +127,6 @@ public class Address {
 		
 		//only valid if all parts are valid
 		Boolean validAddress = validHouseNumorName && validRoadName && validCity && validPostcode(postcode);
-		
 		return validAddress;
 	}
 }

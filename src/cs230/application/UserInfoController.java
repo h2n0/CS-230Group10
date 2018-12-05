@@ -1,5 +1,7 @@
 package cs230.application;
 
+import cs230.system.Address;
+import cs230.system.SharedData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -28,6 +30,11 @@ public class UserInfoController {
 	
 	@FXML
 	public void initialize() {
-		//Here we can populate all of the info
+		nameText.setText(SharedData.getUsername());
+		
+		Address ass = SharedData.getAddress();
+		addressText.setText(ass.gethouseNumorName() + ", " + ass.getroadName() + ", " + ass.getcity() + ", " + ass.getpostcode());
+		
+		balanceText.setText("£" + SharedData.getBalance());
 	}
 }

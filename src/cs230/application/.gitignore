@@ -2,3 +2,12 @@
 /MainPageController.class
 /cs230.system.Fine.class
 /LoginController.class
+/EditFineController.class
+/EditResourceController.class
+/FineController.class
+/ResourceController.class
+/UserInfoController.class
+/ResourceDetailController.class
+/ActionButtonTableCell.class
+/ResourceCopyPageController.class
+/ResourceListPageController.class
