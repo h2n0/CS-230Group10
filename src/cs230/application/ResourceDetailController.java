@@ -1,8 +1,7 @@
 package cs230.application;
 
-import java.util.ArrayList;
-
 import cs230.system.*;
+import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,10 +63,10 @@ public class ResourceDetailController {
 	private TextField genreTextBox;
 
 	@FXML
-	private Label ISBNLabel;
+	private Label isbnLabel;
 
 	@FXML
-	private TextField ISBNTextBox;
+	private TextField isbnTextBox;
 
 	@FXML
 	private Label bookLanguageLabel;
@@ -193,10 +192,10 @@ public class ResourceDetailController {
 		ISBNLabel.textProperty().set(currentBook.getISBN());
 		bookLanguageLabel.textProperty().set(currentBook.getLanguage());
 	}
-	
+
 	@FXML
-	private void handleEditAction(ActionEvent event ) {
-		sharedInfoEdit();
+	private void handleEditAction(ActionEvent event) {
+		sharedInfoEditToggle();
 		if (isDvd) {
 			dvdInfoEdit();
 		} else if (isLaptop) {
@@ -205,28 +204,46 @@ public class ResourceDetailController {
 			bookInfoEdit();
 		}
 	}
-	
-	private void sharedInfoEdit() {
-		titleTextbox.visibleProperty().set(true);
-		titleLabel.setVisible(false);
-		yearTextBox.visibleProperty().set(true);
-		yearLabel.setVisible(false);
-		thumbnailShow.setVisible(false);
-		//Show file select
+
+	private void sharedInfoEditToggle() {
+
+		titleTextbox.visibleProperty().set(!titleTextbox.visibleProperty().get());
+		titleLabel.setVisible(!titleLabel.visibleProperty().get());
+		yearTextBox.visibleProperty().set(!yearTextBox.visibleProperty().get());
+		yearLabel.setVisible(!yearLabel.visibleProperty().get());
+		thumbnailShow.setVisible(!thumbnailShow.visibleProperty().get());
+		// Show file select
 	}
-	
-	private void laptopInfoEdit()
-	{
-		
+
+	private void laptopInfoEdit() {
+		manufacturerTextBox.visibleProperty().set(!manufacturerTextBox.visibleProperty().get());
+		manufacturerLabel.visibleProperty().set(!manufacturerLabel.visibleProperty().get());
+		modelTextBox.visibleProperty().set(!modelTextBox.visibleProperty().get());
+		modelLabel.visibleProperty().set(!modelLabel.visibleProperty().get());
+		osLabel.visibleProperty().set(!osLabel.visibleProperty().get());
+		osTextBox.visibleProperty().set(!osTextBox.visibleProperty().get());
 	}
-	
-	private void dvdInfoEdit()
-	{
-		
+
+	private void dvdInfoEdit() {
+		directorLabel.visibleProperty().set(!directorLabel.visibleProperty().get());
+		directorTextBox.visibleProperty().set(!directorTextBox.visibleProperty().get());
+		runtimeLabel.visibleProperty().set(!runtimeLabel.visibleProperty().get());
+		runtimeTextBox.visibleProperty().set(!runtimeTextBox.visibleProperty().get());
+		dvdLanguageLabel.visibleProperty().set(!dvdLanguageLabel.visibleProperty().get());
+		dvdLanguageTextBox.visibleProperty().set(!dvdLanguageTextBox.visibleProperty().get());
+		// DVD TABLE
 	}
-	
-	private void bookInfoEdit()
-	{
-		
+
+	private void bookInfoEdit() {
+		authorLabel.visibleProperty().set(!authorLabel.visibleProperty().get());
+		authorTextBox.visibleProperty().set(!authorTextBox.visibleProperty().get());
+		publisherLabel.visibleProperty().set(!publisherLabel.visibleProperty().get());
+		publisherTextBox.visibleProperty().set(!publisherTextBox.visibleProperty().get());
+		genreTextBox.visibleProperty().set(!genreTextBox.visibleProperty().get());
+		genreLabel.visibleProperty().set(!genreLabel.visibleProperty().get());
+		ISBNLabel.visibleProperty().set(!ISBNLabel.visibleProperty().get());
+		ISBNTextBox.visibleProperty().set(!ISBNTextBox.visibleProperty().get());
+		bookLanguageLabel.visibleProperty().set(!bookLanguageLabel.visibleProperty().get());
+		bookLanguageTextBox.visibleProperty().set(!bookLanguageTextBox.visibleProperty().get());
 	}
 }
