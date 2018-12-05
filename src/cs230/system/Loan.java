@@ -83,12 +83,65 @@ public class Loan {
 	}
 
 	public String toString() {
-		return userName + ", " + copyID;
+		return userName + ", " + copyID + ", " + getCopyName();
 	}
 
+	/**
+	 * Returns the unique loan ID
+	 * @return The loan ID
+	 */
+	public String getLoanID() {
+		return loanID;
+	}
+
+	/**
+	 * Returns the username attatched to the loan
+	 * @return The user's name
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * Returns the ID of this copy of the resource
+	 * @return The copy ID
+	 */
+	public String getCopyID() {
+		return copyID;
+	}
+
+	/**
+	 * Returns the date that this resource is due back
+	 * @return The due date
+	 */
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
+
+	/**
+	 * Returns the date this resource was borrowed on
+	 * @return The borrow date
+	 */
+	public LocalDate getBorrowDate() {
+		return borrowDate;
+	}
+
+	/**
+	 * Returns the date this resource was returned on
+	 * @return The returned date
+	 */
+	public LocalDate getReturnedDate() {
+		return returnedDate;
+	}
+
+	/**
+	 * Gets the name of the copy attatched to this loan
+	 * @return The name of the copy
+	 */
 	private String getCopyName() {
 		String name;
 		String type;
+		Dvd resource;
 
 		// Get resource ID from the copy
 		Copy copy = new Copy(this.copyID);
@@ -97,9 +150,12 @@ public class Loan {
 
 		// Get the resource name
 		switch (type.toLowerCase()) {
-			case "laptop" :
-
-
+			case "dvd":
+				resource =
+					(Dvd) DatabaseManager.searchExact(new Dvd(copy.getResourceID()), "Dvd");
+				return resource.getTitle();
+			default:
+				break;
 		}
 
 		return null;

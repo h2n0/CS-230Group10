@@ -61,7 +61,7 @@ public class Copy implements Serializable {
 	 * get resource ID
 	 * @return the Resource ID
 	 */
-	public String getresourceID() {
+	public String getResourceID() {
 		return resourceID;
 	}
 
