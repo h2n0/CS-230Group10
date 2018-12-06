@@ -46,7 +46,7 @@ public class UserInfoController {
 
 		String root = new File("").getAbsolutePath();
 
-		if (avatarImageLocation == null) { // User dosen't have an image for some reason
+		if (avatarImageLocation == null || ! new File(avatarImageLocation).exists()) { // User dosen't have an image for some reason
 			avatarImageLocation = root + "/Assets/default.png";
 		} else {
 			avatarImageLocation = avatarImageLocation.trim();
