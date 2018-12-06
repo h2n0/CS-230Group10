@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import cs230.system.Address;
+import cs230.system.DatabaseManager;
+import cs230.system.SharedData;
 import cs230.system.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -207,9 +209,11 @@ public class AccountViewController {
      */
     @FXML
     void initialize() {
+    	User temptuser = new User(SharedData.getUsername(),null,null,0.0,null);
+    	user = (User) DatabaseManager.searchRecord(temptuser, "user");
     	firstName.setText(user.getName());
     	mobileNumber.setText(user.getMobileNum());
-    	address.setText((user.getAddress().gethouseNumorName() + user.getAddress().getroadName() +user.getAddress().getcity() + user.getAddress().getpostcode() ));
+    	address.setText((user.getAddress().getHouseNumorName() + user.getAddress().getRoadName() +user.getAddress().getCity() + user.getAddress().getPostcode() ));
 
     }
 }

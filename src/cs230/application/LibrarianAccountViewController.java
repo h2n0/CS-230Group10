@@ -4,7 +4,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import cs230.system.Address;
+import cs230.system.DatabaseManager;
 import cs230.system.Librarian;
+import cs230.system.SharedData;
+import cs230.system.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -250,9 +253,11 @@ public class LibrarianAccountViewController {
     @FXML
     
     void initialize() {
+    	User templibrarian = new User(SharedData.getUsername(),null,null,0.0,null);
+    	librarian = (Librarian) DatabaseManager.searchRecord(templibrarian, "librarian");
     	firstName.setText(librarian.getName());
     	mobileNumber.setText(librarian.getMobileNum());
-    	address.setText((librarian.getAddress().gethouseNumorName() + librarian.getAddress().getroadName() + librarian.getAddress().getcity() + librarian.getAddress().getpostcode() ));
+    	address.setText((librarian.getAddress().getHouseNumorName() + librarian.getAddress().getRoadName() + librarian.getAddress().getCity() + librarian.getAddress().getPostcode() ));
     	staffNum.setText(librarian.getstaffNumber().toString());
     	emplDate.setText(librarian.getemploymentDate().toString());
     }

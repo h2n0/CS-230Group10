@@ -20,7 +20,7 @@
             <Label fx:id="authorLb" layoutX="160.0" layoutY="102.0" prefHeight="17.0" prefWidth="40.0" text="Author" visible="false" />
             <Label fx:id="bookLanguageLb" layoutX="160.0" layoutY="135.0" text="Language*" visible="false" />
             <Label fx:id="publisherLb" layoutX="162.0" layoutY="169.0" text="Publisher" visible="false" />
-            <Label fx:id="isbnLb" layoutX="160.0" layoutY="200.0" text="isbn*" visible="false" />
+            <Label fx:id="isbnLb" layoutX="160.0" layoutY="200.0" text="ISBN*" visible="false" />
             <Label fx:id="genreLb" layoutX="157.0" layoutY="225.0" text="Genre*" visible="false" />
             <TextField fx:id="author" layoutX="216.0" layoutY="98.0" prefHeight="25.0" prefWidth="71.0" visible="false" />
             <TextField fx:id="bookLanguage" layoutX="216.0" layoutY="131.0" prefHeight="25.0" prefWidth="72.0" visible="false" />

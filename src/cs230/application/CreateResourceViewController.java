@@ -11,13 +11,14 @@ import java.util.ResourceBundle;
 
 import cs230.system.DatabaseManager;
 import cs230.system.Dvd;
-//import cs230.system.Laptop;
-//import cs230.system.Book;
+import cs230.system.Laptop;
+import cs230.system.Book;
 
 import java.util.ArrayList;
 
 /**
  * @author 959470
+ * @version 1.5
  * This is the controller for the CreateResourceView.fxml. It purpose is to create a new Resource(Book,Laptop,Dvd)
  *
  */
@@ -110,17 +111,6 @@ public class CreateResourceViewController {
 	@FXML
     private Label unfinishedLb;
 	
-	/**
-	 * @return The next Resource id for the Resource that is going to be created
-	 */
-	private int getNextId () {
-		ArrayList<Integer> ids = (ArrayList<Integer>)DatabaseManager.getTable("ResourceIDs");
-		int currentID = ids.get(ids.size()-1);
-		System.out.println(currentID);
-		int newID = currentID + 1;
-		System.out.println(newID);
-		return newID;
-	}
 
     /**
      * @param event On click of button "Create" reads the choice of the resource, performs the apropriate checks and
@@ -128,12 +118,12 @@ public class CreateResourceViewController {
      */
     @FXML
     void createResource(MouseEvent event) {
-    	//Shows an error message when any of the requred fileds are left blank
-		if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
+    	//Shows an error message when any of the required fields are left blank, else it creates the resource
+	    if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
 			unfinishedLb.setVisible(true);
 		}else {
 			int year =Integer.parseInt(this.year.getText());
-			int id = getNextId();
+			String id = DatabaseManager.getNextID();
 			System.out.println(id);
 			String choice = resourceChoice.getValue();
 			switch (choice) {
@@ -144,7 +134,7 @@ public class CreateResourceViewController {
 						
 						unfinishedLb.setVisible(false);
 						
-						//Book book1 = new Book(id,title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
+						Book book1 = new Book(id,title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
 					}
 					break;
 				case "Laptop" :
@@ -152,7 +142,7 @@ public class CreateResourceViewController {
 						unfinishedLb.setVisible(true);
 					} else {
 						unfinishedLb.setVisible(false);
-						//Laptop laptop1 = new Laptop(id,title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
+						Laptop laptop1 = new Laptop(id,title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
 					}
 					break;
 				case "Dvd" :

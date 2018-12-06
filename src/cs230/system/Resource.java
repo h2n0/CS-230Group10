@@ -9,7 +9,7 @@ import java.util.Queue;
 
 /**
  * @author 959470
- *
+ * This class is an abstract class. It is the masterclass of the common attributes of all the types of Resources stored in the library.  
  */
 public class Resource implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class Resource implements Serializable {
 	//Number of availabale copies of a specific resource
 	protected int availableCopiesNum;
 	//The queue of users waiting to recieve a copy of this resource
-	protected Queue<Integer> requestQ = new LinkedList<>();
+	protected Queue<String> requestQ = new LinkedList<>();
 	
 	
 	
@@ -168,10 +168,10 @@ public class Resource implements Serializable {
 	}
 	
 	/**
-	 * Adds a user id 'a' to the current Resource's queue
+	 * Adds a username 'a' to the current Resource's queue
 	 * @param a
 	 */
-	public void addToQueue (Integer a) {
+	public void addToQueue (String a) {
 		this.requestQ.add(a);
 		this.update();
 	}
@@ -193,27 +193,12 @@ public class Resource implements Serializable {
 	
 	
 	/**
-	 * @return The user id that is in the front of the queue
+	 * @return The username that is in the front of the queue
 	 */
-	public Integer peekQueue() {
+	public String peekQueue() {
 		return this.requestQ.peek();
 	}
 	
-	/**
-	 * Takes the query result from the database and constructs the queue based on that
-	 * @param queryResult The result of a query to the database, to the Queue table 
-	 * @return The request queue for a resource
-	 */
-	public Queue<Integer> toQueue (String[][] queryResult ){
-		int i=0;
-		Queue<Integer> queue = new LinkedList<>();
-		while (i!=queryResult.length) {
-			Integer iInteger = new Integer(Integer.parseInt(queryResult[i][i+1]));
-			queue.add(iInteger);
-			i++;
-		}
-		return queue;
-	}
 
 	/**
 	 * Updates a specific attribute in the Resource table of the Database
