@@ -3,8 +3,6 @@ package cs230.application;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
@@ -16,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -35,6 +32,10 @@ public class AvatarDrawController {
 	private boolean drawing;
 	private int[] pallet;
 	private int palletIndex;
+	private int brushSize;
+	
+	private final int bigBrush = 10;
+	private final int smallBrush = 3;
 
 	public void saveAvatar(ActionEvent e) {
 		String path = new File("").getAbsolutePath();
@@ -67,6 +68,8 @@ public class AvatarDrawController {
 	}
 
 	public void canvasClick(MouseEvent e) {
+		
+		// Color pallet selection
 		if (this.mx >= 96 && this.mx < 96 + (26 * this.pallet.length)) {
 			if (this.my >= 270 && this.my <= 300) {
 				int opi = palletIndex;
@@ -74,6 +77,15 @@ public class AvatarDrawController {
 				if(palletIndex < 0 || palletIndex >= this.pallet.length) {
 					palletIndex = opi;
 				}
+			}
+		}
+		
+		// Brus size selection
+		if(this.mx >= 16 && this.mx <= 32) {
+			if(this.my >= 16 && this.my <= 32) {
+				this.brushSize = this.bigBrush;
+			}else if(this.my >= 40 && this.my <= 56) {
+				this.brushSize = this.smallBrush;
 			}
 		}
 
@@ -106,7 +118,7 @@ public class AvatarDrawController {
 				}
 			}
 
-			circle(ix, iy, 10, this.pallet[this.palletIndex]);
+			circle(ix, iy, brushSize, this.pallet[this.palletIndex]);
 		}
 
 		bufferToFX();
@@ -137,6 +149,8 @@ public class AvatarDrawController {
 		this.ctx.setFill(Color.rgb(123, 123, 123));
 		this.ctx.fillRect(xo-8, yo-8, 26*this.pallet.length + 8, 36);
 		
+		
+		// Draw the pallet selection
 		for (int i = 0; i < this.pallet.length; i++) {
 			int s = 16;
 			int spacing = 10;
@@ -154,6 +168,26 @@ public class AvatarDrawController {
 				this.ctx.fillRect(xo + (s * i) + (spacing * i), yo + s + 4, s, 2);
 			}
 		}
+		// Draw the brush size section
+		this.ctx.setFill(Color.GRAY);
+		this.ctx.fillRect(16 - 8, 16 - 8, 56 * 2, 56);
+		this.ctx.setFill(Color.WHITE);
+		
+		this.ctx.fillOval(16, 16, 16, 16);
+		this.ctx.setFill(Color.BLACK);
+		if(this.brushSize == this.bigBrush) {
+			this.ctx.fillOval(16 + 4, 16 + 4, 8, 8);
+		}
+		this.ctx.fillText("Big brush", 35, 28);
+		
+		this.ctx.setFill(Color.WHITE);
+		this.ctx.fillOval(16, 40, 16, 16);
+		this.ctx.setFill(Color.BLACK);
+		if(this.brushSize == this.smallBrush) {
+			this.ctx.fillOval(16 + 4, 40 + 4, 8, 8);
+		}
+		this.ctx.fillText("Small brush", 35, 52);
+		
 	}
 
 	private void setPixel(int x, int y, int color) {
@@ -174,6 +208,7 @@ public class AvatarDrawController {
 		this.pallet = new int[] { makeRGB(255, 0, 0), makeRGB(0, 255, 0), makeRGB(0, 0, 255), makeRGB(255, 255, 0),
 				makeRGB(255, 0, 255), makeRGB(0, 255, 255), makeRGB(0, 0, 0), makeRGB(255, 255, 255) };
 
+		this.brushSize = bigBrush;
 		bufferToFX();
 	}
 }
