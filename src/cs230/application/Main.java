@@ -4,7 +4,7 @@ import java.util.Date;
 
 import java.util.Timer;
 
-import cs230.system.UpdateDatabase;
+//import cs230.system.UpdateDatabase;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -28,7 +28,7 @@ public class Main extends Application {
 			
 			//set a new timer and load in updateDB and set to run everyday at midday
 			Timer timer = new Timer();
-			timer.schedule(new UpdateDatabase(), today, delay );
+//			timer.schedule(new UpdateDatabase(), today, delay );
 			
 		} catch (Exception e){
 			System.out.println("database update failed");

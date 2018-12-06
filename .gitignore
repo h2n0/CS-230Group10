@@ -1,3 +1,6 @@
 /bin/
 src/230.xml
 src/.checkstyle
+*.class
+*.class
+src/cs230/application/ResourceCopyPageController.class
