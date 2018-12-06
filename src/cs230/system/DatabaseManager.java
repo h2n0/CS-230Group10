@@ -287,14 +287,13 @@ public class DatabaseManager {
 				if (item.toString().equals(oldRecord.toString())) {
 					index = tableCont.indexOf(item);
 					tableCont.set(index, newRecord);
-					return true;
 				}
 			}
 
 			// Re write to table
 			writeToFile(new FileOutputStream(filePath), tableCont);
 
-			return false;
+			return true;
 
 		} catch (FileNotFoundException e) {
 			displayFileError();
