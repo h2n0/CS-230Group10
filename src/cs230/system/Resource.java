@@ -14,7 +14,7 @@ import java.util.Queue;
 public class Resource implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//the  unique id of the resource
-	protected int id ;
+	protected String id ;
 	//The title of the resource
 	protected String title ;
 	//The year the resource was published
@@ -39,7 +39,8 @@ public class Resource implements Serializable {
 	 * @param year The year the resource was published
 	 * @param thumbnail The file path to the thumbnail of the Resource
 	 */
-	public Resource (int id, String title , int year, String thumbnail ) {
+	public Resource (String id, String title , int year,
+			 String thumbnail ) {
 		this.id= id;
 		this.title= title;
 		this.year=year;
@@ -47,13 +48,21 @@ public class Resource implements Serializable {
 		this.numCopies = 0;
 		this.availableCopiesNum = 0;
 	}
+
+	/**
+	 * Minimal constructor only taking candidate key for database searching
+	 * @param id The ID of the resource
+	 */
+	public Resource(String id) {
+		this.id = id;
+	}
 	
 	
 	/**
 	 * Sets the unique id for this resource
 	 * @param id of the resource
 	 */
-	public  void setID (int id) {
+	public  void setID (String id) {
 		this.id=id;
 	}
 	
@@ -75,7 +84,7 @@ public class Resource implements Serializable {
 	}
 	/**
 	 * Sets the thumbnail
-	 * @param the filepath to the thumbnail
+	 * @param thumbnail filepath to the thumbnail
 	 */
 	public  void setThumbnail (String thumbnail) {
 		this.thumbnail=thumbnail;
@@ -85,7 +94,7 @@ public class Resource implements Serializable {
 	/**
 	 * @return The id 
 	 */
-	public  int getID () {
+	public  String getID () {
 		return this.id;
 	}
 	/**
@@ -205,16 +214,15 @@ public class Resource implements Serializable {
 		}
 		return queue;
 	}
-	
+
 	/**
 	 * Updates a specific attribute in the Resource table of the Database
-	 * @param field The field that will be updated
-	 * @param attribute The new value of the attribute
 	 */
 	public void update () {
 		DatabaseManager.editRecord(this.id,this,type);
 	}
-	
+
+
 	public void create () {
 	}
 	
