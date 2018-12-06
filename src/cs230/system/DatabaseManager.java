@@ -2,6 +2,7 @@ package cs230.system;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -298,6 +299,39 @@ public class DatabaseManager {
 		} catch (FileNotFoundException e) {
 			displayFileError();
 			return false;
+		}
+	}
+
+	/**
+	 * Returns the next resource ID to use and increments the ID for next
+	 * user
+	 * @return The next available resource ID
+	 */
+	public String getNextID() {
+		String filePath = compilePath("resourceID");
+		String ID;
+		String newID;
+
+		try {
+			// Get ID
+			Scanner fileIn = new Scanner(filePath);
+			ID = fileIn.next();
+
+			fileIn.close();
+
+			// Increment ID
+			newID = String.valueOf(Integer.parseInt(ID) + 1);
+
+			BufferedWriter fileOut =
+				new BufferedWriter(new FileWriter(filePath));
+			fileOut.write(newID);
+			fileOut.close();
+
+			return ID;
+
+		} catch(IOException e) {
+			displayIOError("getNextID");
+			return null;
 		}
 	}
 
