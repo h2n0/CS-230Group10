@@ -2,17 +2,18 @@ package cs230.application;
 
 import java.io.File;
 
+import com.sun.corba.se.impl.transport.SharedCDRContactInfoImpl;
+
 import cs230.system.Address;
-import cs230.system.DatabaseManager;
 import cs230.system.PassInfo;
-import cs230.system.Resource;
 import cs230.system.SharedData;
-import cs230.system.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -40,8 +41,8 @@ public class UserInfoController {
 	}
 	
 	
-	private void initialiseAvatar(User u) {
-		String avatarImageLocation = SharedData.getUser().getAvatarFilePath();
+	private void initialiseAvatar() {
+		String avatarImageLocation = PassInfo.getCurrentUser().getAvatarFilePath();
 
 		String root = new File("").getAbsolutePath();
 
@@ -61,7 +62,15 @@ public class UserInfoController {
 	}
 	
 	private void fillTab(Tab t) {
-		ListView list = new ListView<Resource>();
+		TableView list = new TableView<>();
+		
+		TableColumn resourceName = new TableColumn<>("Name");
+		resourceName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+		
+		TableColumn resourceIndex = new TableColumn<>("Position");
+		resourceIndex.setCellValueFactory(new PropertyValueFactory<>("Position"));
+		
+		list.getColumns().addAll(resourceName, resourceIndex);
 		
 		
 		//DatabaseManager.getTable("resourcse");
@@ -71,6 +80,7 @@ public class UserInfoController {
 
 	@FXML
 	public void initialize() {
+		
 		nameText.setText(SharedData.getUsername());
 
 		Address ass = SharedData.getAddress();
@@ -78,15 +88,15 @@ public class UserInfoController {
 				+ ass.getPostcode());
 
 		balanceText.setText("£" + SharedData.getBalance());
-
-		initialiseAvatar(PassInfo.getCurrentUser());
 		
 		
 		Tab loansTab = new Tab("Loans");
 		Tab requestsTab = new Tab("Requests");
 		Tab overdueTab = new Tab("Overdue");
 		
-		//fillTab(loansTab);
+		initialiseAvatar();
+		
+		fillTab(loansTab);
 		
 		tabs.getTabs().addAll(loansTab, requestsTab, overdueTab);
 		
