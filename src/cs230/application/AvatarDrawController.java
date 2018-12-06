@@ -9,6 +9,7 @@ import java.util.Arrays;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+import cs230.system.PassInfo;
 import cs230.system.SharedData;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -33,7 +34,7 @@ public class AvatarDrawController {
 	private BufferedImage newAvatar;
 	private boolean drawing;
 	private int[] pallet;
-	private int pallextIndex;
+	private int palletIndex;
 
 	public void saveAvatar(ActionEvent e) {
 		String path = new File("").getAbsolutePath();
@@ -47,6 +48,8 @@ public class AvatarDrawController {
 			JOptionPane.showMessageDialog(null, "Unable to save avatar", "AvatarDraw", JOptionPane.ERROR_MESSAGE);
 			e1.printStackTrace();
 		}
+		
+		PassInfo.getCurrentUser().setAvatarFilePath(path);
 	}
 
 	public void leaveDialog(ActionEvent e) {
@@ -64,6 +67,16 @@ public class AvatarDrawController {
 	}
 
 	public void canvasClick(MouseEvent e) {
+		if (this.mx >= 96 && this.mx < 96 + (26 * this.pallet.length)) {
+			if (this.my >= 270 && this.my <= 300) {
+				int opi = palletIndex;
+				palletIndex = (mx - 96) / 26;
+				if(palletIndex < 0 || palletIndex >= this.pallet.length) {
+					palletIndex = opi;
+				}
+			}
+		}
+
 		paintOnImage();
 		e.consume();
 	}
@@ -93,7 +106,7 @@ public class AvatarDrawController {
 				}
 			}
 
-			circle(ix, iy, 10, makeRGB(255,0,0));
+			circle(ix, iy, 10, this.pallet[this.palletIndex]);
 		}
 
 		bufferToFX();
@@ -117,18 +130,29 @@ public class AvatarDrawController {
 		int y = (300 - this.imageHeight) / 2;
 
 		this.ctx.drawImage(SwingFXUtils.toFXImage(newAvatar, null), x, y);
+
+		int xo = 96;
+		int yo = 270;
 		
-		for(int i = 0; i < this.pallet.length; i++) {
+		this.ctx.setFill(Color.rgb(123, 123, 123));
+		this.ctx.fillRect(xo-8, yo-8, 26*this.pallet.length + 8, 36);
+		
+		for (int i = 0; i < this.pallet.length; i++) {
 			int s = 16;
 			int spacing = 10;
-			
+
 			int p = this.pallet[i];
-			
+
 			int rr = (p >> 16) & 0xFF;
 			int gg = (p >> 8) & 0xFF;
 			int bb = (p) & 0xFF;
-			this.ctx.setFill(Color.rgb(rr,gg,bb));
-			this.ctx.fillRect(16, 16 + i * s + (spacing * i), s, s);
+			this.ctx.setFill(Color.rgb(rr, gg, bb));
+			
+			this.ctx.fillRect(xo + (s * i) + (spacing * i), yo, s, s);
+			
+			if(this.palletIndex == i) {
+				this.ctx.fillRect(xo + (s * i) + (spacing * i), yo + s + 4, s, 2);
+			}
 		}
 	}
 
@@ -147,7 +171,8 @@ public class AvatarDrawController {
 		this.newAvatar = new BufferedImage(this.imageWidth, this.imageHeight, BufferedImage.TYPE_INT_RGB);
 		this.pixels = new int[this.imageWidth * this.imageHeight];
 
-		this.pallet = new int[] { makeRGB(255, 0, 0), makeRGB(0, 255, 0), makeRGB(0, 0, 255) };
+		this.pallet = new int[] { makeRGB(255, 0, 0), makeRGB(0, 255, 0), makeRGB(0, 0, 255), makeRGB(255, 255, 0),
+				makeRGB(255, 0, 255), makeRGB(0, 255, 255), makeRGB(0, 0, 0), makeRGB(255, 255, 255) };
 
 		bufferToFX();
 	}
