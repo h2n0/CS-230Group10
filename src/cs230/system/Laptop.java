@@ -53,6 +53,7 @@ package cs230.system;
  	 */
  	
  	/**
+
 	 * Sets the model
  	 * @param model
  	 */
@@ -66,6 +67,7 @@ package cs230.system;
  	 * Sets the operating system
  	 * @param operatingSystem
  	 */
+
  	public  void setOperatingSystem (String operatingSystem) {
  		this.operatingSystem=operatingSystem;
  	}
