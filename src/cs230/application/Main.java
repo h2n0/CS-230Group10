@@ -15,6 +15,7 @@ import javafx.stage.StageStyle;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
+		/*
 		//try setting up the scheduler for the database update
 		try {
 			//get todays date
@@ -30,10 +31,12 @@ public class Main extends Application {
 		} catch (Exception e){
 			System.out.println("database update failed");
 		}
+		*/
 		
 		//launch the login window to start the program
 		try {
-			AnchorPane root = FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
+			AnchorPane root =
+				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());

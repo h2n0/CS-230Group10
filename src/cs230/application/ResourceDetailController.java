@@ -153,9 +153,11 @@ public class ResourceDetailController {
 	private Boolean isDvd = false;
 
 	private Boolean isLaptop = false;
+	
+	private String shownResourceId;
 
-	public ResourceDetailController(int resourceId) {
-		setResourceInfo(resourceId);
+	public ResourceDetailController() {
+		setResourceInfo(shownResourceId);
 	}
 
 	@FXML
@@ -170,7 +172,12 @@ public class ResourceDetailController {
 		}
 	}
 	
-	private void setResourceInfo(int resourceId)
+	public void setResource(String id)
+	{
+		shownResourceId = id;
+	}
+	
+	private void setResourceInfo(String resourceId)
 	{
 		ArrayList<Resource> allResources = new ArrayList<Resource>();
 		try {
@@ -178,7 +185,7 @@ public class ResourceDetailController {
 		} catch (ClassCastException e) {
 			// DBERROR
 		}
-		allResources.removeIf((s -> s.getID() != resourceId));
+		allResources.removeIf((s -> !s.getID().equals(resourceId)));
 		showedResource = allResources.get(0);
 		originalResource = showedResource;
 		if (showedResource.getType().equals("Dvd")) {
@@ -198,11 +205,11 @@ public class ResourceDetailController {
 			// DBERROR
 		}
 		resourceCopies = allCopies;
-		resourceCopies.removeIf((s -> s.getresourceID() != resourceId));
+		resourceCopies.removeIf((s -> !s.getResourceID().equals(resourceId)));
 	}
 
 	private void initializeGui() {
-		String showedResourceID = Integer.toString(showedResource.getID());
+		String showedResourceID = showedResource.getID();
 		resourceID.textProperty().set(showedResourceID);
 		titleLabel.textProperty().set(showedResource.getTitle());
 		yearLabel.textProperty().set(Integer.toString(showedResource.getYear()));
@@ -250,7 +257,7 @@ public class ResourceDetailController {
 		Book currentBook = (Book) showedResource;
 		authorLabel.textProperty().set(currentBook.getAuthor());
 		genreLabel.textProperty().set(currentBook.getGenre());
-		isbnLabel.textProperty().set(currentBook.getISBN());
+		isbnLabel.textProperty().set(currentBook.getIsbn());
 		bookLanguageLabel.textProperty().set(currentBook.getLanguage());
 	}
 
