@@ -1,7 +1,4 @@
-package Resources;
- import java.util.ArrayList;
- import java.util.LinkedList;
- import java.util.Queue;
+package cs230.system;
  /**
   * @author 908112
   *
@@ -19,13 +16,14 @@ package Resources;
  	 * The constructor of a new Laptop
  	 * @param id
  	 * @param title
- 	 * @param manufacture year
+ 	 * @param manufacturer year
  	 * @param thumbnail
  	 * @param manufacturer
- 	 * @param operating system
+ 	 * @param operatingSystem
  	 * @param model
  	 */
- 	public Laptop (int id, String title , int year, String thumbnail, String manufacturer , String model, String operatingSystem ) {
+ 	public Laptop (String id, String title , int year, String thumbnail,
+		       String manufacturer , String model, String operatingSystem ) {
  		super(id,title,year,thumbnail);
  		this.manufacturer=manufacturer;
  		this.model=model;
@@ -34,22 +32,30 @@ package Resources;
 // 		create();
 		
 	}
- 	
- 	
+
+	 /**
+	  * Constructs a laptop only using its candidate keys for database
+	  * searching purposes
+	  * @param id The ID of the laptop
+	  */
+ 	public Laptop(String id) {
+ 		super(id);
+	}
  	
  	/**
 	 * Sets the manufacturer
  	 * @param manufacturer
  	 */
- 	public  void setManufacturer (String manufcaturer) {
+ 	public  void setManufacturer (String manufacturer) {
  		this.manufacturer=manufacturer;
  	}
  	/**
  	 */
  	
  	/**
-	 * Sets the publisher
- 	 * @param publisher
+
+	 * Sets the model
+ 	 * @param model
  	 */
  	public  void setModel (String model) {
  		this.model=model;
@@ -61,7 +67,8 @@ package Resources;
  	 * Sets the operating system
  	 * @param operatingSystem
  	 */
- 	public  void setOperatingSystem (String operatingSysytem) {
+
+ 	public  void setOperatingSystem (String operatingSystem) {
  		this.operatingSystem=operatingSystem;
  	}
  	
@@ -86,17 +93,6 @@ package Resources;
  	public  String getOperatingSystem () {
  		return this.operatingSystem;
  	}
- 	
- 	/**
- 	 * Updates a specific attribute in the Laptop table of the Database
- 	 * @param field The field that will be updated
- 	 * @param attribute The new value of the attribute
- 	 */
- 	@Override
- 	public void update () {
-
- 	}
- 	
  	
  	/** 
 	 * Creates a new entry in the database for a new Laptop 

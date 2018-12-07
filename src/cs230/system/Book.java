@@ -1,135 +1,135 @@
- import java.util.ArrayList;
- import java.util.LinkedList;
- import java.util.Queue;
+package cs230.system;
+
  /**
+  * This class models the attributes and functions of a book
   * @author 908112
-  *
   */
- 
- public class Book extends Resource {
- 	//The director of the Book
+public class Book extends Resource {
+	//The director of the Book
  	private String author;
  	//The publisher of the Book
  	private String publisher ;
  	//The spoken language of the Book
  	private String language;
- 	//The ISBN of the book
- 	private String ISBN;
+ 	//The isbn of the book
+ 	private String isbn;
  	//The genre of the book
  	private String genre;
  	
  	/**
  	 * The constructor of a new Book
- 	 * @param id
- 	 * @param title
- 	 * @param year
- 	 * @param thumbnail
- 	 * @param ISBN
- 	 * @param genre
+ 	 * @param ID The resourceID of the book
+ 	 * @param title The title of the book
+ 	 * @param year The year the book was published
+ 	 * @param thumbnail The cover of the book
+ 	 * @param isbn The isbn number of the book
+ 	 * @param genre The genre of the book
  	 * @param author The author of the Book
  	 * @param language The spoken language of the Book
  	 */
- 	public Book (int id, String title , int year, String thumbnail , String author , String publisher, String genre, String ISBN ,String language ) {
- 		super(id,title,year,thumbnail);
- 		this.author=author;
- 		this.publisher=publisher;
- 		this.language=language;
- 		this.genre=genre;
- 		this.ISBN=ISBN;
- 		this.type = "Book";
- //		create();
-		
+ 	public Book (String ID, String title , int year, String thumbnail ,
+		     String author , String publisher, String genre, String isbn ,String language ) {
+ 		super(ID,title,year,thumbnail);
+ 		this.author = author;
+ 		this.publisher = publisher;
+ 		this.language = language;
+ 		this.genre = genre;
+ 		this.isbn = isbn;
+		this.type = "book";
+	}
+
+	/**
+	 * Constructs a book using only its candidate keys for database
+	 * searching purposes
+	 * @param ID The ID of the book
+	 *
+	 */
+	public Book(String ID) {
+ 		super(ID);
 	}
 	 	
  	/**
 	 * Sets the author
- 	 * @param author
+ 	 * @param author The new author of the book
  	 */
  	public  void setAuthor (String author) {
- 		this.author=author;
+ 		this.author = author;
  	}
  	/**
  	 */
- 	
+
  	/**
 	 * Sets the publisher
- 	 * @param publisher
+ 	 * @param publisher The new publisher of the book
  	 */
  	public  void setPublisher (String publisher) {
- 		this.publisher=publisher;
+ 		this.publisher = publisher;
  	}
  	/**
  	 */
  	
  	/**
  	 * Sets the spoken language
- 	 * @param language
+ 	 * @param language The new language of the book
  	 */
  	public  void setLanguage (String language) {
- 		this.language=language;
+ 		this.language = language;
  	}
  	
  	/**
  	 * Sets the genre
- 	 * @param genre
+ 	 * @param genre The new genre of the book
  	 */
  	public  void setGenre (String genre) {
- 		this.genre=genre;
+ 		this.genre = genre;
  	}
- 	
- 	/**
- 	 * Sets the ISBN
- 	 * @param ISBN
- 	 */
- 	public  void setISBN (String ISBN) {
- 		this.ISBN=ISBN;
- 	}
- 	
 
+ 	/**
+ 	 * Sets the isbn
+ 	 * @param isbn The new isbn no. of the book
+ 	 */
+ 	public  void setIsbn(String isbn) {
+ 		this.isbn = isbn;
+ 	}
 
 	/**
- 	 * @return The author
+	 * Gets the author of the book
+ 	 * @return The author of the book
  	 */
  	public  String getAuthor () {
- 		return this.author;
+ 		return author;
  	}
- 	
+
  	/**
- 	 * @return The publisher
+	 * Gets the publisher of the book
+ 	 * @return The publisher of the book
  	 */
  	public  String getPublisher () {
- 		return this.publisher;
+ 		return publisher;
  	}
  	
  	/**
- 	 * @return The spoken language
+	 * Gets the language of the book
+ 	 * @return The spoken language of the book
  	 */
  	public  String getLanguage () {
- 		return this.language;
+ 		return language;
  	}
  	
  	/**
- 	 * @return The Genre
+	 * Gets the genre of the book
+ 	 * @return The Genre of the book
  	 */
  	public  String getGenre () {
- 		return this.genre;
+ 		return genre;
  	}
  	
  	/**
- 	 * @return ISBN
+	 * Gets the isbn no. of the book
+ 	 * @return The isbn no. of the book
  	 */
- 	public  String getISBN () {
- 		return this.ISBN;
- 	}
- 	
- 	/**
- 	 * Updates a specific attribute in the Book table of the Database
- 	 * @param field The field that will be updated
- 	 * @param attribute The new value of the attribute
- 	 */
- 	@Override
- 	public void update () {
- 	
+ 	public  String getIsbn() {
+ 		return isbn;
  	}
  	
  	/** 
@@ -147,9 +147,7 @@
 		
 //	DatabaseManager.deleteRecord(this,"Book");
 //	}
- 	
-	
- }
+}
  	
  	
  	
