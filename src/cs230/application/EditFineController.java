@@ -37,7 +37,7 @@ public class EditFineController  {
 	/**
 	 * gets the user input and validates it, if valid then use the 
 	 * database manager to save the changes
-	 * @param event ?????
+	 * @param event
 	 */
 	@SuppressWarnings("unchecked")
 	@FXML
@@ -125,21 +125,9 @@ public class EditFineController  {
 	 */
 	@FXML
 	private void handleBackButton(ActionEvent event) {
-		//load fine page fxml
-		VBox root = null;
-    	try {
-			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Fine.fxml"));
-		} 
-    	catch (IOException e) {
-			e.printStackTrace();
-		}
-    	
-    	//show fine page
-    	Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-		Stage stage = (Stage)cancelButton.getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
+	        // Close this stage
+                Stage stage = (Stage) cancelButton.getScene().getWindow();
+                stage.close();
 	}
 	
 	/**
@@ -147,26 +135,23 @@ public class EditFineController  {
 	 * info for a user is displayed
 	 */
 	@FXML
-    public void initialize() {
+        public void initialize() {
 		//get the user from PassInfo
 		currentUser = PassInfo.getEditFineUser();
 		//populate page with user info
 		PopulateEditFine(currentUser);
-    }
+        }
 	
-    /**
-     * Populates the appropriate features on the window for a user
-     * @param u the user who's info will be displayed on the screen
-     */
-    private void PopulateEditFine(User u) {
-        if (u != null){
-        	UserName.setText(u.getName());
-        	Amount.setText(u.getBalance().toString());
+        /**
+        * Populates the appropriate features on the window for a user
+        * @param u the user who's info will be displayed on the screen
+        */
+        private void PopulateEditFine(User u) {
+                if (u != null){
+        	        UserName.setText(u.getName());
+        	        Amount.setText(u.getBalance().toString());
+                } else {
+        	        System.out.println("failed to load the user into the window");
+                }
         }
-        else {
-        	System.out.println("failed to load the user into the window");
-        }
-        
-    }
-    
 }

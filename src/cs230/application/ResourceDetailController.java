@@ -185,7 +185,7 @@ public class ResourceDetailController {
 		} catch (ClassCastException e) {
 			// DBERROR
 		}
-		allResources.removeIf((s -> s.getID() != resourceId));
+		allResources.removeIf((s -> !s.getID().equals(resourceId)));
 		showedResource = allResources.get(0);
 		originalResource = showedResource;
 		if (showedResource.getType().equals("Dvd")) {
@@ -205,7 +205,7 @@ public class ResourceDetailController {
 			// DBERROR
 		}
 		resourceCopies = allCopies;
-		resourceCopies.removeIf((s -> s.getResourceID() != resourceId));
+		resourceCopies.removeIf((s -> !s.getResourceID().equals(resourceId)));
 	}
 
 	private void initializeGui() {
