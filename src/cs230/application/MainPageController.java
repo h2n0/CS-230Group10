@@ -1,8 +1,12 @@
 package cs230.application;
 
+import cs230.system.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import cs230.system.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,13 +19,20 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
 public class MainPageController {
+
+	private static final String COMBOBOX_ALL = "All";
+
+	private static final String COMBOBOX_BOOK = "Book";
+
+	private static final String COMBOBOX_DVD = "Dvd";
+
+	private static final String COMBOBOX_LAPTOP = "Laptop";
 
 	@FXML
 	private VBox sideOptions;
@@ -33,7 +44,7 @@ public class MainPageController {
 	private Label balance;
 
 	@FXML
-	private ComboBox<Label> resourcePicker;
+	private ComboBox<String> resourcePicker;
 
 	@FXML
 	private Button logOutButton;
@@ -59,12 +70,14 @@ public class MainPageController {
 	@FXML
 	private ScrollPane mainContent;
 
+	private String currentResourceSelection;
+
 	@FXML
 	public void initialize() {
 		setResourceLinks();
-		//username.textProperty().set(currentUser.getName());
-		//balance.textProperty().set(currentUser.getBalance()
-		// .toString());
+		username.textProperty().set(currentUser.getName());
+		balance.textProperty().set(Double.toString(currentUser.getBalance()));
+		userImage = new ImageView(currentUser.getAvatarFilePath());
 		updateComboBox();
 		username.setText(SharedData.getUsername());
 	}
@@ -76,16 +89,37 @@ public class MainPageController {
 	private User currentUser;
 
 	private void updateComboBox() {
-
-		Label allresources = new Label();
-		allresources.setText("All");
-		//allresources.addEventHandler(changeSearchToAll());
-		//resourcePicker.getItems().add(arg0);
+		ObservableList<String> pickerOptions = FXCollections
+				.observableArrayList(COMBOBOX_ALL, COMBOBOX_DVD,
+				COMBOBOX_BOOK, COMBOBOX_LAPTOP);
+		resourcePicker.getItems().addAll(pickerOptions);
+		resourcePicker.valueProperty()
+		.addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue ov, String t, String selection) {
+				currentResourceSelection = selection;
+			}
+		});
 	}
-	
+
 	@FXML
-	private void handleLoginAction(ActionEvent event ) {
-		
+	private void handleLogout(ActionEvent event) {
+		try {
+			Stage stage = (Stage) mainContent.getScene()
+					.getWindow();
+			AnchorPane root = FXMLLoader.load(getClass()
+					.getClassLoader()
+					.getResource("cs230/application/Login.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets()
+					.add(getClass().getClassLoader()
+							.getResource("cs230/application/application.css")
+							.toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void setResourceLinks() {
@@ -112,39 +146,32 @@ public class MainPageController {
 		sideOptions.getChildren().add(resources);
 	}
 
-	private void changeSearchToAll() {
-		//searchBox.removeEventHandler(eventType, eventHandler);
+	@FXML
+	private void handleSearch(ActionEvent event) {
+		ArrayList<Resource> resources = getResourceList();
+		if (currentResourceSelection.equals(COMBOBOX_BOOK)) {
+			resources.removeIf(r -> r.getType() != "book");
+		} else if (currentResourceSelection.equals(COMBOBOX_LAPTOP)) {
+			resources.removeIf(r -> r.getType() != "Laptop");
+		} else if (currentResourceSelection.equals(COMBOBOX_DVD)) {
+			resources.removeIf(r -> r.getType() != "Dvd");
+		}
+		if(!searchBox.textProperty().equals(null))
+		{
+			resources.removeIf(r -> r.getTitle()
+					.contains((CharSequence) searchBox.textProperty()));
+		}
+		loadListPage(resources);
+	}
+	
+	private void loadListPage(ArrayList<Resource> resources)
+	{
+		
 	}
 
-	private void loadAllPage() {
-//		ArrayList<Resource> resources = new ArrayList<Resource>();
-//		resources.addAll(getLaptopList());
-//		resources.addAll(getDVDList());
-//		resources.addAll(getBookList());
-	}
-
-	private void loadLaptopPage() {
-
-	}
-
-	private void loadDVDPage() {
-		ArrayList resources = new ArrayList();
-	}
-
-	private void loadBookPage() {
-		ArrayList resources = new ArrayList();
-	}
-
-	private void getLaptopList() {
-
-	}
-
-	private void getBookList() {
-
-	}
-
-	private void getDVDList() {
-	}
+        private ArrayList<Resource> getResourceList() {
+		            return (ArrayList<Resource>) DatabaseManager.getTable("Resource");
+        }
 
         /**
         * Handles exiting and logging out of the main menu back to the login menu
@@ -152,7 +179,6 @@ public class MainPageController {
         */
         @FXML
         private void handleExit (ActionEvent event){
-		//changeToLogin();
 		    try {
 		            // Create a new login scene
 			        AnchorPane root =
@@ -171,10 +197,9 @@ public class MainPageController {
 	}
 
 	@FXML
-	private void handleFineAction (ActionEvent event ){
+	private void handleFineAction(ActionEvent event) {
 		try {
-			VBox finePage =
-				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Fine.fxml"));
+			VBox finePage = FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Fine.fxml"));
 			mainContent.setPrefHeight(finePage.getPrefHeight());
 			mainContent.setPrefWidth(finePage.getPrefWidth());
 			mainContent.setContent(finePage);

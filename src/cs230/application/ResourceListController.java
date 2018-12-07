@@ -90,7 +90,7 @@ public class ResourceListController  {
 		allResources.append((ArrayList<Resource>) allDVDs);
 		allResources.append((ArrayList<Resource>) allLaptops);
 		
-		//populate the table with the users above
+		//populate the table with the resources above
 		PopulateFineTable(allResources);
 		*/
     }
