@@ -17,6 +17,8 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 
 public class MainPageController {
@@ -77,6 +79,11 @@ public class MainPageController {
 		//allresources.addEventHandler(changeSearchToAll());
 		//resourcePicker.getItems().add(arg0);
 	}
+	
+	@FXML
+	private void handleLoginAction(ActionEvent event ) {
+		
+	}
 
 	private void setResourceLinks() {
 		TitledPane resources = new TitledPane();
@@ -136,8 +143,27 @@ public class MainPageController {
 	private void getDVDList() {
 	}
 
+    /**
+     * Handles exiting and logging out of the main menu back to the login menu
+     * @param event A button pressed event
+     */
 	public void handleExit (ActionEvent event){
 		//changeToLogin();
+		    try {
+		            // Create a new login scene
+			        AnchorPane root =
+				        FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
+			        Scene scene = new Scene(root);
+
+			        // Get current stage
+			        Stage stage =
+                    (Stage) logOutButton.getScene().getWindow();
+
+			        stage.setScene(scene);
+
+		    } catch (IOException e) {
+                    System.exit(0);
+            }
 	}
 
 	@FXML

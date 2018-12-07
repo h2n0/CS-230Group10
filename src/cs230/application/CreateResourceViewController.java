@@ -105,12 +105,8 @@ public class CreateResourceViewController {
 	@FXML
     private Label unfinishedLb;
 	
-	private int getNextId () {
-		ArrayList<Integer> ids = (ArrayList<Integer>)DatabaseManager.getTable("ResourceIDs");
-		int currentID = ids.get(ids.size()-1);
-		System.out.println(currentID);
-		int newID = currentID + 1;
-		System.out.println(newID);
+	private String getNextId() {
+		String newID = DatabaseManager.getNextID();
 		return newID;
 	}
 
@@ -120,7 +116,7 @@ public class CreateResourceViewController {
 			unfinishedLb.setVisible(true);
 		}else {
 			int year =Integer.parseInt(this.year.getText());
-			int id = getNextId();
+			String id = getNextId();
 			System.out.println(id);
 			String choice = resourceChoice.getValue();
 			switch (choice) {
@@ -148,7 +144,7 @@ public class CreateResourceViewController {
 					} else {
 						unfinishedLb.setVisible(false);
 						String[] subArray = subLanguages.getText().split(",");
-						ArrayList<String> subLang = new ArrayList<String>(); 
+						ArrayList<String> subLang = new ArrayList<>();
 						int i=0;
 		
 						while ( i != (subArray.length)) {
@@ -258,12 +254,12 @@ public class CreateResourceViewController {
 		
     }
 	
-	@FXML
+
+    @FXML
     void initialize() {
 		resourceChoice.getItems().add("Book");
 		resourceChoice.getItems().add("Laptop");
 		resourceChoice.getItems().add("Dvd");
 		resourceChoice.setValue("Book");
     }
-
 }

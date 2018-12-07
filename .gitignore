@@ -1,3 +1,7 @@
 /bin/
 Database/*
 tasks
+src/230.xml
+src/.checkstyle
+*.class
+*.class

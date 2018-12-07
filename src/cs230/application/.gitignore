@@ -11,3 +11,7 @@
 /ActionButtonTableCell.class
 /ResourceCopyPageController.class
 /ResourceListPageController.class
+/AccountViewController.class
+/CreateResourceViewController.class
+/LibrarianAccountViewController.class
+/LibrarianMainpageController.class

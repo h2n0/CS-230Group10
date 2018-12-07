@@ -11,14 +11,14 @@ import java.util.Calendar;
 public class Fine implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// ID of the associated loan
-	private int historyID;
+	private final int historyID;
 	// The fixed fine of the resource
-	private int fixedFine;
+	private final int fixedFine;
 	// The total fine accumulated so far
 	private int totalFine = 0;
 	// Days the book has been overdue for
 	private int overdueDays = 0;
-	// Last day the fine was checked + updated
+	// Last day the fine was checked + updated**
 	private int lastDay;
 	
 	/**

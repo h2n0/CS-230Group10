@@ -3,7 +3,7 @@ package cs230.application;
 import java.util.Date;
 import java.util.Timer;
 
-import cs230.system.UpdateDatabase;
+//import cs230.system.UpdateDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,7 +25,7 @@ public class Main extends Application {
 			
 			//set a new timer and load in updateDB and set to run everyday at midday
 			Timer timer = new Timer();
-			timer.schedule(new UpdateDatabase(), today, delay );
+//			timer.schedule(new UpdateDatabase(), today, delay );
 			
 		} catch (Exception e){
 			System.out.println("database update failed");
@@ -38,6 +38,8 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setMinWidth(400d);
+			primaryStage.setMinHeight(400d);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

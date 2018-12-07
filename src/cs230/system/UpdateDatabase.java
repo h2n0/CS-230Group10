@@ -1,8 +1,9 @@
 package cs230.system;
+
 import java.util.Date;
 import java.util.TimerTask;
-
-import cs230.application.History;
+import java.util.ArrayList;
+import cs230.system.Loan;
 import cs230.system.Copy;
 import cs230.system.DatabaseManager;
 import cs230.system.User;
@@ -11,13 +12,13 @@ import cs230.system.User;
  * @author 963257
  * @version 1.0
  */
-
+/*
 public class UpdateDatabase extends TimerTask {
 	
 	//code to be ran in the main by a schedule
 	public void run() {
 		//get history and see if any books are overdue
-		History allHistory = DatabaseManager.getTable("loan");
+		ArrayList<Loan> allHistory = DatabaseManager.getTable("loan");
 
 		Date today = new Date();
 		//remove all loans that have been returned or arent overdue
@@ -43,3 +44,5 @@ public class UpdateDatabase extends TimerTask {
 		
 	}
 }
+
+*/
