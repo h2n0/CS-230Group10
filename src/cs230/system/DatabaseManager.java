@@ -306,14 +306,15 @@ public class DatabaseManager {
 	 * user
 	 * @return The next available resource ID
 	 */
-	public String getNextID() {
+	public static String getNextID() {
 		String filePath = compilePath("resourceID");
 		String ID;
 		String newID;
 
 		try {
 			// Get ID
-			Scanner fileIn = new Scanner(filePath);
+                        File file = new File(filePath);
+			Scanner fileIn = new Scanner(file);
 			ID = fileIn.next();
 
 			fileIn.close();
@@ -322,7 +323,7 @@ public class DatabaseManager {
 			newID = String.valueOf(Integer.parseInt(ID) + 1);
 
 			BufferedWriter fileOut =
-				new BufferedWriter(new FileWriter(filePath));
+				new BufferedWriter(new FileWriter(file));
 			fileOut.write(newID);
 			fileOut.close();
 
