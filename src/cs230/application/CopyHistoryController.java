@@ -44,7 +44,7 @@ public class CopyHistoryController  {
     public void initialize() {
     	copyID = PassInfo.getCopyID();
     	
-    	ArrayList<User> history = new ArrayList<Loan>();
+    	ArrayList<Loan> history = new ArrayList<Loan>();
 		try {
 			history = (ArrayList<Loan>) DatabaseManager.getTable("loan");
 		}
