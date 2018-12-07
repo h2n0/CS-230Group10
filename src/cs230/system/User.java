@@ -99,14 +99,6 @@ public class User implements Serializable {
 	public String getAvatarFilePath() {
 		return avatarFilePath;
 	}
-<<<<<<< HEAD
-	
-
-	/*
-	 * overrides the equal function to compare only names
-	 * @param obj the User to compare too
-=======
->>>>>>> c5bb1bf9d8d53516e2a6965539f47e38cf76d2ec
 
 	/**
 	 * Equals method defines two user objects as equal if the name is the

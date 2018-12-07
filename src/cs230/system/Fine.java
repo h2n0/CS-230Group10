@@ -11,7 +11,7 @@ import java.util.Calendar;
 public class Fine implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// ID of the associated loan
-	private final int historyID;
+	private final int loanID;
 	// The fixed fine of the resource
 	private final int fixedFine;
 	// The total fine accumulated so far
@@ -22,12 +22,12 @@ public class Fine implements Serializable {
 	private int lastDay;
 	
 	/**
-	 * Takes in ID of the history to attach to and the resource's fixed fine
-	 * @param historyID ID of the history
+	 * Takes in ID of the loan to attach to and the resource's fixed fine
+	 * @param loanID ID of the loan
 	 * @param fixedFine Fixed fine of the resource
 	 */
-	public Fine(int historyID, int fixedFine) {
-		this.historyID = historyID;
+	public Fine(int loanID, int fixedFine) {
+		this.loanID = loanID;
 		this.fixedFine = fixedFine;
 		lastDay = Calendar.DAY_OF_YEAR;
 	}
@@ -115,7 +115,7 @@ public class Fine implements Serializable {
 
 		// If all checks passed, compared historyIDs
 		Fine checkFine = (Fine) obj;
-		return checkFine.historyID == this.historyID;
+		return checkFine.loanID == this.loanID;
 	}
 
 	/**
@@ -128,10 +128,10 @@ public class Fine implements Serializable {
 	
 	/**
 	 * Returns associated ID
-	 * @return ID
+	 * @return loanID
 	 */
-	public int getID() {
-		return historyID;
+	public int getLoanID() {
+		return loanID;
 	}
 	
 	/**

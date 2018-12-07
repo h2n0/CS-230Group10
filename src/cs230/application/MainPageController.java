@@ -80,6 +80,7 @@ public class MainPageController {
 //                userImage = new ImageView(currentUser.getAvatarFilePath());
                 updateComboBox();
                 username.setText(SharedData.getUsername());
+                currentResourceSelection = COMBOBOX_ALL;
         }
 
         public void setCurrentUser(User currentUser) {
@@ -265,5 +266,10 @@ public class MainPageController {
                                 e.printStackTrace();
                         }
                 }
+        }
+        
+        @FXML
+        private void handleCreateRes(ActionEvent event) {
+                
         }
 }

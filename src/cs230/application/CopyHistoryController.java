@@ -16,6 +16,7 @@ import java.util.Date;
 
 
 import cs230.system.Loan;
+import cs230.system.PassInfo;
 import cs230.system.User;
 import cs230.system.DatabaseManager;
 import cs230.system.SharedData;
@@ -45,7 +46,7 @@ public class CopyHistoryController  {
     @SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
-    	copyID = SharedData.getCopyID();
+    	copyID = PassInfo.getCopyID();
     	
     	ArrayList<Loan> history = new ArrayList<Loan>();
 		try {

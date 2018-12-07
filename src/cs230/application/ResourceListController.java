@@ -35,7 +35,7 @@ public class ResourceListController {
 	private TableView<Resource> tableView;
 	// resourceID column in table
 	@FXML
-	private TableColumn<Resource, Integer> resourceID;
+	private TableColumn<Resource, String> resourceID;
 	// title column in table
 	@FXML
 	private TableColumn<Resource, String> title;
@@ -85,7 +85,7 @@ public class ResourceListController {
 	private void populateListTable(ArrayList<Resource> resourceList) {
 		// prepare the resourceID column to take IDs
 		resourceID.setCellValueFactory(
-				new PropertyValueFactory<Resource, Integer>("resourceID"));
+				new PropertyValueFactory<Resource, String>("resourceID"));
 		// prepare the title column to take titles
 		title.setCellValueFactory(new 
 				PropertyValueFactory<Resource, String>("title"));
