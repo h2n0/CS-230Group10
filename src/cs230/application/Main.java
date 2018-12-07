@@ -37,7 +37,6 @@ public class Main extends Application {
 		
 		//launch the login window to start the program
 		try {
-			primaryStage.initStyle(StageStyle.UNDECORATED);
 			AnchorPane root =
 				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
 			Scene scene = new Scene(root);

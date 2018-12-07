@@ -254,12 +254,12 @@ public class CreateResourceViewController {
 		
     }
 	
-	@FXML
+
+    @FXML
     void initialize() {
 		resourceChoice.getItems().add("Book");
 		resourceChoice.getItems().add("Laptop");
 		resourceChoice.getItems().add("Dvd");
 		resourceChoice.setValue("Book");
     }
-
 }
