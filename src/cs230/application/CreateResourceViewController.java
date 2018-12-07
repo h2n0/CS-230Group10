@@ -15,100 +15,100 @@ import java.util.ArrayList;
 
 public class CreateResourceViewController {
 
-    @FXML
-    private TextField title;
+        @FXML
+        private TextField title;
 
-    @FXML
-    private TextField year;
+        @FXML
+        private TextField year;
 
-    @FXML
-    private TextField thumbnail;
+        @FXML
+        private TextField thumbnail;
 
-    @FXML
-    private Label authorLb;
+        @FXML
+        private Label authorLb;
 
-    @FXML
-    private Label bookLanguageLb;
+        @FXML
+        private Label bookLanguageLb;
 
-    @FXML
-    private Label publisherLb;
+        @FXML
+        private Label publisherLb;
 
-    @FXML
-    private Label isbnLb;
+        @FXML
+        private Label isbnLb;
 
-    @FXML
-    private Label genreLb;
+        @FXML
+        private Label genreLb;
 
-    @FXML
-    private TextField author;
+        @FXML
+        private TextField author;
 
-    @FXML
-    private TextField bookLanguage;
+        @FXML
+        private TextField bookLanguage;
 
-    @FXML
-    private TextField publisher;
+        @FXML
+        private TextField publisher;
 
-    @FXML
-    private TextField isbn;
+        @FXML
+        private TextField isbn;
 
-    @FXML
-    private TextField genre;
+        @FXML
+        private TextField genre;
 
-    @FXML
-    private Label manufacturerLb;
+        @FXML
+        private Label manufacturerLb;
 
-    @FXML
-    private Label osLb;
+        @FXML
+        private Label osLb;
 
-    @FXML
-    private Label modelLb;
+        @FXML
+        private Label modelLb;
 
-    @FXML
-    private TextField manufacturer;
+        @FXML
+        private TextField manufacturer;
 
-    @FXML
-    private TextField operatingSystem;
+        @FXML
+        private TextField operatingSystem;
 
-    @FXML
-    private TextField model;
+        @FXML
+        private TextField model;
 
-    @FXML
-    private Label directorLb;
+        @FXML
+        private Label directorLb;
 
-    @FXML
-    private Label runtimeLb;
+        @FXML
+        private Label runtimeLb;
 
-    @FXML
-    private Label subtitlesLb;
-	
-	@FXML
-    private Label dvdLanguageLb;
+        @FXML
+        private Label subtitlesLb;
 
-    @FXML
-    private TextField director;
+        @FXML
+        private Label dvdLanguageLb;
 
-    @FXML
-    private TextField runtime;
+        @FXML
+        private TextField director;
 
-    @FXML
-    private TextField dvdLanguage;
+        @FXML
+        private TextField runtime;
 
-    @FXML
-    private TextField subLanguages;
+        @FXML
+        private TextField dvdLanguage;
 
-    @FXML
-    private ChoiceBox<String> resourceChoice = new ChoiceBox<>();
-	
-	@FXML
-    private Label unfinishedLb;
+        @FXML
+        private TextField subLanguages;
+
+        @FXML
+        private ChoiceBox<String> resourceChoice = new ChoiceBox<>();
+
+        @FXML
+        private Label unfinishedLb;
 	
 	private String getNextId() {
 		String newID = DatabaseManager.getNextID();
 		return newID;
 	}
 
-    @FXML
-    void createResource(MouseEvent event) {
+        @FXML
+        void createResource(MouseEvent event) {
 		if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
 			unfinishedLb.setVisible(true);
 		}else {
@@ -166,7 +166,7 @@ public class CreateResourceViewController {
 					break;
 			}
 		}
-    }
+        }
 
     @FXML
     void showResourceFields(MouseEvent event) {
