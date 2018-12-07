@@ -106,7 +106,7 @@ public class CreateResourceViewController {
     private Label unfinishedLb;
 	
 	private String getNextId() {
-		DatabaseManager.ge
+		String newID = DatabaseManager.getNextID();
 		return newID;
 	}
 

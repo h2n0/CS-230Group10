@@ -84,13 +84,15 @@ public class ResourceListController  {
     	catch(Exception e){
 			e.printStackTrace();
 		}
-		
+
+		/*
 		ArrayList<Resource> allResources = (ArrayList<Resource>) allBooks;
 		allResources.append((ArrayList<Resource>) allDVDs);
 		allResources.append((ArrayList<Resource>) allLaptops);
 		
 		//populate the table with the users above
 		PopulateFineTable(allResources);
+		*/
     }
     
     /**

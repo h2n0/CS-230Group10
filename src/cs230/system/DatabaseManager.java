@@ -306,7 +306,7 @@ public class DatabaseManager {
 	 * user
 	 * @return The next available resource ID
 	 */
-	public String getNextID() {
+	public static String getNextID() {
 		String filePath = compilePath("resourceID");
 		String ID;
 		String newID;
