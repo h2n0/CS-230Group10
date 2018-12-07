@@ -122,7 +122,7 @@
                   </HBox>
                </children>
             </GridPane>
-            <GridPane fx:id="dvdGrid" prefHeight="133.0" prefWidth="404.0">
+            <GridPane prefHeight="133.0" prefWidth="404.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="10.0" prefWidth="157.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="247.0" />
