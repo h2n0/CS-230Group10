@@ -11,7 +11,7 @@ import java.util.Queue;
  * @author 959470
  * This class is an abstract class. It is the masterclass of the common attributes of all the types of Resources stored in the library.  
  */
-public class Resource implements Serializable {
+public class Resource implements Serializable{
 	private static final long serialVersionUID = 1L;
 	//the  unique id of the resource
 	protected String id ;
@@ -39,8 +39,8 @@ public class Resource implements Serializable {
 	 * @param year The year the resource was published
 	 * @param thumbnail The file path to the thumbnail of the Resource
 	 */
-	public Resource (String id, String title , int year,
-			 String thumbnail ) {
+	public Resource(String id, String title , int year,
+			 String thumbnail ){
 		this.id= id;
 		this.title= title;
 		this.year=year;
@@ -53,7 +53,7 @@ public class Resource implements Serializable {
 	 * Minimal constructor only taking candidate key for database searching
 	 * @param id The ID of the resource
 	 */
-	public Resource(String id) {
+	public Resource(String id){
 		this.id = id;
 	}
 	
@@ -62,7 +62,7 @@ public class Resource implements Serializable {
 	 * Sets the unique id for this resource
 	 * @param id of the resource
 	 */
-	public  void setID (String id) {
+	public  void setID(String id){
 		this.id=id;
 	}
 	
@@ -70,7 +70,7 @@ public class Resource implements Serializable {
 	 * Sets the title 
 	 * @param title
 	 */
-	public  void setTitle (String title) {
+	public  void setTitle(String title){
 		this.title=title;
 		this.update();
 	}
@@ -78,7 +78,7 @@ public class Resource implements Serializable {
 	 * Sets the year
 	 * @param year
 	 */
-	public  void setYear (int year) {
+	public  void setYear(int year){
 		this.year=year;
 		this.update();
 	}
@@ -86,48 +86,48 @@ public class Resource implements Serializable {
 	 * Sets the thumbnail
 	 * @param thumbnail filepath to the thumbnail
 	 */
-	public  void setThumbnail (String thumbnail) {
+	public  void setThumbnail (String thumbnail){
 		this.thumbnail=thumbnail;
 		this.update();
 	}
 	
 	/**
-	 * @return The id 
+	 * @return The id of the resource
 	 */
-	public  String getID () {
+	public  String getID(){
 		return this.id;
 	}
 	/**
-	 * @return The title
+	 * @return The title of the resource
 	 */
-	public  String getTitle () {
+	public  String getTitle(){
 		return this.title;
 	}
 	/**
 	 * @return The year
 	 */
-	public  int getYear () {
+	public  int getYear(){
 		return this.year;
 	}
 	
 	/**
 	 * @return The number of copies for that resource
 	 */
-	public  int getNumCopies () {
+	public  int getNumCopies(){
 		return this.numCopies;
 	}
 	
 	/**
 	 * Increments the number of copies by 1
 	 */
-	public void incNumCopies() {
+	public void incNumCopies(){
 		this.numCopies ++;	
 	}
 	
 	/**
 	 * Decrements the number of copies by 1
 	 */
-	public void decNumCopies() {
+	public void decNumCopies(){
 		this.numCopies --;	
 	}
 	
@@ -136,34 +136,34 @@ public class Resource implements Serializable {
 	/**
 	 * @return The number of available copies for that resource
 	 */
-	public  int getAvailableNumCopies () {
+	public  int getAvailableNumCopies(){
 		return this.availableCopiesNum;
 	}
 	
 	/**
 	 * Increments the number of available copies by 1
 	 */
-	public void incAvailableNumCopies() {
+	public void incAvailableNumCopies(){
 		this.availableCopiesNum ++;	
 	}
 	
 	/**
 	 * Decrements the number of available copies by 1
 	 */
-	public void decAvailableNumCopies() {
+	public void decAvailableNumCopies(){
 		this.availableCopiesNum --;	
 	}
 	
 	/**
 	 * @return The thumbanil
 	 */
-	public  String getThumbnail () {
+	public  String getThumbnail(){
 		return this.thumbnail;
 	}
 	/**
 	 * @return The type of the Resource(Book,Dvd or Laptop)
 	 */
-	public String getType() {
+	public String getType(){
 		return this.type;
 	}
 	
@@ -171,7 +171,7 @@ public class Resource implements Serializable {
 	 * Adds a username 'a' to the current Resource's queue
 	 * @param a
 	 */
-	public void addToQueue (String a) {
+	public void addToQueue(String a){
 		this.requestQ.add(a);
 		this.update();
 	}
@@ -179,7 +179,7 @@ public class Resource implements Serializable {
 	/**
 	 * Removes the front user is from the queue
 	 */
-	public void removeFromQueue () {
+	public void removeFromQueue(){
 		this.requestQ.remove();
 		this.update();
 	}
@@ -187,7 +187,7 @@ public class Resource implements Serializable {
 	/**
 	 * @return The current size of the request queue
 	 */
-	public int checkQueue () {
+	public int checkQueue(){
 		return this.requestQ.size();
 	}
 	
@@ -195,7 +195,7 @@ public class Resource implements Serializable {
 	/**
 	 * @return The username that is in the front of the queue
 	 */
-	public String peekQueue() {
+	public String peekQueue(){
 		return this.requestQ.peek();
 	}
 	
@@ -203,18 +203,18 @@ public class Resource implements Serializable {
 	/**
 	 * Updates a specific attribute in the Resource table of the Database
 	 */
-	public void update () {
+	public void update(){
 		DatabaseManager.editRecord(this.id,this,type);
 	}
 
 
-	public void create () {
+	public void create(){
 	}
 	
-	public void delete () {
+	public void delete(){
 	}
 	
-	public String toString() {
+	public String toString(){
 		return this.title;
 	}
 	

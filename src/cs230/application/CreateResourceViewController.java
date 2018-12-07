@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * This is the controller for the CreateResourceView.fxml. It purpose is to create a new Resource(Book,Laptop,Dvd)
  *
  */
-public class CreateResourceViewController {
+public class CreateResourceViewController{
 
     @FXML
     private TextField title;
@@ -117,7 +117,7 @@ public class CreateResourceViewController {
      * then creates the Resource
      */
     @FXML
-    void createResource(MouseEvent event) {
+    void createResource(MouseEvent event){
     	//Shows an error message when any of the required fields are left blank, else it creates the resource
 	    if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
 			unfinishedLb.setVisible(true);
@@ -171,7 +171,7 @@ public class CreateResourceViewController {
      * displaying the appropriate fileds for the user to fill and hiding the rest.
      */
     @FXML
-    void showResourceFields(MouseEvent event) {
+    void showResourceFields(MouseEvent event){
 		String value = resourceChoice.getValue();
 		switch (value) {
 			case "Book" : 
@@ -269,7 +269,7 @@ public class CreateResourceViewController {
 	 * Intializes the page and sets the values for the resource drop-down menu
 	 */
 	@FXML
-    void initialize() {
+    void initialize(){
 		resourceChoice.getItems().add("Book");
 		resourceChoice.getItems().add("Laptop");
 		resourceChoice.getItems().add("Dvd");

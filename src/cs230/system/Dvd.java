@@ -28,7 +28,7 @@ public class Dvd extends Resource implements Serializable {
 	 * @param language The spoken language of the Dvd
 	 * @param subLanguages The available subtitle languages
 	 */
-	public Dvd (String id, String title , int year, String thumbnail ,
+	public Dvd(String id, String title , int year, String thumbnail ,
 		    String director , int runtime ,String language ,ArrayList<String> subLanguages) {
 		super(id,title,year,thumbnail);
 		this.director=director;

@@ -18,7 +18,7 @@ import javafx.scene.input.MouseEvent;
  *
  */
 
-public class AccountViewController {
+public class AccountViewController{
 	//The currently logged in User
 	private static User user ;
 	@FXML
@@ -84,7 +84,7 @@ public class AccountViewController {
      * Removes all the text fields and save & exit buttons , reverting the page to it's default state
      */
     @FXML
-    void cancell(MouseEvent event) {
+    void cancell(MouseEvent event){
 		editFirstName.setVisible(true);
 
 		editAddress.setVisible(true);
@@ -112,7 +112,7 @@ public class AccountViewController {
      * Shows the text field for address as well as the corresponding save and cancel buttons. Hides all the rest
      */
     @FXML
-    void editFieldAddress(MouseEvent event) {
+    void editFieldAddress(MouseEvent event){
 		addresstxt.setVisible(true);
 		addresstxt.setText(address.getText());
 		editAddress.setVisible(false);
@@ -127,7 +127,7 @@ public class AccountViewController {
      * Shows the text field for Full Name as well as the corresponding save and cancel buttons. Hides all the rest
      */
     @FXML
-    void editFieldFname(MouseEvent event) {
+    void editFieldFname(MouseEvent event){
 		firstNametxt.setVisible(true);
 		firstNametxt.setText(firstName.getText());
 		editAddress.setVisible(false);
@@ -142,7 +142,7 @@ public class AccountViewController {
      * Shows the text field for mobile number as well as the corresponding save and cancel buttons. Hides all the rest
      */
     @FXML
-    void editFieldMbNum(MouseEvent event) {
+    void editFieldMbNum(MouseEvent event){
 		mobNumtxt.setVisible(true);
 		mobNumtxt.setText(mobileNumber.getText());
 		editAddress.setVisible(false);
@@ -158,7 +158,7 @@ public class AccountViewController {
      * Checks if the field is empty or the address is entered wrong and shows the appropriate message, otherwise updates the address
      */
     @FXML
-    void saveAdress(MouseEvent event) {
+    void saveAdress(MouseEvent event){
     	if (!addresstxt.getText().equals("")) {
     		try {
     			String[] adComp = addresstxt.getText().split(" ");
@@ -179,7 +179,7 @@ public class AccountViewController {
      * Checks if the field is empty and shows the appropriate message, otherwise updates the FullName
      */
     @FXML
-    void saveFirstName(MouseEvent event) {
+    void saveFirstName(MouseEvent event){
     	if (!firstNametxt.getText().equals("")) {
     		firstName.setText(firstNametxt.getText());
     		user.setName(firstNametxt.getText());
@@ -194,7 +194,7 @@ public class AccountViewController {
      * Checks if the field is empty and shows the appropriate message, otherwise updates the mobile number
      */
     @FXML
-    void saveMobNum(MouseEvent event) {
+    void saveMobNum(MouseEvent event){
     	if (!mobNumtxt.getText().equals("")) {
 			mobileNumber.setText(mobNumtxt.getText());
 			user.setMobileNum(mobNumtxt.getText());
@@ -208,7 +208,7 @@ public class AccountViewController {
      * Intitializes the page, displaying the correct values depending on the currently logged in user.
      */
     @FXML
-    void initialize() {
+    void initialize(){
     	User temptuser = new User(SharedData.getUsername(),null,null,0.0,null);
     	user = (User) DatabaseManager.searchRecord(temptuser, "user");
     	firstName.setText(user.getName());
