@@ -77,6 +77,11 @@ public class MainPageController {
 		//allresources.addEventHandler(changeSearchToAll());
 		//resourcePicker.getItems().add(arg0);
 	}
+	
+	@FXML
+	private void handleLoginAction(ActionEvent event ) {
+		
+	}
 
 	private void setResourceLinks() {
 		TitledPane resources = new TitledPane();
