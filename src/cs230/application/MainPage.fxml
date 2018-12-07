@@ -20,20 +20,20 @@
    <left>
       <VBox fx:id="sideOptions" prefHeight="200.0" prefWidth="75.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink fx:id="dashboardLink" styleClass="mainSideLink" text="Dashboard" />
+            <Hyperlink fx:id="dashboardLink" onAction="#toMainpage" styleClass="mainSideLink" text="Dashboard" />
             <Hyperlink id="cs230.system.Fine" fx:id="fineLink" onAction="#handleFineAction" styleClass="mainSideLink" text="Fines" />
          </children>
       </VBox>
    </left>
    <top>
-   <HBox prefHeight="47.0" prefWidth="563.0" styleClass="mainTopBox" stylesheets="@application.css">
+   <HBox prefHeight="60.0" prefWidth="750.0" styleClass="mainTopBox" stylesheets="@application.css">
                <children>
 			   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="55.0" text="Exit" AnchorPane.rightAnchor="0.0" />
+                  <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="55.0" text="Logout" AnchorPane.rightAnchor="0.0" />
                         <HBox prefHeight="46.0" prefWidth="750.0">
                            <children>
-                              <ImageView fx:id="userImage" fitHeight="45.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="userImage" fitHeight="68.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" />
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label fx:id="username" text="Username" />
@@ -45,7 +45,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </TextField>
-                              <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Search" />
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="25.0" prefWidth="66.0" text="Search" />
                               <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
                            </children>
                         </HBox>
