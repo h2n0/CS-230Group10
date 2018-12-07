@@ -20,10 +20,10 @@ import cs230.system.PassInfo;
 
 public class CopyHistoryController  {
 
-    @FXML private TableView<User> tableView;
-    @FXML private TableColumn<User, String> userBorrow;
-    @FXML private TableColumn<User, Date> startDate;
-    @FXML private TableColumn<User, Date> returnDate;
+    @FXML private TableView<Loan> tableView;
+    @FXML private TableColumn<Loan, String> userBorrow;
+    @FXML private TableColumn<Loan, Date> startDate;
+    @FXML private TableColumn<Loan, Date> returnDate;
     @FXML private Button backButton;
     private Integer copyID;
     
@@ -45,9 +45,9 @@ public class CopyHistoryController  {
     public void initialize() {
     	copyID = PassInfo.getCopyID();
     	
-    	ArrayList<User> history = new ArrayList<History>();
+    	ArrayList<Loan> history = new ArrayList<Loan>();
 		try {
-			history = (ArrayList<History>) DatabaseManager.getTable("loan");
+			history = (ArrayList<Loan>) DatabaseManager.getTable("loan");
 		}
     	catch(Exception e){
 			e.printStackTrace();
@@ -59,11 +59,11 @@ public class CopyHistoryController  {
     /**
      * Populates the appropriate features on the window for a user
      * @param fineList a list of users to be displayed in the table
-     *
-    private void PopulateCopyTable(ArrayList<History> historyList) {
-    	userBorrow.setCellValueFactory(new PropertyValueFactory<History, String>("user"));
-    	startDate.setCellValueFactory(new PropertyValueFactory<History, Date>("startDate"));
-    	returnDate.setCellValueFactory(new PropertyValueFactory<History, Date>("startDate"));
+     */
+    private void PopulateCopyTable(ArrayList<Loan> historyList) {
+    	userBorrow.setCellValueFactory(new PropertyValueFactory<Loan, String>("user"));
+    	startDate.setCellValueFactory(new PropertyValueFactory<Loan, Date>("startDate"));
+    	returnDate.setCellValueFactory(new PropertyValueFactory<Loan, Date>("startDate"));
                
         if (historyList != null){
         	tableView.getItems().setAll(historyList);

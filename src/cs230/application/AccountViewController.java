@@ -1,8 +1,4 @@
 package cs230.application;
-<<<<<<< HEAD
-=======
-
->>>>>>> d30b29f9805e6a385815dbaa7a5cf654ba58ba53
 import java.net.URL;
 import java.util.ResourceBundle;
 
