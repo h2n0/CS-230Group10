@@ -21,6 +21,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainPageController {
@@ -62,6 +63,9 @@ public class MainPageController {
 
 	@FXML
 	private Hyperlink fineLink;
+
+	@FXML
+        private Hyperlink createResLink;
 
 	@FXML
 	private ScrollPane mainContent;
@@ -165,8 +169,31 @@ public class MainPageController {
 		
 	}
 
-	private ArrayList<Resource> getResourceList() {
-		return (ArrayList<Resource>) DatabaseManager.getTable("Resource");
+        private ArrayList<Resource> getResourceList() {
+		            return (ArrayList<Resource>) DatabaseManager.getTable("Resource");
+        }
+
+        /**
+        * Handles exiting and logging out of the main menu back to the login menu
+        * @param event A button pressed event
+        */
+        @FXML
+        private void handleExit (ActionEvent event){
+		    try {
+		            // Create a new login scene
+			        AnchorPane root =
+				        FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
+			        Scene scene = new Scene(root);
+
+			        // Get current stage
+			        Stage stage =
+                    (Stage) logOutButton.getScene().getWindow();
+
+			        stage.setScene(scene);
+
+		    } catch (IOException e) {
+                    System.exit(0);
+            }
 	}
 
 	@FXML
@@ -180,4 +207,24 @@ public class MainPageController {
 			e.printStackTrace();
 		}
 	}
+
+        /**
+         * Handles clicking the create a resource link
+         * @param event Button pressed event
+         */
+        @FXML
+	private void handleCreateRes(ActionEvent event) {
+	        String createResPath = "cs230/application/CreateResourceView" +
+                        ".fxml";
+	        try {
+	                // Load resource page
+	                BorderPane createResPage =
+                                FXMLLoader.load(getClass().getClassLoader().getResource(createResPath));
+	                mainContent.setContent(createResPage);
+                } catch(IOException e) {
+	                // Handle
+                }
+
+
+        }
 }

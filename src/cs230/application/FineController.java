@@ -32,21 +32,6 @@ public class FineController  {
     @FXML private TableColumn<User, Double> Amount;
     //column to put the edit buttons into
     @FXML private TableColumn<User, Button> Edit;
-    //button to go to the previous page
-    @FXML private Button backButton;
-    
-    /**
-     * takes the user back to the main menu
-     * @param event
-     */
-    @FXML
-    private void handleBackButton(ActionEvent event) {
-    	//Jack implement here
-    	
-    	//Temp code to close the window
-    	Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.close();
-    }
     
     /**
 	 * gets the user input and searches for usernames matching the input
@@ -91,32 +76,30 @@ public class FineController  {
 		PopulateFineTable(allUsers);
 	}
     
-    /**
+    	/**
 	 * Overrides the initialise function so when the window is open the
 	 * info for all users with fines are displayed
 	 */
-    @SuppressWarnings("unchecked")
 	@FXML
-    public void initialize() {
-    	//get all the users using the DatabaseManager
-    	ArrayList<User> allUsers = new ArrayList<User>();
-		try {
-			allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
-		}
-    	catch(Exception e){
-			e.printStackTrace();
-		}
+    	public void initialize() {
+    	    //get all the users using the DatabaseManager
+	    ArrayList<User> allUsers = new ArrayList<User>();
+	    try {
+	    	    allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
+	    } catch(Exception e){
+	    	    e.printStackTrace();
+	    }
+
+	    //remove users if they have a balance of 0
+	    allUsers.removeIf(s -> (s.getBalance()==0.0));
 		
-		//remove users if they have a balance of 0
-		allUsers.removeIf(s -> (s.getBalance()==0.0));
-		
-		//populate the table with the users above
-		PopulateFineTable(allUsers);
-    }
+	    //populate the table with the users above
+	    PopulateFineTable(allUsers);
+        }
     
     /**
      * Populates the appropriate features on the window for a user
-     * @param fineList a list of users to be displayed in the table
+     * @param userList a list of users to be displayed in the table
      */
     private void PopulateFineTable(ArrayList<User> userList) {
     	//prepare the Username column to take names
@@ -149,7 +132,7 @@ public class FineController  {
 				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/EditFine.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-			Stage stage = (Stage)backButton.getScene().getWindow();
+			Stage stage = new Stage();
 			stage.setScene(scene);
 			stage.show();
 		} catch (IOException e) {
