@@ -12,7 +12,7 @@ import cs230.system.User;
  * @author 963257
  * @version 1.0
  */
-/*
+
 public class UpdateDatabase extends TimerTask {
 	
 	//code to be ran in the main by a schedule
@@ -25,10 +25,10 @@ public class UpdateDatabase extends TimerTask {
 		allHistory.removeIf(s -> ((s.getReturnDate() != null) || (s.getDueDate().before(today))));
 		
 		//only left with those that are overdue, hence increase fine
-		for (History i : allHistory) {
+		for (Loan i : allHistory) {
 			//gets the user and the copy
-			User u = i.getUser();
-			Copy c = i.getCopy();
+			String u = i.getUserName();
+			String c = i.getCopyID();
 			
 			//get how much each day overdue costs
 			Double overdueAmount = c.getOverDueAmount();
@@ -44,5 +44,3 @@ public class UpdateDatabase extends TimerTask {
 		
 	}
 }
-
-*/
