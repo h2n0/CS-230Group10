@@ -9,10 +9,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import cs230.system.DatabaseManager;
-import cs230.system.Dvd;
-//import cs230.system.Laptop;
-//import cs230.system.Book;
+import cs230.system.*;
 
 import java.util.ArrayList;
 
@@ -127,7 +124,19 @@ public class CreateResourceViewController {
 						
 						unfinishedLb.setVisible(false);
 						
-						//Book book1 = new Book(id,title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
+						Book inputBook = new Book(id,
+                                                        title.getText(),
+                                                        year,
+                                                        thumbnail.getText(),
+                                                        author.getText(),
+                                                        publisher.getText(),
+                                                        genre.getText(),
+                                                        isbn.getText(),
+                                                        bookLanguage.getText());
+
+						DatabaseManager.saveRecord(inputBook, "book");
+						System.out.println("Saved " +
+                                                        "successfully!");
 					}
 					break;
 				case "Laptop" :

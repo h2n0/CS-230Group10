@@ -54,6 +54,9 @@ public class MainPageController {
 	private Hyperlink fineLink;
 
 	@FXML
+        private Hyperlink createResLink;
+
+	@FXML
 	private ScrollPane mainContent;
 
 	@FXML
@@ -143,11 +146,12 @@ public class MainPageController {
 	private void getDVDList() {
 	}
 
-    /**
-     * Handles exiting and logging out of the main menu back to the login menu
-     * @param event A button pressed event
-     */
-	public void handleExit (ActionEvent event){
+        /**
+        * Handles exiting and logging out of the main menu back to the login menu
+        * @param event A button pressed event
+        */
+        @FXML
+        private void handleExit (ActionEvent event){
 		//changeToLogin();
 		    try {
 		            // Create a new login scene
@@ -178,4 +182,24 @@ public class MainPageController {
 			e.printStackTrace();
 		}
 	}
+
+        /**
+         * Handles clicking the create a resource link
+         * @param event Button pressed event
+         */
+        @FXML
+	private void handleCreateRes(ActionEvent event) {
+	        String createResPath = "cs230/application/CreateResourceView" +
+                        ".fxml";
+	        try {
+	                // Load resource page
+	                BorderPane createResPage =
+                                FXMLLoader.load(getClass().getClassLoader().getResource(createResPath));
+	                mainContent.setContent(createResPage);
+                } catch(IOException e) {
+	                // Handle
+                }
+
+
+        }
 }
