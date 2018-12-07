@@ -85,11 +85,12 @@ public class ResourceListController  {
 			e.printStackTrace();
 		}
 		
+		//how the shit do i make a list of resources without instantiating resources
 		ArrayList<Resource> allResources = (ArrayList<Resource>) allBooks;
 		allResources.append((ArrayList<Resource>) allDVDs);
 		allResources.append((ArrayList<Resource>) allLaptops);
 		
-		//populate the table with the users above
+		//populate the table with the resources above
 		PopulateFineTable(allResources);
     }
     
