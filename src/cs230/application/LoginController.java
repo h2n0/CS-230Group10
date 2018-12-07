@@ -3,6 +3,7 @@ package cs230.application;
 import java.io.IOException;
 
 import cs230.system.DatabaseManager;
+import cs230.system.PassInfo;
 import cs230.system.SharedData;
 import cs230.system.User;
 import javafx.event.ActionEvent;
@@ -62,6 +63,7 @@ public class LoginController {
 					"user");
 
 			SharedData.setUser(activeUser);
+			PassInfo.setCurrentUser(activeUser);
 			changeToMainPage();
 			userNotFound.setVisible(false);
 		} else {
