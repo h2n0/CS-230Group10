@@ -1,4 +1,4 @@
-/*
+
 package cs230.application;
 
 import javafx.event.ActionEvent;
@@ -14,9 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+
+import cs230.system.Loan;
 import cs230.system.User;
 import cs230.system.DatabaseManager;
-import cs230.system.PassInfo;
+import cs230.system.SharedData;
 
 public class CopyHistoryController  {
 
@@ -39,11 +41,11 @@ public class CopyHistoryController  {
     /**
 	 * overides the initialize function so when the window is open the
 	 * info for all users with fines are displayed
-	 *
+	 */
     @SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
-    	copyID = PassInfo.getCopyID();
+    	copyID = SharedData.getCopyID();
     	
     	ArrayList<Loan> history = new ArrayList<Loan>();
 		try {
@@ -71,5 +73,3 @@ public class CopyHistoryController  {
         
     }
 }
-
-*/
