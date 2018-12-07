@@ -7,7 +7,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-
+/**
+ * Generic button in a tableview that can be assigned text and a function
+ * @author 963257
+ * @version 1.1
+ */
 public class ActionButtonTableCell<S> extends TableCell<S, Button> {
 	//action button held in the cell
     private final Button actionButton;

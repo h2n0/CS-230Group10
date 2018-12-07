@@ -43,7 +43,7 @@ public class Copy implements Serializable {
 	 * @param ID The ID of the copy
 	 * @param resourceID The ID of the resource the copy is of
 	 */
-	public Copy(String ID, String resourceID, Status status) {
+	public Copy(String ID, String resourceID) {
 		this.ID = ID;
 		this.resourceID = resourceID;
 		this.status = status;

@@ -14,6 +14,8 @@ public class Loan {
 	private final String userName;
 	// ID of the copy the loan is attatched to
 	private final String copyID;
+	// ID of the resource copy is attatched to
+	private final String resourceID;
 	// Due date
 	private LocalDate dueDate;
 	// Date the copy was borrowed
@@ -31,10 +33,10 @@ public class Loan {
 	 * @param borrowDate The date the loan was borrowed
 	 */
 	public Loan(String loanID, String userName, String copyID,
-		    LocalDate borrowDate) {
+		    String resourceID, LocalDate borrowDate) {
 
 		// Get copy from database
-		Copy searchCopy = new Copy(copyID);
+		Copy searchCopy = new Copy(copyID, resourceID);
 		searchCopy = (Copy) DatabaseManager.searchExact(searchCopy,
 			"copy");
 
@@ -47,6 +49,7 @@ public class Loan {
 		// Others
 		this.loanID = loanID;
 		this.copyID = copyID;
+		this.resourceID = resourceID;
 		this.userName = userName;
 		this.borrowDate = borrowDate;
 	}
@@ -59,11 +62,13 @@ public class Loan {
 	 * @param borrowDate The date the loan was borrowed
 	 */
 	public Loan(String loanID, String userName, String copyID,
-		    LocalDate borrowDate, LocalDate dueDate) {
+		    String resourceID, LocalDate borrowDate,
+		    LocalDate dueDate) {
 		// Set attributes
 		this.dueDate = dueDate;
 		this.loanID = loanID;
 		this.copyID = copyID;
+		this.resourceID = resourceID;
 		this.userName = userName;
 		this.borrowDate = borrowDate;
 	}
@@ -159,7 +164,7 @@ public class Loan {
 		Book bookRes;
 
 		// Get resource ID from the copy
-		Copy copy = new Copy(copyID);
+		Copy copy = new Copy(copyID, resourceID);
 		copy = (Copy) DatabaseManager.searchExact(copy, "copy");
 		type = copy.getResourceType();
 

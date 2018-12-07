@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import cs230.system.User;
 import cs230.system.Resource;
 import cs230.system.Book;
-import cs230.system.DVD;
+import cs230.system.Dvd;
 import cs230.system.Laptop;
 import cs230.system.Librarian;
 import cs230.system.DatabaseManager;
@@ -28,15 +28,15 @@ import cs230.system.PassInfo;
  */
 public class ResourceListController  {
 	//Table containing all the resources
-    @FXML private TableView<User> tableView;
+    @FXML private TableView<Resource> tableView;
     //resourceID column in table
-    @FXML private TableColumn<User, String> resourceID;
+    @FXML private TableColumn<Resource, Integer> resourceID;
     //title column in table
-    @FXML private TableColumn<User, String> title;
+    @FXML private TableColumn<Resource, String> title;
     //year column in table
-    @FXML private TableColumn<User, Integer> year;
+    @FXML private TableColumn<Resource, Integer> year;
     //column to put the details buttons into
-    @FXML private TableColumn<User, Button> details;
+    @FXML private TableColumn<Resource, Button> details;
     //button to create a new resource
     @FXML private Button addResourceButton;
     
@@ -68,9 +68,9 @@ public class ResourceListController  {
 		}
 		
 		//get all the DVDs using the DatabaseManager
-    	ArrayList<DVD> allDVDs = new ArrayList<Book>();
+    	ArrayList<Dvd> allDVDs = new ArrayList<Dvd>();
 		try {
-			allDVDs = (ArrayList<DVD>) DatabaseManager.getTable("dvd");
+			allDVDs = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
 		}
     	catch(Exception e){
 			e.printStackTrace();
@@ -85,11 +85,12 @@ public class ResourceListController  {
 			e.printStackTrace();
 		}
 		
-		ArrayList<Resource> allResources = (Resource) allBooks;
-		allResources.append((Resource) allDVDs);
-		allResources.append((Resource) allLaptops);
+		//how the shit do i make a list of resources without instantiating resources
+		ArrayList<Resource> allResources = (ArrayList<Resource>) allBooks;
+		allResources.append((ArrayList<Resource>) allDVDs);
+		allResources.append((ArrayList<Resource>) allLaptops);
 		
-		//populate the table with the users above
+		//populate the table with the resources above
 		PopulateFineTable(allResources);
     }
     
@@ -99,13 +100,13 @@ public class ResourceListController  {
      */
     private void PopulateFineTable(ArrayList<Resource> resourceList) {
     	//prepare the resourceID column to take IDs
-    	resourceID.setCellValueFactory(new PropertyValueFactory<User, Integer>("resourceID"));
+    	resourceID.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("resourceID"));
     	//prepare the title column to take titles
-    	title.setCellValueFactory(new PropertyValueFactory<User, String>("title"));
+    	title.setCellValueFactory(new PropertyValueFactory<Resource, String>("title"));
     	//prepare the year column to take year
-    	year.setCellValueFactory(new PropertyValueFactory<User, Integer>("year"));
+    	year.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("year"));
         //prepare the edit column to take ActionButtons where text = "Details" and call loadResourceDetail when pressed, where u is the user from the row
-        details.setCellFactory(ActionButtonTableCell.<User>forTableColumn("Edit", (Resource r) -> loadResourceDetail(r)));
+        details.setCellFactory(ActionButtonTableCell.<Resource>forTableColumn("Edit", (Resource r) -> loadResourceDetail(r)));
         
         //if the list of resources isnt null
         if (resourceList != null){
