@@ -1,21 +1,12 @@
-package cs230.application;
-
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class AccountViewController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
+public class LibrarianAccountViewController {
 
     @FXML
     private Label firstName;
@@ -30,6 +21,12 @@ public class AccountViewController {
     private Label address;
 
     @FXML
+    private Label staffNum;
+
+    @FXML
+    private Label emplDate;
+
+    @FXML
     private TextField firstNametxt;
 
     @FXML
@@ -40,6 +37,9 @@ public class AccountViewController {
 
     @FXML
     private TextField addresstxt;
+
+    @FXML
+    private TextField staffNumtxt;
 
     @FXML
     private Button editFirstName;
@@ -54,6 +54,9 @@ public class AccountViewController {
     private Button editAddress;
 
     @FXML
+    private Button editStaffNum;
+
+    @FXML
     private Button saveFn;
 
     @FXML
@@ -64,6 +67,9 @@ public class AccountViewController {
 
     @FXML
     private Button saveAdr;
+
+    @FXML
+    private Button saveStaffNum;
 
     @FXML
     private Button cancell1;
@@ -78,23 +84,30 @@ public class AccountViewController {
     private Button cancell4;
 
     @FXML
+    private Button cancell5;
+
+    @FXML
     void cancell(MouseEvent event) {
 		editFirstName.setVisible(true);
 		editLastName.setVisible(true);
 		editAddress.setVisible(true);
 		editMobNum.setVisible(true);
+		editStaffNum.setVisible(true);
 		saveFn.setVisible(false);
 		saveLn.setVisible(false);
 		saveAdr.setVisible(false);
 		saveMobNum.setVisible(false);
+		saveStaffNum.setVisible(false);
 		cancell1.setVisible(false);
 		cancell2.setVisible(false);
 		cancell3.setVisible(false);
 		cancell4.setVisible(false);
+		cancell5.setVisible(false);
 		firstNametxt.setVisible(false);
 		lastNametxt.setVisible(false);
 		mobNumtxt.setVisible(false);
 		addresstxt.setVisible(false);
+		staffNumtxt.setVisible(false);
     }
 
     @FXML
@@ -105,6 +118,7 @@ public class AccountViewController {
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
+		editStaffNum.setVisible(false);
 		saveAdr.setVisible(true);
 		cancell4.setVisible(true);
     }
@@ -117,6 +131,7 @@ public class AccountViewController {
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
+		editStaffNum.setVisible(false);
 		saveFn.setVisible(true);
 		cancell1.setVisible(true);
     }
@@ -129,6 +144,7 @@ public class AccountViewController {
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
+		editStaffNum.setVisible(false);
 		saveLn.setVisible(true);
 		cancell2.setVisible(true);
     }
@@ -141,8 +157,23 @@ public class AccountViewController {
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
+		editStaffNum.setVisible(false);
 		saveMobNum.setVisible(true);
 		cancell3.setVisible(true);
+    }
+	
+	
+	@FXML
+    void editFieldStaffNum(MouseEvent event) {
+		staffNumtxt.setVisible(true);
+		staffNumtxt.setText(staffNum.getText());
+		editLastName.setVisible(false);
+		editAddress.setVisible(false);
+		editMobNum.setVisible(false);
+		editFirstName.setVisible(false);
+		editStaffNum.setVisible(false);
+		saveStaffNum.setVisible(true);
+		cancell5.setVisible(true);
     }
 
     @FXML
@@ -166,6 +197,12 @@ public class AccountViewController {
     @FXML
     void saveMobNum(MouseEvent event) {
 		mobileNumber.setText(mobNumtxt.getText());
+		cancell(event);
+    }
+	
+	@FXML
+    void saveStaffNum(MouseEvent event) {
+		staffNum.setText(staffNumtxt.getText());
 		cancell(event);
     }
 

@@ -7,7 +7,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-
+/**
+ * Generic button in a tableview that can be assigned text and a function
+ * @author 963257
+ * @version 1.1
+ */
 public class ActionButtonTableCell<S> extends TableCell<S, Button> {
 	//action button held in the cell
     private final Button actionButton;
@@ -25,6 +29,7 @@ public class ActionButtonTableCell<S> extends TableCell<S, Button> {
         this.actionButton.setOnAction((ActionEvent e) -> {
             function.apply(getCurrentItem());
         });
+        
         //set the button to fill the cell
         this.actionButton.setMaxWidth(Double.MAX_VALUE);
     }
@@ -34,6 +39,7 @@ public class ActionButtonTableCell<S> extends TableCell<S, Button> {
      * @return the Object displayed in that row
      */
     public S getCurrentItem() {
+    	//return from the table, the items, at the index of the button (return class instance used to populate that row)
         return (S) getTableView().getItems().get(getIndex());
     }
 
@@ -49,6 +55,8 @@ public class ActionButtonTableCell<S> extends TableCell<S, Button> {
 
     /**
      * sets the cell to null if the row is empty, else display the action button
+     * @param item the button in the cell
+     * @param empty true if row is populated other than button, false if row is empty
      */
     @Override
     public void updateItem(Button item, boolean empty) {
