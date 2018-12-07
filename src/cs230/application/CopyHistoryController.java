@@ -1,3 +1,4 @@
+/*
 package cs230.application;
 
 import javafx.event.ActionEvent;
@@ -29,7 +30,7 @@ public class CopyHistoryController  {
     /**
      * takes the user back to the main menu
      * @param event
-     */
+
     @FXML
     private void handleBackButton(ActionEvent event) {
     	// Code that either closes window or returns to main menu
@@ -38,7 +39,7 @@ public class CopyHistoryController  {
     /**
 	 * overides the initialize function so when the window is open the
 	 * info for all users with fines are displayed
-	 */
+	 *
     @SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
@@ -58,7 +59,7 @@ public class CopyHistoryController  {
     /**
      * Populates the appropriate features on the window for a user
      * @param fineList a list of users to be displayed in the table
-     */
+     *
     private void PopulateCopyTable(ArrayList<History> historyList) {
     	userBorrow.setCellValueFactory(new PropertyValueFactory<History, String>("user"));
     	startDate.setCellValueFactory(new PropertyValueFactory<History, Date>("startDate"));
@@ -69,4 +70,6 @@ public class CopyHistoryController  {
         }
         
     }
-}  
+}
+
+*/
