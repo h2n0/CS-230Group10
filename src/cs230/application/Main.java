@@ -1,23 +1,20 @@
 package cs230.application;
 	
 import java.util.Date;
-
 import java.util.Timer;
 
-import cs230.system.UpdateDatabase;
+//import cs230.system.UpdateDatabase;
 import javafx.application.Application;
-import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		
 		//try setting up the scheduler for the database update
 		try {
 			//get todays date
@@ -28,7 +25,7 @@ public class Main extends Application {
 			
 			//set a new timer and load in updateDB and set to run everyday at midday
 			Timer timer = new Timer();
-			timer.schedule(new UpdateDatabase(), today, delay );
+//			timer.schedule(new UpdateDatabase(), today, delay );
 			
 		} catch (Exception e){
 			System.out.println("database update failed");
@@ -36,12 +33,13 @@ public class Main extends Application {
 		
 		//launch the login window to start the program
 		try {
+			AnchorPane root = FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
 			primaryStage.initStyle(StageStyle.UNDECORATED);
-			AnchorPane root =
-				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setMinWidth(400d);
+			primaryStage.setMinHeight(400d);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

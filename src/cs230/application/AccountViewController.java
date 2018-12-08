@@ -2,11 +2,6 @@ package cs230.application;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import cs230.system.Address;
-import cs230.system.DatabaseManager;
-import cs230.system.SharedData;
-import cs230.system.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

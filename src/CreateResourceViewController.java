@@ -1,6 +1,3 @@
-package cs230.application;
-
-
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -8,21 +5,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import cs230.system.DatabaseManager;
-import cs230.system.Dvd;
-import cs230.system.Laptop;
-import cs230.system.Book;
-
 import java.util.ArrayList;
 
-/**
- * @author 959470
- * @version 1.5
- * This is the controller for the CreateResourceView.fxml. It purpose is to create a new Resource(Book,Laptop,Dvd)
- *
- */
-public class CreateResourceViewController{
+public class CreateResourceViewController {
 
     @FXML
     private TextField title;
@@ -105,30 +90,18 @@ public class CreateResourceViewController{
     @FXML
     private TextField subLanguages;
 
-    @FXML //The choice for the type of Resource to create
+    @FXML
     private ChoiceBox<String> resourceChoice = new ChoiceBox<>();
 	
 	@FXML
     private Label unfinishedLb;
-	
-	private String getNextId() {
-		String newID = DatabaseManager.getNextID();
-		return newID;
-	}
 
-    /**
-     * @param event On click of button "Create" reads the choice of the resource, performs the apropriate checks and
-     * then creates the Resource
-     */
     @FXML
-    void createResource(MouseEvent event){
-    	//Shows an error message when any of the required fields are left blank, else it creates the resource
-	    if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
+    void createResource(MouseEvent event) {
+		if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
 			unfinishedLb.setVisible(true);
 		}else {
 			int year =Integer.parseInt(this.year.getText());
-			String id = DatabaseManager.getNextID();
-			System.out.println(id);
 			String choice = resourceChoice.getValue();
 			switch (choice) {
 				case "Book" :
@@ -138,7 +111,7 @@ public class CreateResourceViewController{
 						
 						unfinishedLb.setVisible(false);
 						
-						Book book1 = new Book(id,title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
+						//Book book1 = new Book(id.getText(),title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
 					}
 					break;
 				case "Laptop" :
@@ -146,7 +119,7 @@ public class CreateResourceViewController{
 						unfinishedLb.setVisible(true);
 					} else {
 						unfinishedLb.setVisible(false);
-						Laptop laptop1 = new Laptop(id,title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
+						//Laptop laptop1 = new Laptop(id.getText(),title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
 					}
 					break;
 				case "Dvd" :
@@ -155,7 +128,7 @@ public class CreateResourceViewController{
 					} else {
 						unfinishedLb.setVisible(false);
 						String[] subArray = subLanguages.getText().split(",");
-						ArrayList<String> subLang = new ArrayList<>();
+						ArrayList<String> subLang = new ArrayList<String>(); 
 						int i=0;
 		
 						while ( i != (subArray.length)) {
@@ -163,19 +136,15 @@ public class CreateResourceViewController{
 							i++;
 						}
 						int runtime = Integer.parseInt(this.runtime.getText());
-						Dvd dvd1 = new Dvd(id,title.getText(),year,thumbnail.getText(),director.getText(),runtime,dvdLanguage.getText(),subLang);
+						Dvd dvd1 = new Dvd(5,title.getText(),year,thumbnail.getText(),director.getText(),runtime,dvdLanguage.getText(),subLang);
 					}
 					break;
 			}
 		}
     }
 
-    /**
-     * @param event On mouse click "Confirm" , reads the user's selection from the drop-down menu 
-     * displaying the appropriate fileds for the user to fill and hiding the rest.
-     */
     @FXML
-    void showResourceFields(MouseEvent event){
+    void showResourceFields(MouseEvent event) {
 		String value = resourceChoice.getValue();
 		switch (value) {
 			case "Book" : 
@@ -269,14 +238,12 @@ public class CreateResourceViewController{
 		
     }
 	
-	/**
-	 * Intializes the page and sets the values for the resource drop-down menu
-	 */
 	@FXML
-    void initialize(){
+    void initialize() {
 		resourceChoice.getItems().add("Book");
 		resourceChoice.getItems().add("Laptop");
 		resourceChoice.getItems().add("Dvd");
 		resourceChoice.setValue("Book");
     }
+
 }

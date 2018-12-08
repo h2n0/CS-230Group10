@@ -8,9 +8,9 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane centerShape="false" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.MainPageController">
@@ -20,51 +20,42 @@
    <left>
       <VBox fx:id="sideOptions" prefHeight="200.0" prefWidth="75.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink fx:id="dashboardLink" styleClass="mainSideLink" text="Dashboard" />
+            <Hyperlink fx:id="dashboardLink" onAction="#toMainpage" styleClass="mainSideLink" text="Dashboard" />
             <Hyperlink id="cs230.system.Fine" fx:id="fineLink" onAction="#handleFineAction" styleClass="mainSideLink" text="Fines" />
          </children>
       </VBox>
    </left>
    <top>
-      <StackPane prefHeight="46.0" prefWidth="575.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="47.0" prefWidth="563.0" styleClass="mainTopBox" stylesheets="@application.css">
+   <HBox prefHeight="60.0" prefWidth="750.0" styleClass="mainTopBox" stylesheets="@application.css">
                <children>
-                  <HBox prefHeight="46.0" prefWidth="186.0">
-                     <children>
-                        <ImageView fx:id="userImage" fitHeight="45.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
-                        <VBox prefHeight="200.0" prefWidth="100.0">
+			   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="55.0" text="Logout" AnchorPane.rightAnchor="0.0" />
+                        <HBox prefHeight="46.0" prefWidth="750.0">
                            <children>
-                              <Label fx:id="username" text="Username" />
-                              <Label fx:id="balance" text="Balance" />
+                              <ImageView fx:id="userImage" fitHeight="68.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" />
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label fx:id="username" text="Username" />
+                                    <Label fx:id="balance" text="Balance" />
+                                 </children>
+                              </VBox>
+                              <TextField fx:id="searchBox">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="25.0" prefWidth="66.0" text="Search" />
+                              <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
+                        <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="55.0" text="Exit">
+                           <HBox.margin>
+                              <Insets left="190.0" />
+                           </HBox.margin>
+                        </Button>
                            </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <TextField fx:id="searchBox">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </TextField>
-                  <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Search" />
-                  <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
-               </children>
+                        </HBox>
+               </children></AnchorPane>
+			</children>
             </HBox>
-            <TextField>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </TextField>
-            <Button mnemonicParsing="false" text="Search" />
-            <Button mnemonicParsing="false" onAction="#handleExit" text="Exit">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </StackPane>
    </top>
 </BorderPane>
