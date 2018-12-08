@@ -7,21 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import cs230.system.User;
 import cs230.system.Resource;
 import cs230.system.SharedData;
-import cs230.system.Book;
-import cs230.system.Dvd;
-import cs230.system.Laptop;
-import cs230.system.Librarian;
-import cs230.system.DatabaseManager;
-import cs230.system.PassInfo;
 
 /**
  * Controller behind the Fine page
@@ -55,30 +47,12 @@ public class ResourceListController {
 	     * Overrides the initialise function so when the window is open the info for all
 	     * users with fines are displayed
 	     */
-        @SuppressWarnings("unchecked")
         @FXML
         public void initialize() {
                 // if user is a librarian then show add button
-                String currentUser = SharedData.getUsername();
-                
-                //implementation using search record
-                
-                Librarian tempUser = new Librarian(currentUser,null,null,null,null,null);
-                ArrayList<Librarian> matches = (ArrayList<Librarian>) DatabaseManager.searchRecord(tempUser,"librarian");
-                if (matches != null || matches.size() > 0){
+                if (SharedData.getIsLibrarian()){
                         addResourceButton.setVisible(true); 
                 }
-                
-                /*
-                //old code that uses getTable instead of searchRecord
-                ArrayList<Librarian> librarianList = (ArrayList<Librarian>)DatabaseManager.getTable("librarian");
-
-                for (Librarian l : librarianList) {
-                        if (currentUser.equals(l.getName())) {
-                                addResourceButton.setVisible(true);
-                        }
-                }
-                */
                 
                 // populate the table with the resources passed to the page
                 populateListTable(inputResources);
@@ -87,8 +61,9 @@ public class ResourceListController {
         /** 
          * launches the page to add a resource
          */
-        private void handleAddResourceButton() {
-                
+        @FXML
+        private void handleAddResourceButton(ActionEvent event) {
+                loadResourceDetail(null);
         }
         
         /**
