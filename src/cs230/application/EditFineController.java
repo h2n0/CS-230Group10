@@ -21,6 +21,7 @@ import cs230.system.User;
  * @version 1.2
  */
 public class EditFineController  {
+        
         //the textField for the librarian to type in the amount paid
         @FXML private TextField amountPaid;
         //label that is displayed if invalid input
@@ -33,9 +34,14 @@ public class EditFineController  {
         @FXML private Label saveLabel;
         //button to go back to Fine page
         @FXML private Button cancelButton;
-        //the user to be edited, set when the page is opened
-        private User currentUser;
+        //the user to be edited
+        private static User UserFine;
 	
+        public void setUserFine(User u) {
+                UserFine=u;
+                PopulateEditFine(u);
+        }
+        
         /**
 	     * gets the user input and validates it, if valid then use the 
 	     * database manager to save the changes
@@ -138,10 +144,8 @@ public class EditFineController  {
 	     */
         @FXML
         public void initialize() {
-                //get the user from PassInfo
-                currentUser = PassInfo.getEditFineUser();
                 //populate page with user info
-                PopulateEditFine(currentUser);
+                //PopulateEditFine(UserFine);
         }
 	
         /**

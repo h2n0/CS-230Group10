@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cs230.system.Loan;
+import cs230.system.Resource;
 import cs230.system.User;
 import cs230.system.DatabaseManager;
 import cs230.system.SharedData;
@@ -25,7 +26,8 @@ import cs230.system.SharedData;
  * @version 1.1
  */
 public class CopyHistoryController  {
-        
+        // list of history for the copy
+        private static ArrayList<Loan> inputCopyHist;
         //the table with the columns below
         @FXML private TableView<Loan> tableView;
         //the user who borrowed the copy column
@@ -36,8 +38,6 @@ public class CopyHistoryController  {
         @FXML private TableColumn<Loan, Date> returnDate;
         //the back button
         @FXML private Button backButton;
-        //the copyID of the copy who's history is being displayed
-        private Integer copyID;
     
         /**
          * takes the user back to the main menu
@@ -50,22 +50,11 @@ public class CopyHistoryController  {
     
         /**
 	     * Overrides the initialise function so when the window is open the
-	     * info for all users with fines are displayed
+	     * history for a copy is displayed
 	     */
-        @SuppressWarnings("unchecked")
         @FXML
         public void initialize() {
-                copyID = SharedData.getCopyID();
-    	
-                ArrayList<Loan> history = new ArrayList<Loan>();
-                try {
-                        history = (ArrayList<Loan>) DatabaseManager.getTable("loan");
-		        }
-                catch(Exception e){
-                        e.printStackTrace();
-		        }
-                history.removeIf(s -> (s.getCopyID != copyID));
-                PopulateCopyTable(history);
+                //PopulateCopyTable(inputCopyHist);
 	    }
     
         /**

@@ -7,7 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -113,29 +115,48 @@ public class FineController  {
                 }
         
         }
-    
+        
+        
         /**
          * Loads the edit fine page, passing the user through the PassInfo class
          * @param u the user to pass into the fine edit page
          * @return the user that was edited //not sure why but it breaks when not returned so meh?
          */
         private User loadEditFine(User u){
-    	        try {
-    	                //set the user to be passed to the Edit fine page
-    	                PassInfo.setEditFineUser(u);
-    	                
-    	                //open the edit fine page
-    	                VBox root = FXMLLoader.load(getClass().getClassLoader().getResource(
-    	                                "cs230/application/EditFine.fxml"));
-    	                Scene scene = new Scene(root);
-    	                scene.getStylesheets().add(getClass().getClassLoader().getResource(
-    	                                "cs230/application/application.css").toExternalForm());
-    	                Stage stage = new Stage();
-    	                stage.setScene(scene);
-    	                stage.show();
-    	        } catch (IOException e) {
-    	                e.printStackTrace();
-    	        }
+                try {
+                        // Create a FXML loader for loading the Edit Country FXML file.
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditFine.fxml"));     
+
+                        // Run the loader
+                        VBox editRoot = (VBox)fxmlLoader.load();          
+                        // Access the controller that was created by the FXML loader
+                        EditFineController editController = fxmlLoader.<EditFineController>getController();
+                        
+                        //set the user to be edited
+                        editController.setUserFine(u);
+                        
+                        // Create a scene based on the loaded FXML scene graph
+                        Scene editScene = new Scene(editRoot);
+                        
+                        // Create a new stage (i.e., window) based on the edit scene
+                        Stage editStage = new Stage();
+                        editStage.setScene(editScene);
+                        
+                        // Make the stage a modal window.
+                        // This means that it must be closed before you can interact with any other window from this application.
+                        editStage.initModality(Modality.APPLICATION_MODAL);
+                        
+                        // Show the edit scene and wait for it to be closed
+                        editStage.showAndWait();
+                        
+                        // refresh this page to update any changes to u
+                        initialize();
+                        
+                } catch (IOException e) {
+                        e.printStackTrace();
+                        // Quit the program (with an error code)
+                        System.exit(-1);
+                }
     	        return u;
     }   
 }

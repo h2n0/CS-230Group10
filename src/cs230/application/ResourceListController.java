@@ -60,16 +60,16 @@ public class ResourceListController {
                 // if user is a librarian then show add button
                 String currentUser = SharedData.getUsername();
                 
-                /*
                 //implementation using search record
                 
-                User tempUser = new User(currentUser,null,null,null);
-                ArrayList<User> matches = (ArrayList<User>) DatabaseManager.searchRecord(tempUser,"user");
+                Librarian tempUser = new Librarian(currentUser,null,null,null,null,null);
+                ArrayList<Librarian> matches = (ArrayList<Librarian>) DatabaseManager.searchRecord(tempUser,"librarian");
                 if (matches != null || matches.size() > 0){
                         addResourceButton.setVisible(true); 
                 }
-                */
                 
+                /*
+                //old code that uses getTable instead of searchRecord
                 ArrayList<Librarian> librarianList = (ArrayList<Librarian>)DatabaseManager.getTable("librarian");
 
                 for (Librarian l : librarianList) {
@@ -77,8 +77,9 @@ public class ResourceListController {
                                 addResourceButton.setVisible(true);
                         }
                 }
-
-                // populate the table with the resources passed to the pages
+                */
+                
+                // populate the table with the resources passed to the page
                 populateListTable(inputResources);
 	    }
 
