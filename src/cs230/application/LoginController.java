@@ -1,9 +1,11 @@
 package cs230.application;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import cs230.system.*;
+import cs230.system.DatabaseManager;
+import cs230.system.PassInfo;
+import cs230.system.SharedData;
+import cs230.system.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -60,6 +63,7 @@ public class LoginController {
 					"user");
 
 			SharedData.setUser(activeUser);
+			PassInfo.setCurrentUser(activeUser);
 			changeToMainPage();
 			userNotFound.setVisible(false);
 		} else {
@@ -71,12 +75,12 @@ public class LoginController {
 	 * Loads and shows the main page of the program
 	 */
 	private void changeToMainPage() {
+		AnchorPane root = null;
 		try {
 			// Initalise and load FXML for the main page
-			BorderPane root;
 			root = FXMLLoader.load(
 				getClass().getClassLoader().getResource(
-					"cs230/application/MainPage.fxml"));
+					"cs230/application/UserInfo.fxml"));
 
 			// Initalise and load CSS for scene
 			Scene scene = new Scene(root);

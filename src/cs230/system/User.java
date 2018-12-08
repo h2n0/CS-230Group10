@@ -1,7 +1,6 @@
 package cs230.system;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * User stores the info for each user
