@@ -1,6 +1,7 @@
 package cs230.system;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -452,10 +453,15 @@ public class DatabaseManager {
 		deleteRecord(fine1, "test");
 		test = getTable(new FileInputStream("Database//test.dat"));
 		System.out.println("Amount of data: " + test.size());
-		*/
-
 		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-		User user = new User("Joeseph", address, 10.0, null);
-		saveRecord(user, "user");
+        User user = new User("Joeseph", address, 10.0, null);
+        saveRecord(user, "user");
+		*/
+	    //String loanID, String userName, String copyID, String resourceID, LocalDate borrowDate
+	    ArrayList<Object> test;
+	    Loan l1 = new Loan("1","Joe","1","1",LocalDate.now());  
+		Loan l2 = new Loan("2","Joe","2","2",LocalDate.now());
+		saveRecord(l1, "loan");
+		saveRecord(l2, "loan");
 	}
 }

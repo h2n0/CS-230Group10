@@ -6,6 +6,7 @@ import java.io.Serializable;
  * @author 963257
  * @version 1.1
  */
+
 public class Copy implements Serializable {
         //Default serial ID
         private static final long serialVersionUID = 1L;
@@ -19,22 +20,23 @@ public class Copy implements Serializable {
         private String resourceType;
         //duration of the loan, in days
         private int loanDuration;
+        //cost for this copy to be overdue per day
+        private double overdueCost;
 
         /**
 	     * Constructs a copy entity
-	     * @param ID the identifier for the copy
          * @param resourceID the identifier for the resource
          * @param status says if the copy is available, on loan, or overdue
          * @param resourceType if the copy is a Book, DVD, or Laptop
          * @param loanDuration how long you can borrow the copy for
+         * @param overdueCost cost per day for this copy to be overdue
 	     */
-        public Copy(String ID, String resourceID, Status status,
-                String resourceType, int loanDuration) {
-                this.ID = ID;
+        public Copy(String resourceID, Status status, String resourceType, int loanDuration, double overdueCost) {
                 this.resourceID = resourceID;
                 this.status = status;
                 this.resourceType = resourceType;
                 this.loanDuration = loanDuration;
+                this.overdueCost = overdueCost;
 	    }
 	
         /**
@@ -46,7 +48,6 @@ public class Copy implements Serializable {
         public Copy(String ID, String resourceID) {
                 this.ID = ID;
                 this.resourceID = resourceID;
-                this.status = status;
         }
 	
         /**
@@ -114,6 +115,22 @@ public class Copy implements Serializable {
                 return loanDuration;
 	    }
 
+        /**
+         * Sets the cost per day for this copy to be overdue
+         * @param overdueCost The cost per day for this copy to be overdue
+         */
+        public void setoverdueCost(double overdueCost) {
+                this.overdueCost = overdueCost;
+        }
+
+        /**
+         * Gets the cost per day for this copy to be overdue
+         * @return The cost per day for this copy to be overdue
+         */
+        public double getoverdueCost() {
+                return overdueCost;
+        }
+        
         /**
 	     * Saves this copy to the database
 	     */

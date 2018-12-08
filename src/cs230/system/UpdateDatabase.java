@@ -2,11 +2,13 @@ package cs230.system;
 
 import java.util.Date;
 import java.util.TimerTask;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import cs230.system.Loan;
 import cs230.system.Copy;
 import cs230.system.DatabaseManager;
 import cs230.system.User;
+import cs230.system.Copy.Status;
 
 /**
  * @author 963257
@@ -18,20 +20,27 @@ public class UpdateDatabase extends TimerTask {
 	//code to be ran in the main by a schedule
 	public void run() {
 		//get history and see if any books are overdue
-		ArrayList<Loan> allHistory = DatabaseManager.getTable("loan");
+		ArrayList<Loan> allHistory = (ArrayList<Loan>) DatabaseManager.getTable("loan");
 
-		Date today = new Date();
+		LocalDate today = LocalDate.now();
 		//remove all loans that have been returned or arent overdue
-		allHistory.removeIf(s -> ((s.getReturnDate() != null) || (s.getDueDate().before(today))));
+		allHistory.removeIf(s -> ((s.getReturnedDate() != null) || (s.getDueDate().isAfter(today))));
 		
 		//only left with those that are overdue, hence increase fine
 		for (Loan i : allHistory) {
 			//gets the user and the copy
-			String u = i.getUserName();
-			String c = i.getCopyID();
+			String uname = i.getUserName();
+			String cid = i.getCopyID();
+			String rid = i.getResourceID();
+			
+			User tempUser = new User (uname,null,null,null);
+            Copy tempCopy = new Copy (cid,rid);
+			
+			User u = (User) DatabaseManager.searchRecord(tempUser, "user");
+			Copy c = (Copy) DatabaseManager.searchRecord(tempCopy, "copy");
 			
 			//get how much each day overdue costs
-			Double overdueAmount = c.getOverDueAmount();
+			Double overdueAmount = c.getoverdueCost();
 			
 			//calculate the new balance
 			Double newBalance = u.getBalance() + overdueAmount ; 
