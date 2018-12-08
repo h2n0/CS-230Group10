@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import cs230.system.Loan;
 import cs230.system.Resource;
+import cs230.system.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 
 public class LibrarianMainpageController {
         @FXML
@@ -38,8 +41,20 @@ public class LibrarianMainpageController {
                                 new PropertyValueFactory<Loan, String>("resourceID"));
                 borrowerColumn.setCellValueFactory(
                                 new PropertyValueFactory<Loan, String>("copyID"));
-                copyIdColumn.setCellValueFactory(
-                                new PropertyValueFactory<Loan, String>("username"));
+                infoColumn.setCellFactory(ActionButtonTableCell.<Loan>forTableColumn("Copy Info", (Loan l) -> loadCopy(l)));
+        }
+        
+        private Loan loadCopy(Loan l)
+        {
+                FXMLLoader fxmlLoader = new FXMLLoader(
+                                getClass().getClassLoader().getResource("cs230/application/Copy.fxml"));
+                VBox listPage = fxmlLoader.load();
+                ResourceListController controller = fxmlLoader.<ResourceListController>getController();
+                controller.setListToShow(resources);
+                mainContent.setPrefHeight(listPage.getPrefHeight());
+                mainContent.setPrefWidth(listPage.getPrefWidth());
+                mainContent.setContent(listPage);
+                return l;  
         }
 
 }

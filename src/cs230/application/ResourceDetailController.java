@@ -1,9 +1,12 @@
 package cs230.application;
 
 import cs230.system.*;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,334 +21,394 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class ResourceDetailController {
 
-	@FXML
-	private Button editButton;
+        @FXML
+        private Button editButton;
 
-	@FXML
-	private Button saveButton;
+        @FXML
+        private Button saveButton;
 
-	@FXML
-	private Button deleteButton;
-	
-	@FXML
-	private TableView copyTable;
+        @FXML
+        private Button deleteButton;
 
-	@FXML
-	private TableColumn <Copy, String> copyIdColumn;
-	
-	@FXML
-	private TableColumn <Copy, String> copyDurationColumn;
-	
-	@FXML
-	private TableColumn <Copy,Button> moreInfoColumn;
-	
-	@FXML
-	private Label resourceID;
+        @FXML
+        private TableView copyTable;
 
-	@FXML
-	private Label titleLabel;
+        @FXML
+        TableColumn<String, String> subLanguagesColumn;
 
-	@FXML
-	private TextField titleTextbox;
+        @FXML
+        private TableColumn<Copy, String> copyIdColumn;
 
-	@FXML
-	private Label yearLabel;
+        @FXML
+        private TableColumn<Copy, String> copyDurationColumn;
 
-	@FXML
-	private TextField yearTextBox;
+        @FXML
+        private TableColumn<Copy, Button> moreInfoColumn;
 
-	@FXML
-	private HBox imageBox;
+        @FXML
+        private Label resourceID;
 
-	@FXML
-	private ImageView thumbnailShow;
+        @FXML
+        private Label titleLabel;
 
-	@FXML
-	private Label numOfCopiesLabel;
+        @FXML
+        private TextField titleTextBox;
 
-	@FXML
-	private GridPane bookGrid;
+        @FXML
+        private Label yearLabel;
 
-	@FXML
-	private Label authorLabel;
+        @FXML
+        private TextField yearTextBox;
 
-	@FXML
-	private TextField authorTextBox;
+        @FXML
+        private HBox imageBox;
 
-	@FXML
-	private Label publisherLabel;
+        @FXML
+        private ImageView thumbnailShow;
 
-	@FXML
-	private TextField publisherTextBox;
+        @FXML
+        private Label numOfCopiesLabel;
 
-	@FXML
-	private Label genreLabel;
+        @FXML
+        private GridPane bookGrid;
 
-	@FXML
-	private TextField genreTextBox;
+        @FXML
+        private Label authorLabel;
 
-	@FXML
-	private Label isbnLabel;
+        @FXML
+        private TextField authorTextBox;
 
-	@FXML
-	private TextField isbnTextBox;
+        @FXML
+        private Label publisherLabel;
 
-	@FXML
-	private Label bookLanguageLabel;
+        @FXML
+        private TextField publisherTextBox;
 
-	@FXML
-	private TextField bookLanguageTextBox;
+        @FXML
+        private Label genreLabel;
 
-	@FXML
-	private GridPane dvdGrid;
+        @FXML
+        private TextField genreTextBox;
 
-	@FXML
-	private Label directorLabel;
+        @FXML
+        private Label isbnLabel;
 
-	@FXML
-	private TextField directorTextBox;
+        @FXML
+        private TextField isbnTextBox;
 
-	@FXML
-	private Label runtimeLabel;
+        @FXML
+        private Label bookLanguageLabel;
 
-	@FXML
-	private TextField runtimeTextBox;
+        @FXML
+        private TextField bookLanguageTextBox;
 
-	@FXML
-	private Label dvdLanguageLabel;
+        @FXML
+        private GridPane dvdGrid;
 
-	@FXML
-	private TextField dvdLanguageTextBox;
+        @FXML
+        private Label directorLabel;
 
-	@FXML
-	private GridPane laptopGrid;
+        @FXML
+        private TextField directorTextBox;
 
-	@FXML
-	private Label manufacturerLabel;
+        @FXML
+        private Label runtimeLabel;
 
-	@FXML
-	private TextField manufacturerTextBox;
+        @FXML
+        private TextField runtimeTextBox;
 
-	@FXML
-	private Label modelLabel;
+        @FXML
+        private Label dvdLanguageLabel;
 
-	@FXML
-	private TextField modelTextBox;
+        @FXML
+        private TextField dvdLanguageTextBox;
 
-	@FXML
-	private Label osLabel;
+        @FXML
+        private GridPane laptopGrid;
 
-	@FXML
-	private TextField osTextBox;
+        @FXML
+        private Label manufacturerLabel;
 
-	private Resource originalResource;
-	
-	private Resource showedResource;
-	
-	private ArrayList<Copy> resourceCopies;
+        @FXML
+        private TextField manufacturerTextBox;
 
-	private Boolean isBook = false;
+        @FXML
+        private Label modelLabel;
 
-	private Boolean isDvd = false;
+        @FXML
+        private TextField modelTextBox;
 
-	private Boolean isLaptop = false;
-	
-	private String shownResourceId;
+        @FXML
+        private Label osLabel;
 
-	public ResourceDetailController() {
-		setResourceInfo(shownResourceId);
-	}
+        @FXML
+        private TextField osTextBox;
 
-	@FXML
-	public void initialize() {
-		initializeGui();
-		if (isDvd) {
-			addDvdGui();
-		} else if (isLaptop) {
-			addLaptopGui();
-		} else {
-			addBookGui();
-		}
-	}
-	
-	public void setResource(String id)
-	{
-		shownResourceId = id;
-	}
-	
-	private void setResourceInfo(String resourceId)
-	{
-		ArrayList<Resource> allResources = new ArrayList<Resource>();
-		try {
-			allResources = (ArrayList<Resource>) DatabaseManager.getTable("Resource");
-		} catch (ClassCastException e) {
-			// DBERROR
-		}
-		allResources.removeIf((s -> !s.getID().equals(resourceId)));
-		showedResource = allResources.get(0);
-		originalResource = showedResource;
-		if (showedResource.getType().equals("Dvd")) {
-			showedResource = (Dvd) showedResource;
-			isDvd = true;
-		} else if (showedResource.getType().equals("Laptop")) {
-			showedResource = (Laptop) showedResource;
-			isLaptop = true;
-		} else {
-			showedResource = (Book) showedResource;
-			isBook = true;
-		}
-		ArrayList<Copy> allCopies = new ArrayList<Copy>();
-		try {
-			allCopies = (ArrayList<Copy>) DatabaseManager.getTable("Copy");
-		} catch (ClassCastException e) {
-			// DBERROR
-		}
-		resourceCopies = allCopies;
-		resourceCopies.removeIf((s -> !s.getResourceID().equals(resourceId)));
-	}
+        private Resource originalResource;
 
-	private void initializeGui() {
-		String showedResourceID = showedResource.getID();
-		resourceID.textProperty().set(showedResourceID);
-		titleLabel.textProperty().set(showedResource.getTitle());
-		yearLabel.textProperty().set(Integer.toString(showedResource.getYear()));
-		Image thumbnail = new Image(showedResource.getThumbnail());
-		thumbnailShow.setImage(thumbnail);
-		numOfCopiesLabel.textProperty().set(Integer.toString(showedResource.getNumCopies()));
-		populateCopyTable();
-	}
-	
-	private void populateCopyTable() {
-    	copyIdColumn.setCellValueFactory(new PropertyValueFactory<Copy, String>("ID"));
-        copyDurationColumn.setCellValueFactory(new PropertyValueFactory<Copy, String>("loanDuration"));
-        moreInfoColumn.setCellFactory(ActionButtonTableCell.<Copy>forTableColumn("Edit", (Copy c) -> showCopyInfo(c)));
+        private Resource showedResource;
+
+        private ArrayList<Copy> resourceCopies;
+
+        private Boolean isBook = false;
+
+        private Boolean isDvd = false;
+
+        private Boolean isLaptop = false;
+
+        private String shownResourceId;
         
-        //if the list of users isnt null
-        if (resourceCopies != null){
-        	//populate the columns
-        	copyTable.getItems().setAll(resourceCopies);
+        private String newThumbnailPath;
+
+        public ResourceDetailController() {
+                setResourceInfo(shownResourceId);
         }
-	}
 
-	private Copy showCopyInfo(Copy c) {
-		return resourceCopies.get(0);
-	}
-	
-	private void addDvdGui() {
-		dvdGrid.setVisible(true);
-		Dvd currentDvd = (Dvd) showedResource;
-		directorLabel.textProperty().set(currentDvd.getDirector());
-		runtimeLabel.textProperty().set(Integer.toString(currentDvd.getRuntime()));
-		dvdLanguageLabel.textProperty().set(Integer.toString(currentDvd.getRuntime()));
-	}
+        @FXML
+        public void initialize() {
+                initializeGui();
+                if (isDvd) {
+                        addDvdGui();
+                } else if (isLaptop) {
+                        addLaptopGui();
+                } else {
+                        addBookGui();
+                }
+                if (!SharedData.getIsLibrarian()) {
+                        saveButton.visibleProperty().set(false);
+                        editButton.visibleProperty().set(false);
+                        deleteButton.visibleProperty().set(false);
+                } else {
+                        saveButton.visibleProperty().set(true);
+                        editButton.visibleProperty().set(true);
+                        deleteButton.visibleProperty().set(true);
+                }
+        }
 
-	private void addLaptopGui() {
-		laptopGrid.setVisible(true);
-		Laptop currentLaptop = (Laptop) showedResource;
-		manufacturerLabel.textProperty().set(currentLaptop.getManufacturer());
-		modelLabel.textProperty().set(currentLaptop.getModel());
-		osLabel.textProperty().set(currentLaptop.getOperatingSystem());
+        public void setResource(String id) {
+                shownResourceId = id;
+        }
 
-	}
+        private void setResourceInfo(String resourceId) {
+                ArrayList<Resource> allResources = new ArrayList<Resource>();
+                try {
+                        allResources = (ArrayList<Resource>) DatabaseManager.getTable("Resource");
+                } catch (ClassCastException e) {
+                        // DBERROR
+                }
+                allResources.removeIf((s -> !s.getID().equals(resourceId)));
+                showedResource = allResources.get(0);
+                originalResource = showedResource;
+                if (showedResource.getType().equals("Dvd")) {
+                        showedResource = (Dvd) showedResource;
+                        isDvd = true;
+                } else if (showedResource.getType().equals("Laptop")) {
+                        showedResource = (Laptop) showedResource;
+                        isLaptop = true;
+                } else {
+                        showedResource = (Book) showedResource;
+                        isBook = true;
+                }
+                ArrayList<Copy> allCopies = new ArrayList<Copy>();
+                try {
+                        allCopies = (ArrayList<Copy>) DatabaseManager.getTable("Copy");
+                } catch (ClassCastException e) {
+                        // DBERROR
+                }
+                resourceCopies = allCopies;
+                resourceCopies.removeIf((s -> !s.getResourceID().equals(resourceId)));
+        }
 
-	private void addBookGui() {
-		bookGrid.setVisible(true);
-		Book currentBook = (Book) showedResource;
-		authorLabel.textProperty().set(currentBook.getAuthor());
-		genreLabel.textProperty().set(currentBook.getGenre());
-		isbnLabel.textProperty().set(currentBook.getIsbn());
-		bookLanguageLabel.textProperty().set(currentBook.getLanguage());
-	}
+        private void initializeGui() {
+                String showedResourceID = showedResource.getID();
+                resourceID.textProperty().set(showedResourceID);
+                titleLabel.textProperty().set(showedResource.getTitle());
+                yearLabel.textProperty().set(Integer.toString(showedResource.getYear()));
+                Image thumbnail = new Image(showedResource.getThumbnail());
+                thumbnailShow.setImage(thumbnail);
+                numOfCopiesLabel.textProperty().set(Integer.toString(showedResource.getNumCopies()));
+                populateCopyTable();
+        }
 
-	private void sharedInfoEditToggle() {
-		boolean titleTextboxShow = titleTextbox.visibleProperty().get();
-		titleTextbox.visibleProperty().set(!titleTextboxShow);
-		titleLabel.setVisible(!titleLabel.visibleProperty().get());
-		boolean yearTextBoxShow = yearTextBox.visibleProperty().get();
-		yearTextBox.visibleProperty().set(!yearTextBoxShow);
-		yearLabel.setVisible(!yearLabel.visibleProperty().get());
-		thumbnailShow.setVisible(!thumbnailShow.visibleProperty().get());
-		// Show file select
-		saveButton.setVisible(!saveButton.visibleProperty().get());
-		if(editButton.getText().equals("Cancel"))
-		{
-			editButton.setText("Edit Details");
-		}
-		else
-		{
-			editButton.setText("Cancel");
-		}
-	}
+        private void populateCopyTable() {
+                copyIdColumn.setCellValueFactory(new PropertyValueFactory<Copy, String>("ID"));
+                copyDurationColumn.setCellValueFactory(new PropertyValueFactory<Copy, String>("loanDuration"));
+                moreInfoColumn.setCellFactory(
+                                ActionButtonTableCell.<Copy>forTableColumn("Edit", (Copy c) -> showCopyInfo(c)));
 
-	private void laptopInfoEdit() {
-		boolean manufacturerTBShow = manufacturerTextBox.visibleProperty().get();
-		manufacturerTextBox.visibleProperty().set(!manufacturerTBShow);
-		boolean manufacturerLabelShow = manufacturerLabel.visibleProperty().get();
-		manufacturerLabel.visibleProperty().set(!manufacturerLabelShow);
-		modelTextBox.visibleProperty().set(!modelTextBox.visibleProperty().get());
-		modelLabel.visibleProperty().set(!modelLabel.visibleProperty().get());
-		osLabel.visibleProperty().set(!osLabel.visibleProperty().get());
-		osTextBox.visibleProperty().set(!osTextBox.visibleProperty().get());
-	}
+                // if the list of users isnt null
+                if (resourceCopies != null) {
+                        // populate the columns
+                        copyTable.getItems().setAll(resourceCopies);
+                }
+        }
 
-	private void dvdInfoEdit() {
-		directorLabel.visibleProperty().set(!directorLabel.visibleProperty().get());
-		directorTextBox.visibleProperty().set(!directorTextBox.visibleProperty().get());
-		runtimeLabel.visibleProperty().set(!runtimeLabel.visibleProperty().get());
-		runtimeTextBox.visibleProperty().set(!runtimeTextBox.visibleProperty().get());
-		dvdLanguageLabel.visibleProperty().set(!dvdLanguageLabel.visibleProperty().get());
-		dvdLanguageTextBox.visibleProperty().set(!dvdLanguageTextBox.visibleProperty().get());
-		// DVD TABLE
-	}
+        private Copy showCopyInfo(Copy c) {
+                return resourceCopies.get(0);
+        }
 
-	private void bookInfoEdit() {
-		authorLabel.visibleProperty().set(!authorLabel.visibleProperty().get());
-		authorTextBox.visibleProperty().set(!authorTextBox.visibleProperty().get());
-		publisherLabel.visibleProperty().set(!publisherLabel.visibleProperty().get());
-		publisherTextBox.visibleProperty().set(!publisherTextBox.visibleProperty().get());
-		genreTextBox.visibleProperty().set(!genreTextBox.visibleProperty().get());
-		genreLabel.visibleProperty().set(!genreLabel.visibleProperty().get());
-		isbnLabel.visibleProperty().set(!isbnLabel.visibleProperty().get());
-		isbnTextBox.visibleProperty().set(!isbnTextBox.visibleProperty().get());
-		bookLanguageLabel.visibleProperty().set(!bookLanguageLabel.visibleProperty().get());
-		boolean bookLanguageTBShow = bookLanguageTextBox.visibleProperty().get();
-		bookLanguageTextBox.visibleProperty().set(!bookLanguageTBShow);
-	}
-	
-	@FXML
-	private void handleEditAction(ActionEvent event) {
-		sharedInfoEditToggle();
-		if (isDvd) {
-			dvdInfoEdit();
-		} else if (isLaptop) {
-			laptopInfoEdit();
-		} else {
-			bookInfoEdit();
-		}
-	}
-	
-	@FXML
-	private void handleDeleteAction(ActionEvent event) {
-		DatabaseManager.deleteRecord(originalResource, "Resource");
-		DatabaseManager.deleteRecord(showedResource, "Resource");
-		//load fine page fxml
-		VBox root = null;
-    	try {
-			root = (VBox)FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
-		} 
-    	catch (IOException e) {
-			e.printStackTrace();
-		}
-    	
-    	//show fine page
-    	Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-		Stage stage = (Stage)deleteButton.getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
-	}
+        private void addDvdGui() {
+                dvdGrid.setVisible(true);
+                Dvd currentDvd = (Dvd) showedResource;
+                directorLabel.textProperty().set(currentDvd.getDirector());
+                runtimeLabel.textProperty().set(Integer.toString(currentDvd.getRuntime()));
+                dvdLanguageLabel.textProperty().set(Integer.toString(currentDvd.getRuntime()));
+                saveButton.setOnAction((new EventHandler<ActionEvent>() {
+                        @Override public void handle(ActionEvent e) {
+                                handleDvdSave();
+                            }}));
+        }
+
+        private void addLaptopGui() {
+                laptopGrid.setVisible(true);
+                Laptop currentLaptop = (Laptop) showedResource;
+                manufacturerLabel.textProperty().set(currentLaptop.getManufacturer());
+                modelLabel.textProperty().set(currentLaptop.getModel());
+                osLabel.textProperty().set(currentLaptop.getOperatingSystem());
+                saveButton.setOnAction((new EventHandler<ActionEvent>() {
+                        @Override public void handle(ActionEvent e) {
+                                handleLaptopSave();
+                            }}));
+
+        }
+
+        private void addBookGui() {
+                bookGrid.setVisible(true);
+                Book currentBook = (Book) showedResource;
+                authorLabel.textProperty().set(currentBook.getAuthor());
+                genreLabel.textProperty().set(currentBook.getGenre());
+                isbnLabel.textProperty().set(currentBook.getIsbn());
+                bookLanguageLabel.textProperty().set(currentBook.getLanguage());
+                saveButton.setOnAction((new EventHandler<ActionEvent>() {
+                        @Override public void handle(ActionEvent e) {
+                                handleBookSave();
+                            }}));
+        }
+
+        private void sharedInfoEditToggle() {
+                boolean titleTextboxShow = titleTextBox.visibleProperty().get();
+                titleTextBox.visibleProperty().set(!titleTextboxShow);
+                titleLabel.setVisible(!titleLabel.visibleProperty().get());
+                boolean yearTextBoxShow = yearTextBox.visibleProperty().get();
+                yearTextBox.visibleProperty().set(!yearTextBoxShow);
+                yearLabel.setVisible(!yearLabel.visibleProperty().get());
+                thumbnailShow.setVisible(!thumbnailShow.visibleProperty().get());
+                // Show file select
+                saveButton.setVisible(!saveButton.visibleProperty().get());
+                if (editButton.getText().equals("Cancel")) {
+                        editButton.setText("Edit Details");
+                } else {
+                        editButton.setText("Cancel");
+                }
+                copyTable.setEditable(!copyTable.editableProperty().get());
+        }
+
+        private void laptopInfoEdit() {
+                boolean manufacturerTBShow = manufacturerTextBox.visibleProperty().get();
+                manufacturerTextBox.visibleProperty().set(!manufacturerTBShow);
+                boolean manufacturerLabelShow = manufacturerLabel.visibleProperty().get();
+                manufacturerLabel.visibleProperty().set(!manufacturerLabelShow);
+                modelTextBox.visibleProperty().set(!modelTextBox.visibleProperty().get());
+                modelLabel.visibleProperty().set(!modelLabel.visibleProperty().get());
+                osLabel.visibleProperty().set(!osLabel.visibleProperty().get());
+                osTextBox.visibleProperty().set(!osTextBox.visibleProperty().get());
+        }
+
+        private void dvdInfoEdit() {
+                directorLabel.visibleProperty().set(!directorLabel.visibleProperty().get());
+                directorTextBox.visibleProperty().set(!directorTextBox.visibleProperty().get());
+                runtimeLabel.visibleProperty().set(!runtimeLabel.visibleProperty().get());
+                runtimeTextBox.visibleProperty().set(!runtimeTextBox.visibleProperty().get());
+                dvdLanguageLabel.visibleProperty().set(!dvdLanguageLabel.visibleProperty().get());
+                dvdLanguageTextBox.visibleProperty().set(!dvdLanguageTextBox.visibleProperty().get());
+                // DVD TABLE
+        }
+
+        private void bookInfoEdit() {
+                authorLabel.visibleProperty().set(!authorLabel.visibleProperty().get());
+                authorTextBox.visibleProperty().set(!authorTextBox.visibleProperty().get());
+                publisherLabel.visibleProperty().set(!publisherLabel.visibleProperty().get());
+                publisherTextBox.visibleProperty().set(!publisherTextBox.visibleProperty().get());
+                genreTextBox.visibleProperty().set(!genreTextBox.visibleProperty().get());
+                genreLabel.visibleProperty().set(!genreLabel.visibleProperty().get());
+                isbnLabel.visibleProperty().set(!isbnLabel.visibleProperty().get());
+                isbnTextBox.visibleProperty().set(!isbnTextBox.visibleProperty().get());
+                bookLanguageLabel.visibleProperty().set(!bookLanguageLabel.visibleProperty().get());
+                boolean bookLanguageTBShow = bookLanguageTextBox.visibleProperty().get();
+                bookLanguageTextBox.visibleProperty().set(!bookLanguageTBShow);
+        }
+        
+        @FXML
+        private void handleThumbnail(ActionEvent event) {
+                FileChooser fileChooser = new FileChooser();
+                FileChooser.ExtensionFilter extFilter = 
+                                new FileChooser
+                                .ExtensionFilter("TXT files (*.txt)", "*.txt");
+                fileChooser.getExtensionFilters().add(extFilter);
+                Stage stage =
+                                (Stage) numOfCopiesLabel.getScene().getWindow();
+                File file = fileChooser.showOpenDialog(stage);
+        }
+
+        @FXML
+        private void handleEditAction(ActionEvent event) {
+                sharedInfoEditToggle();
+                if (isDvd) {
+                        dvdInfoEdit();
+                } else if (isLaptop) {
+                        laptopInfoEdit();
+                } else {
+                        bookInfoEdit();
+                }
+        }
+
+        @FXML
+        private void handleDeleteAction(ActionEvent event) {
+                DatabaseManager.deleteRecord(originalResource, "Resource");
+                // load fine page fxml
+                VBox root = null;
+                try {
+                        root = (VBox) FXMLLoader.load(
+                                        getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+
+                // show fine page
+                Scene scene = new Scene(root);
+                scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css")
+                                .toExternalForm());
+                Stage stage = (Stage) deleteButton.getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+        }
+        
+        @FXML
+        private void handleBookSave() {
+                Book oldBook = (Book) showedResource;
+                Book newBook = new Book(shownResourceId
+                                , titleTextBox.getText()
+                                , yearTextBox.getText()
+                                , showedResource.getThumbnail()
+                                , oldBook.getAuthor()
+                                , oldBook.getPublisher()
+                                , oldBook.getGenre()
+                                , oldBook.getIsbn()
+                                , oldBook.getLanguage());
+        }
+        
+        @FXML
+        private void handleDvdSave() {
+
+        }
+        
+        @FXML
+        private void handleLaptopSave() {
+
+        }
 }

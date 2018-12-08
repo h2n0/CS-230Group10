@@ -54,7 +54,6 @@ public class Dvd extends Resource implements Serializable {
 	 */
 	public  void setDirector (String director) {
 		this.director=director;
-		this.update();
 	}
 
 	/**
@@ -63,7 +62,6 @@ public class Dvd extends Resource implements Serializable {
 	 */
 	public  void setRuntime (int runtime) {
 		this.runtime=runtime;
-		this.update();
 	}
 
 	/**
@@ -72,7 +70,6 @@ public class Dvd extends Resource implements Serializable {
 	 */
 	public  void setLanguage (String language) {
 		this.language=language;
-		this.update();
 	}
 
 	/**
@@ -81,7 +78,6 @@ public class Dvd extends Resource implements Serializable {
 	 */
 	public  void setSubLanguages (ArrayList<String> subLanguages) {
 		this.subLanguages=subLanguages;
-		this.update();
 	}
 	
 	/**
@@ -119,9 +115,8 @@ public class Dvd extends Resource implements Serializable {
 	/**
 	 * Updates the DVD in the database with its new attributes
 	 */
-	@Override
-	public void update () {
-		DatabaseManager.editRecord(this.getID(),this,"Dvd");
+	public void update (Dvd old, Dvd newD) {
+		DatabaseManager.editRecord(old,newD,"Dvd");
 	}
 	
 	/** 
@@ -138,7 +133,7 @@ public class Dvd extends Resource implements Serializable {
 	 */
 	public void delete () {
 		DatabaseManager.deleteRecord(this,"Dvd");
-		DatabaseManager.deleteRecord(this.id,"ResourceIDs");
+		DatabaseManager.deleteRecord(this.id,"resourceID");
 	}
 	
 	/** 
