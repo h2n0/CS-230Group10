@@ -124,7 +124,7 @@ public class FineController  {
          */
         private User loadEditFine(User u){
                 try {
-                        // Create a FXML loader for loading the Edit Country FXML file.
+                        // Create a FXML loader for loading the Edit Fine FXML file.
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditFine.fxml"));     
 
                         // Run the loader

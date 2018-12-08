@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -83,6 +84,13 @@ public class ResourceListController {
                 populateListTable(inputResources);
 	    }
 
+        /** 
+         * launches the page to add a resource
+         */
+        private void handleAddResourceButton() {
+                
+        }
+        
         /**
 	     * Populates the appropriate features on the window for a user
 	     * 
@@ -111,22 +119,38 @@ public class ResourceListController {
 	     */
         private Resource loadResourceDetail(Resource r) {
                 try {
-                        // set the resource to be passed to the resource detail page
-                        PassInfo.setResourceDetails(r);
-                        // open the resource detail page
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource(
-                                        "cs230/application/resourceDetail.fxml"));
-                        VBox root = fxmlLoader.load();
-                        ResourceDetailController controller = fxmlLoader.<ResourceDetailController>getController();
-                        controller.setResource(r.getID());
-                        Scene scene = new Scene(root);
-                        scene.getStylesheets().add(getClass().getClassLoader().getResource(
-                                        "cs230/application/application.css").toExternalForm());
-                        Stage stage = (Stage) addResourceButton.getScene().getWindow();
-                        stage.setScene(scene);
-                        stage.show();
+                        // Create a FXML loader for loading the resourceDetail FXML file.
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resourceDetail.fxml"));     
+
+                        // Run the loader
+                        AnchorPane editRoot = (AnchorPane)fxmlLoader.load();          
+                        // Access the controller that was created by the FXML loader
+                        ResourceDetailController detailController = fxmlLoader.<ResourceDetailController>getController();
+                        
+                        //set the user to be edited
+                        detailController.setResource(r.getID());
+                        
+                        // Create a scene based on the loaded FXML scene graph
+                        Scene editScene = new Scene(editRoot);
+                        
+                        // Create a new stage (i.e., window) based on the edit scene
+                        Stage editStage = new Stage();
+                        editStage.setScene(editScene);
+                        
+                        // Make the stage a modal window.
+                        // This means that it must be closed before you can interact with any other window from this application.
+                        editStage.initModality(Modality.APPLICATION_MODAL);
+                        
+                        // Show the edit scene and wait for it to be closed
+                        editStage.showAndWait();
+                        
+                        // refresh this page to update any changes to u
+                        initialize();
+                        
                 } catch (IOException e) {
                         e.printStackTrace();
+                        // Quit the program (with an error code)
+                        System.exit(-1);
                 }
                 return r;
 	    }
