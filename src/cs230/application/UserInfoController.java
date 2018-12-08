@@ -2,7 +2,7 @@ package cs230.application;
 
 import java.io.File;
 
-import com.sun.corba.se.impl.transport.SharedCDRContactInfoImpl;
+//import com.sun.corba.se.impl.transport.SharedCDRContactInfoImpl;
 
 import cs230.system.Address;
 import cs230.system.DatabaseManager;

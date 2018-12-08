@@ -186,15 +186,13 @@ public class MainPageController {
         }
 
         private void loadListPage(ArrayList<Resource> resources) {
+                VBox root;
                 try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(
+                        root  = FXMLLoader.load(
                                         getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
-                        VBox listPage = fxmlLoader.load();
-                        ResourceListController controller = fxmlLoader.<ResourceListController>getController();
-                        controller.setListToShow(resources);
-                        mainContent.setPrefHeight(listPage.getPrefHeight());
-                        mainContent.setPrefWidth(listPage.getPrefWidth());
-                        mainContent.setContent(listPage);
+                        //mainContent.setPrefHeight(listPage.getPrefHeight());
+                        //mainContent.setPrefWidth(listPage.getPrefWidth());
+                        mainContent.setContent(root);
                 } catch (IOException e) {
                         e.printStackTrace();
                 }

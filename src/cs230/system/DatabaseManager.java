@@ -20,9 +20,11 @@ public class DatabaseManager {
 	private static final String EXTENSION = ".dat";
 
 	/**
-	 * Gets all records from a specified table
+	 * Gets all records from a specified table, if the table is empty
+         * returns null
 	 * @param table The table to retrieve
-	 * @return The table in the form of an array list
+	 * @return The table in the form of an array list, if it is empty it
+         * will return null
 	 */
 	public static Object getTable(String table) {
 		// Check variable for end of file
@@ -32,11 +34,11 @@ public class DatabaseManager {
 		try {
 			FileInputStream fileWrite =
 				new FileInputStream(filePath);
-			ObjectInputStream objI =
-				new ObjectInputStream(fileWrite);
 
 			// Check if file is empty to prevent IOException
 			if (fileWrite.available() != 0) {
+                                ObjectInputStream objI =
+                                        new ObjectInputStream(fileWrite);
 				// Cast file content to an arraylist of objects
 				data = objI.readObject();
 				objI.close();
