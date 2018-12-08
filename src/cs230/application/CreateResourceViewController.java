@@ -11,12 +11,18 @@ import java.util.ResourceBundle;
 
 import cs230.system.DatabaseManager;
 import cs230.system.Dvd;
-//import cs230.system.Laptop;
-//import cs230.system.Book;
+import cs230.system.Laptop;
+import cs230.system.Book;
 
 import java.util.ArrayList;
 
-public class CreateResourceViewController {
+/**
+ * @author 959470
+ * @version 1.5
+ * This is the controller for the CreateResourceView.fxml. It purpose is to create a new Resource(Book,Laptop,Dvd)
+ *
+ */
+public class CreateResourceViewController{
 
     @FXML
     private TextField title;
@@ -99,7 +105,7 @@ public class CreateResourceViewController {
     @FXML
     private TextField subLanguages;
 
-    @FXML
+    @FXML //The choice for the type of Resource to create
     private ChoiceBox<String> resourceChoice = new ChoiceBox<>();
 	
 	@FXML
@@ -110,13 +116,18 @@ public class CreateResourceViewController {
 		return newID;
 	}
 
+    /**
+     * @param event On click of button "Create" reads the choice of the resource, performs the apropriate checks and
+     * then creates the Resource
+     */
     @FXML
-    void createResource(MouseEvent event) {
-		if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
+    void createResource(MouseEvent event){
+    	//Shows an error message when any of the required fields are left blank, else it creates the resource
+	    if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
 			unfinishedLb.setVisible(true);
 		}else {
 			int year =Integer.parseInt(this.year.getText());
-			String id = getNextId();
+			String id = DatabaseManager.getNextID();
 			System.out.println(id);
 			String choice = resourceChoice.getValue();
 			switch (choice) {
@@ -127,7 +138,7 @@ public class CreateResourceViewController {
 						
 						unfinishedLb.setVisible(false);
 						
-						//Book book1 = new Book(id,title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
+						Book book1 = new Book(id,title.getText(),year,thumbnail.getText(),author.getText(),publisher.getText(),genre.getText(),isbn.getText(),bookLanguage.getText());
 					}
 					break;
 				case "Laptop" :
@@ -135,7 +146,7 @@ public class CreateResourceViewController {
 						unfinishedLb.setVisible(true);
 					} else {
 						unfinishedLb.setVisible(false);
-						//Laptop laptop1 = new Laptop(id,title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
+						Laptop laptop1 = new Laptop(id,title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
 					}
 					break;
 				case "Dvd" :
@@ -159,8 +170,12 @@ public class CreateResourceViewController {
 		}
     }
 
+    /**
+     * @param event On mouse click "Confirm" , reads the user's selection from the drop-down menu 
+     * displaying the appropriate fileds for the user to fill and hiding the rest.
+     */
     @FXML
-    void showResourceFields(MouseEvent event) {
+    void showResourceFields(MouseEvent event){
 		String value = resourceChoice.getValue();
 		switch (value) {
 			case "Book" : 
@@ -254,9 +269,11 @@ public class CreateResourceViewController {
 		
     }
 	
-
-    @FXML
-    void initialize() {
+	/**
+	 * Intializes the page and sets the values for the resource drop-down menu
+	 */
+	@FXML
+    void initialize(){
 		resourceChoice.getItems().add("Book");
 		resourceChoice.getItems().add("Laptop");
 		resourceChoice.getItems().add("Dvd");

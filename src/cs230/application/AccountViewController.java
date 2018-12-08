@@ -1,26 +1,29 @@
 package cs230.application;
+
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class AccountViewController {
+/**
+ * @author 959470 This is the controller for View.fxm, which let's the currently logged in User see and individually change their account details.
+ *
+ */
 
-    @FXML
-    private ResourceBundle resources;
+public class AccountViewController{
+	//The currently logged in User
+	private static User user ;
+	@FXML
+	private Label emptyFieldLb;
 
-    @FXML
-    private URL location;
-
-    @FXML
+	@FXML
+	private Label incorrectadressLb;
+	
+	@FXML
     private Label firstName;
-
-    @FXML
-    private Label lastName;
 
     @FXML
     private Label mobileNumber;
@@ -31,8 +34,6 @@ public class AccountViewController {
     @FXML
     private TextField firstNametxt;
 
-    @FXML
-    private TextField lastNametxt;
 
     @FXML
     private TextField mobNumtxt;
@@ -40,11 +41,9 @@ public class AccountViewController {
     @FXML
     private TextField addresstxt;
 
-    @FXML
-    private Button editFirstName;
 
     @FXML
-    private Button editLastName;
+    private Button editFirstName;
 
     @FXML
     private Button editMobNum;
@@ -52,11 +51,11 @@ public class AccountViewController {
     @FXML
     private Button editAddress;
 
+
+
     @FXML
     private Button saveFn;
 
-    @FXML
-    private Button saveLn;
 
     @FXML
     private Button saveMobNum;
@@ -64,11 +63,10 @@ public class AccountViewController {
     @FXML
     private Button saveAdr;
 
-    @FXML
-    private Button cancell1;
+
 
     @FXML
-    private Button cancell2;
+    private Button cancell1;
 
     @FXML
     private Button cancell3;
@@ -76,99 +74,141 @@ public class AccountViewController {
     @FXML
     private Button cancell4;
 
+
+    /**
+     * Removes all the text fields and save & exit buttons , reverting the page to it's default state
+     */
     @FXML
-    void cancell(MouseEvent event) {
+    void cancell(MouseEvent event){
 		editFirstName.setVisible(true);
-		editLastName.setVisible(true);
+
 		editAddress.setVisible(true);
 		editMobNum.setVisible(true);
+		
 		saveFn.setVisible(false);
-		saveLn.setVisible(false);
+
 		saveAdr.setVisible(false);
 		saveMobNum.setVisible(false);
+		
 		cancell1.setVisible(false);
-		cancell2.setVisible(false);
+
 		cancell3.setVisible(false);
 		cancell4.setVisible(false);
+	
 		firstNametxt.setVisible(false);
-		lastNametxt.setVisible(false);
 		mobNumtxt.setVisible(false);
 		addresstxt.setVisible(false);
-    }
 
+		emptyFieldLb.setVisible(false);
+		incorrectadressLb.setVisible(false);
+    }
+    
+    /**
+     * Shows the text field for address as well as the corresponding save and cancel buttons. Hides all the rest
+     */
     @FXML
-    void editFieldAddress(MouseEvent event) {
+    void editFieldAddress(MouseEvent event){
 		addresstxt.setVisible(true);
 		addresstxt.setText(address.getText());
-		editLastName.setVisible(false);
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
+		
 		saveAdr.setVisible(true);
 		cancell4.setVisible(true);
     }
-
+    
+    /**
+     * Shows the text field for Full Name as well as the corresponding save and cancel buttons. Hides all the rest
+     */
     @FXML
-    void editFieldFname(MouseEvent event) {
+    void editFieldFname(MouseEvent event){
 		firstNametxt.setVisible(true);
 		firstNametxt.setText(firstName.getText());
-		editLastName.setVisible(false);
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
+		
 		saveFn.setVisible(true);
 		cancell1.setVisible(true);
     }
 
+    /**
+     * Shows the text field for mobile number as well as the corresponding save and cancel buttons. Hides all the rest
+     */
     @FXML
-    void editFieldLastName(MouseEvent event) {
-		lastNametxt.setVisible(true);
-		lastNametxt.setText(lastName.getText());
-		editLastName.setVisible(false);
-		editAddress.setVisible(false);
-		editMobNum.setVisible(false);
-		editFirstName.setVisible(false);
-		saveLn.setVisible(true);
-		cancell2.setVisible(true);
-    }
-
-    @FXML
-    void editFieldMbNum(MouseEvent event) {
+    void editFieldMbNum(MouseEvent event){
 		mobNumtxt.setVisible(true);
 		mobNumtxt.setText(mobileNumber.getText());
-		editLastName.setVisible(false);
 		editAddress.setVisible(false);
 		editMobNum.setVisible(false);
 		editFirstName.setVisible(false);
+		
 		saveMobNum.setVisible(true);
 		cancell3.setVisible(true);
     }
-
+	
+	
+    /**
+     * Checks if the field is empty or the address is entered wrong and shows the appropriate message, otherwise updates the address
+     */
     @FXML
-    void saveAdress(MouseEvent event) {
-		address.setText(addresstxt.getText());
-		cancell(event);
+    void saveAdress(MouseEvent event){
+    	if (!addresstxt.getText().equals("")) {
+    		try {
+    			String[] adComp = addresstxt.getText().split(" ");
+    			Address address1 = new Address(adComp[0],adComp[1],adComp[2],adComp[3]);
+    			user.setAddress(address1);
+    			address.setText(addresstxt.getText());
+    			cancell(event);
+    		}
+    		catch (Exception e) {
+    			incorrectadressLb.setVisible(true);
+    		}
+    	}else {
+    		emptyFieldLb.setVisible(true);
+    	}
+    }
+    
+    /**
+     * Checks if the field is empty and shows the appropriate message, otherwise updates the FullName
+     */
+    @FXML
+    void saveFirstName(MouseEvent event){
+    	if (!firstNametxt.getText().equals("")) {
+    		firstName.setText(firstNametxt.getText());
+    		user.setName(firstNametxt.getText());
+    		cancell(event);
+    	} else {
+    		emptyFieldLb.setVisible(true);
+    	}
     }
 
+    
+    /**
+     * Checks if the field is empty and shows the appropriate message, otherwise updates the mobile number
+     */
     @FXML
-    void saveFirstName(MouseEvent event) {
-		firstName.setText(firstNametxt.getText());
-		cancell(event);
+    void saveMobNum(MouseEvent event){
+    	if (!mobNumtxt.getText().equals("")) {
+			mobileNumber.setText(mobNumtxt.getText());
+			user.setMobileNum(mobNumtxt.getText());
+			cancell(event);
+    	} else {
+    		emptyFieldLb.setVisible(true);
+    	}
     }
-
+	
+    /**
+     * Intitializes the page, displaying the correct values depending on the currently logged in user.
+     */
     @FXML
-    void saveLastName(MouseEvent event) {
-		lastName.setText(lastNametxt.getText());
-		cancell(event);
-    }
+    void initialize(){
+    	User temptuser = new User(SharedData.getUsername(),null,null,0.0,null);
+    	user = (User) DatabaseManager.searchRecord(temptuser, "user");
+    	firstName.setText(user.getName());
+    	mobileNumber.setText(user.getMobileNum());
+    	address.setText((user.getAddress().getHouseNumorName() + user.getAddress().getRoadName() +user.getAddress().getCity() + user.getAddress().getPostcode() ));
 
-    @FXML
-    void saveMobNum(MouseEvent event) {
-		mobileNumber.setText(mobNumtxt.getText());
-		cancell(event);
-    }
-
-    @FXML
-    void initialize() {
     }
 }
