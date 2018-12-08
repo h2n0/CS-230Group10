@@ -10,45 +10,97 @@ import java.io.Serializable;
 public class User implements Serializable {
         //Default serial ID
         private static final long serialVersionUID = 1L;
-        //The user's name
-        private String name;
+        //The user's username
+        private String username;
         //The user's address
         private Address address;
         //The user's balance 
         private Double balance;
         //The filepath to the user's avatar
         private String avatarFilePath;
+        //first name
+        private String firstName;
+        //last name
+        private String lastName;
+        //telephone number
+        private String phoneNum;
 		
         /**
 	     * Constructor for a new user
-	     * @param userID the identifier for the user
-	     * @param name the name of the user
+	     * @param username the username of the user
 	     * @param address the address of the user
 	     * @param balance how much money the user owes the library
 	     * @param avatarFilePath the file path to the user's avatar
 	     */
-        public User(String name, Address address, Double balance, String avatarFilePath) {
-                this.name = name;
+        public User(String username, String firstName, String lastName, String phoneNum, Address address, Double balance, String avatarFilePath) {
+                this.username = username;
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.phoneNum = phoneNum;
                 this.address = address;
                 this.balance = balance;
                 this.avatarFilePath = avatarFilePath;
 	    }
 	
         /**
-	     * Sets the user's name
-	     * @param name The new name of the user
+	     * Sets the username
+	     * @param name The new username of the user
 	     */
-        public void setName(String name) {
-                this.name = name;
+        public void setName(String username) {
+                this.username = username;
 	    }
         /**
-	     * Gets the user's name
-	     * @return The users name
+	     * Gets the username
+	     * @return The username
 	     */
         public String getName() {
-                return name;
+                return username;
 	    }
-
+        /**
+         * Sets the firstName
+         * @param name The new firstName of the user
+         */
+        public void setFirstName(String firstName) {
+                this.firstName = firstName;
+        }
+        /**
+         * Gets the firstName
+         * @return The firstName
+         */
+        public String getfirstName() {
+                return firstName;
+        }
+        
+        /**
+         * Sets the lastName
+         * @param name The new lastName of the user
+         */
+        public void setlastName(String lastName) {
+                this.lastName = lastName;
+        }
+        /**
+         * Gets the lastName
+         * @return The lastName
+         */
+        public String getlastName() {
+                return lastName;
+        }
+        
+        /**
+         * Sets the phoneNum
+         * @param name The new phoneNum of the user
+         */
+        public void setphoneNum(String phoneNum) {
+                this.phoneNum = phoneNum;
+        }
+        /**
+         * Gets the phoneNum
+         * @return The phoneNum
+         */
+        public String getphoneNum() {
+                return phoneNum;
+        }
+        
         /**
 	     * Sets the user's address
 	     * @param address The user's new address
@@ -115,17 +167,17 @@ public class User implements Serializable {
                 User PERSON = (User) obj;
 
                 // If they are an exact match return true
-                if (this.name.equalsIgnoreCase(PERSON.name)) {
+                if (this.username.equalsIgnoreCase(PERSON.getName())) {
                         return true;
 			    }
                 return false;
 	    }
 
         /**
-	     * Returns the user
+	     * Returns the user name
 	     * @return
 	     */
         public String toString() {
-                return this.name;
+                return this.username;
 	    }
 }
