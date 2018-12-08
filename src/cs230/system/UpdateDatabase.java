@@ -34,7 +34,7 @@ public class UpdateDatabase extends TimerTask {
                                 String cid = i.getCopyID();
                                 String rid = i.getResourceID();
 
-                                User tempUser = new User(uname, null, null, null);
+                                User tempUser = new User(uname, null, null, null, null, null, null);
                                 Copy tempCopy = new Copy(cid, rid);
 
                                 User u = (User) DatabaseManager.searchRecord(tempUser, "user");

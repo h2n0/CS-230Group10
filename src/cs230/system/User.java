@@ -18,16 +18,19 @@ public class User implements Serializable {
         private Double balance;
         //The filepath to the user's avatar
         private String avatarFilePath;
-        //first name
+        //The user's first name
         private String firstName;
-        //last name
+        //The user's last name
         private String lastName;
-        //telephone number
+        //The user's telephone number
         private String phoneNum;
 		
         /**
 	     * Constructor for a new user
 	     * @param username the username of the user
+	     * @param firstName the first name of the user
+	     * @param lastName the last name of the user
+	     * @param phoneNum the phone number of the user
 	     * @param address the address of the user
 	     * @param balance how much money the user owes the library
 	     * @param avatarFilePath the file path to the user's avatar
