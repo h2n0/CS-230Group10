@@ -5,8 +5,9 @@ import java.io.File;
 import com.sun.corba.se.impl.transport.SharedCDRContactInfoImpl;
 
 import cs230.system.Address;
-import cs230.system.PassInfo;
+import cs230.system.DatabaseManager;
 import cs230.system.SharedData;
+import cs230.system.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
@@ -42,7 +43,9 @@ public class UserInfoController {
 	
 	
 	private void initialiseAvatar() {
-		String avatarImageLocation = PassInfo.getCurrentUser().getAvatarFilePath();
+	    User tempUser = new User(SharedData.getUsername(),null,null,null);
+	    User curUser = (User) DatabaseManager.searchExact(tempUser, "user");
+	    String avatarImageLocation = curUser.getAvatarFilePath();
 
 		String root = new File("").getAbsolutePath();
 
