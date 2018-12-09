@@ -25,7 +25,7 @@ public class Resource implements Serializable {
         // Number of availabale copies of a specific resource
         protected int availableCopiesNum;
         // The queue of users waiting to recieve a copy of this resource
-        protected Queue<Integer> requestQ = new LinkedList<>();
+        protected Queue<String> requestQ = new LinkedList<>();
 
         /**
          * The constructor of a new Resource
@@ -180,7 +180,7 @@ public class Resource implements Serializable {
          * 
          * @param a
          */
-        public void addToQueue(Integer a) {
+        public void addToQueue(String a) {
                 Resource old = this;
                 this.requestQ.add(a);
                 Resource newR = this;
@@ -207,7 +207,7 @@ public class Resource implements Serializable {
         /**
          * @return The user id that is in the front of the queue
          */
-        public Integer peekQueue() {
+        public String peekQueue() {
                 return this.requestQ.peek();
         }
 
@@ -218,12 +218,12 @@ public class Resource implements Serializable {
          * @param queryResult The result of a query to the database, to the Queue table
          * @return The request queue for a resource
          */
-        public Queue<Integer> toQueue(String[][] queryResult) {
+        public Queue<String> toQueue(String[][] queryResult) {
                 int i = 0;
-                Queue<Integer> queue = new LinkedList<>();
+                Queue<String> queue = new LinkedList<>();
                 while (i != queryResult.length) {
-                        Integer iInteger = new Integer(Integer.parseInt(queryResult[i][i + 1]));
-                        queue.add(iInteger);
+                        String iString = queryResult[i][i + 1];
+                        queue.add(iString);
                         i++;
                 }
                 return queue;
