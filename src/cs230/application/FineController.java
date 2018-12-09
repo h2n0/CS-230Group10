@@ -90,12 +90,17 @@ public class FineController  {
 	    	    } catch(Exception e){
 	    	            e.printStackTrace();
 	            }
+                if(allUsers != null && !allUsers.isEmpty())
+                {
+                      //remove users if they have a balance of 0
+                        allUsers.removeIf(s -> (s.getBalance()==0.0));      
+                }
 
-	            //remove users if they have a balance of 0
-                allUsers.removeIf(s -> (s.getBalance()==0.0));
-		
                 //populate the table with the users above
-                PopulateFineTable(allUsers);
+                if(allUsers != null && !allUsers.isEmpty())
+                {
+                        PopulateFineTable(allUsers);
+                }
         }
     
         /**
