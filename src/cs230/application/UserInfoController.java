@@ -43,7 +43,8 @@ public class UserInfoController {
 	
 	
 	private void initialiseAvatar() {
-	    User tempUser = new User(SharedData.getUsername(),null,null,null);
+	    User tempUser = new User(SharedData.getUsername(),null,null,
+                    null, null, null, null);
 	    User curUser = (User) DatabaseManager.searchExact(tempUser, "user");
 	    String avatarImageLocation = curUser.getAvatarFilePath();
 
