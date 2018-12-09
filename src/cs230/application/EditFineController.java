@@ -72,11 +72,11 @@ public class EditFineController  {
                 }
 		
                 //* by 100 to move 2dp to 0 dp
-                Double foo = amountPaidDbl * 100;
+                Double tempDbl = amountPaidDbl * 100;
                 //if more than 2dp foo will != 0
-                foo = foo - foo.intValue();
+                tempDbl = tempDbl - tempDbl.intValue();
 		
-                if (foo > 0){
+                if (tempDbl > 0){
                         //was more than 2dp therefore invalid
                         invalidAmountPaid();
 			    }
