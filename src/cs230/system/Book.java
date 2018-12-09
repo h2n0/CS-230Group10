@@ -140,13 +140,20 @@ public class Book extends Resource {
 //		DatabaseManagaer.saveRecord(this,"Book");
 //	}
  	
-	/**
-	 * Deletes all the information associated with this Book from the Database
-	 */
-//	public void delete () {
-		
-//	DatabaseManager.deleteRecord(this,"Book");
-//	}
+    /**
+     * Deletes all the information associated with this Book from the Database
+     */
+    public void delete () {
+        DatabaseManager.deleteRecord(this,"Book");
+        DatabaseManager.deleteRecord(this.id,"resourceID");
+    }
+    
+    /**
+     * Updates the Book in the database with its new attributes
+     */
+    public void update(Book old, Book newB) {
+            DatabaseManager.editRecord(old, newB, "Book");
+    }
 }
  	
  	

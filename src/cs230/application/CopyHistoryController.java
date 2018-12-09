@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cs230.system.Loan;
+import cs230.system.PassInfo;
 import cs230.system.Resource;
 import cs230.system.User;
 import cs230.system.DatabaseManager;
@@ -42,14 +43,25 @@ public class CopyHistoryController  {
         	// Code that either closes window or returns to main menu
         }
     
-        /**
-	     * Overrides the initialise function so when the window is open the
-	     * history for a copy is displayed
-	     */
-        @FXML
-        public void initialize() {
-                //PopulateCopyTable(inputCopyHist);
-	    }
+    /**
+	 * overides the initialize function so when the window is open the
+	 * info for all users with fines are displayed
+	 */
+    @SuppressWarnings("unchecked")
+	@FXML
+    public void initialize() {
+    	copyID = PassInfo.getCopyID();
+    	
+    	ArrayList<Loan> history = new ArrayList<Loan>();
+		try {
+			history = (ArrayList<Loan>) DatabaseManager.getTable("loan");
+		}
+    	catch(Exception e){
+			e.printStackTrace();
+		}
+		history.removeIf(s -> (s.getCopyID != copyID));
+		PopulateCopyTable(history);
+    }
     
         /**
          * Populates the appropriate features on the window for a user
