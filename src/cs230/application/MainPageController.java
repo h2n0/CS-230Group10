@@ -65,13 +65,18 @@ public class MainPageController {
         @FXML
         private Hyperlink fineLink;
 
-		@FXML
+        @FXML
+        private Hyperlink transactionLink;
+
+        @FXML
         private Hyperlink createResLink;
 		
         @FXML
         private ScrollPane mainContent;
 
         private String currentResourceSelection;
+
+
 
         @FXML
         public void initialize() {
@@ -277,6 +282,18 @@ public class MainPageController {
                                 new FXMLLoader(getClass().getClassLoader().getResource("cs230/application/CreateResourceView.fxml"));
                         BorderPane createResource = fxmlLoader.load();
                         mainContent.setContent(createResource);
+                } catch(IOException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        @FXML
+        private void handleViewTrans(ActionEvent event) {
+                try {
+                        FXMLLoader fxmlLoader =
+                                new FXMLLoader(getClass().getClassLoader().getResource("cs230/application/Transaction.fxml"));
+                        VBox viewTrans = fxmlLoader.load();
+                        mainContent.setContent(viewTrans);
                 } catch(IOException e) {
                         e.printStackTrace();
                 }

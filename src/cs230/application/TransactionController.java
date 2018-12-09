@@ -63,7 +63,7 @@ public class TransactionController  {
          */
         private void PopulateTransactionTable(ArrayList<Transaction> historyList) {
                 //prepare the columns to accept values
-        	    transactionID.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("transactionID"));
+                transactionID.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("transactionID"));
                 date.setCellValueFactory(new PropertyValueFactory<Transaction, Date>("date"));
                 type.setCellValueFactory(new PropertyValueFactory<Transaction, String>("type"));
                 amount.setCellValueFactory(new PropertyValueFactory<Transaction, Double>("amount"));

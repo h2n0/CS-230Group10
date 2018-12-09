@@ -21,7 +21,7 @@
    <left>
       <VBox fx:id="sideOptions" prefHeight="544.0" prefWidth="109.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink fx:id="dashboardLink" onAction="#toMainpage" styleClass="mainSideLink" text="Dashboard" >
+            <Hyperlink fx:id="dashboardLink" onAction="#toMainpage" styleClass="mainSideLink" text="Dashboard">
                <font>
                   <Font size="13.0" />
                </font></Hyperlink>
@@ -34,6 +34,11 @@
                   <Font size="13.0" />
                </font>
             </Hyperlink>
+            <Hyperlink fx:id="transactionLink" onAction="#handleViewTrans" text="View Transaction History" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
          </children>
       </VBox>
    </left>
@@ -42,7 +47,6 @@
                <children>
 			   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="55.0" text="Logout" AnchorPane.rightAnchor="0.0" />
                         <HBox layoutY="10.0" prefHeight="46.0" prefWidth="750.0">
                            <children>
                               <ImageView fx:id="userImage" fitHeight="68.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" />
@@ -59,6 +63,11 @@
                               </TextField>
                               <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="25.0" prefWidth="66.0" text="Search" />
                               <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
+                        <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="55.0" text="Logout">
+                           <HBox.margin>
+                              <Insets left="160.0" />
+                           </HBox.margin>
+                        </Button>
                            </children>
                         </HBox>
                </children></AnchorPane>
