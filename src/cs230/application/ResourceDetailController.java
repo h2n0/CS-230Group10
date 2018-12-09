@@ -5,7 +5,10 @@ import cs230.system.Copy.Status;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,11 +28,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 /**
  * This class controls the resource detail page.
+ * 
  * @author 901306
  */
 public class ResourceDetailController {
+        
+        private final int MAX_BOOK_DVD_FINE= 25;
+        private final int MAX_LAPTOP_FINE= 25;
+        private final int DAILY_BOOK_DVD_FINE = 2;
+        private final int DAILY_LAPTOP_FINE = 10;
 
         // The edit button shown for librarians
         @FXML
@@ -42,11 +52,11 @@ public class ResourceDetailController {
         // The delete button shown to librarians to delete the resource
         @FXML
         private Button deleteButton;
-        
-        // The button to  save a loan
+
+        // The button to save a loan
         @FXML
         private Button saveLoanButton;
-        
+
         // The button to cancel the loan
         @FXML
         private Button cancelLoanButton;
@@ -54,15 +64,24 @@ public class ResourceDetailController {
         // The button to change the thumbnail of the resource
         @FXML
         private Button changeThumbnailButton;
-        
+
         // The loan book button
         @FXML
         private Button loanButton;
-        
+
+        @FXML
+        private Button returnButton;
+
+        @FXML
+        private Button returnCancelButton;
+
+        @FXML
+        private Button returnShowButton;
+
         // The table showing copies
         @FXML
         private TableView copyTable;
-        
+
         @FXML
         TableColumn<String, String> subLanguagesColumn;
 
@@ -74,15 +93,30 @@ public class ResourceDetailController {
 
         @FXML
         private TableColumn<Copy, Button> moreInfoColumn;
-        
+
         @FXML
         private VBox showLoanCreate;
-        
+
         @FXML
         private TextField userLoanTextBox;
-        
+
         @FXML
-        private Label userNotFoundLabel;
+        private Label userNotFoundLoanLabel;
+
+        @FXML
+        private VBox showReturnBox;
+
+        @FXML
+        private TextField returnUsernameTextBox;
+
+        @FXML
+        private TextField returnCopyIdTextBox;
+
+        @FXML
+        private Label userNotFoundReturnLabel;
+
+        @FXML
+        private Label noLoanFoundLabel;
 
         @FXML
         private Label resourceID;
@@ -182,10 +216,10 @@ public class ResourceDetailController {
 
         @FXML
         private TextField osTextBox;
-        
+
         @FXML
         private HBox deleteSaveBox;
-        
+
         @FXML
         private Label incorrectFieldLabel;
 
@@ -272,6 +306,7 @@ public class ResourceDetailController {
 
         private void initializeGui() {
                 showLoanCreate.setVisible(false);
+                showReturnBox.setVisible(false);
                 String showedResourceID = showedResource.getID();
                 resourceID.textProperty().set(showedResourceID);
                 titleLabel.textProperty().set(showedResource.getTitle());
@@ -298,7 +333,7 @@ public class ResourceDetailController {
         }
 
         private Copy showCopyInfo(Copy c) {
-                
+
         }
 
         private void addDvdGui() {
@@ -506,17 +541,14 @@ public class ResourceDetailController {
                         canAdd = false;
                 }
                 if (canAdd) {
-                        Book newBook = new Book(shownResourceId, 
-                                        titleAdd, yearAdd,
-                                        thumbnailAdd, authorAdd,
-                                        publisherAdd, genreAdd,
-                                        isbnAdd, languageAdd);
+                        Book newBook = new Book(shownResourceId, titleAdd, yearAdd, thumbnailAdd, authorAdd,
+                                        publisherAdd, genreAdd, isbnAdd, languageAdd);
                         DatabaseManager.editRecord(oldBook, newBook, "book");
                         showedResource = (Resource) newBook;
                         incorrectFieldLabel.setVisible(false);
                         setResourceInfo(newBook.getID());
                         initialize();
-                        
+
                 } else {
                         incorrectFieldLabel.setVisible(true);
                 }
@@ -532,7 +564,7 @@ public class ResourceDetailController {
                 String directorAdd = "";
                 int runtimeAdd = 0;
                 String languageAdd = "";
-                
+
                 if (!titleTextBox.getText().isEmpty()) {
                         titleAdd = titleTextBox.getText();
                 } else {
@@ -568,18 +600,14 @@ public class ResourceDetailController {
                         canAdd = false;
                 }
                 if (canAdd) {
-                        Dvd newDvd = new Dvd(shownResourceId, 
-                                        titleAdd, yearAdd,
-                                        thumbnailAdd, directorAdd,
-                                        runtimeAdd, languageAdd,
-                                        oldDvd.getSubLanguages());
-                        DatabaseManager.editRecord(oldDvd, newDvd,
-                                        "dvd");
+                        Dvd newDvd = new Dvd(shownResourceId, titleAdd, yearAdd, thumbnailAdd, directorAdd, runtimeAdd,
+                                        languageAdd, oldDvd.getSubLanguages());
+                        DatabaseManager.editRecord(oldDvd, newDvd, "dvd");
                         showedResource = (Resource) newDvd;
                         incorrectFieldLabel.setVisible(false);
                         setResourceInfo(newDvd.getID());
                         initialize();
-                        
+
                 } else {
                         incorrectFieldLabel.setVisible(true);
                 }
@@ -617,97 +645,159 @@ public class ResourceDetailController {
                 } else {
                         canAdd = false;
                 }
-                if(!osTextBox.getText().isEmpty())
-                {
+                if (!osTextBox.getText().isEmpty()) {
                         osAdd = osTextBox.getText();
                 } else {
                         canAdd = false;
                 }
-                if(!modelTextBox.getText().isEmpty())
-                {
+                if (!modelTextBox.getText().isEmpty()) {
                         modelAdd = modelTextBox.getText();
                 } else {
                         canAdd = false;
                 }
                 if (canAdd) {
-                        Laptop newLaptop = new Laptop(shownResourceId, 
-                                        titleAdd, yearAdd,
-                                        thumbnailAdd, manufacturerAdd,
+                        Laptop newLaptop = new Laptop(shownResourceId, titleAdd, yearAdd, thumbnailAdd, manufacturerAdd,
                                         modelAdd, osAdd);
-                        DatabaseManager.editRecord(oldLaptop, newLaptop,
-                                        "laptop");
+                        DatabaseManager.editRecord(oldLaptop, newLaptop, "laptop");
                         showedResource = (Resource) newLaptop;
                         incorrectFieldLabel.setVisible(false);
                         setResourceInfo(newLaptop.getID());
                         initialize();
-                        
+
                 } else {
                         incorrectFieldLabel.setVisible(true);
                 }
         }
+
         @FXML
         private void handleLoanAction(ActionEvent event) {
                 showLoanCreate.setVisible(true);
-                userNotFoundLabel.setVisible(false);
+                userNotFoundLoanLabel.setVisible(false);
         }
-        
+
         @FXML
         private void handleLoanSaveAction(ActionEvent event) {
                 String inputUsername = userLoanTextBox.getText();
-                User activeUser = new User(inputUsername, null, null, null);
-                boolean exists = DatabaseManager
-                                .checkForRecord(activeUser, "user");
-                ArrayList<Loan> loanTable = 
-                                (ArrayList<Loan>) DatabaseManager
-                                .getTable("Loan");
+                Address tempAddress = new Address("", "", "", "");
+                User activeUser = new User(inputUsername, null, null, null, tempAddress, 0.0, "");
+                boolean exists = DatabaseManager.checkForRecord(activeUser, "user");
+                ArrayList<Loan> loanTable = (ArrayList<Loan>) DatabaseManager.getTable("Loan");
                 String nextId = "";
-                if(loanTable.isEmpty())
-                {
-                   nextId = "1";     
+                if (loanTable.isEmpty()) {
+                        nextId = "1";
                 } else {
                         int maxId = 0;
-                        for(Loan loan : loanTable )
-                        {
+                        for (Loan loan : loanTable) {
                                 int loanInt = Integer.parseInt(loan.getLoanID());
-                                if(Integer.parseInt(loan.getLoanID()) > maxId)
-                                {
+                                if (Integer.parseInt(loan.getLoanID()) > maxId) {
                                         maxId = loanInt;
                                 }
                         }
                         maxId++;
                         nextId = Integer.toString(maxId);
                 }
-                
-                if(exists)
-                {
-                        ArrayList<Copy> availableCopyList = 
-                                        (ArrayList<Copy>) DatabaseManager
-                                        .getTable("copy");
-                        ArrayList<Copy> copyList = 
-                                        (ArrayList<Copy>) DatabaseManager
-                                        .getTable("copy");
-                        availableCopyList.removeIf(c -> 
-                        !c.getResourceID().equals(showedResource.getID()) 
-                        && c.getstatus() != Status.AVAILABLE);
+
+                if (exists) {
+                        ArrayList<Copy> availableCopyList = (ArrayList<Copy>) DatabaseManager.getTable("copy");
+                        ArrayList<Copy> copyList = (ArrayList<Copy>) DatabaseManager.getTable("copy");
+                        availableCopyList.removeIf(c -> !c.getResourceID().equals(showedResource.getID())
+                                        && c.getstatus() != Status.AVAILABLE);
+                        copyList.removeIf(c -> !c.getResourceID().equals(showedResource.getID()));
                         int firstIndex = 0;
                         LocalDate now = LocalDate.now();
-                        if(!copyList.isEmpty())
-                        {
-                                Loan newLoan = new Loan(nextId,
-                                                inputUsername,
-                                                copyList.get(firstIndex).getID()
-                                                , showedResource.getID(),now);
+                        if (!copyList.isEmpty()) {
+                                Loan newLoan = new Loan(nextId, inputUsername, copyList.get(firstIndex).getID(),
+                                                showedResource.getID(), now);
                                 DatabaseManager.saveRecord(newLoan, "loan");
                         }
                 } else {
-                        userNotFoundLabel.setVisible(true);
+                        userNotFoundLoanLabel.setVisible(true);
                 }
         }
-        
+
         @FXML
         private void handleLoanCancelAction(ActionEvent event) {
                 userLoanTextBox.setText("");
-                userNotFoundLabel.setVisible(false);
+                userNotFoundLoanLabel.setVisible(false);
                 showLoanCreate.setVisible(false);
+        }
+
+        @FXML
+        private void handleReturnShowAction(ActionEvent event) {
+                showReturnBox.setVisible(true);
+                userNotFoundReturnLabel.setVisible(false);
+                noLoanFoundLabel.setVisible(false);
+        }
+
+        @FXML
+        private void handleReturnSaveAction(ActionEvent event) {
+                String inputUsername = returnUsernameTextBox.getText();
+                String inputCopyId = returnCopyIdTextBox.getText();
+                Address tempAddress = new Address("", "", "", "");
+                User activeUser = new User(inputUsername, null, null, null, tempAddress, 0.0, "");
+                boolean exists = DatabaseManager.checkForRecord(activeUser, "user");
+                ArrayList<Loan> loanTable = (ArrayList<Loan>) DatabaseManager.getTable("Loan");
+                loanTable.removeIf(l -> !l.getUserName().equals(inputUsername)
+                                && !l.getResourceID().equals(showedResource.getID())
+                                && !l.getCopyID().equals(inputCopyId));
+                Loan oldLoan = new Loan("", "", "", "", LocalDate.now());
+                ArrayList<Copy> copyTable = (ArrayList<Copy>) DatabaseManager.getTable("copy");
+                copyTable.removeIf(c -> !c.getID().equals(inputCopyId));
+                if (!loanTable.isEmpty()) {
+                        for (Loan loan : loanTable) {
+                                if (loan.getReturnedDate() == null) {
+                                        oldLoan = loan;
+                                }
+                        }
+                        LocalDate now = LocalDate.now();
+                        Loan newLoan = oldLoan;
+                        newLoan.setReturnedDate(now);
+                        DatabaseManager.editRecord(oldLoan, newLoan, "loan");
+                        if (!oldLoan.getDueDate().equals(null)) {
+                                if (oldLoan.getDueDate().isBefore(now)) {
+                                        int fineAmount = 0;
+                                        Long daysLate = Duration.between(oldLoan
+                                                        .getDueDate()
+                                                        .atStartOfDay(), 
+                                                        LocalDate.now()
+                                                        .atStartOfDay())
+                                                        .toDays();
+                                        if(daysLate > 0) {
+                                                fineAmount = calculateFine(daysLate);
+                                                //Fine change
+                                                Fine newFine = new Fine();
+                                                DatabaseManager.saveRecord(newFine, "fine");
+                                        } 
+                                }
+                        }
+                } else {
+                        noLoanFoundLabel.setVisible(true);
+                }
+        }
+        
+        private int calculateFine(Long daysLate)
+        {
+                int fineAmount = 0;
+                if(isBook || isDvd)
+                {
+                        fineAmount = (int) (daysLate*DAILY_BOOK_DVD_FINE);
+                        if(fineAmount > MAX_BOOK_DVD_FINE) {
+                                fineAmount = MAX_BOOK_DVD_FINE;
+                        }
+                } else {
+                        fineAmount = (int) (daysLate*DAILY_LAPTOP_FINE);
+                        if(fineAmount > MAX_LAPTOP_FINE)
+                        {
+                                fineAmount = MAX_LAPTOP_FINE;
+                        }
+                }
+                return fineAmount;
+        }
+
+        @FXML
+        private void handleReturnCancelAction(ActionEvent event) {
+                showReturnBox.setVisible(true);
+                userNotFoundReturnLabel.setVisible(false);
+                noLoanFoundLabel.setVisible(false);
         }
 }
