@@ -1,15 +1,18 @@
 package cs230.system;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Models the transaction history, 
  * @author 963257
- *
+ * @version 1.0
  */
-public class Transaction {
+public class Transaction implements Serializable {
+    //Default serial ID
+    private static final long serialVersionUID = 1L;
 	// ID of the transaction
-	private final int transactionID;
+	private final String transactionID;
 	// User involved in the transaction
 	private final User user;
 	// date of the transaction
@@ -18,7 +21,6 @@ public class Transaction {
 	private final String type;
 	// amount either payed or added on depending on type
 	private final double amount;
-	
 	// copy that caused the fine
 	private final Copy copy;
 	//num of days the copy is overdue
@@ -32,7 +34,7 @@ public class Transaction {
 	 * @param amount the amount paid/owed 
 	 */
 	public Transaction( User user, Date date, String type, double amount, Copy copy, int daysOverdue) {
-		    this.transactionID = 1;
+	        this.transactionID = DatabaseManager.getNextTransID();
 	        this.user = user;
 	        this.date = date;
 	        this.type = type;
@@ -48,21 +50,21 @@ public class Transaction {
 	 * @param type the type of transaction
 	 * @param amount the amount paid/owed 
 	 */
-	public Transaction( User user, Date date, String type, double amount) {
-	        this.transactionID = 1;
+	public Transaction(User user, Date date, String type, double amount) {
+	        this.transactionID = DatabaseManager.getNextTransID();
             this.user = user;
             this.date = date;
             this.type = type;
             this.amount = amount;
-            this.copy = null;
-            this.daysOverdue = null;
+            this.copy = new Copy(null, null);
+            this.daysOverdue = 0;
 	}
 	
 	/**
      * gets the transactionID
      * @return transactionID the ID of the transaction
      */
-    public int getTransactionID() {
+    public String getTransactionID() {
         return transactionID;
     }
     
@@ -121,8 +123,4 @@ public class Transaction {
     public void setDaysOverdue(int daysOverdue) {
     	this.daysOverdue = daysOverdue ;
     }
-    
-    
-
-	
 }

@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 /**
  * Copy class stores the information for each copy
- * @author 963257
+ * @author 963257 & 960689
  * @version 1.1
  */
 
@@ -28,7 +28,8 @@ public class Copy implements Serializable {
          * @param resourceType if the copy is a Book, DVD, or Laptop
          * @param loanDuration how long you can borrow the copy for
 	     */
-        public Copy(String resourceID, Status status, String resourceType, int loanDuration) {
+        public Copy(String ID, String resourceID, Status status,
+                    String resourceType, int loanDuration, double overdueCost) {
                 this.resourceID = resourceID;
                 this.status = status;
                 this.resourceType = resourceType;
@@ -142,5 +143,5 @@ public class Copy implements Serializable {
                 AVAILABLE,
                 ON_LOAN,
                 OVERDUE
-	    }
+        }
 }

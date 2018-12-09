@@ -19,18 +19,15 @@ import javafx.stage.Stage;
 /**This controllers the ui for the login page
  * 
  * @author Jack
- *
+ * @version 1.0
  */
 public class LoginController {
-
-	@FXML
-	private Label userNotFound;
-	
-	@FXML
-	private TextField usernameField;
-	
-	@FXML
-	private Button loginButton;
+	// label to say the user wasnt found
+	@FXML private Label userNotFound;
+	//text field to capture user input
+	@FXML private TextField usernameField;
+	// button to log in
+	@FXML private Button loginButton;
 
 	/**
 	 * Handles the exit button being pressed
@@ -90,6 +87,7 @@ public class LoginController {
 			Stage stage =
 				(Stage) loginButton.getScene().getWindow();
 			stage.setScene(scene);
+			stage.centerOnScreen();
 			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

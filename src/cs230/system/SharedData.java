@@ -1,5 +1,7 @@
 package cs230.system;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 
 /**
@@ -21,14 +23,6 @@ public class SharedData {
          */
         public static void setUser(User user) {
                 activeUser = user;
-//                ArrayList<User> allLibrarians = (ArrayList<User>) DatabaseManager.getTable("librarian");
-//                allLibrarians.removeIf(l -> !l.getName().equals(activeUser.getName()));
-//                if (allLibrarians.size()>0) {
-//                        isLibrarian = false;
-//                } else {
-//                        isLibrarian = true;
-//                }
-                isLibrarian = true;
         }
 
         /**
@@ -72,5 +66,16 @@ public class SharedData {
          */
         public static boolean getIsLibrarian() {
                 return isLibrarian;
+        }
+
+        /**
+         * Returns the user's avatar image
+         * @return The active user's avatar
+         */
+        public static Image getAvatar() {
+                //Image image = new Image(activeUser.getAvatarFilePath());
+                return new Image("\\Database\\Images" +
+                        "\\Harry_Potter_and_the_Philosopher" +
+                        "'s_Stone_Book_Cover.png");
         }
 }

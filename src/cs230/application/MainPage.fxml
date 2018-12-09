@@ -34,6 +34,11 @@
                   <Font size="13.0" />
                </font>
             </Hyperlink>
+            <Hyperlink fx:id="transactionLink" onAction="#handleViewTrans" text="View Transaction History" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
          </children>
       </VBox>
    </left>
@@ -49,7 +54,10 @@
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                               <Hyperlink fx:id="username" prefHeight="23.0" prefWidth="95.0" text="Username" />
-                                    <Label fx:id="balance" text="Balance" />
+                                    <Label fx:id="balance" text="Balance" textFill="RED">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Label>
                                  </children>
                               </VBox>
                               <TextField fx:id="searchBox">
@@ -59,6 +67,11 @@
                               </TextField>
                               <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="25.0" prefWidth="66.0" text="Search" />
                               <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
+                        <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="55.0" text="Logout">
+                           <HBox.margin>
+                              <Insets left="160.0" />
+                           </HBox.margin>
+                        </Button>
                            </children>
                         </HBox>
                </children></AnchorPane>

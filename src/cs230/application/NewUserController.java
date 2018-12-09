@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import cs230.system.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -230,11 +231,14 @@ public class NewUserController {
                         changePage();
                 }
                 if (canContinue && isLibrarian) {
-                        Date employmentDate = new SimpleDateFormat("dd/MM/yyyy").parse(employmentDateAdd);
-                        Address newAddress = new Address(houseNumberAdd, roadNameAdd, cityAdd, postcodeAdd);
-                        Librarian newLibrarian = new Librarian(usernameAdd, firstNameAdd, lastNameAdd, phoneNumberAdd, newAddress, 0.0, imagePath, employmentDate, staffNumberAdd);
-                        DatabaseManager.saveRecord(newLibrarian, "librarian");
-                        changePage();
+                        //Date employmentDate = employmentDateAdd;
+                        //Address newAddress = new Address(houseNumberAdd,
+//                                roadNameAdd, cityAdd, postcodeAdd);
+                        //Librarian newLibrarian = new Librarian(usernameAdd,
+//                                firstNameAdd, lastNameAdd, phoneNumberAdd,
+//                                newAddress, 0.0, imagePath, employmentDate, staffNumberAdd);
+                        //DatabaseManager.saveRecord(newLibrarian, "librarian");
+//                        changePage();
                 }
                 if (!canContinue) {
                         incorrectDetails.setVisible(true);
