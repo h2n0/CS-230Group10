@@ -41,13 +41,6 @@ public class TransactionController  {
         @SuppressWarnings("unchecked")
 		@FXML
     	public void initialize() {
-        		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-        		User user = new User("admin", "Scott", "Simmons", "07535537447",
-                    address,
-                    10.0, "\\Database\\Images" +
-                    "\\Harry_Potter_and_the_Philosopher" +
-                    "'s_Stone_Book_Cover.jpg");
-        		SharedData.setUser(user);
         	
                 //get all the users using the DatabaseManager
                 ArrayList<Transaction> allHistory = new ArrayList<Transaction>();
