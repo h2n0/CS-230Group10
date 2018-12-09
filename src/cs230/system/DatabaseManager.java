@@ -339,6 +339,38 @@ public class DatabaseManager {
 		}
 	}
 
+        /**
+         * This method gets the next ID value for a transaction
+         * @return The next transaction ID available
+         */
+	public static String getNextTransID() {
+                String filePath = compilePath("transactionID");
+                String ID;
+                String newID;
+
+                try {
+                        // Get ID
+                        File file = new File(filePath);
+                        Scanner fileIn = new Scanner(file);
+                        ID = fileIn.next();
+
+                        fileIn.close();
+
+                        // Increment ID
+                        newID = String.valueOf(Integer.parseInt(ID) + 1);
+
+                        BufferedWriter fileOut =
+                                new BufferedWriter(new FileWriter(file));
+                        fileOut.write(newID);
+                        fileOut.close();
+
+                        return ID;
+                } catch(IOException e) {
+                        displayIOError("getNextID");
+                        return null;
+                }
+        }
+
 	/**
 	 * Gets all records from a specified table
 	 * @param fileRead File input stream open on desired table
@@ -469,8 +501,8 @@ public class DatabaseManager {
 //                ArrayList<Book> books =
 //                        (ArrayList<Book>) DatabaseManager.getTable("book");
 //                System.out.println(books.toString());
-                Loan loan = new Loan("1", "admin", "1", "4", LocalDate.now(),
-                        LocalDate.of(2018, 12, 8));
+//                Loan loan = new Loan("1", "admin", "1", "4", LocalDate.now(),
+//                        LocalDate.of(2018, 12, 8));
 
 	    //String loanID, String userName, String copyID, String resourceID, LocalDate borrowDate
 	    //ArrayList<Object> test;
