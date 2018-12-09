@@ -50,7 +50,7 @@ public class TransactionController  {
 	    	            e.printStackTrace();
 	            }
 
-	            //remove users if they have a balance of 0
+	            //remove transactions if they arent for the current user
                 allHistory.removeIf(s -> (s.getUser()!=SharedData.getUser()));
 		
                 //populate the table with the users above
