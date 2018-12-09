@@ -107,6 +107,14 @@ public class Loan {
 	}
 
 	/**
+     * Returns the resource ID
+     * @return The resource ID
+     */
+	public String getResourceID() {
+	        return resourceID;
+	}
+	
+	/**
 	 * Returns the username attatched to the loan
 	 * @return The user's name
 	 */

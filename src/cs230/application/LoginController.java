@@ -51,7 +51,7 @@ public class LoginController {
 		String inputUsername = usernameField.getText();
 
 		//Create a user object to search in DB
-		User activeUser = new User(inputUsername, null, null, null);
+		User activeUser = new User(inputUsername, null, null, null, null, null, null);
 		exists = DatabaseManager.checkForRecord(activeUser, "user");
 
 		//If they exist log in, else show an error

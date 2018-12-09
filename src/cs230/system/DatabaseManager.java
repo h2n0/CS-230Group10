@@ -1,6 +1,7 @@
 package cs230.system;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -19,9 +20,11 @@ public class DatabaseManager {
 	private static final String EXTENSION = ".dat";
 
 	/**
-	 * Gets all records from a specified table
+	 * Gets all records from a specified table, if the table is empty
+         * returns null
 	 * @param table The table to retrieve
-	 * @return The table in the form of an array list
+	 * @return The table in the form of an array list, if it is empty it
+         * will return null
 	 */
 	public static Object getTable(String table) {
 		// Check variable for end of file
@@ -31,11 +34,11 @@ public class DatabaseManager {
 		try {
 			FileInputStream fileWrite =
 				new FileInputStream(filePath);
-			ObjectInputStream objI =
-				new ObjectInputStream(fileWrite);
 
 			// Check if file is empty to prevent IOException
 			if (fileWrite.available() != 0) {
+                                ObjectInputStream objI =
+                                        new ObjectInputStream(fileWrite);
 				// Cast file content to an arraylist of objects
 				data = objI.readObject();
 				objI.close();
@@ -379,6 +382,7 @@ public class DatabaseManager {
 
 	/**
 	 * Displays the input/output error message using a JOptionPane
+         * @param methodName Name of method that
 	 */
 	private static void displayIOError(String methodName) {
 		JOptionPane.showMessageDialog(null,
@@ -439,23 +443,33 @@ public class DatabaseManager {
 	}
 
 	public static void main(String[] args) {
-		/*
-		ArrayList<Object> test;
-		Fine fine1 = new Fine(1, 20);
-		Fine fine2 = new Fine(2, 30);
-		saveRecord(fine1, "test");
-		saveRecord(fine2, "test");
-		test = getTable(new FileInputStream("Database//test.dat"));
-		System.out.println("Amount of data: " + test.size());
-		System.out.println("Object found: " + searchRecord(fine1,
-			"test"));
-		deleteRecord(fine1, "test");
-		test = getTable(new FileInputStream("Database//test.dat"));
-		System.out.println("Amount of data: " + test.size());
-		*/
 
+//		ArrayList<Object> test;
+//                Loan loan = new Loan("admin", "1", "1", "1", LocalDate.now());
+//                saveRecord(loan, "loan");
+//		Fine fine1 = new Fine(1, 20);
+//		Fine fine2 = new Fine(2, 30);
+//		saveRecord(fine1, "fine");
+//		test = getTable(new FileInputStream("Database//test.dat"));
+//		System.out.println("Amount of data: " + test.size());
+//		System.out.println("Object found: " + searchRecord(fine1,
+//			"test"));
+//		deleteRecord(fine1, "test");
+//		test = getTable(new FileInputStream("Database//test.dat"));
+//		System.out.println("Amount of data: " + test.size());
 		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-		User user = new User("Joeseph", address, 10.0, null);
-		saveRecord(user, "user");
+                User user = new User("admin", "Scott", "Simmons", "07535537447",
+                        address,
+                        10.0, "\\Database\\Images" +
+                        "\\Harry_Potter_and_the_Philosopher" +
+                        "'s_Stone_Book_Cover.jpg");
+                saveRecord(user, "user");
+
+	    //String loanID, String userName, String copyID, String resourceID, LocalDate borrowDate
+	    //ArrayList<Object> test;
+	    //Loan l1 = new Loan("1","Joe","1","1",LocalDate.now());
+		//Loan l2 = new Loan("2","Joe","2","2",LocalDate.now());
+		//saveRecord(l1, "loan");
+		//saveRecord(l2, "loan");
 	}
 }

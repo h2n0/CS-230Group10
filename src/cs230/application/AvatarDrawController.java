@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import cs230.system.DatabaseManager;
-import cs230.system.PassInfo;
+//import cs230.system.PassInfo;
 import cs230.system.SharedData;
 import cs230.system.User;
 import javafx.embed.swing.SwingFXUtils;
@@ -58,12 +58,14 @@ public class AvatarDrawController {
 			JOptionPane.showMessageDialog(null, "Unable to save avatar", "AvatarDraw", JOptionPane.ERROR_MESSAGE);
 			e1.printStackTrace();
 		}
-		
+
+		/*
 		User oldUser = PassInfo.getCurrentUser();
 		User newUser = PassInfo.getCurrentUser();
 		newUser.setAvatarFilePath(path);
 		DatabaseManager.editRecord(oldUser, newUser, "user");
 		PassInfo.setCurrentUser(newUser);
+		*/
 	}
 
 	/*
