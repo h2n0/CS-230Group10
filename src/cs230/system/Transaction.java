@@ -48,7 +48,7 @@ public class Transaction {
 	 * @param type the type of transaction
 	 * @param amount the amount paid/owed 
 	 */
-	public Transaction( User user, Date date, String type, double amount) {
+	public Transaction(User user, Date date, String type, double amount) {
 	        this.transactionID = 1;
             this.user = user;
             this.date = date;
@@ -121,8 +121,4 @@ public class Transaction {
     public void setDaysOverdue(int daysOverdue) {
     	this.daysOverdue = daysOverdue ;
     }
-    
-    
-
-	
 }

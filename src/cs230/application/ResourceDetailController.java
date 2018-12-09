@@ -765,8 +765,10 @@ public class ResourceDetailController {
                                         if(daysLate > 0) {
                                                 fineAmount = calculateFine(daysLate);
                                                 //Fine change
-                                                Fine newFine = new Fine();
-                                                DatabaseManager.saveRecord(newFine, "fine");
+                                                //Fine newFine = new Fine("",
+                                                //        "");
+                                                //DatabaseManager.saveRecord
+                                                // (newFine, "fine");
                                         } 
                                 }
                         }
