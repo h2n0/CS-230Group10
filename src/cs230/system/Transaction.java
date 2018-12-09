@@ -1,5 +1,6 @@
 package cs230.system;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,9 @@ import java.util.Date;
  * @author 963257
  * @version 1.0
  */
-public class Transaction {
+public class Transaction implements Serializable {
+    //Default serial ID
+    private static final long serialVersionUID = 1L;
 	// ID of the transaction
 	private final int transactionID;
 	// User involved in the transaction
