@@ -133,11 +133,11 @@ public class NewUserController {
                 }
         }
         
-        private void setIsFirstRun (boolean isFirstRun) {
+        public void setIsFirstRun() {
                 this.isFirstRun = isFirstRun;
         }
         @FXML
-        private void handleSwitchUser (ActionEvent event) {
+        private void handleSwitchUser(ActionEvent event) {
                 staffEditArea.setVisible(false);
                 isLibrarian = false;
         }

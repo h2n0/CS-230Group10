@@ -1,9 +1,12 @@
 package cs230.application;
 	
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
 
+import cs230.system.DatabaseManager;
 import cs230.system.UpdateDatabase;
+import cs230.system.User;
 //import cs230.system.UpdateDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -33,20 +36,53 @@ public class Main extends Application {
 		} catch (Exception e){
 			System.out.println("database update failed");
 		}
-		
-		//launch the login window to start the program
-		try {
-		        AnchorPane root =
-				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
-			primaryStage.initStyle(StageStyle.UNDECORATED);
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.centerOnScreen();
-			primaryStage.show();
-			primaryStage.centerOnScreen();
-		} catch(Exception e) {
-			e.printStackTrace();
+		ArrayList<User> userList = (ArrayList<User>) DatabaseManager.getTable("user");
+		if(userList != null)
+		{
+		        //launch the login window to start the program
+		        try {
+		                AnchorPane root =
+		                                FXMLLoader
+		                                .load(getClass()
+                                                .getClassLoader()
+                                                .getResource("cs230/application/"
+                                                        + "Login.fxml"));
+		                primaryStage.initStyle(StageStyle.UNDECORATED);
+		                Scene scene = new Scene(root);
+		                scene.getStylesheets()
+		                .add(getClass().getClassLoader()
+		                                .getResource("cs230/"
+                                                + "application/application.css")
+		                                .toExternalForm());
+		                primaryStage.setScene(scene);
+		                primaryStage.centerOnScreen();
+		                primaryStage.show();
+		                primaryStage.centerOnScreen();
+		        } catch(Exception e) {
+		                e.printStackTrace();
+		        }
+		} else {
+		        try {
+                        VBox root = FXMLLoader.load(getClass()
+                                        .getClassLoader()
+                                        .getResource("cs230"
+                                                + "/application/NewUser.fxml"));
+                        NewUserController controller = new NewUserController();
+                        controller.isFirstRun();
+                        primaryStage.initStyle(StageStyle.UNDECORATED);
+                        Scene scene = new Scene(root);
+                        scene.getStylesheets().add(getClass()
+                                        .getClassLoader()
+                                        .getResource("cs230"
+                                                + "/application/application.css")
+                                        .toExternalForm());
+                        primaryStage.setScene(scene);
+                        primaryStage.centerOnScreen();
+                        primaryStage.show();
+                        primaryStage.centerOnScreen();
+                } catch(Exception e) {
+                        e.printStackTrace();
+                }
 		}
 	}
 	
