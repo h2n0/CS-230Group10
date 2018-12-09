@@ -56,9 +56,9 @@ public class ResourceListController {
                 populateListTable(inputResources);
 	    }
 
-	public void setListToShow(ArrayList<Resource> resourceList) {
-
-	}
+	    public void setListToShow(ArrayList<Resource> resourceList) {
+	            
+	    }
 
 
         /** 
