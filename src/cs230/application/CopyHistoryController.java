@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import cs230.system.Loan;
-import cs230.system.PassInfo;
 import cs230.system.Resource;
 import cs230.system.User;
 import cs230.system.DatabaseManager;
@@ -50,22 +49,23 @@ public class CopyHistoryController  {
     @SuppressWarnings("unchecked")
 	@FXML
     public void initialize() {
-    	copyID = PassInfo.getCopyID();
-    	
-    	ArrayList<Loan> history = new ArrayList<Loan>();
-		try {
-			history = (ArrayList<Loan>) DatabaseManager.getTable("loan");
-		}
-    	catch(Exception e){
-			e.printStackTrace();
-		}
-		history.removeIf(s -> (s.getCopyID != copyID));
-		PopulateCopyTable(history);
+            // Replace with actual copyID
+            String copyID = "1";
+
+            ArrayList<Loan> history = new ArrayList<Loan>();
+                    history = (ArrayList<Loan>) DatabaseManager.getTable("loan");
+
+                    for (Loan loan : history) {
+                            if (loan.getCopyID().equals(copyID)) {
+                                    //Handle code
+                            }
+                    }
+
     }
     
         /**
          * Populates the appropriate features on the window for a user
-         * @param fineList a list of users to be displayed in the table
+         * @param historyList a list of users to be displayed in the table
          */
         private void PopulateCopyTable(ArrayList<Loan> historyList) {
                 //prepare the columns to accept values

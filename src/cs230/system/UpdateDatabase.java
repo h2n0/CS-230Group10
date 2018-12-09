@@ -21,6 +21,7 @@ public class UpdateDatabase extends TimerTask {
 	public void run() {
 		//get history and see if any books are overdue
                 if (DatabaseManager.getTable("loan") != null) {
+                        @SuppressWarnings("unchecked")
                         ArrayList<Loan> allHistory = (ArrayList<Loan>) DatabaseManager.getTable("loan");
 
                         LocalDate today = LocalDate.now();
