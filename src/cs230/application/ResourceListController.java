@@ -1,144 +1,190 @@
 package cs230.application;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import cs230.system.DatabaseManager;
+import cs230.system.Librarian;
+import cs230.system.Resource;
+import cs230.system.SharedData;
+import cs230.system.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import cs230.system.User;
-import cs230.system.Resource;
-import cs230.system.Book;
-import cs230.system.Dvd;
-import cs230.system.Laptop;
-import cs230.system.Librarian;
-import cs230.system.DatabaseManager;
-import cs230.system.PassInfo;
 
 /**
  * Controller behind the Fine page
+ * 
  * @author 963257
  * @version 1.0
  */
-public class ResourceListController  {
-	//Table containing all the resources
-    @FXML private TableView<Resource> tableView;
-    //resourceID column in table
-    @FXML private TableColumn<Resource, Integer> resourceID;
-    //title column in table
-    @FXML private TableColumn<Resource, String> title;
-    //year column in table
-    @FXML private TableColumn<Resource, Integer> year;
-    //column to put the details buttons into
-    @FXML private TableColumn<Resource, Button> details;
-    //button to create a new resource
-    @FXML private Button addResourceButton;
-    
-    /**
-	 * Overrides the initialise function so when the window is open the
-	 * info for all users with fines are displayed
-	 */
-    @SuppressWarnings("unchecked")
+public class ResourceListController {
+	// list of resources to show
+	private static ArrayList<Resource> inputResources;
+	// Table containing all the resources
 	@FXML
-    public void initialize() {
-    	
-    	// if user is a librarian then show add button
-    	User currentUser = PassInfo.getCurrentUser();
-    	ArrayList<Librarian> librarianList = (ArrayList<Librarian>) DatabaseManager.getTable("librarian");
-    	
-    	for( Librarian l : librarianList) {
-    		if (currentUser.getName().equals(l.getName())) {
-    			addResourceButton.setVisible(true);
-    		}
-    	}
-    	
-    	//get all the books using the DatabaseManager
-    	ArrayList<Book> allBooks = new ArrayList<Book>();
-		try {
-			allBooks = (ArrayList<Book>) DatabaseManager.getTable("book");
+	private TableView<Resource> tableView;
+	// resourceID column in table
+	@FXML
+	private TableColumn<Resource, String> resourceID;
+	// title column in table
+	@FXML
+	private TableColumn<Resource, String> title;
+	// year column in table
+	@FXML
+	private TableColumn<Resource, Integer> year;
+	// column to put the details buttons into
+	@FXML
+	private TableColumn<Resource, Button> details;
+	// button to create a new resource
+	@FXML
+	private Button addResourceButton;
+
+	/**
+	 * Overrides the initialise function so when the window is open the info for all
+	 * users with fines are displayed
+	 */
+	@FXML
+	public void initialize() {
+		// if user is a librarian then show add button
+		if (SharedData.getIsLibrarian()) {
+			addResourceButton.setVisible(true);
 		}
-    	catch(Exception e){
-			e.printStackTrace();
+
+		// populate the table with the resources passed to the page
+		populateListTable(inputResources);
+
+		// if user is a librarian then show add button
+		User currentUser = PassInfo.getCurrentUser();
+		ArrayList<Librarian> librarianList = (ArrayList<Librarian>) DatabaseManager.getTable("librarian");
+
+		for (Librarian l : librarianList) {
+			if (currentUser.getName().equals(l.getName())) {
+				addResourceButton.setVisible(true);
+			}
 		}
-		
-		//get all the DVDs using the DatabaseManager
-    	ArrayList<Dvd> allDVDs = new ArrayList<Dvd>();
-		try {
-			allDVDs = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
-		}
-    	catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		//get all the laptops using the DatabaseManager
-    	ArrayList<Laptop> allLaptops = new ArrayList<Laptop>();
-		try {
-			allLaptops = (ArrayList<Laptop>) DatabaseManager.getTable("laptop");
-		}
-    	catch(Exception e){
-			e.printStackTrace();
-		}
-		
+
 		/*
-		//how the shit do i make a list of resources without instantiating resources
-		ArrayList<Resource> allResources = (ArrayList<Resource>) allBooks;
-		allResources.append((ArrayList<Resource>) allDVDs);
-		allResources.append((ArrayList<Resource>) allLaptops);
-		
-		//populate the table with the resources above
-		PopulateFineTable(allResources);
-		*/
-    }
-    
-    /**
-     * Populates the appropriate features on the window for a user
-     * @param fineList a list of users to be displayed in the table
-     */
-    private void PopulateFineTable(ArrayList<Resource> resourceList) {
-    	//prepare the resourceID column to take IDs
-    	resourceID.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("resourceID"));
-    	//prepare the title column to take titles
-    	title.setCellValueFactory(new PropertyValueFactory<Resource, String>("title"));
-    	//prepare the year column to take year
-    	year.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("year"));
-        //prepare the edit column to take ActionButtons where text = "Details" and call loadResourceDetail when pressed, where u is the user from the row
-        details.setCellFactory(ActionButtonTableCell.<Resource>forTableColumn("Edit", (Resource r) -> loadResourceDetail(r)));
-        
-        //if the list of resources isnt null
-        if (resourceList != null){
-        	//populate the columns
-        	tableView.getItems().setAll(resourceList);
-        }
-        
-    }
-    
-    /**
-     * Loads the edit fine page, passing the user through the PassInfo class
-     * @param u the user to pass into the fine edit page
-     * @return the user that was edited //not sure why but it breaks when not returned so meh?
-     */
-    private Resource loadResourceDetail(Resource r){
-    	try {
-    		//set the resource to be passed to the resource detail page
-    		PassInfo.setResourceDetails(r);
-    		
-    		//open the resource detail page
-			VBox root =
-				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/resourceDetail.fxml"));
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-			Stage stage = (Stage)addResourceButton.getScene().getWindow();
-			stage.setScene(scene);
-			stage.show();
+		 * //how the shit do i make a list of resources without instantiating resources
+		 * ArrayList<Resource> allResources = (ArrayList<Resource>) allBooks;
+		 * allResources.append((ArrayList<Resource>) allDVDs);
+		 * allResources.append((ArrayList<Resource>) allLaptops);
+		 * 
+		 * //populate the table with the resources above
+		 * PopulateFineTable(allResources);
+		 */
+	}
+
+	/**
+	 * Populates the appropriate features on the window for a user
+	 * 
+	 * @param fineList a list of users to be displayed in the table
+	 */
+	private void PopulateFineTable(ArrayList<Resource> resourceList) {
+		// prepare the resourceID column to take IDs
+		resourceID.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("resourceID"));
+		// prepare the title column to take titles
+		title.setCellValueFactory(new PropertyValueFactory<Resource, String>("title"));
+		// prepare the year column to take year
+		year.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("year"));
+		// prepare the edit column to take ActionButtons where text = "Details" and call
+		// loadResourceDetail when pressed, where u is the user from the row
+		details.setCellFactory(
+				ActionButtonTableCell.<Resource>forTableColumn("Edit", (Resource r) -> loadResourceDetail(r)));
+
+		// if the list of resources isnt null
+		if (resourceList != null) {
+			// populate the columns
+			tableView.getItems().setAll(resourceList);
+
+			// populate the table with the resources above
+			populateListTable(inputResources);
+		}
+	}
+
+	public void setListToShow(ArrayList<Resource> resourceList) {
+
+	}
+
+	/**
+	 * launches the page to add a resource
+	 */
+	@FXML
+	private void handleAddResourceButton(ActionEvent event) {
+		loadResourceDetail(null);
+	}
+
+	/**
+	 * Populates the appropriate features on the window for a user
+	 * 
+	 * @param fineList a list of users to be displayed in the table
+	 */
+	private void populateListTable(ArrayList<Resource> resourceList) {
+		// prepare the columns to accept values
+		resourceID.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("resourceID"));
+		title.setCellValueFactory(new PropertyValueFactory<Resource, String>("title"));
+		year.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("year"));
+		details.setCellFactory(
+				ActionButtonTableCell.<Resource>forTableColumn("Edit", (Resource r) -> loadResourceDetail(r)));
+
+		// if the list of resources isnt null
+		if (resourceList != null) {
+			// populate the columns
+			tableView.getItems().setAll(resourceList);
+		}
+
+	}
+
+	/**
+	 * Loads the edit fine page, passing the user through the PassInfo class
+	 * 
+	 * @param u the user to pass into the fine edit page
+	 * @return the user that was edited
+	 */
+	private Resource loadResourceDetail(Resource r) {
+		try {
+			// Create a FXML loader for loading the resourceDetail FXML file.
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resourceDetail.fxml"));
+
+			// Run the loader
+			AnchorPane editRoot = (AnchorPane) fxmlLoader.load();
+			// Access the controller that was created by the FXML loader
+			ResourceDetailController detailController = fxmlLoader.<ResourceDetailController>getController();
+
+			// set the user to be edited
+			detailController.setResource(r.getID());
+
+			// Create a scene based on the loaded FXML scene graph
+			Scene editScene = new Scene(editRoot);
+
+			// Create a new stage (i.e., window) based on the edit scene
+			Stage editStage = new Stage();
+			editStage.setScene(editScene);
+
+			// Make the stage a modal window.
+			// This means that it must be closed before you can interact with any other
+			// window from this application.
+			editStage.initModality(Modality.APPLICATION_MODAL);
+
+			// Show the edit scene and wait for it to be closed
+			editStage.showAndWait();
+
+			// refresh this page to update any changes to u
+			initialize();
+
 		} catch (IOException e) {
 			e.printStackTrace();
+			// Quit the program (with an error code)
+			System.exit(-1);
 		}
-    	return r;
-    }   
+		return r;
+	}
 }

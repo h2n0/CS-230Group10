@@ -107,6 +107,14 @@ public class Loan {
 	}
 
 	/**
+     * Returns the resource ID
+     * @return The resource ID
+     */
+	public String getResourceID() {
+	        return resourceID;
+	}
+	
+	/**
 	 * Returns the username attatched to the loan
 	 * @return The user's name
 	 */
@@ -145,6 +153,14 @@ public class Loan {
 	public LocalDate getReturnedDate() {
 		return returnedDate;
 	}
+	
+	/**
+     * Sets the date this resource was returned on
+     * @param The return date
+     */
+    public void  setReturnedDate(LocalDate returnedDate) {
+        this.returnedDate = returnedDate;
+    }
 
 	/**
 	 * Returns the status of the loan

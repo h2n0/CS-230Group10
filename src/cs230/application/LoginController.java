@@ -52,35 +52,35 @@ public class LoginController {
 		String inputUsername = usernameField.getText();
 
 		//Create a user object to search in DB
-		User activeUser = new User(inputUsername, null, null, null);
+		User activeUser = new User(inputUsername, null, null, null, null, null, null);
 		exists = DatabaseManager.checkForRecord(activeUser, "user");
 
 		//If they exist log in, else show an error
-	    	if(exists) {
+	//    	if(exists) {
 			// Get all of user's details
-			activeUser = (User)
-				DatabaseManager.searchExact(activeUser,
-					"user");
+	//		activeUser = (User)
+	//			DatabaseManager.searchExact(activeUser,
+	//				"user");
 
 			SharedData.setUser(activeUser);
 			PassInfo.setCurrentUser(activeUser);
 			changeToMainPage();
 			userNotFound.setVisible(false);
-		} else {
+	//	} else {
 	    		userNotFound.setVisible(true);
-	    	}
+	//    	}
 	}
 
 	/**
 	 * Loads and shows the main page of the program
 	 */
 	private void changeToMainPage() {
-		AnchorPane root = null;
+		BorderPane root = null;
 		try {
 			// Initalise and load FXML for the main page
 			root = FXMLLoader.load(
 				getClass().getClassLoader().getResource(
-					"cs230/application/UserInfo.fxml"));
+					"cs230/application/MainPage.fxml"));
 
 			// Initalise and load CSS for scene
 			Scene scene = new Scene(root);

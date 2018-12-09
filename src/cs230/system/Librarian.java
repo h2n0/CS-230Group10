@@ -18,16 +18,19 @@ public class Librarian extends User implements Serializable {
 	/**
 	 * Constructor
 	 * @param name the name of the user
+     * @param firstName the first name of the user
+     * @param lastName the last name of the user
+     * @param phoneNum the phone number of the user
 	 * @param address the address of the user
 	 * @param balance how much money the user owes the library
 	 * @param avatarFilePath the file path to the user's avatar
 	 * @param employmentDate the date the librarian started working in the library
 	 * @param staffNumber the identifier for each librarian
 	 */
-	public Librarian(String name, Address address,
+	public Librarian(String name,String firstname, String lastname, String phonenum, Address address,
 			 Double balance, String avatarFilePath,
 			 Date employmentDate, Integer staffNumber) {
-		super(name, address, balance, avatarFilePath);
+		super(name, firstname, lastname, phonenum, address, balance, avatarFilePath);
 		this.employmentDate = employmentDate;
 		this.staffNumber = staffNumber;
 	}

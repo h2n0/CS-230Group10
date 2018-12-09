@@ -12,16 +12,28 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane centerShape="false" prefHeight="600.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.MainPageController">
+<BorderPane centerShape="false" prefHeight="600.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.MainPageController">
    <center>
       <ScrollPane fx:id="mainContent" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER" />
    </center>
    <left>
-      <VBox fx:id="sideOptions" prefHeight="200.0" prefWidth="75.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
+      <VBox fx:id="sideOptions" prefHeight="544.0" prefWidth="109.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink fx:id="dashboardLink" onAction="#toMainpage" styleClass="mainSideLink" text="Dashboard" />
-            <Hyperlink id="cs230.system.Fine" fx:id="fineLink" onAction="#handleFineAction" styleClass="mainSideLink" text="Fines" />
+            <Hyperlink fx:id="dashboardLink" onAction="#toMainpage" styleClass="mainSideLink" text="Dashboard" >
+               <font>
+                  <Font size="13.0" />
+               </font></Hyperlink>
+            <Hyperlink id="cs230.system.Fine" fx:id="fineLink" onAction="#handleFineAction" styleClass="mainSideLink" text="Fines">
+               <font>
+                  <Font size="13.0" />
+               </font></Hyperlink>
+            <Hyperlink fx:id="createResLink" onAction="#handleCreateRes" text="Create Resource">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
          </children>
       </VBox>
    </left>
@@ -47,11 +59,6 @@
                               </TextField>
                               <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="25.0" prefWidth="66.0" text="Search" />
                               <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
-                        <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="55.0" text="Exit">
-                           <HBox.margin>
-                              <Insets left="190.0" />
-                           </HBox.margin>
-                        </Button>
                            </children>
                         </HBox>
                </children></AnchorPane>
