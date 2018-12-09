@@ -23,21 +23,33 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * This class controls the resource detail page.
+ * @author 901306
+ */
 public class ResourceDetailController {
 
+        // The edit button shown for librarians
         @FXML
         private Button editButton;
 
+        // The save button shown after the edit button is pressed
         @FXML
         private Button saveButton;
 
+        // The delete button shown to librarians to delete the resource
         @FXML
         private Button deleteButton;
 
+        // The button to change the thumbnail of the resource
+        @FXML
+        private Button changeThumbnailButton;
+        
+        // The table showing copies
         @FXML
         private TableView copyTable;
 
+        
         @FXML
         TableColumn<String, String> subLanguagesColumn;
 
@@ -148,6 +160,12 @@ public class ResourceDetailController {
 
         @FXML
         private TextField osTextBox;
+        
+        @FXML
+        private HBox deleteSaveBox;
+        
+        @FXML
+        private Label incorrectFieldLabel;
 
         private Resource originalResource;
 
@@ -162,8 +180,8 @@ public class ResourceDetailController {
         private Boolean isLaptop = false;
 
         private String shownResourceId;
-        
-        private String newThumbnailPath;
+
+        private String newThumbnailPath = "";
 
         public ResourceDetailController() {
                 setResourceInfo(shownResourceId);
@@ -183,10 +201,14 @@ public class ResourceDetailController {
                         saveButton.visibleProperty().set(false);
                         editButton.visibleProperty().set(false);
                         deleteButton.visibleProperty().set(false);
+                        changeThumbnailButton.visibleProperty().set(false);
+                        copyTable.visibleProperty().set(false);
                 } else {
                         saveButton.visibleProperty().set(true);
                         editButton.visibleProperty().set(true);
                         deleteButton.visibleProperty().set(true);
+                        changeThumbnailButton.visibleProperty().set(true);
+                        copyTable.visibleProperty().set(true);
                 }
         }
 
@@ -228,7 +250,9 @@ public class ResourceDetailController {
                 String showedResourceID = showedResource.getID();
                 resourceID.textProperty().set(showedResourceID);
                 titleLabel.textProperty().set(showedResource.getTitle());
+                titleTextBox.setText(showedResource.getTitle());
                 yearLabel.textProperty().set(Integer.toString(showedResource.getYear()));
+                yearTextBox.setText(Integer.toString(showedResource.getYear()));
                 Image thumbnail = new Image(showedResource.getThumbnail());
                 thumbnailShow.setImage(thumbnail);
                 numOfCopiesLabel.textProperty().set(Integer.toString(showedResource.getNumCopies()));
@@ -249,31 +273,41 @@ public class ResourceDetailController {
         }
 
         private Copy showCopyInfo(Copy c) {
-                return resourceCopies.get(0);
+                
         }
 
         private void addDvdGui() {
                 dvdGrid.setVisible(true);
                 Dvd currentDvd = (Dvd) showedResource;
                 directorLabel.textProperty().set(currentDvd.getDirector());
+                directorTextBox.setText(currentDvd.getDirector());
                 runtimeLabel.textProperty().set(Integer.toString(currentDvd.getRuntime()));
-                dvdLanguageLabel.textProperty().set(Integer.toString(currentDvd.getRuntime()));
+                runtimeTextBox.setText(Integer.toString(currentDvd.getRuntime()));
+                dvdLanguageLabel.textProperty().set(currentDvd.getLanguage());
+                dvdLanguageTextBox.setText(currentDvd.getLanguage());
                 saveButton.setOnAction((new EventHandler<ActionEvent>() {
-                        @Override public void handle(ActionEvent e) {
+                        @Override
+                        public void handle(ActionEvent e) {
                                 handleDvdSave();
-                            }}));
+                        }
+                }));
         }
 
         private void addLaptopGui() {
                 laptopGrid.setVisible(true);
                 Laptop currentLaptop = (Laptop) showedResource;
                 manufacturerLabel.textProperty().set(currentLaptop.getManufacturer());
+                manufacturerTextBox.setText(currentLaptop.getManufacturer());
                 modelLabel.textProperty().set(currentLaptop.getModel());
+                modelTextBox.setText(currentLaptop.getModel());
                 osLabel.textProperty().set(currentLaptop.getOperatingSystem());
+                osTextBox.setText(currentLaptop.getOperatingSystem());
                 saveButton.setOnAction((new EventHandler<ActionEvent>() {
-                        @Override public void handle(ActionEvent e) {
+                        @Override
+                        public void handle(ActionEvent e) {
                                 handleLaptopSave();
-                            }}));
+                        }
+                }));
 
         }
 
@@ -281,13 +315,19 @@ public class ResourceDetailController {
                 bookGrid.setVisible(true);
                 Book currentBook = (Book) showedResource;
                 authorLabel.textProperty().set(currentBook.getAuthor());
+                authorTextBox.setText(currentBook.getAuthor());
                 genreLabel.textProperty().set(currentBook.getGenre());
+                genreTextBox.setText(currentBook.getGenre());
                 isbnLabel.textProperty().set(currentBook.getIsbn());
+                isbnTextBox.setText(currentBook.getIsbn());
                 bookLanguageLabel.textProperty().set(currentBook.getLanguage());
+                bookLanguageTextBox.setText(currentBook.getLanguage());
                 saveButton.setOnAction((new EventHandler<ActionEvent>() {
-                        @Override public void handle(ActionEvent e) {
+                        @Override
+                        public void handle(ActionEvent e) {
                                 handleBookSave();
-                            }}));
+                        }
+                }));
         }
 
         private void sharedInfoEditToggle() {
@@ -342,17 +382,15 @@ public class ResourceDetailController {
                 boolean bookLanguageTBShow = bookLanguageTextBox.visibleProperty().get();
                 bookLanguageTextBox.visibleProperty().set(!bookLanguageTBShow);
         }
-        
+
         @FXML
         private void handleThumbnail(ActionEvent event) {
                 FileChooser fileChooser = new FileChooser();
-                FileChooser.ExtensionFilter extFilter = 
-                                new FileChooser
-                                .ExtensionFilter("TXT files (*.txt)", "*.txt");
+                FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
                 fileChooser.getExtensionFilters().add(extFilter);
-                Stage stage =
-                                (Stage) numOfCopiesLabel.getScene().getWindow();
+                Stage stage = (Stage) numOfCopiesLabel.getScene().getWindow();
                 File file = fileChooser.showOpenDialog(stage);
+                newThumbnailPath = file.getPath();
         }
 
         @FXML
@@ -387,28 +425,199 @@ public class ResourceDetailController {
                 stage.setScene(scene);
                 stage.show();
         }
-        
+
         @FXML
         private void handleBookSave() {
                 Book oldBook = (Book) showedResource;
-                Book newBook = new Book(shownResourceId
-                                , titleTextBox.getText()
-                                , yearTextBox.getText()
-                                , showedResource.getThumbnail()
-                                , oldBook.getAuthor()
-                                , oldBook.getPublisher()
-                                , oldBook.getGenre()
-                                , oldBook.getIsbn()
-                                , oldBook.getLanguage());
+                boolean canAdd = false;
+                String titleAdd = "";
+                int yearAdd = 0;
+                String thumbnailAdd = "";
+                String authorAdd = "";
+                String publisherAdd = "";
+                String genreAdd = "";
+                String isbnAdd = "";
+                String languageAdd = "";
+                if (!titleTextBox.getText().isEmpty()) {
+                        titleAdd = titleTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (!yearTextBox.getText().isEmpty()) {
+                        try {
+                                yearAdd = Integer.parseInt(yearTextBox.getText());
+                        } catch (NumberFormatException e) {
+                                canAdd = false;
+                        }
+                }
+                if (newThumbnailPath != null && !newThumbnailPath.isEmpty()) {
+                        thumbnailAdd = oldBook.getThumbnail();
+                } else {
+                        thumbnailAdd = newThumbnailPath;
+                }
+                if (!authorTextBox.getText().isEmpty()) {
+                        authorAdd = authorTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (!publisherTextBox.getText().isEmpty()) {
+                        publisherAdd = publisherTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (!genreTextBox.getText().isEmpty()) {
+                        genreAdd = genreTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (!isbnTextBox.getText().isEmpty()) {
+                        isbnAdd = isbnTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (!bookLanguageTextBox.getText().isEmpty()) {
+                        languageAdd = bookLanguageTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (canAdd) {
+                        Book newBook = new Book(shownResourceId, 
+                                        titleAdd, yearAdd,
+                                        thumbnailAdd, authorAdd,
+                                        publisherAdd, genreAdd,
+                                        isbnAdd, languageAdd);
+                        DatabaseManager.editRecord(oldBook, newBook, "book");
+                        showedResource = (Resource) newBook;
+                        incorrectFieldLabel.setVisible(false);
+                        setResourceInfo(newBook.getID());
+                        initialize();
+                        
+                } else {
+                        incorrectFieldLabel.setVisible(true);
+                }
         }
-        
+
         @FXML
         private void handleDvdSave() {
-
+                Dvd oldDvd = (Dvd) showedResource;
+                boolean canAdd = false;
+                String titleAdd = "";
+                int yearAdd = 0;
+                String thumbnailAdd = "";
+                String directorAdd = "";
+                int runtimeAdd = 0;
+                String languageAdd = "";
+                
+                if (!titleTextBox.getText().isEmpty()) {
+                        titleAdd = titleTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (!yearTextBox.getText().isEmpty()) {
+                        try {
+                                yearAdd = Integer.parseInt(yearTextBox.getText());
+                        } catch (NumberFormatException e) {
+                                canAdd = false;
+                        }
+                }
+                if (newThumbnailPath != null && !newThumbnailPath.isEmpty()) {
+                        thumbnailAdd = oldDvd.getThumbnail();
+                } else {
+                        thumbnailAdd = newThumbnailPath;
+                }
+                if (!directorTextBox.getText().isEmpty()) {
+                        directorAdd = directorTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (!runtimeTextBox.getText().isEmpty()) {
+                        try {
+                                runtimeAdd = Integer.parseInt(runtimeTextBox.getText());
+                        } catch (NumberFormatException e) {
+                                canAdd = false;
+                        }
+                }
+                if (!dvdLanguageTextBox.getText().isEmpty()) {
+                        languageAdd = dvdLanguageTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (canAdd) {
+                        Dvd newDvd = new Dvd(shownResourceId, 
+                                        titleAdd, yearAdd,
+                                        thumbnailAdd, directorAdd,
+                                        runtimeAdd, languageAdd,
+                                        oldDvd.getSubLanguages());
+                        DatabaseManager.editRecord(oldDvd, newDvd,
+                                        "dvd");
+                        showedResource = (Resource) newDvd;
+                        incorrectFieldLabel.setVisible(false);
+                        setResourceInfo(newDvd.getID());
+                        initialize();
+                        
+                } else {
+                        incorrectFieldLabel.setVisible(true);
+                }
         }
-        
+
         @FXML
         private void handleLaptopSave() {
-
+                Laptop oldLaptop = (Laptop) showedResource;
+                boolean canAdd = false;
+                String titleAdd = "";
+                int yearAdd = 0;
+                String thumbnailAdd = "";
+                String manufacturerAdd = "";
+                String osAdd = "";
+                String modelAdd = "";
+                if (!titleTextBox.getText().isEmpty()) {
+                        titleAdd = titleTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (!yearTextBox.getText().isEmpty()) {
+                        try {
+                                yearAdd = Integer.parseInt(yearTextBox.getText());
+                        } catch (NumberFormatException e) {
+                                canAdd = false;
+                        }
+                }
+                if (newThumbnailPath != null && !newThumbnailPath.isEmpty()) {
+                        thumbnailAdd = oldLaptop.getThumbnail();
+                } else {
+                        thumbnailAdd = newThumbnailPath;
+                }
+                if (!manufacturerTextBox.getText().isEmpty()) {
+                        manufacturerAdd = manufacturerTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if(!osTextBox.getText().isEmpty())
+                {
+                        osAdd = osTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if(!modelTextBox.getText().isEmpty())
+                {
+                        modelAdd = modelTextBox.getText();
+                } else {
+                        canAdd = false;
+                }
+                if (canAdd) {
+                        Laptop newLaptop = new Laptop(shownResourceId, 
+                                        titleAdd, yearAdd,
+                                        thumbnailAdd, manufacturerAdd,
+                                        modelAdd, osAdd);
+                        DatabaseManager.editRecord(oldLaptop, newLaptop,
+                                        "laptop");
+                        showedResource = (Resource) newLaptop;
+                        incorrectFieldLabel.setVisible(false);
+                        setResourceInfo(newLaptop.getID());
+                        initialize();
+                        
+                } else {
+                        incorrectFieldLabel.setVisible(true);
+                }
         }
 }
