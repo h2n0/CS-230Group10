@@ -372,7 +372,7 @@ public class ResourceDetailController {
                 editColumn.setCellFactory(
                                 ActionButtonTableCell
                                 .<Copy>forTableColumn("Edit",
-                                                (Copy c) -> editCopyInfo(c)));
+                                                (Copy c) -> showEditInfo(c)));
 
                 // if the list of copies isnt null
                 if (resourceCopies != null) {
@@ -397,13 +397,22 @@ public class ResourceDetailController {
                 return c;
         }
         
-        private Copy showEditInfor(Copy c)
+        private Copy showEditInfo(Copy c)
         {
                 Popup popup = new Popup();
                 CopyEditController controller =
                                 new CopyEditController();
                 controller.setCopyID(c.getID());
                 controller.setResourceID(c.getResourceID());
+                controller.setDuration(c.getLoanDuration());
+                controller.setCopyStatus(c.getstatus());
+                if(isLaptop) {
+                        controller.setIsLaptop();
+                } else if (isBook) {
+                        controller.setIsBook();
+                } else {
+                        controller.setIsDvd();
+                }
                 FXMLLoader loader = new 
                                 FXMLLoader(getClass().getResource("CopyEdit.fxml"));
                 loader.setController(controller);
@@ -429,7 +438,6 @@ public class ResourceDetailController {
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
-                return c;
         }
 
         private void addDvdGui() {
