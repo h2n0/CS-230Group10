@@ -2,8 +2,6 @@ package cs230.system;
 
 import javafx.scene.image.Image;
 
-import java.util.ArrayList;
-
 /**
  * This class stores session information such as username to be used by each GUI
  * form.
@@ -78,4 +76,9 @@ public class SharedData {
                         "\\Harry_Potter_and_the_Philosopher" +
                         "'s_Stone_Book_Cover.png");
         }
+
+		public static void setIsLibrarian(boolean b ) {
+			isLibrarian = b;
+			
+		}
 }
