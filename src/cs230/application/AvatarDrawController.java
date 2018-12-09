@@ -61,6 +61,7 @@ public class AvatarDrawController {
 				makeRGB(255, 0, 255), makeRGB(0, 255, 255), makeRGB(0, 0, 0), makeRGB(255, 255, 255) };
 
 		this.brushSize = bigBrush;
+		this.usingBrush = true;
 		this.lx = -1;
 		this.ly = -1;
 
@@ -213,6 +214,10 @@ public class AvatarDrawController {
 		bufferToFX();
 	}
 	
+	/**
+	 * Helper function to draw lines based on the Xiaolin Wu Line drawing function
+	 * see https://en.wikipedia.org/wiki/Xiaolin_Wu's_line_algorithm for more details
+	 */
 	private void drawLineOnImage() {
 		int ix = mx - (400 - this.imageWidth) / 2;
 		int iy = my - (300 - this.imageHeight) / 2;
@@ -228,6 +233,7 @@ public class AvatarDrawController {
 			int y0 = ly;
 			int x1 = ix;
 			int y1 = iy;
+			
 			int w = x1 - x0;
 			int h = y1 - y0;
 			int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
@@ -249,15 +255,16 @@ public class AvatarDrawController {
 			int longest = Math.abs(w);
 			int shortest = Math.abs(h);
 			if (!(longest > shortest)) {
-				longest = Math.abs(h);
-				shortest = Math.abs(w);
+				int old = longest;
+				longest = shortest;
+				shortest = old;
 				if (h < 0)
 					dy2 = -1;
 				else if (h > 0)
 					dy2 = 1;
 				dx2 = 0;
 			}
-			int numerator = longest >> 1;
+			int numerator = longest / 2;
 			for (int i = 0; i <= longest; i++) {
 				circle(x0, y0, this.currentLineSize==this.bigLine?this.bigLine:this.smallLine, this.pallet[this.palletIndex]);
 				numerator += shortest;
@@ -305,17 +312,18 @@ public class AvatarDrawController {
 		newAvatar.setRGB(0, 0, imageWidth, imageHeight, pixels, 0, imageWidth);
 		int x = (400 - this.imageWidth) / 2;
 		int y = (300 - this.imageHeight) / 2;
+		int padding = 8;
 		this.ctx.setFill(Color.LIGHTGRAY);
-		this.ctx.fillRect(x - 8, y - 8, this.imageWidth + 8, this.imageHeight + 8);
+		this.ctx.fillRect(x - padding, y - padding, this.imageWidth + padding, this.imageHeight + padding);
 		this.ctx.setFill(Color.GREY);
-		this.ctx.fillRect(x, y, this.imageWidth + 8, this.imageHeight + 8);
+		this.ctx.fillRect(x, y, this.imageWidth + padding, this.imageHeight + padding);
 		this.ctx.drawImage(SwingFXUtils.toFXImage(newAvatar, null), x, y);
 
 		// Draw the pallet selection
 		int xo = 96;
 		int yo = 270;
 		this.ctx.setFill(Color.rgb(123, 123, 123));
-		this.ctx.fillRect(xo - 8, yo - 8, 26 * this.pallet.length + 8, 36);
+		this.ctx.fillRect(xo - padding, yo - padding, 26 * this.pallet.length + padding, 36);
 
 		for (int i = 0; i < this.pallet.length; i++) {
 			int s = 16;
@@ -323,6 +331,7 @@ public class AvatarDrawController {
 
 			int p = this.pallet[i];
 
+			// Get the individual color components from the color int
 			int rr = (p >> 16) & 0xFF;
 			int gg = (p >> 8) & 0xFF;
 			int bb = (p) & 0xFF;
@@ -330,6 +339,7 @@ public class AvatarDrawController {
 
 			this.ctx.fillRect(xo + (s * i) + (spacing * i), yo, s, s);
 
+			// If the color is the one currently in use, underline it
 			if (this.palletIndex == i) {
 				this.ctx.fillRect(xo + (s * i) + (spacing * i), yo + s + 4, s, 2);
 			}
