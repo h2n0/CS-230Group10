@@ -32,6 +32,13 @@ public class SharedData {
         }
 
         /**
+         * Returns the active user object
+         */
+        public static void getUser() {
+                return activeUser;
+        }
+
+        /**
          * Gets the name of the active user
          * 
          * @return The name of the active user

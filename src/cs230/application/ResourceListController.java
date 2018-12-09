@@ -1,5 +1,6 @@
 package cs230.application;
 
+import cs230.system.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,7 +59,7 @@ public class ResourceListController {
                 populateListTable(inputResources);
           
           // if user is a librarian then show add button
-		User currentUser = PassInfo.getCurrentUser();
+		User currentUser = SharedData.getCurrentUser();
 		ArrayList<Librarian> librarianList = 
 				(ArrayList<Librarian>)DatabaseManager
 				.getTable("librarian");
@@ -118,8 +119,7 @@ public class ResourceListController {
                 resourceID.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("resourceID"));
                 title.setCellValueFactory(new PropertyValueFactory<Resource, String>("title"));
                 year.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("year"));
-                details.setCellFactory(ActionButtonTableCell.<Resource>forTableColumn("Edit", (Resource r)
-						-> loadResourceDetail(r)));
+                details.setCellFactory(ActionButtonTableCell.<Resource>forTableColumn("Edit", (Resource r) -> loadResourceDetail(r)));
 
                 // if the list of resources isnt null
                 if (resourceList != null) {
@@ -171,4 +171,5 @@ public class ResourceListController {
                 }
                 return r;
 	    }
+        }
 }			
