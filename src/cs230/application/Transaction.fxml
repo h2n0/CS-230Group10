@@ -7,16 +7,23 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.TransactionController">
    <children>
-      <Label alignment="CENTER" prefHeight="17.0" prefWidth="619.0" text="Transaction history" />
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="619.0" text="Fine history" />
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="transactionID" prefWidth="92.00" text="Transaction ID" />
-            <TableColumn fx:id="date" prefWidth="82.66664123535156" text="Date" />
-            <TableColumn fx:id="type" prefWidth="106.00007629394531" text="Type" />
-            <TableColumn fx:id="amount" prefWidth="81.33331298828125" text="Amount" />
-            <TableColumn fx:id="copy" prefWidth="147.99996948242188" text="Copy" />
-            <TableColumn fx:id="daysOverdue" prefWidth="82.0" text="Days overdue" />
+            <TableColumn fx:id="date" prefWidth="155.99999237060547" text="Date" />
+            <TableColumn fx:id="amount" prefWidth="87.33338928222656" text="Amount" />
+            <TableColumn fx:id="copy" prefWidth="109.99993896484375" text="Copy" />
+            <TableColumn fx:id="daysOverdue" prefWidth="152.00003051757812" text="Days overdue" />
         </columns>
+      </TableView>
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="619.0" text="Payment history" />
+      <TableView fx:id="tableViewPayment" prefHeight="200.0" prefWidth="200.0">
+         <columns>
+            <TableColumn fx:id="transactionIDPayment" prefWidth="199.99996435642242" text="Transaction ID" />
+            <TableColumn fx:id="datePayment" prefWidth="245.3333282470703" text="Date" />
+            <TableColumn fx:id="amountPayment" minWidth="0.0" prefWidth="148.66659545898438" text="Amount" />
+         </columns>
       </TableView>
    </children>
 </VBox>
