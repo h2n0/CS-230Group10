@@ -731,7 +731,7 @@ public class ResourceDetailController {
                                                 null, null,
                                                 null, tempAddress, 0.0, "");
                 boolean exists = DatabaseManager
-                                .checkForRecord(borrowing, "user");
+                                .checkForRecord(borrowingUser, "user");
                 ArrayList<Loan> loanTable =
                                 (ArrayList<Loan>) DatabaseManager.getTable("Loan");
                 String nextId = "";
@@ -836,7 +836,7 @@ public class ResourceDetailController {
                                 } else {
                                         newLoan.setDueDate(dateToComplete);       
                                 }
-                                DatabaseManager.editRecord(loanToChange, newLoan, "loan")
+                                DatabaseManager.editRecord(loanToChange, newLoan, "loan");
                         }
                 }    
         }
