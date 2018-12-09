@@ -256,7 +256,10 @@ public class MainPageController {
                 } else {
                         try {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader()
-                                                .getResource("cs230/application/UserMainPage.fxml"));
+                                                .getResource("cs230" +
+                                                        "/application" +
+                                                        "/UserInfo" +
+                                                        ".fxml"));
                                 VBox mainPage = fxmlLoader.load();
                                 mainContent.setPrefHeight(mainPage.getPrefHeight());
                                 mainContent.setPrefWidth(mainPage.getPrefWidth());
@@ -269,6 +272,13 @@ public class MainPageController {
         
         @FXML
         private void handleCreateRes(ActionEvent event) {
-                
+                try {
+                        FXMLLoader fxmlLoader =
+                                new FXMLLoader(getClass().getClassLoader().getResource("cs230/application/CreateResourceView.fxml"));
+                        BorderPane createResource = fxmlLoader.load();
+                        mainContent.setContent(createResource);
+                } catch(IOException e) {
+                        e.printStackTrace();
+                }
         }
 }

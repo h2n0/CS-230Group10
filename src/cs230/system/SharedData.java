@@ -21,14 +21,6 @@ public class SharedData {
          */
         public static void setUser(User user) {
                 activeUser = user;
-//                ArrayList<User> allLibrarians = (ArrayList<User>) DatabaseManager.getTable("librarian");
-//                allLibrarians.removeIf(l -> !l.getName().equals(activeUser.getName()));
-//                if (allLibrarians.size()>0) {
-//                        isLibrarian = false;
-//                } else {
-//                        isLibrarian = true;
-//                }
-                isLibrarian = true;
         }
 
         /**

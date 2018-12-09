@@ -205,7 +205,7 @@ public class LibrarianAccountViewController {
     void saveStaffNum(MouseEvent event) {
 		if (!staffNum.getText().equals("")) {
 			staffNum.setText(staffNumtxt.getText());
-			librarian.setstaffNumber(Integer.parseInt(staffNumtxt.getText()));
+			librarian.setstaffNumber(staffNumtxt.getText());
 			cancell(event);
 		} else {
     		emptyFieldLb.setVisible(true);
