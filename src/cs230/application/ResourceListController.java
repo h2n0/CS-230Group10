@@ -21,26 +21,26 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public class ResourceListController {
-	// list of resources to show
-	private static ArrayList<Resource> inputResources;
-	// Table containing all the resources
-	@FXML
-	private TableView<Resource> tableView;
-	// resourceID column in table
-	@FXML
-	private TableColumn<Resource, String> resourceID;
-	// title column in table
-	@FXML
-	private TableColumn<Resource, String> title;
-	// year column in table
-	@FXML
-	private TableColumn<Resource, Integer> year;
-	// column to put the details buttons into
-	@FXML
-	private TableColumn<Resource, Button> details;
-	// button to create a new resource
-	@FXML
-	private Button addResourceButton;
+        // list of resources to show
+	    private static ArrayList<Resource> inputResources;
+	    // Table containing all the resources
+	    @FXML
+	    private TableView<Resource> tableView;
+	    // resourceID column in table
+	    @FXML
+	    private TableColumn<Resource, String> resourceID;
+	    // title column in table
+	    @FXML
+	    private TableColumn<Resource, String> title;
+	    // year column in table
+	    @FXML
+	    private TableColumn<Resource, Integer> year;
+	    // column to put the details buttons into
+	    @FXML
+	    private TableColumn<Resource, Button> details;
+	    // button to create a new resource
+	    @FXML
+	    private Button addResourceButton;
 
         /**
 	     * Overrides the initialise function so when the window is open the info for all
@@ -52,25 +52,9 @@ public class ResourceListController {
                 if (SharedData.getIsLibrarian()){
                         addResourceButton.setVisible(true); 
                 }
-                
                 // populate the table with the resources passed to the page
                 populateListTable(inputResources);
-          
-          // if user is a librarian then show add button
-		User currentUser = SharedData.getUser();
-		ArrayList<Librarian> librarianList =
-				(ArrayList<Librarian>) DatabaseManager
-				.getTable("librarian");
-
-		for (Librarian l : librarianList) {
-			if (currentUser.getName().equals(l.getName())) {
-				addResourceButton.setVisible(true);
-			}
-		}
-
-		// populate the table with the resources above
-		populateListTable(inputResources);
-	}
+	    }
 
 	public void setListToShow(ArrayList<Resource> resourceList) {
 
