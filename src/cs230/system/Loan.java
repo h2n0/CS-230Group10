@@ -153,6 +153,14 @@ public class Loan {
 	public LocalDate getReturnedDate() {
 		return returnedDate;
 	}
+	
+	/**
+     * Sets the date this resource was returned on
+     * @param The return date
+     */
+    public void  setReturnedDate(LocalDate returnedDate) {
+        this.returnedDate = returnedDate;
+    }
 
 	/**
 	 * Returns the status of the loan
