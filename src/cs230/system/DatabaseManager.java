@@ -39,9 +39,10 @@ public class DatabaseManager {
 			if (fileWrite.available() != 0) {
                                 ObjectInputStream objI =
                                         new ObjectInputStream(fileWrite);
-				// Cast file content to an arraylist of objects
-				data = objI.readObject();
-				objI.close();
+
+                                // Get the content of the file
+                                data = objI.readObject();
+                                objI.close();
 				return data;
 			} else {
 				return null;
@@ -338,6 +339,38 @@ public class DatabaseManager {
 		}
 	}
 
+        /**
+         * This method gets the next ID value for a transaction
+         * @return The next transaction ID available
+         */
+	public static String getNextTransID() {
+                String filePath = compilePath("transactionID");
+                String ID;
+                String newID;
+
+                try {
+                        // Get ID
+                        File file = new File(filePath);
+                        Scanner fileIn = new Scanner(file);
+                        ID = fileIn.next();
+
+                        fileIn.close();
+
+                        // Increment ID
+                        newID = String.valueOf(Integer.parseInt(ID) + 1);
+
+                        BufferedWriter fileOut =
+                                new BufferedWriter(new FileWriter(file));
+                        fileOut.write(newID);
+                        fileOut.close();
+
+                        return ID;
+                } catch(IOException e) {
+                        displayIOError("getNextID");
+                        return null;
+                }
+        }
+
 	/**
 	 * Gets all records from a specified table
 	 * @param fileRead File input stream open on desired table
@@ -457,13 +490,19 @@ public class DatabaseManager {
 //		deleteRecord(fine1, "test");
 //		test = getTable(new FileInputStream("Database//test.dat"));
 //		System.out.println("Amount of data: " + test.size());
-		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-                User user = new User("admin", "Scott", "Simmons", "07535537447",
-                        address,
-                        10.0, "\\Database\\Images" +
-                        "\\Harry_Potter_and_the_Philosopher" +
-                        "'s_Stone_Book_Cover.jpg");
-                saveRecord(user, "user");
+//		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
+//                User user = new User("admin", "Scott", "Simmons", "07535537447",
+//                        address,
+//                        10.0, "\\Database\\Images" +
+//                        "\\Harry_Potter_and_the_Philosopher" +
+//                        "'s_Stone_Book_Cover.jpg");
+//                saveRecord(user, "user");
+
+//                ArrayList<Book> books =
+//                        (ArrayList<Book>) DatabaseManager.getTable("book");
+//                System.out.println(books.toString());
+//                Loan loan = new Loan("1", "admin", "1", "4", LocalDate.now(),
+//                        LocalDate.of(2018, 12, 8));
 
 	    //String loanID, String userName, String copyID, String resourceID, LocalDate borrowDate
 	    //ArrayList<Object> test;

@@ -65,7 +65,10 @@ public class MainPageController {
         @FXML
         private Hyperlink fineLink;
 
-		@FXML
+        @FXML
+        private Hyperlink transactionLink;
+
+        @FXML
         private Hyperlink createResLink;
 		
         @FXML
@@ -73,14 +76,15 @@ public class MainPageController {
 
         private String currentResourceSelection;
 
+
+
         @FXML
         public void initialize() {
                 setResourceLinks();
-//                username.textProperty().set(currentUser.getName());
-//                balance.textProperty().set(Double.toString(currentUser.getBalance()));
-//                userImage = new ImageView(currentUser.getAvatarFilePath());
                 updateComboBox();
                 username.setText(SharedData.getUsername());
+                balance.textProperty().set("Balance: " + Double.toString(SharedData.getBalance()));
+                //userImage = new ImageView(SharedData.getAvatar());
                 currentResourceSelection = COMBOBOX_ALL;
         }
 
@@ -234,6 +238,7 @@ public class MainPageController {
                     (Stage) logOutButton.getScene().getWindow();
 
 			        stage.setScene(scene);
+			        stage.centerOnScreen();
 
 		    } catch (IOException e) {
                     System.exit(0);
@@ -256,7 +261,10 @@ public class MainPageController {
                 } else {
                         try {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader()
-                                                .getResource("cs230/application/UserMainPage.fxml"));
+                                                .getResource("cs230" +
+                                                        "/application" +
+                                                        "/UserInfo" +
+                                                        ".fxml"));
                                 VBox mainPage = fxmlLoader.load();
                                 mainContent.setPrefHeight(mainPage.getPrefHeight());
                                 mainContent.setPrefWidth(mainPage.getPrefWidth());
@@ -269,6 +277,25 @@ public class MainPageController {
         
         @FXML
         private void handleCreateRes(ActionEvent event) {
-                
+                try {
+                        FXMLLoader fxmlLoader =
+                                new FXMLLoader(getClass().getClassLoader().getResource("cs230/application/CreateResourceView.fxml"));
+                        BorderPane createResource = fxmlLoader.load();
+                        mainContent.setContent(createResource);
+                } catch(IOException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        @FXML
+        private void handleViewTrans(ActionEvent event) {
+                try {
+                        FXMLLoader fxmlLoader =
+                                new FXMLLoader(getClass().getClassLoader().getResource("cs230/application/Transaction.fxml"));
+                        VBox viewTrans = fxmlLoader.load();
+                        mainContent.setContent(viewTrans);
+                } catch(IOException e) {
+                        e.printStackTrace();
+                }
         }
 }
