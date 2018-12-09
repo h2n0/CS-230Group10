@@ -52,8 +52,14 @@
                               <ImageView fx:id="userImage" fitHeight="68.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" />
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Label fx:id="username" text="Username" />
-                                    <Label fx:id="balance" text="Balance" />
+                                    <Label fx:id="username" text="Username">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Label>
+                                    <Label fx:id="balance" text="Balance" textFill="RED">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font></Label>
                                  </children>
                               </VBox>
                               <TextField fx:id="searchBox">

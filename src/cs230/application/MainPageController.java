@@ -81,11 +81,10 @@ public class MainPageController {
         @FXML
         public void initialize() {
                 setResourceLinks();
-//                username.textProperty().set(currentUser.getName());
-//                balance.textProperty().set(Double.toString(currentUser.getBalance()));
-//                userImage = new ImageView(currentUser.getAvatarFilePath());
                 updateComboBox();
                 username.setText(SharedData.getUsername());
+                balance.textProperty().set("Balance: " + Double.toString(SharedData.getBalance()));
+                //userImage = new ImageView(SharedData.getAvatar());
                 currentResourceSelection = COMBOBOX_ALL;
         }
 
