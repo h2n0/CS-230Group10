@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2dcf51a0-078f-4ea1-9528-84334c7de2a9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Images/Harry_Potter_and_the_Philosopher's_Stone_Book_Cover.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs230/application/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/MainPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs230/application/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/MainPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs230/system/SharedData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/system/SharedData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Images/Harry_Potter_and_the_Philosopher's_Stone_Book_Cover.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Images/Harry_Potter_and_the_Philosopher's_Stone_Book_Cover.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Images/Harry_Potter_and_the_Philosopher's_Stone_Book_Cover.png" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Images/Harry_Potter_and_the_Philosopher's_Stone_Book_Cover.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/transaction.dat" beforeDir="false" afterPath="$PROJECT_DIR$/Database/transaction.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/user.dat" beforeDir="false" afterPath="$PROJECT_DIR$/Database/user.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs230/application/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/TransactionController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,12 +20,12 @@
     <session id="1713084186">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2358" />
+          <entry key="java" value="3014" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2358" />
+          <entry key="JAVA" value="3014" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -57,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="85" column="72" selection-start-line="85" selection-start-column="72" selection-end-line="85" selection-end-column="72" />
+            <state relative-caret-position="213">
+              <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,11 +82,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/TransactionController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
+            <state relative-caret-position="153">
+              <caret line="65" column="106" selection-start-line="65" selection-start-column="106" selection-end-line="65" selection-end-column="106" />
+              <folding>
+                <element signature="e#1914#1944#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -126,7 +130,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/EditFineController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1146">
+            <state relative-caret-position="-224">
               <caret line="70" column="44" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -222,10 +226,10 @@
         <option value="$PROJECT_DIR$/src/cs230/system/Copy.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/Main.java" />
-        <option value="$PROJECT_DIR$/src/cs230/application/TransactionController.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/Book.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/SharedData.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/MainPageController.java" />
+        <option value="$PROJECT_DIR$/src/cs230/application/TransactionController.java" />
       </list>
     </option>
   </component>
@@ -281,7 +285,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544389099584" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544392137604" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -607,23 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs230/application/TransactionController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs230/application/EditFineController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1146">
-          <caret line="70" column="44" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs230/application/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
@@ -650,10 +637,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="85" column="72" selection-start-line="85" selection-start-column="72" selection-end-line="85" selection-end-column="72" />
+        <state relative-caret-position="213">
+          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs230/application/EditFineController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-224">
+          <caret line="70" column="44" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs230/application/TransactionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="65" column="106" selection-start-line="65" selection-start-column="106" selection-end-line="65" selection-end-column="106" />
+          <folding>
+            <element signature="e#1914#1944#0" expanded="true" />
           </folding>
         </state>
       </provider>

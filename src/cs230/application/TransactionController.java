@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import cs230.system.Address;
 import cs230.system.Copy;
@@ -53,36 +54,41 @@ public class TransactionController  {
         @SuppressWarnings("unchecked")
 		@FXML
     	public void initialize() {
-        	    System.out.println("Hello World!");
-                //get all the users using the DatabaseManager
-                ArrayList<Transaction> allHistory = new ArrayList<Transaction>();
                 try {
-                        allHistory = (ArrayList<Transaction>) DatabaseManager.getTable("transaction");
-                        System.out.println(allHistory.size());
+                        System.out.println("Hello World!");
+                        //get all the users using the DatabaseManager
+                        ArrayList<Transaction> allPayments =
+                                (ArrayList<Transaction>) DatabaseManager.getTable("transaction");
+                        ArrayList<Transaction> allFines =
+                                (ArrayList<Transaction>) DatabaseManager.getTable("transaction");
+                        //remove transactions if they arent for the current user
+                        allPayments.removeIf(s -> (!s.getUser().getName().equals(SharedData.getUsername())));
+                        allFines.removeIf(s -> (!s.getUser().getName().equals(SharedData.getUsername())));
+
+                        // Spereate fines from payments in two for loops
+                        for (Iterator<Transaction> iterator =
+                             allPayments.iterator(); iterator.hasNext();) {
+                                Transaction trans = iterator.next();
+                                if (trans.getType().equals("fine")) {
+                                        iterator.remove();
+                                }
+                        }
+
+                        for (Iterator<Transaction> iterator =
+                             allFines.iterator(); iterator.hasNext();) {
+                                Transaction trans = iterator.next();
+                                if (trans.getType().equals("payment")) {
+                                        iterator.remove();
+                                }
+                        }
+
+                        PopulateFineTable(allFines);
+                        PopulatePaymentTable(allPayments);
 	    	    } catch(Exception e){
 	    	            e.printStackTrace();
 	            }
                 
-	            //remove transactions if they arent for the current user
-                allHistory.removeIf(s -> (s.getUser()!=SharedData.getUser()));
 
-                System.out.println(allHistory.size());
-                
-                ArrayList<Transaction> allPayments = allHistory;
-                ArrayList<Transaction> allFines = allHistory;
-                
-                allPayments.removeIf(s -> (s.getType() !="payment"));
-
-                System.out.println(allPayments.size());
-                
-                allFines.removeIf(s -> (s.getType() !="fine"));
-                
-                System.out.println(allFines.size());
-                
-                //populate the fines table
-                PopulateFineTable(allFines);
-                
-                PopulatePaymentTable(allPayments);
                 
                 
                 
