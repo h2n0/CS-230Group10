@@ -5,13 +5,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.TransactionController">
    <children>
       <Label alignment="CENTER" prefHeight="17.0" prefWidth="619.0" text="Transaction history" />
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn  fx:id="transactionID" prefWidth="92.00" text="Transaction ID" />
+          <TableColumn fx:id="transactionID" prefWidth="92.00" text="Transaction ID" />
             <TableColumn fx:id="date" prefWidth="82.66664123535156" text="Date" />
             <TableColumn fx:id="type" prefWidth="106.00007629394531" text="Type" />
             <TableColumn fx:id="amount" prefWidth="81.33331298828125" text="Amount" />

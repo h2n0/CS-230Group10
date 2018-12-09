@@ -41,7 +41,7 @@ public class TransactionController  {
         @SuppressWarnings("unchecked")
 		@FXML
     	public void initialize() {
-        	
+        	System.out.println("Hello World!");
                 //get all the users using the DatabaseManager
                 ArrayList<Transaction> allHistory = new ArrayList<Transaction>();
                 try {
