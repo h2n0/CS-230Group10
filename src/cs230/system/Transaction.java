@@ -12,7 +12,7 @@ public class Transaction implements Serializable {
     //Default serial ID
     private static final long serialVersionUID = 1L;
 	// ID of the transaction
-	private final int transactionID;
+	private final String transactionID;
 	// User involved in the transaction
 	private final User user;
 	// date of the transaction
@@ -34,6 +34,7 @@ public class Transaction implements Serializable {
 	 * @param amount the amount paid/owed 
 	 */
 	public Transaction( User user, Date date, String type, double amount, Copy copy, int daysOverdue) {
+	        this.transactionID = DatabaseManager.getNextTransID();
 	        this.user = user;
 	        this.date = date;
 	        this.type = type;
@@ -50,6 +51,7 @@ public class Transaction implements Serializable {
 	 * @param amount the amount paid/owed 
 	 */
 	public Transaction(User user, Date date, String type, double amount) {
+	        this.transactionID = DatabaseManager.getNextTransID();
             this.user = user;
             this.date = date;
             this.type = type;
@@ -62,7 +64,7 @@ public class Transaction implements Serializable {
      * gets the transactionID
      * @return transactionID the ID of the transaction
      */
-    public int getTransactionID() {
+    public String getTransactionID() {
         return transactionID;
     }
     

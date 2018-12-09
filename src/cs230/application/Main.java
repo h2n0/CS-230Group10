@@ -43,6 +43,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			primaryStage.centerOnScreen();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

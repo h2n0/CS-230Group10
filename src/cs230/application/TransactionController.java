@@ -61,6 +61,7 @@ public class TransactionController  {
                                 (ArrayList<Transaction>) DatabaseManager.getTable("transaction");
                         ArrayList<Transaction> allFines =
                                 (ArrayList<Transaction>) DatabaseManager.getTable("transaction");
+                        System.out.println("Length: " + allPayments.size());
                         //remove transactions if they arent for the current user
                         allPayments.removeIf(s -> (!s.getUser().getName().equals(SharedData.getUsername())));
                         allFines.removeIf(s -> (!s.getUser().getName().equals(SharedData.getUsername())));
