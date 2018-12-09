@@ -41,18 +41,20 @@ public class TransactionController  {
         @SuppressWarnings("unchecked")
 		@FXML
     	public void initialize() {
-        	System.out.println("Hello World!");
+        	    System.out.println("Hello World!");
                 //get all the users using the DatabaseManager
                 ArrayList<Transaction> allHistory = new ArrayList<Transaction>();
                 try {
                         allHistory = (ArrayList<Transaction>) DatabaseManager.getTable("transaction");
+                        System.out.println(allHistory.size());
 	    	    } catch(Exception e){
 	    	            e.printStackTrace();
 	            }
 
 	            //remove transactions if they arent for the current user
-                allHistory.removeIf(s -> (s.getUser()!=SharedData.getUser()));
+                //allHistory.removeIf(s -> (s.getUser()!=SharedData.getUser()));
 		
+                
                 //populate the table with the users above
                 PopulateTransactionTable(allHistory);
         }

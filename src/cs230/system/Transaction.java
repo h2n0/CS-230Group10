@@ -56,8 +56,8 @@ public class Transaction implements Serializable {
             this.date = date;
             this.type = type;
             this.amount = amount;
-            this.copy = null;
-            this.daysOverdue = null;
+            this.copy = new Copy(null, null);
+            this.daysOverdue = 0;
 	}
 	
 	/**
