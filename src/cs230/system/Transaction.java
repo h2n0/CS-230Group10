@@ -19,20 +19,43 @@ public class Transaction {
 	// amount either payed or added on depending on type
 	private final double amount;
 	
+	// copy that caused the fine
+	private final Copy copy;
+	//num of days the copy is overdue
+	private Integer daysOverdue;
+	
 	/**
 	 * constructor for a transaction
-	 * @param transactionID identifies the transaction
 	 * @param user the user involved
 	 * @param date the date of the transaction
 	 * @param type the type of transaction
 	 * @param amount the amount paid/owed 
 	 */
-	public Transaction(int transactionID, User user, Date date, String type, double amount) {
-	        this.transactionID = transactionID;
+	public Transaction( User user, Date date, String type, double amount, Copy copy, int daysOverdue) {
+		    this.transactionID = 1;
 	        this.user = user;
 	        this.date = date;
 	        this.type = type;
 	        this.amount = amount;
+	        this.copy = copy;
+	        this.daysOverdue = daysOverdue;
+	}
+	
+	/**
+	 * constructor for a transaction without copy and overdue days
+	 * @param user the user involved
+	 * @param date the date of the transaction
+	 * @param type the type of transaction
+	 * @param amount the amount paid/owed 
+	 */
+	public Transaction( User user, Date date, String type, double amount) {
+	        this.transactionID = 1;
+            this.user = user;
+            this.date = date;
+            this.type = type;
+            this.amount = amount;
+            this.copy = null;
+            this.daysOverdue = null;
 	}
 	
 	/**
@@ -73,6 +96,30 @@ public class Transaction {
      */
     public double getAmount() {
         return amount;
+    }
+    
+    /**
+     * gets the copy causing the fine
+     * @return copy the copy causing the fine
+     */
+    public Copy getCopy() {
+        return copy;
+    }
+    
+    /**
+     * gets the number of days the copy is overdue
+     * @return daysOverdue the number of days the copy is overdue
+     */
+    public int getDaysOverdue() {
+    	return daysOverdue;
+    }
+    
+    /**
+     * sets the number of days the copy is overdue
+     * @param daysOverdue the number of days the copy is overdue
+     */
+    public void setDaysOverdue(int daysOverdue) {
+    	this.daysOverdue = daysOverdue ;
     }
     
     

@@ -10,8 +10,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import cs230.system.DatabaseManager;
+import cs230.system.Transaction;
 //import cs230.system.PassInfo;
 import cs230.system.User;
 
@@ -90,8 +92,12 @@ public class EditFineController  {
                         User changedUser = allUsers.get(0);
                         changedUser.setBalance(unchangedUser.getBalance() - amountPaidDbl);
                         
+                        //date type amount
+                        Transaction transaction = new Transaction(unchangedUser, new Date(), "payment", amountPaidDbl);
+                        
                         //save new balance amount and display label for success/error
-                        if (DatabaseManager.editRecord(unchangedUser, changedUser, "user")) {
+                        if (DatabaseManager.editRecord(unchangedUser, changedUser, "user") &&
+                        		DatabaseManager.saveRecord(transaction, "transaction")) {
                                 saveSuccessful();
                                 PopulateEditFine(changedUser);
                         }
