@@ -125,15 +125,16 @@ public class ResourceListController {
 	/**
 	 * Populates the appropriate features on the window for a user
 	 * 
-	 * @param fineList a list of users to be displayed in the table
+	 * @param resourceList a list of users to be displayed in the table
 	 */
 	private void populateListTable(ArrayList<Resource> resourceList) {
 		// prepare the columns to accept values
-		resourceID.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("resourceID"));
+		// resourceID.setCellValueFactory(new
+		// PropertyValueFactory<Resource, Integer>("resourceID"));
 		title.setCellValueFactory(new PropertyValueFactory<Resource, String>("title"));
 		year.setCellValueFactory(new PropertyValueFactory<Resource, Integer>("year"));
-		details.setCellFactory(
-				ActionButtonTableCell.<Resource>forTableColumn("Edit", (Resource r) -> loadResourceDetail(r)));
+		// details.setCellFactory(ActionButtonTableCell
+		// .<Resource>forTableColumn("Edit", this.loadResourceDetail()));
 
 		// if the list of resources isnt null
 		if (resourceList != null) {
@@ -146,7 +147,6 @@ public class ResourceListController {
 	/**
 	 * Loads the edit fine page, passing the user through the PassInfo class
 	 * 
-	 * @param u the user to pass into the fine edit page
 	 * @return the user that was edited
 	 */
 	private Resource loadResourceDetail(Resource r) {

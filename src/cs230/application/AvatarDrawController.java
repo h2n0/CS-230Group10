@@ -7,10 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-import cs230.system.DatabaseManager;
 //import cs230.system.PassInfo;
 import cs230.system.SharedData;
-import cs230.system.User;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

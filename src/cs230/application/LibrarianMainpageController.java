@@ -1,5 +1,6 @@
 package cs230.application;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import cs230.system.Loan;
@@ -46,15 +47,20 @@ public class LibrarianMainpageController {
         
         private Loan loadCopy(Loan l)
         {
-                FXMLLoader fxmlLoader = new FXMLLoader(
+                try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(
                                 getClass().getClassLoader().getResource("cs230/application/Copy.fxml"));
-                VBox listPage = fxmlLoader.load();
-                ResourceListController controller = fxmlLoader.<ResourceListController>getController();
-                controller.setListToShow(resources);
-                mainContent.setPrefHeight(listPage.getPrefHeight());
-                mainContent.setPrefWidth(listPage.getPrefWidth());
-                mainContent.setContent(listPage);
-                return l;  
+                        VBox listPage = fxmlLoader.load();
+                        ResourceListController controller = fxmlLoader.<ResourceListController>getController();
+                        //controller.setListToShow(resources);
+                        //mainContent.setPrefHeight(listPage.getPrefHeight());
+                        //mainContent.setPrefWidth(listPage.getPrefWidth());
+                        //mainContent.setContent(listPage);
+                        return l;
+                } catch(IOException e) {
+                        e.printStackTrace();
+                        return null;
+                }
         }
 
 }

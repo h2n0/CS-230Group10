@@ -118,9 +118,9 @@ public class FineController  {
         
         
         /**
-         * Loads the edit fine page, passing the user through the PassInfo class
+         * Loads the edit fine page, passing the user to the controller
          * @param u the user to pass into the fine edit page
-         * @return the user that was edited //not sure why but it breaks when not returned so meh?
+         * @return the user that was edited 
          */
         private User loadEditFine(User u){
                 try {
