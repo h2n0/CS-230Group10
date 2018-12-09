@@ -70,6 +70,10 @@ public class ResourceDetailController {
         @FXML
         private Button loanButton;
         
+     // The new copy button
+        @FXML
+        private Button newCopyButton;
+        
         // The return button
         @FXML
         private Button returnButton;
@@ -103,6 +107,9 @@ public class ResourceDetailController {
 
         @FXML
         private TableColumn<Copy, Button> moreInfoColumn;
+        
+        @FXML
+        private TableColumn<Copy, Button> editColumn;
 
         @FXML
         private VBox showLoanCreate;
@@ -361,6 +368,11 @@ public class ResourceDetailController {
                                 ActionButtonTableCell
                                 .<Copy>forTableColumn("Edit",
                                                 (Copy c) -> showCopyInfo(c)));
+                
+                editColumn.setCellFactory(
+                                ActionButtonTableCell
+                                .<Copy>forTableColumn("Edit",
+                                                (Copy c) -> editCopyInfo(c)));
 
                 // if the list of copies isnt null
                 if (resourceCopies != null) {
@@ -376,6 +388,41 @@ public class ResourceDetailController {
                 controller.setCopyId(c.getID());
                 FXMLLoader loader = new 
                                 FXMLLoader(getClass().getResource("Copy.fxml"));
+                loader.setController(controller);
+                try {
+                        popup.getContent().add((Parent)loader.load());
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+                return c;
+        }
+        
+        private Copy showEditInfor(Copy c)
+        {
+                Popup popup = new Popup();
+                CopyEditController controller =
+                                new CopyEditController();
+                controller.setCopyID(c.getID());
+                controller.setResourceID(c.getResourceID());
+                FXMLLoader loader = new 
+                                FXMLLoader(getClass().getResource("CopyEdit.fxml"));
+                loader.setController(controller);
+                try {
+                        popup.getContent().add((Parent)loader.load());
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+                return c;
+        }
+        
+        @FXML
+        private void handleNewCopy(ActionEvent event) {
+                Popup popup = new Popup();
+                CopyEditController controller =
+                                new CopyEditController();
+                controller.setResourceID(showedResource.getID());
+                FXMLLoader loader = new 
+                                FXMLLoader(getClass().getResource("CopyEdit.fxml"));
                 loader.setController(controller);
                 try {
                         popup.getContent().add((Parent)loader.load());

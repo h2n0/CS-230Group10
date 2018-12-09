@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="262.0" prefWidth="447.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="editLabel" prefHeight="35.0" prefWidth="518.0" text="Change the loan duration(days) to either 1, 7, 14 or 28" />
+      <Label fx:id="newLabel" prefHeight="28.0" prefWidth="331.0" text="Set the loan duration(days) of the copy to either 1, 7, 14 or 28" />
+      <Label fx:id="incorrectLabel" prefHeight="17.0" prefWidth="158.0" text="The duration is incorrect" />
+      <TextField fx:id="durationTextBox" />
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

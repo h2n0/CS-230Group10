@@ -20,8 +20,6 @@ public class Copy implements Serializable {
         private String resourceType;
         //duration of the loan, in days
         private int loanDuration;
-        //cost for this copy to be overdue per day
-        private double overdueCost;
 
         /**
 	     * Constructs a copy entity
@@ -29,14 +27,12 @@ public class Copy implements Serializable {
          * @param status says if the copy is available, on loan, or overdue
          * @param resourceType if the copy is a Book, DVD, or Laptop
          * @param loanDuration how long you can borrow the copy for
-         * @param overdueCost cost per day for this copy to be overdue
 	     */
-        public Copy(String resourceID, Status status, String resourceType, int loanDuration, double overdueCost) {
+        public Copy(String resourceID, Status status, String resourceType, int loanDuration) {
                 this.resourceID = resourceID;
                 this.status = status;
                 this.resourceType = resourceType;
                 this.loanDuration = loanDuration;
-                this.overdueCost = overdueCost;
 	    }
 	
         /**
@@ -114,22 +110,6 @@ public class Copy implements Serializable {
         public int getLoanDuration() {
                 return loanDuration;
 	    }
-
-        /**
-         * Sets the cost per day for this copy to be overdue
-         * @param overdueCost The cost per day for this copy to be overdue
-         */
-        public void setoverdueCost(double overdueCost) {
-                this.overdueCost = overdueCost;
-        }
-
-        /**
-         * Gets the cost per day for this copy to be overdue
-         * @return The cost per day for this copy to be overdue
-         */
-        public double getoverdueCost() {
-                return overdueCost;
-        }
         
         /**
 	     * Saves this copy to the database
