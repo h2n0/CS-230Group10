@@ -5,10 +5,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.TransactionController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.TransactionController">
    <children>
       <Label alignment="CENTER" prefHeight="17.0" prefWidth="619.0" text="Fine history" />
-      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="tableView" prefHeight="192.0" prefWidth="600.0">
         <columns>
           <TableColumn fx:id="transactionID" prefWidth="92.00" text="Transaction ID" />
             <TableColumn fx:id="date" prefWidth="155.99999237060547" text="Date" />
@@ -18,7 +18,7 @@
         </columns>
       </TableView>
       <Label alignment="CENTER" prefHeight="17.0" prefWidth="619.0" text="Payment history" />
-      <TableView fx:id="tableViewPayment" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="tableViewPayment" prefHeight="280.0" prefWidth="600.0">
          <columns>
             <TableColumn fx:id="transactionIDPayment" prefWidth="199.99996435642242" text="Transaction ID" />
             <TableColumn fx:id="datePayment" prefWidth="245.3333282470703" text="Date" />
