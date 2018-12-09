@@ -2,14 +2,13 @@ package cs230.application;
 
 import cs230.system.*;
 import cs230.system.Copy.Status;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -70,13 +69,16 @@ public class ResourceDetailController {
         // The loan book button
         @FXML
         private Button loanButton;
-
+        
+        // The return button
         @FXML
         private Button returnButton;
 
+        // The return cancel button
         @FXML
         private Button returnCancelButton;
 
+        // The return cancel button
         @FXML
         private Button returnShowButton;
 
@@ -230,6 +232,9 @@ public class ResourceDetailController {
 
         @FXML
         private Label incorrectFieldLabel;
+        
+        @FXML
+        private TableView subtitleLabelTable;
 
         private Resource originalResource;
 
@@ -249,10 +254,17 @@ public class ResourceDetailController {
         
         private String loanUsername = "";
 
+        /**
+         * The Constructor of the controller
+         */
         public ResourceDetailController() {
+                //Sets the info to show
                 setResourceInfo(shownResourceId);
         }
 
+        /**
+         * Initialises the gui for the resource detail
+         */
         @FXML
         public void initialize() {
                 initializeGui();
@@ -280,38 +292,45 @@ public class ResourceDetailController {
                 }
         }
 
+        /**
+         *  Sets the id of the resource to be shown.
+         * @param id The resources ID
+         */
         public void setResource(String id) {
                 shownResourceId = id;
         }
 
         private void setResourceInfo(String resourceId) {
-                ArrayList<Resource> allResources = new ArrayList<Resource>();
-                try {
-                        allResources = (ArrayList<Resource>) DatabaseManager.getTable("Resource");
-                } catch (ClassCastException e) {
-                        // DBERROR
-                }
-                allResources.removeIf((s -> !s.getID().equals(resourceId)));
-                showedResource = allResources.get(0);
-                originalResource = showedResource;
-                if (showedResource.getType().equals("Dvd")) {
-                        showedResource = (Dvd) showedResource;
+                ArrayList<Dvd> allDvds = new ArrayList<Dvd>();
+                allDvds = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
+                allDvds.removeIf((s -> !s.getID().equals(resourceId)));
+                
+                ArrayList<Book> allBooks = new ArrayList<Book>();
+                allBooks = (ArrayList<Book>) DatabaseManager.getTable("book");
+                
+                ArrayList<Laptop> allLaptops = new ArrayList<Laptop>();
+                allLaptops = (ArrayList<Laptop>) DatabaseManager.getTable("laptop");
+                if(!allDvds.isEmpty())
+                {
+                        showedResource = allDvds.get(0);
                         isDvd = true;
-                } else if (showedResource.getType().equals("Laptop")) {
-                        showedResource = (Laptop) showedResource;
-                        isLaptop = true;
-                } else {
-                        showedResource = (Book) showedResource;
+                } else if (!allBooks.isEmpty()) {
+                        showedResource = allBooks.get(0);
                         isBook = true;
+                } else {
+                        showedResource = allLaptops.get(0);
+                        isLaptop = true;
                 }
                 ArrayList<Copy> allCopies = new ArrayList<Copy>();
                 try {
-                        allCopies = (ArrayList<Copy>) DatabaseManager.getTable("Copy");
+                        allCopies = (ArrayList<Copy>) DatabaseManager
+                                        .getTable("copy");
                 } catch (ClassCastException e) {
                         // DBERROR
                 }
                 resourceCopies = allCopies;
-                resourceCopies.removeIf((s -> !s.getResourceID().equals(resourceId)));
+                resourceCopies.removeIf((s -> !s.getResourceID()
+                                .equals(resourceId)));
         }
 
         private void initializeGui() {
@@ -321,21 +340,29 @@ public class ResourceDetailController {
                 resourceID.textProperty().set(showedResourceID);
                 titleLabel.textProperty().set(showedResource.getTitle());
                 titleTextBox.setText(showedResource.getTitle());
-                yearLabel.textProperty().set(Integer.toString(showedResource.getYear()));
+                yearLabel.textProperty().set(Integer
+                                .toString(showedResource.getYear()));
                 yearTextBox.setText(Integer.toString(showedResource.getYear()));
                 Image thumbnail = new Image(showedResource.getThumbnail());
                 thumbnailShow.setImage(thumbnail);
-                numOfCopiesLabel.textProperty().set(Integer.toString(showedResource.getNumCopies()));
+                numOfCopiesLabel.textProperty().set(Integer
+                                .toString(showedResource.getNumCopies()));
                 populateCopyTable();
         }
 
         private void populateCopyTable() {
-                copyIdColumn.setCellValueFactory(new PropertyValueFactory<Copy, String>("ID"));
-                copyDurationColumn.setCellValueFactory(new PropertyValueFactory<Copy, String>("loanDuration"));
+                copyIdColumn.setCellValueFactory
+                (new PropertyValueFactory<Copy
+                                , String>("ID"));
+                copyDurationColumn
+                .setCellValueFactory(new PropertyValueFactory<Copy,
+                                String>("loanDuration"));
                 moreInfoColumn.setCellFactory(
-                                ActionButtonTableCell.<Copy>forTableColumn("Edit", (Copy c) -> showCopyInfo(c)));
+                                ActionButtonTableCell
+                                .<Copy>forTableColumn("Edit",
+                                                (Copy c) -> showCopyInfo(c)));
 
-                // if the list of users isnt null
+                // if the list of copies isnt null
                 if (resourceCopies != null) {
                         // populate the columns
                         copyTable.getItems().setAll(resourceCopies);
@@ -363,10 +390,12 @@ public class ResourceDetailController {
                 Dvd currentDvd = (Dvd) showedResource;
                 directorLabel.textProperty().set(currentDvd.getDirector());
                 directorTextBox.setText(currentDvd.getDirector());
-                runtimeLabel.textProperty().set(Integer.toString(currentDvd.getRuntime()));
+                runtimeLabel.textProperty()
+                .set(Integer.toString(currentDvd.getRuntime()));
                 runtimeTextBox.setText(Integer.toString(currentDvd.getRuntime()));
                 dvdLanguageLabel.textProperty().set(currentDvd.getLanguage());
                 dvdLanguageTextBox.setText(currentDvd.getLanguage());
+                populateDvdTable(currentDvd);
                 saveButton.setOnAction((new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent e) {
@@ -374,11 +403,19 @@ public class ResourceDetailController {
                         }
                 }));
         }
+        
+        private void  populateDvdTable(Dvd currentDvd)
+        {
+                ArrayList<String> subLanguages = currentDvd.getSubLanguages();
+                subLanguagesColumn.setCellValueFactory(c -> new SimpleStringProperty());
+                subtitleLabelTable.getItems().addAll(subtitleLabelTable);
+        }
 
         private void addLaptopGui() {
                 laptopGrid.setVisible(true);
                 Laptop currentLaptop = (Laptop) showedResource;
-                manufacturerLabel.textProperty().set(currentLaptop.getManufacturer());
+                manufacturerLabel.textProperty()
+                .set(currentLaptop.getManufacturer());
                 manufacturerTextBox.setText(currentLaptop.getManufacturer());
                 modelLabel.textProperty().set(currentLaptop.getModel());
                 modelTextBox.setText(currentLaptop.getModel());
@@ -420,7 +457,6 @@ public class ResourceDetailController {
                 yearTextBox.visibleProperty().set(!yearTextBoxShow);
                 yearLabel.setVisible(!yearLabel.visibleProperty().get());
                 thumbnailShow.setVisible(!thumbnailShow.visibleProperty().get());
-                // Show file select
                 saveButton.setVisible(!saveButton.visibleProperty().get());
                 if (editButton.getText().equals("Cancel")) {
                         editButton.setText("Edit Details");
@@ -431,14 +467,19 @@ public class ResourceDetailController {
         }
 
         private void laptopInfoEdit() {
-                boolean manufacturerTBShow = manufacturerTextBox.visibleProperty().get();
+                boolean manufacturerTBShow =
+                                manufacturerTextBox.visibleProperty().get();
                 manufacturerTextBox.visibleProperty().set(!manufacturerTBShow);
-                boolean manufacturerLabelShow = manufacturerLabel.visibleProperty().get();
+                boolean manufacturerLabelShow =
+                                manufacturerLabel.visibleProperty().get();
                 manufacturerLabel.visibleProperty().set(!manufacturerLabelShow);
-                modelTextBox.visibleProperty().set(!modelTextBox.visibleProperty().get());
-                modelLabel.visibleProperty().set(!modelLabel.visibleProperty().get());
+                modelTextBox.visibleProperty()
+                .set(!modelTextBox.visibleProperty().get());
+                modelLabel.visibleProperty()
+                .set(!modelLabel.visibleProperty().get());
                 osLabel.visibleProperty().set(!osLabel.visibleProperty().get());
-                osTextBox.visibleProperty().set(!osTextBox.visibleProperty().get());
+                osTextBox.visibleProperty()
+                .set(!osTextBox.visibleProperty().get());
         }
 
         private void dvdInfoEdit() {
@@ -454,6 +495,8 @@ public class ResourceDetailController {
                 .set(!dvdLanguageLabel.visibleProperty().get());
                 dvdLanguageTextBox.visibleProperty()
                 .set(!dvdLanguageTextBox.visibleProperty().get());
+                subtitleLabelTable
+                .setEditable(!subtitleLabelTable.editableProperty().get());
                 // DVD TABLE
         }
 
@@ -486,7 +529,7 @@ public class ResourceDetailController {
                 FileChooser fileChooser = new FileChooser();
                 FileChooser.ExtensionFilter extFilter =
                                 new FileChooser.
-                                ExtensionFilter("TXT files (*.txt)", "*.txt");
+                                ExtensionFilter("PNG files (*.png)", "*.png");
                 fileChooser.getExtensionFilters().add(extFilter);
                 Stage stage = (Stage) numOfCopiesLabel.getScene().getWindow();
                 File file = fileChooser.showOpenDialog(stage);
@@ -508,19 +551,16 @@ public class ResourceDetailController {
         @FXML
         private void handleDeleteAction(ActionEvent event) {
                 DatabaseManager.deleteRecord(originalResource, "Resource");
-                // load fine page fxml
                 VBox root = null;
                 try {
                         root = (VBox) FXMLLoader.load(
                                         getClass()
                                         .getClassLoader()
                                         .getResource("cs230/application"
-                                                        + "/ResourceList.fxml"));
+                                                        + "/MainPage.fxml"));
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
-
-                // show fine page
                 Scene scene = new Scene(root);
                 scene.getStylesheets().add(getClass()
                                 .getClassLoader()
@@ -570,21 +610,6 @@ public class ResourceDetailController {
                 } else {
                         canAdd = false;
                 }
-                if (!genreTextBox.getText().isEmpty()) {
-                        genreAdd = genreTextBox.getText();
-                } else {
-                        canAdd = false;
-                }
-                if (!isbnTextBox.getText().isEmpty()) {
-                        isbnAdd = isbnTextBox.getText();
-                } else {
-                        canAdd = false;
-                }
-                if (!bookLanguageTextBox.getText().isEmpty()) {
-                        languageAdd = bookLanguageTextBox.getText();
-                } else {
-                        canAdd = false;
-                }
                 if (canAdd) {
                         Book newBook = new Book(shownResourceId, titleAdd,
                                         yearAdd, thumbnailAdd, authorAdd,
@@ -611,6 +636,7 @@ public class ResourceDetailController {
                 String directorAdd = "";
                 int runtimeAdd = 0;
                 String languageAdd = "";
+                ArrayList<String> subLangsAdd = (ArrayList<String>) subtitleLabelTable.getItems();
 
                 if (!titleTextBox.getText().isEmpty()) {
                         titleAdd = titleTextBox.getText();
@@ -641,14 +667,9 @@ public class ResourceDetailController {
                                 canAdd = false;
                         }
                 }
-                if (!dvdLanguageTextBox.getText().isEmpty()) {
-                        languageAdd = dvdLanguageTextBox.getText();
-                } else {
-                        canAdd = false;
-                }
                 if (canAdd) {
                         Dvd newDvd = new Dvd(shownResourceId, titleAdd, yearAdd, thumbnailAdd, directorAdd, runtimeAdd,
-                                        languageAdd, oldDvd.getSubLanguages());
+                                        languageAdd, subLangsAdd);
                         DatabaseManager.editRecord(oldDvd, newDvd, "dvd");
                         showedResource = (Resource) newDvd;
                         incorrectFieldLabel.setVisible(false);
@@ -750,20 +771,25 @@ public class ResourceDetailController {
                 }
 
                 if (exists) {
-                        borrowingUser = (User)DatabaseManager.searchRecord(borrowingUser, "user");
+                        borrowingUser = (User)DatabaseManager
+                                        .searchRecord(borrowingUser, "user");
                         if(borrowingUser.getBalance()> 0)
                         {
                                 if (showedResource.checkQueue() == 0) {
                                         loanResource(nextId, inputUsername);
-                                } else if (showedResource.peekQueue().equals(inputUsername)) {
+                                } else if (showedResource.peekQueue()
+                                                .equals(inputUsername)) {
                                         loanResource(nextId, inputUsername);
-                                        Resource resource = new Resource(showedResource.getID());
+                                        Resource resource 
+                                        = new Resource(showedResource.getID());
                                         ArrayList<Resource> resources = 
                                                         (ArrayList<Resource>)DatabaseManager
                                                         .searchRecord(resource, "resource");
                                         resource = resources.get(0);
                                         resource.removeFromQueue();
-                                        DatabaseManager.editRecord(showedResource, resource, "resource");
+                                        DatabaseManager
+                                        .editRecord(showedResource,
+                                                        resource, "resource");
                                 }  else {
                                         showReserveOption(inputUsername);
                                 }
@@ -779,7 +805,9 @@ public class ResourceDetailController {
         @FXML
         private void handleReserveYes(ActionEvent event) {
                 Resource resource = new Resource(showedResource.getID());
-                ArrayList<Resource> resources = (ArrayList<Resource>)DatabaseManager.searchRecord(resource, "resource");
+                ArrayList<Resource> resources =
+                                (ArrayList<Resource>)DatabaseManager
+                                .searchRecord(resource, "resource");
                 resource = resources.get(0); 
                 resource.addToQueue(loanUsername);
                 DatabaseManager.editRecord(showedResource, resource, "resource");
@@ -888,14 +916,17 @@ public class ResourceDetailController {
                 String inputUsername = returnUsernameTextBox.getText();
                 String inputCopyId = returnCopyIdTextBox.getText();
                 Address tempAddress = new Address("", "", "", "");
-                User returningUser = new User(inputUsername, null, null, null, tempAddress, 0.0, "");
+                User returningUser = new User(inputUsername,
+                                null, null, null, tempAddress, 0.0, "");
                 boolean exists = DatabaseManager.checkForRecord(returningUser, "user");
-                ArrayList<Loan> loanTable = (ArrayList<Loan>) DatabaseManager.getTable("Loan");
+                ArrayList<Loan> loanTable = (ArrayList<Loan>) 
+                                DatabaseManager.getTable("loan");
                 loanTable.removeIf(l -> !l.getUserName().equals(inputUsername)
                                 && !l.getResourceID().equals(showedResource.getID())
                                 && !l.getCopyID().equals(inputCopyId));
                 Loan oldLoan = new Loan("", "", "", "", LocalDate.now());
-                ArrayList<Copy> copyTable = (ArrayList<Copy>) DatabaseManager.getTable("copy");
+                ArrayList<Copy> copyTable = (ArrayList<Copy>)
+                                DatabaseManager.getTable("copy");
                 copyTable.removeIf(c -> !c.getID().equals(inputCopyId));
                 if (!loanTable.isEmpty()) {
                         for (Loan loan : loanTable) {
@@ -904,7 +935,13 @@ public class ResourceDetailController {
                                 }
                         }
                         LocalDate now = LocalDate.now();
-                        Loan newLoan = oldLoan;
+                        Loan newLoan = new Loan(oldLoan.getLoanID(),
+                                        oldLoan.getUserName(),
+                                        oldLoan.getCopyID(), 
+                                        oldLoan.getResourceID(), now);
+                        ArrayList<Loan> loans= (ArrayList<Loan>)
+                                        DatabaseManager.searchRecord(newLoan,"loan");
+                        newLoan = loans.get(0);
                         newLoan.setReturnedDate(now);
                         DatabaseManager.editRecord(oldLoan, newLoan, "loan");
                         if (!oldLoan.getDueDate().equals(null)) {
@@ -919,14 +956,22 @@ public class ResourceDetailController {
                                         if(daysLate > 0) {
                                                 fineAmount = calculateFine(daysLate);
                                                 //Fine change
-                                                Fine newFine = new Fine(newLoan.getLoanID(), fineAmount);
+                                                Fine newFine = new Fine(newLoan.getLoanID()
+                                                                , fineAmount);
                                                 DatabaseManager.saveRecord(newFine, "fine");
                                                 ArrayList<User> returningUsers = 
                                                                 (ArrayList<User>) DatabaseManager
                                                                 .searchRecord(returningUser, "user");
                                                 returningUser = returningUsers
                                                                 .get(0);
-                                                User newUser = returningUser;
+                                                User newUser 
+                                                = new User(returningUser.getName()
+                                                                ,null, null, null,
+                                                                tempAddress, 0.0, "");
+                                                ArrayList<User> users = 
+                                                                (ArrayList<User>)DatabaseManager
+                                                                .searchRecord(newUser, "user");
+                                                newUser = users.get(0);
                                                 Double currentB = returningUser.getBalance();
                                                 newUser.setBalance(fineAmount.doubleValue());
                                                 DatabaseManager.editRecord(returningUser, newUser, "user");
