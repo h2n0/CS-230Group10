@@ -23,7 +23,8 @@ public class Main extends Application {
 			Date today = new Date();
 			
 			//long delay is time in milliseconds between the scheduled code 
-			long delay = 100000000;
+			//43200000 milliseconds is 12hrs
+			long delay = 43200000;
 			
 			//set a new timer and load in updateDB and set to run everyday at midday
 			Timer timer = new Timer();

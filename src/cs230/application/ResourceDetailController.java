@@ -356,7 +356,6 @@ public class ResourceDetailController {
                         e.printStackTrace();
                 }
                 return c;
-                
         }
 
         private void addDvdGui() {

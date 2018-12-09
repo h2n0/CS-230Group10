@@ -55,18 +55,18 @@ public class LoginController {
 		exists = DatabaseManager.checkForRecord(activeUser, "user");
 
 		//If they exist log in, else show an error
-	//    	if(exists) {
+	    	if(exists) {
 			// Get all of user's details
-	//		activeUser = (User)
-	//			DatabaseManager.searchExact(activeUser,
-	//				"user");
+			activeUser = (User)
+				DatabaseManager.searchExact(activeUser,
+					"user");
 
 			SharedData.setUser(activeUser);
 			changeToMainPage();
 			userNotFound.setVisible(false);
-	//	} else {
+		} else {
 	    		userNotFound.setVisible(true);
-	//    	}
+	    	}
 	}
 
 	/**
