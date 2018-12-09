@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Models the transaction history, 
  * @author 963257
- *
+ * @version 1.0
  */
 public class Transaction {
 	// ID of the transaction
@@ -18,7 +18,6 @@ public class Transaction {
 	private final String type;
 	// amount either payed or added on depending on type
 	private final double amount;
-	
 	// copy that caused the fine
 	private final Copy copy;
 	//num of days the copy is overdue
