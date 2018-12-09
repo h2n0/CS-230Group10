@@ -273,7 +273,7 @@ public class ResourceDetailController {
         }
 
         private Copy showCopyInfo(Copy c) {
-                
+                return null;
         }
 
         private void addDvdGui() {
