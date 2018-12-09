@@ -8,10 +8,12 @@ import cs230.system.Resource;
 import cs230.system.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 
 public class LibrarianMainpageController {
         @FXML
@@ -47,20 +49,19 @@ public class LibrarianMainpageController {
         
         private Loan loadCopy(Loan l)
         {
+                Popup popup = new Popup();
+                ResourceCopyPageController controller =
+                                new ResourceCopyPageController();
+                controller.setCopyId(l.getCopyID());
+                FXMLLoader loader = new 
+                                FXMLLoader(getClass().getResource("Copy.fxml"));
+                loader.setController(controller);
                 try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(
-                                getClass().getClassLoader().getResource("cs230/application/Copy.fxml"));
-                        VBox listPage = fxmlLoader.load();
-                        ResourceListController controller = fxmlLoader.<ResourceListController>getController();
-                        //controller.setListToShow(resources);
-                        //mainContent.setPrefHeight(listPage.getPrefHeight());
-                        //mainContent.setPrefWidth(listPage.getPrefWidth());
-                        //mainContent.setContent(listPage);
-                        return l;
-                } catch(IOException e) {
+                        popup.getContent().add((Parent)loader.load());
+                } catch (IOException e) {
                         e.printStackTrace();
-                        return null;
                 }
+                return l;  
         }
 
 }

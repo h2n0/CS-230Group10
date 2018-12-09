@@ -44,6 +44,15 @@ public class User implements Serializable {
                 this.balance = balance;
                 this.avatarFilePath = avatarFilePath;
 	    }
+        
+        /**
+         * Constructor to copy a user
+         * @param username the username of the user
+         */
+        public void User(User user)
+        {
+                this.username = user.getName();
+        }
 	
         /**
 	     * Sets the username

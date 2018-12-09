@@ -137,6 +137,14 @@ public class Loan {
 	public LocalDate getDueDate() {
 		return dueDate;
 	}
+	
+	/**
+     * Sets the date that this resource is due back
+     * @param The due date
+     */
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate =  dueDate;
+    }
 
 	/**
 	 * Returns the date this resource was borrowed on
