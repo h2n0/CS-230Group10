@@ -238,6 +238,7 @@ public class MainPageController {
                     (Stage) logOutButton.getScene().getWindow();
 
 			        stage.setScene(scene);
+			        stage.centerOnScreen();
 
 		    } catch (IOException e) {
                     System.exit(0);
