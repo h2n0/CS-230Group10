@@ -34,7 +34,6 @@ public class Transaction implements Serializable {
 	 * @param amount the amount paid/owed 
 	 */
 	public Transaction( User user, Date date, String type, double amount, Copy copy, int daysOverdue) {
-		    this.transactionID = 1;
 	        this.user = user;
 	        this.date = date;
 	        this.type = type;
@@ -51,7 +50,6 @@ public class Transaction implements Serializable {
 	 * @param amount the amount paid/owed 
 	 */
 	public Transaction(User user, Date date, String type, double amount) {
-	        this.transactionID = 1;
             this.user = user;
             this.date = date;
             this.type = type;
