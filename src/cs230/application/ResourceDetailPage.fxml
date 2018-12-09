@@ -43,7 +43,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Label id="resourceID" fx:id="titleLabel" prefHeight="39.0" prefWidth="111.0" text="Label" />
-                        <TextField fx:id="titleTextbox" prefHeight="25.0" prefWidth="148.0" visible="false" />
+                        <TextField fx:id="titleTextBox" prefHeight="25.0" prefWidth="148.0" visible="false" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -55,7 +55,7 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <ImageView fx:id="thumbnailShow" fitHeight="61.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button fx:id="changeThumbnail" mnemonicParsing="false" prefHeight="24.0" prefWidth="114.0" text="Change thumbnail" />
+                        <Button fx:id="changeThumbnailButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="114.0" text="Change thumbnail" />
                      </children>
                   </HBox>
                   <Label prefHeight="43.0" prefWidth="206.0" text="Thumbnail" GridPane.rowIndex="3" />
@@ -71,6 +71,7 @@
                         <TableColumn fx:id="moreInfoColumn" prefWidth="90.0" />
                     </columns>
                   </TableView>
+                  <Button mnemonicParsing="false" text="Edit " />
                </children>
             </HBox>
             <GridPane id="bookDetails" fx:id="bookGrid" prefHeight="160.0" prefWidth="324.0">
@@ -207,7 +208,8 @@
                   </HBox>
                </children>
             </GridPane>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <Label fx:id="incorrectFieldLabel" text="Can't edit resource, some fields are incorrect" />
+            <HBox fx:id="deleteSaveBox" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="deleteButton" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" text="Delete" />
                   <Button fx:id="saveButton" mnemonicParsing="false" onAction="#handleSave" prefHeight="36.0" prefWidth="85.0" text="Save" visible="false" />
