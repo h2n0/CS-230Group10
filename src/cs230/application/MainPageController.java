@@ -209,13 +209,12 @@ public class MainPageController {
                 if (!searchBox.getText().equals(null)) {
                         if (currentResourceSelection.equals(COMBOBOX_DVD)) {
                                 ArrayList<Dvd>dvdList = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
-                                dvdList.removeIf(d -> d.getTitle().equals(searchBox.getText()));
                                 loadDVDPage(dvdList);
                         } else if (currentResourceSelection.equals(COMBOBOX_LAPTOP)) {
-                                ArrayList<Laptop>laptopList = (ArrayList<Laptop>) DatabaseManager.getTable("laptop"); 
+                                ArrayList<Laptop>laptopList = (ArrayList<Laptop>) DatabaseManager.getTable("laptop");
                                 loadLaptopPage(laptopList);
                         } else if (currentResourceSelection.equals(COMBOBOX_BOOK)) {
-                                ArrayList<Book>bookList = (ArrayList<Book>) DatabaseManager.getTable("book"); 
+                                ArrayList<Book>bookList = (ArrayList<Book>) DatabaseManager.getTable("book");
                                 loadBookPage(bookList);
                         }
                 }

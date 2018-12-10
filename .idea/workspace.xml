@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dcf51a0-078f-4ea1-9528-84334c7de2a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs230/application/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/book.dat" beforeDir="false" afterPath="$PROJECT_DIR$/Database/book.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/resourceID.dat" beforeDir="false" afterPath="$PROJECT_DIR$/Database/resourceID.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cs230/application/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/MainPageController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -17,23 +17,23 @@
     <session id="1713084186">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5879" />
+          <entry key="java" value="6042" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5879" />
+          <entry key="JAVA" value="6042" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="fxml" value="2" />
-          <entry key="java" value="42" />
+          <entry key="java" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="42" />
+          <entry key="JAVA" value="43" />
           <entry key="XML" value="2" />
         </counts>
       </usages-collector>
@@ -44,11 +44,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="89" column="34" lean-forward="true" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
+            <state relative-caret-position="88">
+              <caret line="210" column="105" selection-start-line="210" selection-start-column="105" selection-end-line="210" selection-end-column="105" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cs230/system/Dvd.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-976">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -246,7 +255,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544426805797" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544427273346" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -617,10 +626,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs230/system/Dvd.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-976">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="89" column="34" lean-forward="true" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
+        <state relative-caret-position="88">
+          <caret line="210" column="105" selection-start-line="210" selection-start-column="105" selection-end-line="210" selection-end-column="105" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
