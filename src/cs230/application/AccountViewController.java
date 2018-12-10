@@ -9,7 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-
+/**
+ * 
+ * @author 959470
+ * @version 1.0
+ */
 public class AccountViewController {
 	//the resources to be displayed
     @FXML private ResourceBundle resources;
@@ -17,64 +21,49 @@ public class AccountViewController {
     @FXML private URL location;
     // the users first name
     @FXML private Label firstName;
+    // the users last name
+    @FXML private Label lastName;
+    // the users phone number
+    @FXML private Label mobileNumber;
+    //the users address
+    @FXML private Label address;
+    //textfield to capture first name
+    @FXML private TextField firstNametxt;
+    //textfield to capture last name
+    @FXML private TextField lastNametxt;
+    //textfield to capture phone number
+    @FXML private TextField mobNumtxt;
+    //textfield to capture address
+    @FXML private TextField addresstxt;
+    //textfield to capture firstname
+    @FXML private Button editFirstName;
+    //button to edit lastname
+    @FXML private Button editLastName;
+    //button to edit the mobile number
+    @FXML private Button editMobNum;
+    //button to edit address
+    @FXML private Button editAddress;
+    //button to save first name
+    @FXML private Button saveFn;
+    //button to save last name
+    @FXML private Button saveLn;
+    //button to save phone number
+    @FXML private Button saveMobNum;
+    //button to save address
+    @FXML private Button saveAdr;
+    //button to cancel a popup
+    @FXML private Button cancell1;
+    //button to cancel a popup
+    @FXML private Button cancell2;
+    //button to cancel a popup
+    @FXML private Button cancell3;
+    //button to cancel a popup
+    @FXML private Button cancell4;
 
-    @FXML
-    private Label lastName;
-
-    @FXML
-    private Label mobileNumber;
-
-    @FXML
-    private Label address;
-
-    @FXML
-    private TextField firstNametxt;
-
-    @FXML
-    private TextField lastNametxt;
-
-    @FXML
-    private TextField mobNumtxt;
-
-    @FXML
-    private TextField addresstxt;
-
-    @FXML
-    private Button editFirstName;
-
-    @FXML
-    private Button editLastName;
-
-    @FXML
-    private Button editMobNum;
-
-    @FXML
-    private Button editAddress;
-
-    @FXML
-    private Button saveFn;
-
-    @FXML
-    private Button saveLn;
-
-    @FXML
-    private Button saveMobNum;
-
-    @FXML
-    private Button saveAdr;
-
-    @FXML
-    private Button cancell1;
-
-    @FXML
-    private Button cancell2;
-
-    @FXML
-    private Button cancell3;
-
-    @FXML
-    private Button cancell4;
-
+    /**
+     * sets all window features to be invisible
+     * @param event event to trigger code
+     */
     @FXML
     void cancell(MouseEvent event) {
 		editFirstName.setVisible(true);
@@ -95,6 +84,11 @@ public class AccountViewController {
 		addresstxt.setVisible(false);
     }
 
+    /**
+     * set the relevant features to be visible so 
+     * user can edit address
+     * @param event even to trigger this code
+     */
     @FXML
     void editFieldAddress(MouseEvent event) {
 		addresstxt.setVisible(true);
@@ -107,6 +101,11 @@ public class AccountViewController {
 		cancell4.setVisible(true);
     }
 
+    /**
+     * set the relevant features to be visible so 
+     * user can edit first name
+     * @param event even to trigger this code
+     */
     @FXML
     void editFieldFname(MouseEvent event) {
 		firstNametxt.setVisible(true);
@@ -119,6 +118,11 @@ public class AccountViewController {
 		cancell1.setVisible(true);
     }
 
+    /**
+     * set the relevant features to be visible so 
+     * user can edit last name
+     * @param event even to trigger this code
+     */
     @FXML
     void editFieldLastName(MouseEvent event) {
 		lastNametxt.setVisible(true);
@@ -131,6 +135,11 @@ public class AccountViewController {
 		cancell2.setVisible(true);
     }
 
+    /**
+     * set the relevant features to be visible so 
+     * user can edit phone number
+     * @param event even to trigger this code
+     */
     @FXML
     void editFieldMbNum(MouseEvent event) {
 		mobNumtxt.setVisible(true);
@@ -142,32 +151,44 @@ public class AccountViewController {
 		saveMobNum.setVisible(true);
 		cancell3.setVisible(true);
     }
-
+    
+    /**
+     * saves the address
+     * @param event even to trigger this code
+     */
     @FXML
     void saveAdress(MouseEvent event) {
 		address.setText(addresstxt.getText());
 		cancell(event);
     }
 
+    /**
+     * saves the first name
+     * @param event even to trigger this code
+     */
     @FXML
     void saveFirstName(MouseEvent event) {
 		firstName.setText(firstNametxt.getText());
 		cancell(event);
     }
 
+    /**
+     * saves the last name
+     * @param event even to trigger this code
+     */
     @FXML
     void saveLastName(MouseEvent event) {
 		lastName.setText(lastNametxt.getText());
 		cancell(event);
     }
 
+    /**
+     * saves the phone number
+     * @param event even to trigger this code
+     */
     @FXML
     void saveMobNum(MouseEvent event) {
 		mobileNumber.setText(mobNumtxt.getText());
 		cancell(event);
-    }
-
-    @FXML
-    void initialize() {
     }
 }
