@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+
 import cs230.system.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -158,11 +159,11 @@ public class NewUserController {
                 }
         }
         
-        public void setIsFirstRun() {
+        private void setIsFirstRun (boolean isFirstRun) {
                 this.isFirstRun = isFirstRun;
         }
         @FXML
-        private void handleSwitchUser(ActionEvent event) {
+        private void handleSwitchUser (ActionEvent event) {
                 staffEditArea.setVisible(false);
                 isLibrarian = false;
         }
@@ -238,9 +239,6 @@ public class NewUserController {
                 postcodeAdd = postcodeTextBox.getText();
                 employmentDateAdd = employmentDateTextBox.getText();
                 staffNumberAdd = staffNumberTextBox.getText();
-                ArrayList<User> userList = (ArrayList<User>) DatabaseManager.getTable("user");
-                
-                
                 boolean canContinue = false;
                 if (!usernameAdd.isEmpty() && !firstNameAdd.isEmpty() && 
                                 !lastNameAdd.isEmpty() && !phoneNumberAdd.isEmpty() &&
@@ -249,14 +247,7 @@ public class NewUserController {
                                 imagePath != "") {
                         canContinue = true;
                 }
-          
-                if(userList != null) {
-                        userList.removeIf(u -> !u.getName().equals(usernameTextBox.getText()));
-                        if(!userList.isEmpty()) {
-                                canContinue = false;
-                        }
-                }
-          
+
                 if (canContinue && !isLibrarian) {
                         Address newAddress = new Address(houseNumberAdd, roadNameAdd, cityAdd, postcodeAdd);
                         User newUser = new User(usernameAdd, firstNameAdd, lastNameAdd, phoneNumberAdd, newAddress, 0.0, imagePath);
