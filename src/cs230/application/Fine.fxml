@@ -26,7 +26,7 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="57.0" prefWidth="586.0" spacing="15.0">
          <children>
-            <Label alignment="BASELINE_LEFT" contentDisplay="CENTER" text="Search for student :">
+            <Label fx:id="searchLabel" alignment="BASELINE_LEFT" contentDisplay="CENTER" text="Search for student :">
                <font>
                   <Font size="14.0" />
                </font>
