@@ -99,9 +99,9 @@ public class MainPageController {
  //               }
                 
                 updateComboBox();
-                username.setText(SharedData.getUsername());
-                balance.textProperty().set("Balance: " + Double.toString(SharedData.getBalance()));
-                userImage.setImage(SharedData.getAvatar());
+ //               username.setText(SharedData.getUsername());
+ //               balance.textProperty().set("Balance: " + Double.toString(SharedData.getBalance()));
+ //               userImage.setImage(SharedData.getAvatar());
                 //userImage = new ImageView(SharedData.getAvatar());
                 currentResourceSelection = COMBOBOX_ALL;
         }
@@ -204,41 +204,31 @@ public class MainPageController {
 
         @FXML
         private void handleSearch(ActionEvent event) {
-                ArrayList<Resource> resources = getResourceList();
-                if (currentResourceSelection.equals(COMBOBOX_BOOK)) {
-                        resources.removeIf(r -> r.getType() != "book");
-                } else if (currentResourceSelection.equals(COMBOBOX_LAPTOP)) {
-                        resources.removeIf(r -> r.getType() != "Laptop");
-                } else if (currentResourceSelection.equals(COMBOBOX_DVD)) {
-                        resources.removeIf(r -> r.getType() != "Dvd");
+                if (!searchBox.getText().equals(null)) {
+                        if (currentResourceSelection.equals(COMBOBOX_DVD)) {
+                                ArrayList<Dvd>dvdList = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
+                                dvdList.removeIf(d -> d.getTitle().equals(searchBox.getText()));
+                                loadDVDPage(dvdList);
+                        } else if (currentResourceSelection.equals(COMBOBOX_LAPTOP)) {
+                                ArrayList<Laptop>laptopList = (ArrayList<Laptop>) DatabaseManager.getTable("laptop"); 
+                                loadLaptopPage(laptopList);
+                        } else if (currentResourceSelection.equals(COMBOBOX_BOOK)) {
+                                ArrayList<Book>bookList = (ArrayList<Book>) DatabaseManager.getTable("book"); 
+                                loadBookPage(bookList);
+                        }
                 }
-                if (!searchBox.textProperty().equals(null)) {
-                        resources.removeIf(r -> r.getTitle()
-							.contains((CharSequence) searchBox.textProperty()));
-                }
-                loadListPage(resources);
         }
 
-        private void loadAllPage() {
-                loadListPage(getResourceList());
+        private void loadDVDPage(ArrayList<Dvd> dvdList) {
+                
         }
 
-        private void loadDVDPage() {
-                ArrayList<Resource> resources = getResourceList();
-                resources.removeIf(r -> r.getType().equals("Dvd"));
-                loadListPage(resources);
+        private void loadBookPage(ArrayList<Book> bookList) {
+                
         }
 
-        private void loadBookPage() {
-                ArrayList<Resource> resources = getResourceList();
-                resources.removeIf(r -> r.getType().equals("book"));
-                loadListPage(resources);
-        }
-
-        private void loadLaptopPage() {
-                ArrayList<Resource> resources = getResourceList();
-                resources.removeIf(r -> r.getType().equals("Laptop"));
-                loadListPage(resources);
+        private void loadLaptopPage(ArrayList<Laptop> laptopList) {
+                
         }
 
         private void loadListPage(ArrayList<Resource> resources) {
@@ -254,22 +244,6 @@ public class MainPageController {
                 }
         }
 
-        private ArrayList<Resource> getResourceList() {
-                ArrayList<Resource> resourceList =
-                                new ArrayList<Resource>();
-                ArrayList<Dvd> dvdList
-                = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
-                ArrayList<Book> bookList = (ArrayList<Book>) DatabaseManager.getTable("book");
-                ArrayList<Laptop> laptopList
-                = (ArrayList<Laptop>) DatabaseManager.getTable("laptop");
-                resourceList
-                .addAll((ArrayList<Resource>) (ArrayList<?>) dvdList);
-                resourceList
-                .addAll((ArrayList<Resource>) (ArrayList<?>) bookList);
-                resourceList
-                .addAll((ArrayList<Resource>) (ArrayList<?>) laptopList);
-                return resourceList;
-        }
 
         @FXML
         private void handleFineAction(ActionEvent event) {

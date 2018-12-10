@@ -61,13 +61,7 @@
                            </HBox.margin></ImageView>
                               <VBox prefHeight="68.0" prefWidth="171.0">
                                  <children>
-                                    <Label fx:id="username" prefHeight="27.0" prefWidth="169.0" text="Username">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="10.0" />
-                                 </padding></Label>
+                                    <Hyperlink fx:id="username" prefHeight="27.0" prefWidth="169.0" text="Username"/>
                                     <Label fx:id="balance" prefHeight="27.0" prefWidth="166.0" text="Balance" textFill="RED">
                                  <font>
                                     <Font size="14.0" />
