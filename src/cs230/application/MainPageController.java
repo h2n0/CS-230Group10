@@ -89,21 +89,21 @@ public class MainPageController {
         @FXML
         public void initialize() {
                 setResourceLinks();
-//                balance.textProperty()
-//                .set(Double.toString(currentUser.getBalance()));
-//                if(SharedData.getIsLibrarian())
-//                {
-//                        username.setOnAction(e -> loadLibrarianInfo()); 
-//                }
- //               else
- //               {
-//                        username.setOnAction(e -> loadUserInfo()); 
- //               }
+                balance.textProperty()
+                .set(Double.toString(currentUser.getBalance()));
+                if(SharedData.getIsLibrarian())
+                {
+                        username.setOnAction(e -> loadLibrarianInfo()); 
+                }
+                else
+                {
+                        username.setOnAction(e -> loadUserInfo()); 
+                }
                 
                 updateComboBox();
- //               username.setText(SharedData.getUsername());
- //               balance.textProperty().set("Balance: " + Double.toString(SharedData.getBalance()));
- //               userImage.setImage(SharedData.getAvatar());
+                username.setText(SharedData.getUsername());
+                balance.textProperty().set("Balance: " + Double.toString(SharedData.getBalance()));
+                userImage.setImage(SharedData.getAvatar());
                 //userImage = new ImageView(SharedData.getAvatar());
                 currentResourceSelection = COMBOBOX_ALL;
         }

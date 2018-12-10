@@ -157,7 +157,8 @@ public class CreateResourceViewController {
 						unfinishedLb.setVisible(true);
 					} else {
 						unfinishedLb.setVisible(false);
-						//Laptop laptop1 = new Laptop(id,title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
+						Laptop laptop1 = new Laptop(id,title.getText(),year,thumbnail.getText(),manufacturer.getText(),model.getText(),operatingSystem.getText());
+						DatabaseManager.saveRecord(laptop1, "laptop");
 					}
 					break;
 				case "Dvd" :
@@ -175,6 +176,7 @@ public class CreateResourceViewController {
 						}
 						int runtime = Integer.parseInt(this.runtime.getText());
 						Dvd dvd1 = new Dvd(id,title.getText(),year,thumbnail.getText(),director.getText(),runtime,dvdLanguage.getText(),subLang);
+						DatabaseManager.saveRecord(dvd1, "dvd");
 					}
 					break;
 			}

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.CreateResourceViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.CreateResourceViewController">
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,16 +17,16 @@
             <TextField fx:id="title" layoutX="73.0" layoutY="98.0" prefHeight="25.0" prefWidth="76.0" />
             <TextField fx:id="year" layoutX="73.0" layoutY="131.0" prefHeight="25.0" prefWidth="41.0" />
             <TextField fx:id="thumbnail" layoutX="73.0" layoutY="165.0" prefHeight="25.0" prefWidth="75.0" />
-            <Label fx:id="authorLb" layoutX="160.0" layoutY="102.0" prefHeight="17.0" prefWidth="40.0" text="Author" visible="false" />
-            <Label fx:id="bookLanguageLb" layoutX="160.0" layoutY="135.0" text="Language*" visible="false" />
-            <Label fx:id="publisherLb" layoutX="162.0" layoutY="169.0" text="Publisher" visible="false" />
-            <Label fx:id="isbnLb" layoutX="160.0" layoutY="200.0" text="isbn*" visible="false" />
-            <Label fx:id="genreLb" layoutX="157.0" layoutY="225.0" text="Genre*" visible="false" />
-            <TextField fx:id="author" layoutX="216.0" layoutY="98.0" prefHeight="25.0" prefWidth="71.0" visible="false" />
-            <TextField fx:id="bookLanguage" layoutX="216.0" layoutY="131.0" prefHeight="25.0" prefWidth="72.0" visible="false" />
-            <TextField fx:id="publisher" layoutX="215.0" layoutY="165.0" prefHeight="25.0" prefWidth="73.0" visible="false" />
-            <TextField fx:id="isbn" layoutX="215.0" layoutY="196.0" prefHeight="25.0" prefWidth="74.0" visible="false" />
-            <TextField fx:id="genre" layoutX="215.0" layoutY="230.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
+            <Label fx:id="authorLb" layoutX="160.0" layoutY="102.0" prefHeight="17.0" prefWidth="40.0" text="Author" />
+            <Label fx:id="bookLanguageLb" layoutX="160.0" layoutY="135.0" text="Language*" />
+            <Label fx:id="publisherLb" layoutX="162.0" layoutY="169.0" text="Publisher" />
+            <Label fx:id="isbnLb" layoutX="160.0" layoutY="200.0" text="isbn*" />
+            <Label fx:id="genreLb" layoutX="157.0" layoutY="225.0" text="Genre*" />
+            <TextField fx:id="author" layoutX="216.0" layoutY="98.0" prefHeight="25.0" prefWidth="71.0" />
+            <TextField fx:id="bookLanguage" layoutX="216.0" layoutY="131.0" prefHeight="25.0" prefWidth="72.0" />
+            <TextField fx:id="publisher" layoutX="215.0" layoutY="165.0" prefHeight="25.0" prefWidth="73.0" />
+            <TextField fx:id="isbn" layoutX="215.0" layoutY="196.0" prefHeight="25.0" prefWidth="74.0" />
+            <TextField fx:id="genre" layoutX="215.0" layoutY="230.0" prefHeight="25.0" prefWidth="75.0" />
             <Label fx:id="manufacturerLb" layoutX="300.0" layoutY="102.0" text="Manufacturer*" visible="false" />
             <Label fx:id="osLb" layoutX="300.0" layoutY="135.0" text="OS*" visible="false" />
             <Label fx:id="modelLb" layoutX="300.0" layoutY="169.0" text="Model*" visible="false" />
