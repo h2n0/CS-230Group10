@@ -82,6 +82,10 @@ public class Loan {
 		this.status = false;
 	}
 
+	/**
+	 * checks if two loans are equal
+	 * @param obj the loan to compare against this
+	 */
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;

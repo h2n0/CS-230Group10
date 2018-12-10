@@ -73,14 +73,15 @@ public class SharedData {
          * @return The active user's avatar
          */
         public static Image getAvatar() {
-                //Image image = new Image(activeUser.getAvatarFilePath());
                 File file = new File(activeUser.getAvatarFilePath());
                 return new Image(file.toURI().toString());
         }
 
-
+        /**
+         * set the librarian to boolean input
+         * @param b the boolean if a 
+         */
 		public static void setIsLibrarian(boolean b ) {
 			isLibrarian = b;
-			
 		}
 }

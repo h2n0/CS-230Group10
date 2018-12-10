@@ -19,9 +19,9 @@ public class Librarian extends User implements Serializable {
 	/**
 	 * Constructor
 	 * @param name the name of the user
-         * @param firstname the first name of the user
-         * @param lastname the last name of the user
-         * @param phonenum the phone number of the user
+     * @param firstname the first name of the user
+     * @param lastname the last name of the user
+     * @param phonenum the phone number of the user
 	 * @param address the address of the user
 	 * @param balance how much money the user owes the library
 	 * @param avatarFilePath the file path to the user's avatar
@@ -66,25 +66,4 @@ public class Librarian extends User implements Serializable {
 		return staffNumber;
 	}
 
-	public void payfine (Integer userID, Float paid) {
-		//Select amount where id = UserID
-		//update amount = amount - paid where id = UserID
-	}
-	
-	public void authoriseLoan (Integer userID, Integer copyID) {
-		//if the user has negative balance set negative balance to true
-		Boolean negativeBalance = false;
-		if (negativeBalance) {
-			throw new IllegalArgumentException ("That user has unpaid fines and hence cannot take out a book"); 
-		}
-		else {
-			//update copy where id = CopyID, set status to unavailable
-			//update resource where id = ResourceID, set availablecopies to -1
-			//insert into history where id = copyID, add info
-		}
-	}
-
-	public void authoriseReturn (Integer loanReferance) {
-		//update database to say user has returned copy, changing the status of copy to unavailable and -1 from the available copies in the resource table
-	}
 }

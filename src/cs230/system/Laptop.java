@@ -1,11 +1,14 @@
 package cs230.system;
 
+import java.io.Serializable;
+
 /**
  * @author 908112
  *
  */
 
-public class Laptop extends Resource {
+public class Laptop extends Resource implements Serializable {
+		private static final long serialVersionUID = 1L;
         // The manufacturer of the Laptop
         private String manufacturer;
         // The model of the Laptop
@@ -15,10 +18,9 @@ public class Laptop extends Resource {
 
         /**
          * The constructor of a new Laptop
-         * 
          * @param id
          * @param title
-         * @param manufacturer    year
+         * @param manufacturer year
          * @param thumbnail
          * @param manufacturer
          * @param operatingSystem
@@ -31,8 +33,6 @@ public class Laptop extends Resource {
                 this.model = model;
                 this.operatingSystem = operatingSystem;
                 this.type = "Laptop";
-// 		create();
-
         }
 
         /**
@@ -47,35 +47,24 @@ public class Laptop extends Resource {
 
         /**
          * Sets the manufacturer
-         * 
-         * @param manufacturer
+         * @param manufacturer the manufacturer
          */
         public void setManufacturer(String manufacturer) {
                 this.manufacturer = manufacturer;
         }
 
-        /**
-         */
-
-        /**
-         * 
+        /** 
          * Sets the model
-         * 
-         * @param model
+         * @param model the model
          */
         public void setModel(String model) {
                 this.model = model;
         }
 
         /**
-         */
-
-        /**
          * Sets the operating system
-         * 
-         * @param operatingSystem
+         * @param operatingSystem the os
          */
-
         public void setOperatingSystem(String operatingSystem) {
                 this.operatingSystem = operatingSystem;
         }
