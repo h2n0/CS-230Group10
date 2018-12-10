@@ -2,7 +2,7 @@ package cs230.system;
 
 import javafx.scene.image.Image;
 
-import java.util.ArrayList;
+import java.io.File;
 
 /**
  * This class stores session information such as username to be used by each GUI
@@ -74,8 +74,13 @@ public class SharedData {
          */
         public static Image getAvatar() {
                 //Image image = new Image(activeUser.getAvatarFilePath());
-                return new Image("\\Database\\Images" +
-                        "\\Harry_Potter_and_the_Philosopher" +
-                        "'s_Stone_Book_Cover.png");
+                File file = new File(activeUser.getAvatarFilePath());
+                return new Image(file.toURI().toString());
         }
+
+
+		public static void setIsLibrarian(boolean b ) {
+			isLibrarian = b;
+			
+		}
 }
