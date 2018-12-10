@@ -70,7 +70,7 @@ public class Librarian extends User implements Serializable {
 	{
 	        try {
 	             Librarian toCompare = (Librarian) obj;   
-	             if(toCompare.getName().equals(this.getName()))
+	             if(this.getName().equalsIgnoreCase(toCompare.getName()))
 	             {
 	                     return true;
 	             } else {
