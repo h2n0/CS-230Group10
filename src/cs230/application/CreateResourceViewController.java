@@ -20,33 +20,24 @@ import java.util.ArrayList;
  *
  */
 public class CreateResourceViewController {
-
-        @FXML
-        private TextField title;
-
-        @FXML
-        private TextField year;
-
-        @FXML
-        private TextField thumbnail;
-
-        @FXML
-        private Label authorLb;
-
-        @FXML
-        private Label bookLanguageLb;
-
-        @FXML
-        private Label publisherLb;
-
-        @FXML
-        private Label isbnLb;
-
-        @FXML
-        private Label genreLb;
-
-        @FXML
-        private TextField author;
+		//textfield to capture title
+        @FXML private TextField title;
+        //textfield to capture year
+        @FXML private TextField year;
+        //textfield to capture thumbnail
+        @FXML private TextField thumbnail;
+        //label to display author
+        @FXML private Label authorLb;
+        //label to display book language
+        @FXML private Label bookLanguageLb;
+        //label to display publisher
+        @FXML private Label publisherLb;
+        //label to display isbn
+        @FXML private Label isbnLb;
+        //label to display genere
+        @FXML private Label genreLb;
+        //textfield to capture author
+        @FXML private TextField author;
 
         @FXML
         private TextField bookLanguage;
@@ -280,7 +271,9 @@ public class CreateResourceViewController {
 		
     }
 	
-
+    /**
+     * initialise the page
+     */
     @FXML
     void initialize() {
 		resourceChoice.getItems().add("Book");
