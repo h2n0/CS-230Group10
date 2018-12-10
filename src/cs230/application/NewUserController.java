@@ -3,6 +3,7 @@ package cs230.application;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import cs230.system.*;
@@ -216,6 +217,9 @@ public class NewUserController {
                 postcodeAdd = postcodeTextBox.getText();
                 employmentDateAdd = employmentDateTextBox.getText();
                 staffNumberAdd = staffNumberTextBox.getText();
+                ArrayList<User> userList = (ArrayList<User>) DatabaseManager.getTable("user");
+                
+                
                 boolean canContinue = false;
                 if (!usernameAdd.isEmpty() && !firstNameAdd.isEmpty() && 
                                 !lastNameAdd.isEmpty() && !phoneNumberAdd.isEmpty() &&
@@ -223,6 +227,12 @@ public class NewUserController {
                                 !cityAdd.isEmpty() && !postcodeAdd.isEmpty() && 
                                 imagePath != "") {
                         canContinue = true;
+                }
+                if(userList != null) {
+                        userList.removeIf(u -> !u.getName().equals(usernameTextBox.getText()));
+                        if(!userList.isEmpty()) {
+                                canContinue = false;
+                        }
                 }
                 if (canContinue && !isLibrarian) {
                         Address newAddress = new Address(houseNumberAdd, roadNameAdd, cityAdd, postcodeAdd);
