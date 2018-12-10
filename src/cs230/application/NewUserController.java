@@ -118,6 +118,7 @@ public class NewUserController {
                         staffEditArea.setVisible(true); 
                         switchToUser.setVisible(false);
                         switchToLibrarian.setVisible(false);
+                        isLibrarian = true;
                 }
                 else
                 {
