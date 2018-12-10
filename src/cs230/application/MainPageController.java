@@ -25,6 +25,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/**
+ * @author 901306 & Scott (960689)
+ */
 public class MainPageController {
 
         private static final String COMBOBOX_ALL = "All";
