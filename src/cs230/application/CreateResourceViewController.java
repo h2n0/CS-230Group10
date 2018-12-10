@@ -14,7 +14,7 @@ import cs230.system.*;
 import java.util.ArrayList;
 
 /**
- * 
+ * the controller behind create resource
  * @author 959470
  * @version 1.0
  *
@@ -107,12 +107,20 @@ public class CreateResourceViewController {
 
         @FXML
         private Label unfinishedLb;
-	
+        
+	/**
+	 * get the next id from the database
+	 * @return the id from the database
+	 */
 	private String getNextId() {
 		String newID = DatabaseManager.getNextID();
 		return newID;
 	}
-
+ 
+		/**
+		 * creates a resource
+		 * @param event the event that triggered this code
+		 */
         @FXML
         void createResource(MouseEvent event) {
 		if (title.getText().equals("") || year.getText().equals("") || thumbnail.getText().equals("")){
@@ -171,8 +179,12 @@ public class CreateResourceViewController {
 					break;
 			}
 		}
-        }
+    }
 
+    /**
+     * show the resources
+     * @param event the event that triggered this code
+     */
     @FXML
     void showResourceFields(MouseEvent event) {
 		String value = resourceChoice.getValue();
