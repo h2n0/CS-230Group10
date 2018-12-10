@@ -17,6 +17,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 
+/**
+ * @author Jack
+ */
 public class LibrarianMainpageController {
         @FXML
         private TableColumn<Loan,String> copyIdColumn;

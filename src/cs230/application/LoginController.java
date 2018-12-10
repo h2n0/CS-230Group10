@@ -3,6 +3,7 @@ package cs230.application;
 import java.io.IOException;
 
 import cs230.system.DatabaseManager;
+import cs230.system.Librarian;
 import cs230.system.SharedData;
 import cs230.system.User;
 import javafx.event.ActionEvent;
@@ -57,6 +58,11 @@ public class LoginController {
 			activeUser = (User)
 				DatabaseManager.searchExact(activeUser,
 					"user");
+			
+			Librarian tempLib = new Librarian(inputUsername, null, null, null, null, null, null, null, null);
+			if(DatabaseManager.checkForRecord(tempLib, "librarian")) {
+				SharedData.setIsLibrarian(true);
+			}
 
 			SharedData.setUser(activeUser);
 			changeToMainPage();
