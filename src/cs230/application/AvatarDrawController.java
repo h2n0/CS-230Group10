@@ -19,28 +19,42 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
+/**
+ * handles drawing an avatar
+ * @author 964552
+ * @version 1.0
+ */
 public class AvatarDrawController {
-
-	@FXML
-	private Canvas canvas;
-
+	// the canvas to be drawn on
+	@FXML private Canvas canvas;
+	// 
 	private GraphicsContext ctx;
+	// 
 	private int mx, my;
+	//int array for pixels
 	private int[] pixels;
+	// the image width
 	private int imageWidth = 128;
+	//the image height
 	private int imageHeight = 128;
+	// the image to canvas writes too
 	private BufferedImage newAvatar;
+	//
 	private boolean drawing;
+	//the list of colours
 	private int[] pallet;
+	//index in pallet
 	private int palletIndex;
+	// size of the brush
 	private int brushSize;
-	
+	//the size of a big brush
 	private final int bigBrush = 10;
+	//the size of a small brush
 	private final int smallBrush = 3;
 
 	/**
 	 * Called when the user clicks the save button
-	 * @param e
+	 * @param e the event
 	 */
 	public void saveAvatar(ActionEvent e) {
 		
@@ -58,33 +72,20 @@ public class AvatarDrawController {
 			JOptionPane.showMessageDialog(null, "Unable to save avatar", "AvatarDraw", JOptionPane.ERROR_MESSAGE);
 			e1.printStackTrace();
 		}
-
-		/*
-		User oldUser = PassInfo.getCurrentUser();
-		User newUser = PassInfo.getCurrentUser();
-		newUser.setAvatarFilePath(path);
-		DatabaseManager.editRecord(oldUser, newUser, "user");
-		PassInfo.setCurrentUser(newUser);
-		*/
 	}
 
-	/*
-	 * Called by pressing the leave button
-	 */
-	public void leaveDialog(ActionEvent e) {
-		// Code here to go back to UserInfo page
-	}
-
-	/*
+	/**
 	 * Called when we bring the mouse up from the canvas
+	 * @param e the mouse movement event
 	 */
 	public void mouseUp(MouseEvent e) {
 		this.drawing = false;
 		e.consume();
 	}
 
-	/*
+	/**
 	 * Called when we push the mouse onto the canvas
+	 * @param e the mouse movement event
 	 */
 	public void mouseDown(MouseEvent e) {
 		this.drawing = true;
@@ -94,7 +95,7 @@ public class AvatarDrawController {
 	/**
 	 * Called when the mouse is clicked on the canvase
 	 * we can see if it was in certain areas here
-	 * @param e
+	 * @param e the mouse movement event
 	 */
 	public void canvasClick(MouseEvent e) {
 		
@@ -124,7 +125,7 @@ public class AvatarDrawController {
 
 	/**
 	 * Called when the mouse moves over the canvas
-	 * @param e
+	 * @param e the mouse movement event
 	 */
 	public void mouseMove(MouseEvent e) {
 		mx = (int) e.getX();
@@ -136,6 +137,24 @@ public class AvatarDrawController {
 
 		e.consume();
 	}
+	
+	/*
+	 * Called when the scene loads
+	 */
+	public void initialize() {
+		this.ctx = canvas.getGraphicsContext2D();
+		this.newAvatar = new BufferedImage(this.imageWidth, this.imageHeight, BufferedImage.TYPE_INT_RGB);
+		this.pixels = new int[this.imageWidth * this.imageHeight];
+
+		// Create a pallet; Red, Green, Blue, Yellow, Pink, Cyan, Black and White 
+		this.pallet = new int[] { makeRGB(255, 0, 0), makeRGB(0, 255, 0), makeRGB(0, 0, 255), makeRGB(255, 255, 0),
+				makeRGB(255, 0, 255), makeRGB(0, 255, 255), makeRGB(0, 0, 0), makeRGB(255, 255, 255) };
+
+		this.brushSize = bigBrush;
+		
+		// Make sure something is on the canvas so the user isn't confused
+		bufferToFX();
+	}
 
 	/**
 	 * Called when we are painting on the image
@@ -146,6 +165,7 @@ public class AvatarDrawController {
 		int ix = mx - (400 - this.imageWidth) / 2;
 		int iy = my - (300 - this.imageHeight) / 2;
 
+		//true if pixels are in the boundaries of the image
 		boolean valid = !(ix < 0 || iy < 0 || ix >= this.imageWidth || iy >= this.imageWidth);
 
 		// Check if we are inside the "image"
@@ -164,8 +184,10 @@ public class AvatarDrawController {
 	 * @param color - The color of the circle
 	 */
 	private void circle(int x, int y, int r, int color) {
+		//for every pixel
 		for (int xx = -r; xx < r; xx++) {
 			for (int yy = -r; yy < r; yy++) {
+				//colour in if inside radius
 				if (xx * xx + yy * yy < r * r) {
 					setPixel(x + xx, y + yy, color);
 				}
@@ -173,6 +195,9 @@ public class AvatarDrawController {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void bufferToFX() {
 		
 		// Clear the area before we draw it again
@@ -245,28 +270,15 @@ public class AvatarDrawController {
 		this.pixels[x + y * this.imageWidth] = color;
 	}
 
-	/*
+	/**
 	 * Helper function to make colors easier
+	 * @param r the red value of a colour
+	 * @param g the green value of a colour
+	 * @param b the blue value of a colour
+	 * @return the integer representaion of a colour
 	 */
 	private int makeRGB(int r, int g, int b) {
 		return (r << 16) | (g << 8) | b;
 	}
-
-	/*
-	 * Called when the scene loads
-	 */
-	public void initialize() {
-		this.ctx = canvas.getGraphicsContext2D();
-		this.newAvatar = new BufferedImage(this.imageWidth, this.imageHeight, BufferedImage.TYPE_INT_RGB);
-		this.pixels = new int[this.imageWidth * this.imageHeight];
-
-		// Create a pallet; Red, Green, Blue, Yellow, Pink, Cyan, Black and White 
-		this.pallet = new int[] { makeRGB(255, 0, 0), makeRGB(0, 255, 0), makeRGB(0, 0, 255), makeRGB(255, 255, 0),
-				makeRGB(255, 0, 255), makeRGB(0, 255, 255), makeRGB(0, 0, 0), makeRGB(255, 255, 255) };
-
-		this.brushSize = bigBrush;
-		
-		// Make sure something is on the canvas so the user isn't confused
-		bufferToFX();
-	}
+	
 }

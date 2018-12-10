@@ -17,8 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-/**This controllers the ui for the login page
- * 
+/**
+ * This controllers the ui for the login page
  * @author Jack
  * @version 1.0
  */

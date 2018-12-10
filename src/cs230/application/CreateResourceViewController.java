@@ -13,6 +13,12 @@ import cs230.system.*;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author 959470
+ * @version 1.0
+ *
+ */
 public class CreateResourceViewController {
 
         @FXML
@@ -135,8 +141,7 @@ public class CreateResourceViewController {
                                                         bookLanguage.getText());
 
 						DatabaseManager.saveRecord(inputBook, "book");
-						System.out.println("Saved " +
-                                                        "successfully!");
+						System.out.println("Saved successfully!");
 					}
 					break;
 				case "Laptop" :

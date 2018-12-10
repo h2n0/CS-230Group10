@@ -9,16 +9,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
+
 public class AccountViewController {
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
-    private Label firstName;
+	//the resources to be displayed
+    @FXML private ResourceBundle resources;
+    // 
+    @FXML private URL location;
+    // the users first name
+    @FXML private Label firstName;
 
     @FXML
     private Label lastName;

@@ -39,34 +39,8 @@ public class FineController  {
         //column to put the edit buttons into
         @FXML private TableColumn<User, Button> Edit;
     
+        
         /**
-	     * gets the user input and searches for usernames matching the input
-	     * then displays these users in the table
-	     * @param event ?????
-	     */
-        @SuppressWarnings("unchecked")
-        @FXML
-        private void handleSearchButton(ActionEvent event) {
-                //get the text from the search button
-                String student = studentBox.getText();
-		
-                //get all the users
-                ArrayList<User> allUsers = new ArrayList<User>();
-                try {
-                        allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
-		        }
-                catch(Exception e){
-                        e.printStackTrace();
-		        }
-                
-                //remove users if their balance is 0 or their name doesnt contain the search value
-                allUsers.removeIf(s -> (s.getBalance()==0.0 || !s.getName().contains(student)));
-                
-                //populate the table with the users found
-                PopulateFineTable(allUsers);
-	    }
-    
-    	/**
 	     * Overrides the initialise function so when the window is open the
 	     * info for all users with fines are displayed
 	     */
@@ -97,6 +71,32 @@ public class FineController  {
                 //populate the table with the users above
                 PopulateFineTable(allUsers);
         }
+    
+        /**
+	     * gets the user input and searches for usernames matching the input
+	     * then displays these users in the table
+	     * @param event ?????
+	     */
+        @FXML
+        private void handleSearchButton(ActionEvent event) {
+                //get the text from the search button
+                String student = studentBox.getText();
+		
+                //get all the users
+                ArrayList<User> allUsers = new ArrayList<User>();
+                try {
+                        allUsers = (ArrayList<User>) DatabaseManager.getTable("user");
+		        }
+                catch(Exception e){
+                        e.printStackTrace();
+		        }
+                
+                //remove users if their balance is 0 or their name doesnt contain the search value
+                allUsers.removeIf(s -> (s.getBalance()==0.0 || !s.getName().contains(student)));
+                
+                //populate the table with the users found
+                PopulateFineTable(allUsers);
+	    }
     
         /**
          * Populates the appropriate features on the window for a user

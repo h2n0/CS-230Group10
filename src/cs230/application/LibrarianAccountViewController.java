@@ -11,6 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * 
+ * @author 959470
+ * @version 1.0
+ *
+ */
 public class LibrarianAccountViewController {
 	
 	private Librarian librarian ;

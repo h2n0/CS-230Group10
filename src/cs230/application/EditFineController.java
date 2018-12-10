@@ -39,6 +39,10 @@ public class EditFineController  {
         //the user to be edited
         private static User UserFine;
 	
+        /**
+         * sets the suer fine
+         * @param u the user to be edited
+         */
         public void setUserFine(User u) {
                 UserFine=u;
                 PopulateEditFine(u);
@@ -144,15 +148,6 @@ public class EditFineController  {
                 stage.close();
         }
 	
-        /**
-	     * overides the initialize function so when the window is open the
-	     * info for a user is displayed
-	     */
-        @FXML
-        public void initialize() {
-                //populate page with user info
-                //PopulateEditFine(UserFine);
-        }
 	
         /**
          * Populates the appropriate features on the window for a user

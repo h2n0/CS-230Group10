@@ -32,14 +32,17 @@ import javafx.stage.Stage;
 
 /**
  * This class controls the resource detail page.
- * 
  * @author 901306
+ * @version 1.1
  */
 public class ResourceDetailController {
-        
+        //max amount of fines on an overdue book or dvd
         private final int MAX_BOOK_DVD_FINE= 25;
-        private final int MAX_LAPTOP_FINE= 25;
+        //max amount of fines on an overdue laptop
+        private final int MAX_LAPTOP_FINE= 100;
+        //daily fine for a dvd/book 
         private final int DAILY_BOOK_DVD_FINE = 2;
+        //daily fine for a laptop
         private final int DAILY_LAPTOP_FINE = 10;
 
         // The edit button shown for librarians

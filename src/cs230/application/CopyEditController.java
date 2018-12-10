@@ -14,48 +14,42 @@ import javafx.stage.Stage;
 /**Controls the copy edit/save page
  * 
  * @author 901306
- *
+ * @version 1.0
  */
 public class CopyEditController {
 
         //The copy to edit
         private String copyID = "";
-        
         //The resource to add the copy to
         private String resourceID;
-        
         //The old Duration
         private int duration;
-        
         //The status of the copy
         private Copy.Status status;
-        
-        @FXML
-        private Label editLabel;
-        
-        @FXML
-        private Label newLabel;
-        
-        @FXML
-        private Label incorrectLabel;
-        
-        @FXML
-        private TextField durationTextBox;
-        
-        @FXML
-        private Button saveButton;
-        
-        @FXML
-        private Button cancelButton;
-        
+        //the edit label
+        @FXML private Label editLabel;
+        //the new label
+        @FXML private Label newLabel;
+        //the incorrect label
+        @FXML private Label incorrectLabel;
+        //the text Field to capture the duration
+        @FXML private TextField durationTextBox;
+        // the save button
+        @FXML private Button saveButton;
+        //the cancel button
+        @FXML private Button cancelButton;
+        //boolean to check if new or not
         private boolean isNew;
-        
+        //true if its a laptop
         private boolean isLaptop;
-        
+        //true if its a book
         private boolean isBook;
-        
+        //true if its a DVD
         private boolean isDvd;
         
+        /**
+         * 
+         */
         public CopyEditController() {
                 
         }
@@ -113,6 +107,9 @@ public class CopyEditController {
                 this.resourceID = resourceID;
         }
         
+        /**
+         * intialises the page
+         */
         @FXML
         public void initialize() {
                 if(copyID.equals("")) {
@@ -128,8 +125,14 @@ public class CopyEditController {
                 
         }
         
+        /**
+         * saves the copy to the database
+         * @param e the event to trigger the code
+         */
         public void handleSave(ActionEvent e) {
+        		//get the duration
                 int enteredDuration = Integer.parseInt(durationTextBox.getText());
+                //if its a valid input
                 if(enteredDuration == 1 || enteredDuration == 7 
                                 || enteredDuration == 14 || enteredDuration == 28) {
                         
@@ -188,6 +191,10 @@ public class CopyEditController {
                         incorrectLabel.setVisible(true);
                 }
         }
+        /**
+         * cancels the window
+         * @param e
+         */
         @FXML
         public void handleCancel(ActionEvent e) {
                 Stage currentStage = (Stage)incorrectLabel.getScene().getWindow();

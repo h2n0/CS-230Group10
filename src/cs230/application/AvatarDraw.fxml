@@ -9,6 +9,5 @@
    <children>
       <Canvas fx:id="canvas" height="300.0" onMouseClicked="#canvasClick" onMouseDragged="#mouseMove" onMouseMoved="#mouseMove" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" width="400.0" />
       <Button layoutX="63.0" layoutY="339.0" mnemonicParsing="false" onAction="#saveAvatar" text="Save" />
-      <Button layoutX="272.0" layoutY="339.0" mnemonicParsing="false" onAction="#leaveDialog" text="Cancel" />
    </children>
 </Pane>

@@ -63,6 +63,7 @@ public class ResourceListController {
 
         /** 
          * launches the page to add a resource
+         * @param e the event that triggered this code
          */
         @FXML
         private void handleAddResourceButton(ActionEvent event) {
@@ -71,7 +72,6 @@ public class ResourceListController {
         
         /**
 	     * Populates the appropriate features on the window for a user
-	     * 
 	     * @param resourceList a list of users to be displayed in the table
 	     */
         private void populateListTable(ArrayList<Resource> resourceList) {
@@ -128,8 +128,6 @@ public class ResourceListController {
                         
                 } catch (IOException e) {
                         e.printStackTrace();
-                        // Quit the program (with an error code)
-                        System.exit(-1);
                 }
                 return r;
 	    }

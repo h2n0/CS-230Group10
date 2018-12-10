@@ -19,6 +19,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+/**
+ * 
+ * @author 
+ * @version 1.0
+ */
 public class UserInfoController {
 
 	@FXML
