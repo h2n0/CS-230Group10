@@ -93,11 +93,13 @@ public class MainPageController {
                 .set(Double.toString(SharedData.getBalance()));
                 if(SharedData.getIsLibrarian())
                 {
-                        username.setOnAction(e -> loadLibrarianInfo()); 
+                        username.setOnAction(e -> loadLibrarianInfo());
+                        addUserLink.setVisible(true);
                 }
                 else
                 {
-                        username.setOnAction(e -> loadUserInfo()); 
+                        username.setOnAction(e -> loadUserInfo());
+                        addUserLink.setVisible(false);
                 }
                 
                 updateComboBox();
