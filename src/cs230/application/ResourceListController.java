@@ -193,7 +193,7 @@ public class ResourceListController {
                         ResourceDetailController detailController = fxmlLoader.<ResourceDetailController>getController();
                         
                         //set the user to be edited
-                        detailController.setResource(d.getID());
+                        detailController.setDvdResource(d);
                         
                         // Create a scene based on the loaded FXML scene graph
                         Scene editScene = new Scene(editRoot);
@@ -229,7 +229,7 @@ public class ResourceListController {
                         ResourceDetailController detailController = fxmlLoader.<ResourceDetailController>getController();
                         
                         //set the user to be edited
-                        detailController.setResource(b.getID());
+                        detailController.setBookResource(b);
                         
                         // Create a scene based on the loaded FXML scene graph
                         Scene editScene = new Scene(editRoot);
@@ -265,7 +265,7 @@ public class ResourceListController {
                         ResourceDetailController detailController = fxmlLoader.<ResourceDetailController>getController();
                         
                         //set the user to be edited
-                        detailController.setResource(l.getID());
+                        detailController.setLaptopResource(l);
                         
                         // Create a scene based on the loaded FXML scene graph
                         Scene editScene = new Scene(editRoot);
