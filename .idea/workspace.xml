@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dcf51a0-078f-4ea1-9528-84334c7de2a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/cs230/application/AvatarDraw.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/AvatarDraw.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs230/application/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs230/application/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/MainPageController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,12 +17,12 @@
     <session id="1713084186">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5818" />
+          <entry key="java" value="5879" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5818" />
+          <entry key="JAVA" value="5879" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -39,11 +41,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="91" selection-start-line="91" selection-end-line="91" />
+            <state relative-caret-position="264">
+              <caret line="89" column="34" lean-forward="true" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -54,21 +56,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="66" column="55" lean-forward="true" selection-start-line="66" selection-start-column="55" selection-end-line="66" selection-end-column="55" />
+            <state relative-caret-position="348">
+              <caret line="65" column="43" lean-forward="true" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cs230/application/AvatarDraw.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -83,18 +75,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs230/application/CopyHistoryController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="81" column="1" lean-forward="true" selection-start-line="81" selection-start-column="1" selection-end-line="81" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/CreateResourceViewController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
@@ -104,10 +84,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cs230/application/AvatarDrawController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="397" column="48" lean-forward="true" selection-start-line="397" selection-start-column="48" selection-end-line="397" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="54" lean-forward="true" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+            <state relative-caret-position="510">
+              <caret line="30" column="54" lean-forward="true" selection-start-line="30" selection-start-column="54" selection-end-line="30" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -118,8 +110,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/NewUserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="254" column="68" selection-start-line="254" selection-start-column="68" selection-end-line="254" selection-end-column="68" />
+            <state relative-caret-position="195">
+              <caret line="257" column="68" selection-start-line="257" selection-start-column="68" selection-end-line="257" selection-end-column="68" />
             </state>
           </provider>
         </entry>
@@ -128,7 +120,7 @@
         <entry file="file://$PROJECT_DIR$/src/cs230/system/SharedData.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="334">
-              <caret line="78" selection-start-line="78" selection-end-line="78" />
+              <caret line="97" selection-start-line="97" selection-end-line="97" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -181,7 +173,6 @@
         <option value="$PROJECT_DIR$/src/cs230/application/UserInfoController.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/ResourceListController.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/CopyHistoryController.java" />
-        <option value="$PROJECT_DIR$/src/cs230/application/LoginController.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/Librarian.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/LibrarianAccountViewController.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/Book.java" />
@@ -197,8 +188,9 @@
         <option value="$PROJECT_DIR$/src/cs230/application/NewUserController.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/SharedData.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/Main.java" />
-        <option value="$PROJECT_DIR$/src/cs230/application/MainPageController.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/AvatarDraw.fxml" />
+        <option value="$PROJECT_DIR$/src/cs230/application/LoginController.java" />
+        <option value="$PROJECT_DIR$/src/cs230/application/MainPageController.java" />
       </list>
     </option>
   </component>
@@ -254,7 +246,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544425114551" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544426805797" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -323,7 +315,7 @@
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23733938" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23733938" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -333,7 +325,7 @@
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891247" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25596818" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25596818" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -413,8 +405,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs230/application/AvatarDrawController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2557">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        <state relative-caret-position="122">
+          <caret line="397" column="48" lean-forward="true" selection-start-line="397" selection-start-column="48" selection-end-line="397" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -469,16 +461,6 @@
             <element signature="e#2731#2732#0" expanded="true" />
             <element signature="e#2847#2848#0" expanded="true" />
             <element signature="e#2867#2868#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs230/application/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="66" column="55" lean-forward="true" selection-start-line="66" selection-start-column="55" selection-end-line="66" selection-end-column="55" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -575,15 +557,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs230/application/NewUserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="254" column="68" selection-start-line="254" selection-start-column="68" selection-end-line="254" selection-end-column="68" />
+        <state relative-caret-position="195">
+          <caret line="257" column="68" selection-start-line="257" selection-start-column="68" selection-end-line="257" selection-end-column="68" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs230/system/SharedData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -592,8 +574,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cs230/application/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="54" lean-forward="true" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+        <state relative-caret-position="510">
+          <caret line="30" column="54" lean-forward="true" selection-start-line="30" selection-start-column="54" selection-end-line="30" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -604,16 +586,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="476" lean-forward="true" selection-start-line="476" selection-end-line="476" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -632,6 +604,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs230/application/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="65" column="43" lean-forward="true" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="89" column="34" lean-forward="true" selection-start-line="89" selection-start-column="34" selection-end-line="89" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

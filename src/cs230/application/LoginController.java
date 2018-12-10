@@ -53,30 +53,27 @@ public class LoginController {
 		exists = DatabaseManager.checkForRecord(activeUser, "user");
 
 		//If they exist log in, else show an error
-//	    	if(exists) {
+	    	if(exists) {
 			// Get all of user's details
 			activeUser = (User)
 				DatabaseManager.searchExact(activeUser,
 					"user");
-			
-			Librarian tempLib = new Librarian(inputUsername, null, null, null, null, null, null, null, null);
-			if(DatabaseManager.checkForRecord(tempLib, "librarian")) {
-				SharedData.setIsLibrarian(true);
-			}
+			System.out.println(activeUser.getBalance());
+
 
 			SharedData.setUser(activeUser);
-			changeToMainPage();
 			userNotFound.setVisible(false);
-//		} else {
+                        changeToMainPage();
+		} else {
 	    		userNotFound.setVisible(true);
-	    	//}
+	    	}
 	}
 
 	/**
 	 * Loads and shows the main page of the program
 	 */
 	private void changeToMainPage() {
-		BorderPane root = null;
+		BorderPane root;
 		try {
 			// Initalise and load FXML for the main page
 			root = FXMLLoader.load(

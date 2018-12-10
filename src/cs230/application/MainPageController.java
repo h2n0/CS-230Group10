@@ -90,7 +90,7 @@ public class MainPageController {
         public void initialize() {
                 setResourceLinks();
                 balance.textProperty()
-                .set(Double.toString(currentUser.getBalance()));
+                .set(Double.toString(SharedData.getBalance()));
                 if(SharedData.getIsLibrarian())
                 {
                         username.setOnAction(e -> loadLibrarianInfo()); 
