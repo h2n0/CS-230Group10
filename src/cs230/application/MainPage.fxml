@@ -58,18 +58,18 @@
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin></ImageView>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox prefHeight="68.0" prefWidth="171.0">
                                  <children>
-                                    <Label fx:id="username" text="Username">
+                                    <Label fx:id="username" prefHeight="27.0" prefWidth="169.0" text="Username">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                                  <padding>
                                     <Insets left="10.0" />
                                  </padding></Label>
-                                    <Label fx:id="balance" text="Balance" textFill="RED">
+                                    <Label fx:id="balance" prefHeight="27.0" prefWidth="166.0" text="Balance" textFill="RED">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font size="14.0" />
                                  </font>
                                  <padding>
                                     <Insets left="10.0" />
@@ -81,7 +81,7 @@
                                     <Insets />
                                  </opaqueInsets>
                            <HBox.margin>
-                              <Insets left="60.0" />
+                              <Insets />
                            </HBox.margin>
                               </TextField>
                               <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="25.0" prefWidth="66.0" text="Search" />

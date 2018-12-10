@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dcf51a0-078f-4ea1-9528-84334c7de2a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/cs230/application/Fine.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/Fine.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cs230/application/FineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/FineController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs230/application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cs230/application/MainPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/MainPage.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cs230/application/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cs230/application/MainPageController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -17,23 +17,23 @@
     <session id="1713084186">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="5816" />
+          <entry key="java" value="5818" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="5816" />
+          <entry key="JAVA" value="5818" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="fxml" value="1" />
-          <entry key="java" value="41" />
+          <entry key="java" value="42" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="41" />
+          <entry key="JAVA" value="42" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -44,10 +44,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="27" column="3" lean-forward="true" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+            <state relative-caret-position="288">
+              <caret line="191" column="22" selection-start-line="191" selection-start-column="22" selection-end-line="191" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#6008#6009#0" expanded="true" />
+                <element signature="e#6067#6068#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,10 +74,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cs230/system/UpdateDatabase.java">
+        <entry file="file://$PROJECT_DIR$/src/cs230/application/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="357">
+              <caret line="21" column="55" lean-forward="true" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,8 +140,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cs230/system/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
+            <state relative-caret-position="162">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -184,7 +186,6 @@
         <option value="$PROJECT_DIR$/src/cs230/system/Librarian.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/LibrarianAccountViewController.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/Book.java" />
-        <option value="$PROJECT_DIR$/src/cs230/application/Main.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/Transaction.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/TransactionController.java" />
@@ -196,6 +197,7 @@
         <option value="$PROJECT_DIR$/src/cs230/system/UpdateDatabase.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/NewUserController.java" />
         <option value="$PROJECT_DIR$/src/cs230/system/SharedData.java" />
+        <option value="$PROJECT_DIR$/src/cs230/application/Main.java" />
         <option value="$PROJECT_DIR$/src/cs230/application/MainPageController.java" />
       </list>
     </option>
@@ -252,7 +254,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544406978380" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544407605523" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -500,16 +502,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs230/application/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="46" column="54" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs230/system/Transaction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -598,16 +590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs230/system/DatabaseManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="24" column="23" lean-forward="true" selection-start-line="24" selection-start-column="23" selection-end-line="24" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/cs230/system/Librarian.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="775">
@@ -632,12 +614,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
+    <entry file="file://$PROJECT_DIR$/src/cs230/application/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="27" column="3" lean-forward="true" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+        <state relative-caret-position="357">
+          <caret line="21" column="55" lean-forward="true" selection-start-line="21" selection-start-column="55" selection-end-line="21" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs230/system/DatabaseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cs230/application/MainPageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="191" column="22" selection-start-line="191" selection-start-column="22" selection-end-line="191" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6008#6009#0" expanded="true" />
+            <element signature="e#6067#6068#0" expanded="true" />
           </folding>
         </state>
       </provider>

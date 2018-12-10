@@ -212,7 +212,8 @@ public class MainPageController {
         }
 
         private ArrayList<Resource> getResourceList() {
-                return (ArrayList<Resource>) DatabaseManager.getTable("Resource");
+                return (ArrayList<Resource>) DatabaseManager.getTable(
+                        "resource");
         }
 
         @FXML
