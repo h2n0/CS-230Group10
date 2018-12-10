@@ -1,8 +1,10 @@
 package cs230.application;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import cs230.system.DatabaseManager;
 import cs230.system.Loan;
 import cs230.system.Resource;
 import cs230.system.User;
@@ -36,6 +38,11 @@ public class LibrarianMainpageController {
         
         @FXML
         public void initialize() {
+                ArrayList<Loan> loanList 
+                = (ArrayList<Loan>) DatabaseManager.getTable("loan");
+                loanList.removeIf(l -> (l.getDueDate() == null 
+                                && l.getDueDate().isAfter(LocalDate.now())));
+                
                 
         }
         
@@ -47,14 +54,17 @@ public class LibrarianMainpageController {
                                 new PropertyValueFactory<Loan, String>("resourceID"));
                 borrowerColumn.setCellValueFactory(
                                 new PropertyValueFactory<Loan, String>("copyID"));
-                infoColumn.setCellFactory(ActionButtonTableCell.<Loan>forTableColumn("Copy Info", (Loan l) -> loadCopy(l)));
+                infoColumn.setCellFactory(ActionButtonTableCell
+                                .<Loan>forTableColumn("Copy Info",
+                                                (Loan l) -> loadCopy(l)));
         }
         
         private Loan loadCopy(Loan l)
         {
                 Popup popup = new Popup();
-                ResourceCopyPageController controller =
-                                new ResourceCopyPageController();
+                CopyHistoryController controller =
+                                new CopyHistoryController();
+                controller.setCopyId(l.getCopyID());
                 FXMLLoader loader = new 
                                 FXMLLoader(getClass().getResource("Copy.fxml"));
                 loader.setController(controller);
