@@ -30,13 +30,13 @@ public class Resource implements Serializable {
         /**
          * The constructor of a new Resource
          * 
-         * @param id        The usnique id of the Resource
+         * @param id        The unique id of the Resource
          * @param title     The title of the Resource
          * @param year      The year the resource was published
          * @param thumbnail The file path to the thumbnail of the Resource
          */
         public Resource(String id, String title, int year, String thumbnail) {
-                this.id = id;
+                this.id = DatabaseManager.getNextID();
                 this.title = title;
                 this.year = year;
                 this.thumbnail = thumbnail;
@@ -68,10 +68,7 @@ public class Resource implements Serializable {
          * @param title
          */
         public void setTitle(String title) {
-                Resource old = this;
                 this.title = title;
-                Resource newR = this;
-                this.update(old, newR);
         }
 
         /**
@@ -80,10 +77,7 @@ public class Resource implements Serializable {
          * @param year
          */
         public void setYear(int year) {
-                Resource old = this;
                 this.year = year;
-                Resource newR = this;
-                this.update(old, newR);
         }
 
         /**
@@ -92,10 +86,7 @@ public class Resource implements Serializable {
          * @param thumbnail filepath to the thumbnail
          */
         public void setThumbnail(String thumbnail) {
-                Resource old = this;
                 this.thumbnail = thumbnail;
-                Resource newR = this;
-                this.update(old, newR);
         }
 
         /**
@@ -181,20 +172,14 @@ public class Resource implements Serializable {
          * @param a
          */
         public void addToQueue(String a) {
-                Resource old = this;
                 this.requestQ.add(a);
-                Resource newR = this;
-                this.update(old, newR);
         }
 
         /**
          * Removes the front user is from the queue
          */
         public void removeFromQueue() {
-                Resource old = this;
                 this.requestQ.remove();
-                Resource newR = this;
-                this.update(old, newR);
         }
 
         /**
@@ -228,14 +213,6 @@ public class Resource implements Serializable {
                 }
                 return queue;
         }
-
-        /**
-         * Updates a specific attribute in the Resource table of the Database
-         */
-        public void update(Resource old, Resource newR) {
-                DatabaseManager.editRecord(old, newR, "Resource");
-        }
-
 
         /**
          * Returns the string value of this resource 
