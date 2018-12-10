@@ -177,6 +177,7 @@ public class MainPageController {
                         e.printStackTrace();
                 }
         }
+        
 
         private void setResourceLinks() {
                 TitledPane resources = new TitledPane();
@@ -219,14 +220,15 @@ public class MainPageController {
         }
 
         private void loadDVDPage(ArrayList<Dvd> dvdList) {
-                VBox root;
                 try {
-                        root  = FXMLLoader.load(
-                                        getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
+                        FXMLLoader fxmlLoader  = new FXMLLoader(
+                                        getClass().getResource("cs230/application/ResourceList.fxml"));
                         //mainContent.setPrefHeight(listPage.getPrefHeight());
                         //mainContent.setPrefWidth(listPage.getPrefWidth());
                         ResourceListController controller = new ResourceListController();
                         controller.setDvdToShow(dvdList);
+                        fxmlLoader.setController(controller);
+                        VBox root = fxmlLoader.load();
                         mainContent.setContent(root);
                 } catch (IOException e) {
                         e.printStackTrace();
@@ -234,14 +236,15 @@ public class MainPageController {
         }
 
         private void loadBookPage(ArrayList<Book> bookList) {
-                VBox root;
                 try {
-                        root  = FXMLLoader.load(
-                                        getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
+                        FXMLLoader fxmlLoader  = new FXMLLoader(
+                                        getClass().getResource("cs230/application/ResourceList.fxml"));
                         //mainContent.setPrefHeight(listPage.getPrefHeight());
                         //mainContent.setPrefWidth(listPage.getPrefWidth());
                         ResourceListController controller = new ResourceListController();
                         controller.setbookToShow(bookList);
+                        fxmlLoader.setController(controller);
+                        VBox root = fxmlLoader.load();
                         mainContent.setContent(root);
                 } catch (IOException e) {
                         e.printStackTrace();
@@ -249,14 +252,15 @@ public class MainPageController {
         }
 
         private void loadLaptopPage(ArrayList<Laptop> laptopList) {
-                VBox root;
                 try {
-                        root  = FXMLLoader.load(
-                                        getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
+                        FXMLLoader fxmlLoader  = new FXMLLoader(
+                                        getClass().getResource("cs230/application/ResourceList.fxml"));
                         //mainContent.setPrefHeight(listPage.getPrefHeight());
                         //mainContent.setPrefWidth(listPage.getPrefWidth());
                         ResourceListController controller = new ResourceListController();
                         controller.setLaptopToShow(laptopList);
+                        fxmlLoader.setController(controller);
+                        VBox root = fxmlLoader.load();
                         mainContent.setContent(root);
                 } catch (IOException e) {
                         e.printStackTrace();
@@ -315,19 +319,7 @@ public class MainPageController {
                                 e.printStackTrace();
                         }
                 } else {
-                        try {
-                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader()
-                                                .getResource("cs230" +
-                                                        "/application" +
-                                                        "/UserInfo" +
-                                                        ".fxml"));
-                                VBox mainPage = fxmlLoader.load();
-                                mainContent.setPrefHeight(mainPage.getPrefHeight());
-                                mainContent.setPrefWidth(mainPage.getPrefWidth());
-                                mainContent.setContent(mainPage);
-                        } catch (IOException e) {
-                                e.printStackTrace();
-                        }
+                        //To implement
                 }
         }
         

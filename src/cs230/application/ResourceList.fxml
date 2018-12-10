@@ -18,7 +18,6 @@
                   <Font size="29.0" />
                </font>
             </Label>
-            <Button fx:id="addResourceButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleAddResourceButton" text="Add resource" visible="false" />
          </children>
       </HBox>
       <TableView fx:id="tableViewBook" editable="true" prefHeight="352.0" prefWidth="546.0">
