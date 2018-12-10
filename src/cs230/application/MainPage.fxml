@@ -54,17 +54,26 @@
                <children>
                         <HBox layoutY="10.0" prefHeight="46.0" prefWidth="750.0">
                            <children>
-                              <ImageView fx:id="userImage" fitHeight="68.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="userImage" fitHeight="68.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></ImageView>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label fx:id="username" text="Username">
                                  <font>
                                     <Font size="18.0" />
-                                 </font></Label>
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding></Label>
                                     <Label fx:id="balance" text="Balance" textFill="RED">
                                  <font>
                                     <Font size="18.0" />
-                                 </font></Label>
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding></Label>
                                  </children>
                               </VBox>
                               <TextField fx:id="searchBox">
@@ -72,14 +81,14 @@
                                     <Insets />
                                  </opaqueInsets>
                            <HBox.margin>
-                              <Insets left="40.0" />
+                              <Insets left="60.0" />
                            </HBox.margin>
                               </TextField>
                               <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="25.0" prefWidth="66.0" text="Search" />
                               <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
                         <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="55.0" text="Logout">
                            <HBox.margin>
-                              <Insets left="120.0" />
+                              <Insets left="90.0" />
                            </HBox.margin>
                         </Button>
                            </children>
