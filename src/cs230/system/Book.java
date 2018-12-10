@@ -132,14 +132,6 @@ public class Book extends Resource {
  		return isbn;
  	}
  	
- 	/** 
-	 * Creates a new entry in the database for a new Book 
-	 */
-//	public void create () {
-		
-//		DatabaseManagaer.saveRecord(this,"Book");
-//	}
- 	
     /**
      * Deletes all the information associated with this Book from the Database
      */

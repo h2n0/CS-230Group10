@@ -475,40 +475,4 @@ public class DatabaseManager {
 		return null;
 	}
 
-	public static void main(String[] args) {
-
-//		ArrayList<Object> test;
-//                Loan loan = new Loan("admin", "1", "1", "1", LocalDate.now());
-//                saveRecord(loan, "loan");
-//		Fine fine1 = new Fine(1, 20);
-//		Fine fine2 = new Fine(2, 30);
-//		saveRecord(fine1, "fine");
-//		test = getTable(new FileInputStream("Database//test.dat"));
-//		System.out.println("Amount of data: " + test.size());
-//		System.out.println("Object found: " + searchRecord(fine1,
-//			"test"));
-//		deleteRecord(fine1, "test");
-//		test = getTable(new FileInputStream("Database//test.dat"));
-//		System.out.println("Amount of data: " + test.size());
-//		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-//                User user = new User("admin", "Scott", "Simmons", "07535537447",
-//                        address,
-//                        10.0, "\\Database\\Images" +
-//                        "\\Harry_Potter_and_the_Philosopher" +
-//                        "'s_Stone_Book_Cover.jpg");
-//                saveRecord(user, "user");
-
-//                ArrayList<Book> books =
-//                        (ArrayList<Book>) DatabaseManager.getTable("book");
-//                System.out.println(books.toString());
-//                Loan loan = new Loan("1", "admin", "1", "4", LocalDate.now(),
-//                        LocalDate.of(2018, 12, 8));
-
-	    //String loanID, String userName, String copyID, String resourceID, LocalDate borrowDate
-	    //ArrayList<Object> test;
-	    //Loan l1 = new Loan("1","Joe","1","1",LocalDate.now());
-		//Loan l2 = new Loan("2","Joe","2","2",LocalDate.now());
-		//saveRecord(l1, "loan");
-		//saveRecord(l2, "loan");
-	}
 }
