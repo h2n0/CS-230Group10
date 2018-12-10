@@ -182,19 +182,18 @@ public class MainPageController {
                 TitledPane resources = new TitledPane();
                 resources.setText("View Resource");
                 VBox resourceChoices = new VBox();
-                Hyperlink allChoice = new Hyperlink();
-                allChoice.setText("All resources");
-                allChoice.setOnAction(e -> loadAllPage());
                 Hyperlink laptopChoice = new Hyperlink();
                 laptopChoice.setText("Laptops");
-                laptopChoice.setOnAction(e -> loadLaptopPage());
+                ArrayList<Laptop>laptopList = (ArrayList<Laptop>) DatabaseManager.getTable("laptop");
+                laptopChoice.setOnAction(e -> loadLaptopPage(laptopList));
                 Hyperlink bookChoice = new Hyperlink();
+                ArrayList<Book>bookList = (ArrayList<Book>) DatabaseManager.getTable("book");
                 bookChoice.setText("Books");
-                bookChoice.setOnAction(e -> loadBookPage());
+                bookChoice.setOnAction(e -> loadBookPage(bookList));
                 Hyperlink dvdChoice = new Hyperlink();
                 dvdChoice.setText("DVDs");
-                dvdChoice.setOnAction(e -> loadDVDPage());
-                resourceChoices.getChildren().add(allChoice);
+                ArrayList<Dvd>dvdList = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
+                dvdChoice.setOnAction(e -> loadDVDPage(dvdList));
                 resourceChoices.getChildren().add(laptopChoice);
                 resourceChoices.getChildren().add(bookChoice);
                 resourceChoices.getChildren().add(dvdChoice);
@@ -220,24 +219,44 @@ public class MainPageController {
         }
 
         private void loadDVDPage(ArrayList<Dvd> dvdList) {
-                
-        }
-
-        private void loadBookPage(ArrayList<Book> bookList) {
-                
-        }
-
-        private void loadLaptopPage(ArrayList<Laptop> laptopList) {
-                
-        }
-
-        private void loadListPage(ArrayList<Resource> resources) {
                 VBox root;
                 try {
                         root  = FXMLLoader.load(
                                         getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
                         //mainContent.setPrefHeight(listPage.getPrefHeight());
                         //mainContent.setPrefWidth(listPage.getPrefWidth());
+                        ResourceListController controller = new ResourceListController();
+                        controller.setDvdToShow(dvdList);
+                        mainContent.setContent(root);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        private void loadBookPage(ArrayList<Book> bookList) {
+                VBox root;
+                try {
+                        root  = FXMLLoader.load(
+                                        getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
+                        //mainContent.setPrefHeight(listPage.getPrefHeight());
+                        //mainContent.setPrefWidth(listPage.getPrefWidth());
+                        ResourceListController controller = new ResourceListController();
+                        controller.setbookToShow(bookList);
+                        mainContent.setContent(root);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        private void loadLaptopPage(ArrayList<Laptop> laptopList) {
+                VBox root;
+                try {
+                        root  = FXMLLoader.load(
+                                        getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
+                        //mainContent.setPrefHeight(listPage.getPrefHeight());
+                        //mainContent.setPrefWidth(listPage.getPrefWidth());
+                        ResourceListController controller = new ResourceListController();
+                        controller.setLaptopToShow(laptopList);
                         mainContent.setContent(root);
                 } catch (IOException e) {
                         e.printStackTrace();
