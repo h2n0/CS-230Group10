@@ -45,26 +45,38 @@ public class LoginController {
 	 */
 	@FXML
 	private void handleLoginAction(ActionEvent event ) {
-		boolean exists;
+		boolean userExists;
+		boolean libExists;
 		String inputUsername = usernameField.getText();
 
 		//Create a user object to search in DB
 		User activeUser = new User(inputUsername, null, null, null, null, null, null);
-		exists = DatabaseManager.checkForRecord(activeUser, "user");
+		userExists = DatabaseManager.checkForRecord(activeUser, "user");
+		Librarian librarian = new Librarian(inputUsername, null, null, null, null, null, null, null, null);
+		libExists = DatabaseManager.checkForRecord(librarian, "librarian");
 
 		//If they exist log in, else show an error
-	    	if(exists) {
+	    	if(userExists) {
 			// Get all of user's details
 			activeUser = (User)
 				DatabaseManager.searchExact(activeUser,
 					"user");
-			System.out.println(activeUser.getBalance());
 
 
 			SharedData.setUser(activeUser);
 			userNotFound.setVisible(false);
                         changeToMainPage();
-		} else {
+	    	}else if (libExists) {
+	    	        activeUser = (User)
+	    	                        DatabaseManager.searchExact(librarian,
+	    	                            "librarian");
+
+
+	    	                    SharedData.setUser(activeUser);
+	    	                    SharedData.setIsLibrarian(true);
+	    	                    userNotFound.setVisible(false);
+	    	                                changeToMainPage();
+	    	} else {
 	    		userNotFound.setVisible(true);
 	    	}
 	}
