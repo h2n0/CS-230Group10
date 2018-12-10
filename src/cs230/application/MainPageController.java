@@ -95,11 +95,13 @@ public class MainPageController {
                 {
                         username.setOnAction(e -> loadLibrarianInfo());
                         addUserLink.setVisible(true);
+                        createResLink.setVisible(true);
                 }
                 else
                 {
                         username.setOnAction(e -> loadUserInfo());
                         addUserLink.setVisible(false);
+                        createResLink.setVisible(false);
                 }
                 
                 updateComboBox();
