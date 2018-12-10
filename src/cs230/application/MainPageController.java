@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -20,9 +21,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.AnchorPane;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 /**
@@ -221,14 +223,13 @@ public class MainPageController {
 
         private void loadDVDPage(ArrayList<Dvd> dvdList) {
                 try {
-                        FXMLLoader fxmlLoader  = new FXMLLoader(
-                                        getClass().getResource("cs230/application/ResourceList.fxml"));
-                        //mainContent.setPrefHeight(listPage.getPrefHeight());
-                        //mainContent.setPrefWidth(listPage.getPrefWidth());
-                        ResourceListController controller = new ResourceListController();
+                        ResourceListController controller =
+                                        new ResourceListController();
                         controller.setDvdToShow(dvdList);
-                        fxmlLoader.setController(controller);
-                        VBox root = fxmlLoader.load();
+                        FXMLLoader loader = new 
+                                        FXMLLoader(getClass().getResource("ResourceList.fxml"));
+                        loader.setController(controller);
+                        VBox root = loader.load();
                         mainContent.setContent(root);
                 } catch (IOException e) {
                         e.printStackTrace();
@@ -237,14 +238,13 @@ public class MainPageController {
 
         private void loadBookPage(ArrayList<Book> bookList) {
                 try {
-                        FXMLLoader fxmlLoader  = new FXMLLoader(
-                                        getClass().getResource("cs230/application/ResourceList.fxml"));
-                        //mainContent.setPrefHeight(listPage.getPrefHeight());
-                        //mainContent.setPrefWidth(listPage.getPrefWidth());
-                        ResourceListController controller = new ResourceListController();
+                        ResourceListController controller =
+                                        new ResourceListController();
                         controller.setbookToShow(bookList);
-                        fxmlLoader.setController(controller);
-                        VBox root = fxmlLoader.load();
+                        FXMLLoader loader = new 
+                                        FXMLLoader(getClass().getResource("ResourceList.fxml"));
+                        loader.setController(controller);
+                        VBox root = loader.load();
                         mainContent.setContent(root);
                 } catch (IOException e) {
                         e.printStackTrace();
@@ -253,14 +253,13 @@ public class MainPageController {
 
         private void loadLaptopPage(ArrayList<Laptop> laptopList) {
                 try {
-                        FXMLLoader fxmlLoader  = new FXMLLoader(
-                                        getClass().getResource("cs230/application/ResourceList.fxml"));
-                        //mainContent.setPrefHeight(listPage.getPrefHeight());
-                        //mainContent.setPrefWidth(listPage.getPrefWidth());
-                        ResourceListController controller = new ResourceListController();
+                        ResourceListController controller =
+                                        new ResourceListController();
                         controller.setLaptopToShow(laptopList);
-                        fxmlLoader.setController(controller);
-                        VBox root = fxmlLoader.load();
+                        FXMLLoader loader = new 
+                                        FXMLLoader(getClass().getResource("ResourceList.fxml"));
+                        loader.setController(controller);
+                        VBox root = loader.load();
                         mainContent.setContent(root);
                 } catch (IOException e) {
                         e.printStackTrace();
