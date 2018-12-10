@@ -27,6 +27,7 @@ public class Copy implements Serializable {
 
         /**
 	     * Constructs a copy entity
+	     * @param ID The Id of this copy
          * @param resourceID the identifier for the resource
          * @param status says if the copy is available, on loan, or overdue
          * @param resourceType if the copy is a Book, DVD, or Laptop

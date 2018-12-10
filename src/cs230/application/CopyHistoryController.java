@@ -20,8 +20,9 @@ import cs230.system.SharedData;
  * @version 1.1
  */
 public class CopyHistoryController  {
-        // list of history for the copy
-        private static ArrayList<Loan> inputCopyHist;
+        
+        //Copy is of the history
+        private String copyId;
         //the table with the columns below
         @FXML private TableView<Loan> tableView;
         //the user who borrowed the copy column
@@ -34,6 +35,26 @@ public class CopyHistoryController  {
         @FXML private Button backButton;
     
         /**
+         * overides the initialize function so when the window is open the
+         * info for all users with fines are displayed
+         */
+        @SuppressWarnings("unchecked")
+        @FXML
+        public void initialize() {
+                // Replace with actual copyID
+
+                ArrayList<Loan> history = new ArrayList<Loan>();
+                        history = (ArrayList<Loan>) DatabaseManager.getTable("loan");
+                history.removeIf(s -> !s.getCopyID().equals(copyId));
+                PopulateCopyTable(history);
+
+        }
+        
+        public void setCopyId(String copyId) {
+                this.copyId = copyId;
+        }
+        
+        /**
          * takes the user back to the main menu
          * @param event
          */
@@ -41,28 +62,7 @@ public class CopyHistoryController  {
         private void handleBackButton(ActionEvent event) {
         	// Code that either closes window or returns to main menu
         }
-    
-    /**
-	 * overides the initialize function so when the window is open the
-	 * info for all users with fines are displayed
-	 */
-    @SuppressWarnings("unchecked")
-	@FXML
-    public void initialize() {
-            // Replace with actual copyID
-            String copyID = "1";
 
-            ArrayList<Loan> history = new ArrayList<Loan>();
-                    history = (ArrayList<Loan>) DatabaseManager.getTable("loan");
-
-                    for (Loan loan : history) {
-                            if (loan.getCopyID().equals(copyID)) {
-                                    //Handle code
-                            }
-                    }
-
-    }
-    
         /**
          * Populates the appropriate features on the window for a user
          * @param historyList a list of users to be displayed in the table

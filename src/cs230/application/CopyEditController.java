@@ -145,6 +145,7 @@ public class CopyEditController {
                                 if(maxId == 0) {
                                         maxId = 1;
                                 }
+                                copyID = Integer.toString( maxId + 1);
                                 String type = "";
                                 if(isLaptop) {
                                         type = "Laptop";
@@ -153,6 +154,7 @@ public class CopyEditController {
                                 } else {
                                         type = "Dvd";
                                 }
+                          
                                 Copy toAdd = new Copy(copyID ,resourceID,
                                         Copy.Status.AVAILABLE, type
                                                 , enteredDuration);
@@ -176,9 +178,11 @@ public class CopyEditController {
                                                 resourceID,
                                                 Copy.Status.AVAILABLE, type
                                                 , enteredDuration);
-                                        DatabaseManager.editRecord(oldCopy, newCopy, "copy");
+                                        DatabaseManager
+                                        .editRecord(oldCopy, newCopy, "copy");
                                 } else {
-                                        Stage currentStage = (Stage)incorrectLabel.getScene().getWindow();
+                                        Stage currentStage = (Stage)incorrectLabel
+                                                        .getScene().getWindow();
                                         currentStage.close();
                                 }
                               

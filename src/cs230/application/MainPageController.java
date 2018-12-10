@@ -42,7 +42,7 @@ public class MainPageController {
         private VBox sideOptions;
 
         @FXML
-        private Label username;
+        private Hyperlink username;
 
         @FXML
         private Label balance;
@@ -87,6 +87,17 @@ public class MainPageController {
         @FXML
         public void initialize() {
                 setResourceLinks();
+//                balance.textProperty()
+//                .set(Double.toString(currentUser.getBalance()));
+//                if(SharedData.getIsLibrarian())
+//                {
+//                        username.setOnAction(e -> loadLibrarianInfo()); 
+//                }
+ //               else
+ //               {
+//                        username.setOnAction(e -> loadUserInfo()); 
+ //               }
+                
                 updateComboBox();
                 username.setText(SharedData.getUsername());
                 balance.textProperty().set("Balance: " + Double.toString(SharedData.getBalance()));
@@ -98,7 +109,39 @@ public class MainPageController {
         public void setCurrentUser(User currentUser) {
                 this.currentUser = currentUser;
         }
+        
+        private void loadLibrarianInfo() {
+                VBox root;
+                try {
+                        root  = FXMLLoader.load(
+                                        getClass().getClassLoader()
+                                        .getResource("cs230/application/Librarian"
+                                                        + "AccountView.fxml"));
+                        //mainContent.setPrefHeight(listPage.getPrefHeight());
+                        //mainContent.setPrefWidth(listPage.getPrefWidth());
+                        mainContent.setContent(root);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+        }
 
+        
+        private void loadUserInfo() {
+                VBox root;
+                try {
+                        root  = FXMLLoader.load(
+                                        getClass().getClassLoader()
+                                        .getResource("cs230/application"
+                                                        + "/AccountView.fxml"));
+                        //mainContent.setPrefHeight(listPage.getPrefHeight());
+                        //mainContent.setPrefWidth(listPage.getPrefWidth());
+                        mainContent.setContent(root);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+                
+        }
+        
         private User currentUser;
 
         private void updateComboBox() {
@@ -212,8 +255,20 @@ public class MainPageController {
         }
 
         private ArrayList<Resource> getResourceList() {
-                return (ArrayList<Resource>) DatabaseManager.getTable(
-                        "resource");
+                ArrayList<Resource> resourceList =
+                                new ArrayList<Resource>();
+                ArrayList<Dvd> dvdList
+                = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
+                ArrayList<Book> bookList = (ArrayList<Book>) DatabaseManager.getTable("book");
+                ArrayList<Laptop> laptopList
+                = (ArrayList<Laptop>) DatabaseManager.getTable("laptop");
+                resourceList
+                .addAll((ArrayList<Resource>) (ArrayList<?>) dvdList);
+                resourceList
+                .addAll((ArrayList<Resource>) (ArrayList<?>) bookList);
+                resourceList
+                .addAll((ArrayList<Resource>) (ArrayList<?>) laptopList);
+                return resourceList;
         }
 
         @FXML
