@@ -9,7 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-
+/**
+ * 
+ * @author 959470
+ * @version 1.0
+ */
 public class AccountViewController {
 	//the resources to be displayed
     @FXML private ResourceBundle resources;
@@ -17,39 +21,28 @@ public class AccountViewController {
     @FXML private URL location;
     // the users first name
     @FXML private Label firstName;
-
-    @FXML
-    private Label lastName;
-
-    @FXML
-    private Label mobileNumber;
-
-    @FXML
-    private Label address;
-
-    @FXML
-    private TextField firstNametxt;
-
-    @FXML
-    private TextField lastNametxt;
-
-    @FXML
-    private TextField mobNumtxt;
-
-    @FXML
-    private TextField addresstxt;
-
-    @FXML
-    private Button editFirstName;
-
-    @FXML
-    private Button editLastName;
-
-    @FXML
-    private Button editMobNum;
-
-    @FXML
-    private Button editAddress;
+    // the users last name
+    @FXML private Label lastName;
+    // the users phone number
+    @FXML private Label mobileNumber;
+    //the users address
+    @FXML private Label address;
+    //textfield to capture first name
+    @FXML private TextField firstNametxt;
+    //textfield to capture last name
+    @FXML private TextField lastNametxt;
+    //textfield to capture phone number
+    @FXML private TextField mobNumtxt;
+    //textfield to capture address
+    @FXML private TextField addresstxt;
+    //textfield to capture firstname
+    @FXML private Button editFirstName;
+    //button to edit lastname
+    @FXML private Button editLastName;
+    //button to edit the mobile number
+    @FXML private Button editMobNum;
+    //button to edit address
+    @FXML private Button editAddress;
 
     @FXML
     private Button saveFn;
@@ -75,6 +68,10 @@ public class AccountViewController {
     @FXML
     private Button cancell4;
 
+    /**
+     * 
+     * @param event event to trigger code
+     */
     @FXML
     void cancell(MouseEvent event) {
 		editFirstName.setVisible(true);
