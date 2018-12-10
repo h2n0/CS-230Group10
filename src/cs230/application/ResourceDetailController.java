@@ -383,8 +383,8 @@ public class ResourceDetailController {
 
         private Copy showCopyInfo(Copy c) {
                 Popup popup = new Popup();
-                ResourceCopyPageController controller =
-                                new ResourceCopyPageController();
+                CopyHistoryController controller =
+                                new CopyHistoryController();
                 controller.setCopyId(c.getID());
                 FXMLLoader loader = new 
                                 FXMLLoader(getClass().getResource("Copy.fxml"));

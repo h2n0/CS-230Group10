@@ -68,7 +68,7 @@ public class Main extends Application {
                                         .getResource("cs230"
                                                 + "/application/NewUser.fxml"));
                         NewUserController controller = new NewUserController();
-                        controller.isFirstRun();
+                        controller.setIsFirstRun();
                         primaryStage.initStyle(StageStyle.UNDECORATED);
                         Scene scene = new Scene(root);
                         scene.getStylesheets().add(getClass()

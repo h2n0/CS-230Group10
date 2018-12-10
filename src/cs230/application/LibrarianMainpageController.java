@@ -50,8 +50,8 @@ public class LibrarianMainpageController {
         private Loan loadCopy(Loan l)
         {
                 Popup popup = new Popup();
-                ResourceCopyPageController controller =
-                                new ResourceCopyPageController();
+                CopyHistoryController controller =
+                                new CopyHistoryController();
                 controller.setCopyId(l.getCopyID());
                 FXMLLoader loader = new 
                                 FXMLLoader(getClass().getResource("Copy.fxml"));
