@@ -43,30 +43,22 @@ public class AccountViewController {
     @FXML private Button editMobNum;
     //button to edit address
     @FXML private Button editAddress;
-
-    @FXML
-    private Button saveFn;
-
-    @FXML
-    private Button saveLn;
-
-    @FXML
-    private Button saveMobNum;
-
-    @FXML
-    private Button saveAdr;
-
-    @FXML
-    private Button cancell1;
-
-    @FXML
-    private Button cancell2;
-
-    @FXML
-    private Button cancell3;
-
-    @FXML
-    private Button cancell4;
+    //button to save first name
+    @FXML private Button saveFn;
+    //button to save last name
+    @FXML private Button saveLn;
+    //button to save phone number
+    @FXML private Button saveMobNum;
+    //button to save address
+    @FXML private Button saveAdr;
+    //button to cancel a popup
+    @FXML private Button cancell1;
+    //button to cancel a popup
+    @FXML private Button cancell2;
+    //button to cancel a popup
+    @FXML private Button cancell3;
+    //button to cancel a popup
+    @FXML private Button cancell4;
 
     /**
      * sets all window features to be invisible
