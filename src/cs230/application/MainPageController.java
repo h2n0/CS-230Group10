@@ -87,6 +87,7 @@ public class MainPageController {
                 updateComboBox();
                 username.setText(SharedData.getUsername());
                 balance.textProperty().set("Balance: " + Double.toString(SharedData.getBalance()));
+                userImage.setImage(SharedData.getAvatar());
                 //userImage = new ImageView(SharedData.getAvatar());
                 currentResourceSelection = COMBOBOX_ALL;
         }
