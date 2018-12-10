@@ -58,9 +58,6 @@ public class FineController  {
                       //remove users if they have a balance of 0
                         allUsers.removeIf(s -> (s.getBalance()==0.0));      
                 }
-
-	            //remove users if they have a balance of 0
-                allUsers.removeIf(s -> (s.getBalance()==0.0));
                 
                 if (!SharedData.getIsLibrarian()){
                 	//the user is a student hence remove all other user data

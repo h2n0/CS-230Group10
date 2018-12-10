@@ -15,6 +15,7 @@ public class SharedData {
         // User currently logged in
         private static User activeUser;
         private static boolean isLibrarian;
+        private static boolean isFirstRun;
 
         /**
          * Sets the current active user and checks if they are a librarian
@@ -66,6 +67,24 @@ public class SharedData {
          */
         public static boolean getIsLibrarian() {
                 return isLibrarian;
+        }
+        
+        /**
+         * Gets whether it is first run.
+         * 
+         * @return True/False depending if it is first run
+         */
+        public static boolean getIsFirstRun() {
+                return isFirstRun;
+        }
+        
+        /**
+         * Sets whether it is first run.
+         * 
+         * @param firstRun Whether it is first run or not
+         */
+        public static void setIsFirstRun(boolean firstRun) {
+                isFirstRun = firstRun;
         }
 
         /**

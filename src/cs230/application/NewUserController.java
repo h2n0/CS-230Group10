@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -30,7 +31,6 @@ import javafx.stage.Stage;
  * @version 1.0
  */
 public class NewUserController {
-        public boolean isFirstRun;
         @FXML
         private VBox rootVBox;
         @FXML
@@ -113,7 +113,18 @@ public class NewUserController {
         @FXML
         public void initialize () {
                 // Hide areas
-                staffEditArea.setVisible(false);
+                if(SharedData.getIsFirstRun())
+                {
+                        staffEditArea.setVisible(true); 
+                        switchToUser.setVisible(false);
+                        switchToLibrarian.setVisible(false);
+                        isLibrarian = true;
+                }
+                else
+                {
+                        staffEditArea.setVisible(false); 
+                }
+                
                 drawAvatarBox.setVisible(false);
 
 
@@ -154,15 +165,8 @@ public class NewUserController {
                         e.printStackTrace();
                     }
                 drawAvatarBox.getChildren().add(root); 
-                if (isFirstRun) {
-                        switchToUser.setVisible(false);
-                        switchToLibrarian.setVisible(false);
-                }
         }
         
-        private void setIsFirstRun (boolean isFirstRun) {
-                this.isFirstRun = isFirstRun;
-        }
         @FXML
         private void handleSwitchUser (ActionEvent event) {
                 staffEditArea.setVisible(false);
@@ -262,10 +266,40 @@ public class NewUserController {
                                 firstNameAdd, lastNameAdd, phoneNumberAdd,
                                 newAddress, 0.0, imagePath, employmentDate, staffNumberAdd);
                         DatabaseManager.saveRecord(newLibrarian, "librarian");
+                        SharedData.setUser(newLibrarian);
+                        SharedData.setIsLibrarian(true);
+                        SharedData.setIsFirstRun(false);
+                        changeToMainpage();
                 }
 
                 if (!canContinue) {
                         incorrectDetails.setVisible(true);
+                }
+        }
+        
+        private void changeToMainpage()
+        {
+                BorderPane root = null;
+                try {
+                    // Initalise and load FXML for the main page
+                    root = FXMLLoader.load(
+                        getClass().getClassLoader().getResource(
+                            "cs230/application/MainPage.fxml"));
+
+                    // Initalise and load CSS for scene
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add(
+                        getClass().getClassLoader().getResource(
+                            "cs230/application/application.css").toExternalForm());
+
+                    // Initalise and display stage
+                    Stage stage =
+                        (Stage) image1.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.centerOnScreen();
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
         }
         

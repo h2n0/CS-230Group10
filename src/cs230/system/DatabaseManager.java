@@ -475,4 +475,12 @@ public class DatabaseManager {
 		return null;
 	}
 
+	public static void main(String[] args) {
+		//Fine fine = new Fine("1", 2);
+		//saveRecord(fine, "fine");
+		Address adress = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
+		Librarian l = new Librarian("lib", "Scott", "Simmons", "2342355", adress, 0.00, "Database\\avatars\\image4.png", null, "123");
+		saveRecord(l,"librarian");
+	}
+	
 }

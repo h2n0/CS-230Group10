@@ -65,5 +65,22 @@ public class Librarian extends User implements Serializable {
 	public String getstaffNumber() {
 		return staffNumber;
 	}
+	@Override
+	public boolean equals(Object obj)
+	{
+	        try {
+	             Librarian toCompare = (Librarian) obj;   
+	             if(this.getName().equalsIgnoreCase(toCompare.getName()))
+	             {
+	                     return true;
+	             } else {
+	                     return false;
+	             }
+	        } catch (Exception e)
+	        {
+	               
+	        }
+	        return false;
+	}
 
 }
