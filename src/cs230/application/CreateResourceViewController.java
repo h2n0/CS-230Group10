@@ -38,66 +38,46 @@ public class CreateResourceViewController {
         @FXML private Label genreLb;
         //textfield to capture author
         @FXML private TextField author;
-
-        @FXML
-        private TextField bookLanguage;
-
-        @FXML
-        private TextField publisher;
-
-        @FXML
-        private TextField isbn;
-
-        @FXML
-        private TextField genre;
-
-        @FXML
-        private Label manufacturerLb;
-
-        @FXML
-        private Label osLb;
-
-        @FXML
-        private Label modelLb;
-
-        @FXML
-        private TextField manufacturer;
-
-        @FXML
-        private TextField operatingSystem;
-
-        @FXML
-        private TextField model;
-
-        @FXML
-        private Label directorLb;
-
-        @FXML
-        private Label runtimeLb;
-
-        @FXML
-        private Label subtitlesLb;
-
-        @FXML
-        private Label dvdLanguageLb;
-
-        @FXML
-        private TextField director;
-
-        @FXML
-        private TextField runtime;
-
-        @FXML
-        private TextField dvdLanguage;
-
-        @FXML
-        private TextField subLanguages;
-
-        @FXML
-        private ChoiceBox<String> resourceChoice = new ChoiceBox<>();
-
-        @FXML
-        private Label unfinishedLb;
+        //textfield to capture book language
+        @FXML private TextField bookLanguage;
+        //textfield to capture publisher
+        @FXML private TextField publisher;
+        //textfield to capture isbn
+        @FXML private TextField isbn;
+        //textfield to capture genre
+        @FXML private TextField genre;
+        //label to show manufacturer
+        @FXML private Label manufacturerLb;
+        //label to show OS
+        @FXML private Label osLb;
+        //label to show model
+        @FXML private Label modelLb;
+        //textfield to capture manufacturer
+        @FXML private TextField manufacturer;
+        //textfield to capture OS
+        @FXML private TextField operatingSystem;
+        //textfield to capture model
+        @FXML private TextField model;
+        //label to show director
+        @FXML private Label directorLb;
+        //label to show runtime
+        @FXML private Label runtimeLb;
+        //label to show subtitles
+        @FXML private Label subtitlesLb;
+        //label to show dvd language
+        @FXML private Label dvdLanguageLb;
+        //textfield to capture director
+        @FXML private TextField director;
+        //textfield to capture runtime
+        @FXML private TextField runtime;
+        //textfield to capture dvd language
+        @FXML private TextField dvdLanguage;
+        //textfield to capture the subtitle languages
+        @FXML private TextField subLanguages;
+        //choice box to choose what resource type
+        @FXML private ChoiceBox<String> resourceChoice = new ChoiceBox<>();
+        //label to show unfinished
+        @FXML private Label unfinishedLb;
         
 	/**
 	 * get the next id from the database
