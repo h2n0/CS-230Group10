@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import cs230.system.User;
 import cs230.system.DatabaseManager;
+import cs230.system.SharedData;
 
 /**
  * Controller behind the Fine page
@@ -23,8 +24,12 @@ import cs230.system.DatabaseManager;
  * @version 1.2
  */
 public class FineController  {
+		//search user label
+		@FXML private Label searchLabel;
         //TextField to search for a student
         @FXML private TextField studentBox;
+        //Search button for a User
+        @FXML private Button searchButton;
         //Table containing all the students
         @FXML private TableView<User> tableView;
         //Username column in table
@@ -42,22 +47,6 @@ public class FineController  {
         @SuppressWarnings("unchecked")
         @FXML
         private void handleSearchButton(ActionEvent event) {
-                /*
-    	        //implementation using searchRecord
-    	
-    	        //get the text from the search button
-    	        String student = studentBox.getText();
-    	        //create a new student with the name
-    	        User searchStudent = new User (student, null, null, null);
-    	    
-    	        //search the database for the student
-    	        ArrayList<User> usersFound = new ArrayList<User>();
-    	        usersFound = (ArrayList<User>) DatabaseManager.searchRecord(searchStudent, "User");
-    	
-    	        //populate the table with the users found
-    	        PopulateFineTable(allUsers);
-    	        */
-    	
                 //get the text from the search button
                 String student = studentBox.getText();
 		
@@ -93,6 +82,17 @@ public class FineController  {
 
 	            //remove users if they have a balance of 0
                 allUsers.removeIf(s -> (s.getBalance()==0.0));
+                
+                if (!SharedData.getIsLibrarian()){
+                	//the user is a student hence remove all other user data
+                	allUsers.removeIf(s -> !(s.equals(SharedData.getUser())));
+                	
+                	//and remove the search fields and the edit column
+                	searchLabel.setVisible(false);
+                	studentBox.setVisible(false);
+                	searchButton.setVisible(false);
+                	Edit.setVisible(false);
+                }
 		
                 //populate the table with the users above
                 PopulateFineTable(allUsers);
