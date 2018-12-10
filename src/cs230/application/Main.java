@@ -3,6 +3,7 @@ package cs230.application;
 import java.util.ArrayList;
 
 import cs230.system.DatabaseManager;
+import cs230.system.Librarian;
 import cs230.system.SharedData;
 import cs230.system.User;
 import javafx.application.Application;
@@ -21,7 +22,8 @@ public class Main extends Application {
 		//try setting up the scheduler for the database update
 		//launch the login window to start the program
 	        ArrayList<User> userList = (ArrayList<User>) DatabaseManager.getTable("user");
-	        if(userList == null || userList.isEmpty())
+	        ArrayList<Librarian> librarianList = (ArrayList<Librarian>) DatabaseManager.getTable("librarian");
+	        if((userList == null || userList.isEmpty()) && (librarianList == null || librarianList.isEmpty()))
 	        {
 	                SharedData.setIsFirstRun(true);
 	                try {
@@ -37,19 +39,22 @@ public class Main extends Application {
 	                    e.printStackTrace();
 	                } 
 	        }
-		try {
-		        AnchorPane root =
-				FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
-			primaryStage.initStyle(StageStyle.UNDECORATED);
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.centerOnScreen();
-			primaryStage.show();
-			primaryStage.centerOnScreen();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	        else {
+	                try {
+	                        AnchorPane root =
+	                        FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
+	                    primaryStage.initStyle(StageStyle.UNDECORATED);
+	                    Scene scene = new Scene(root);
+	                    scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+	                    primaryStage.setScene(scene);
+	                    primaryStage.centerOnScreen();
+	                    primaryStage.show();
+	                    primaryStage.centerOnScreen();
+	                } catch(Exception e) {
+	                    e.printStackTrace();
+	                }    
+	        }
+		
 	}
 	
 	public static void main(String[] args) {
