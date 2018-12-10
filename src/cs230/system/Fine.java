@@ -11,7 +11,7 @@ import java.util.Calendar;
 public class Fine implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// ID of the associated loan
-	private final int loanID;
+	private final String loanID;
 	// The fixed fine of the resource
 	private final int fixedFine;
 	// The total fine accumulated so far
@@ -26,7 +26,7 @@ public class Fine implements Serializable {
 	 * @param loanID ID of the loan
 	 * @param fixedFine Fixed fine of the resource
 	 */
-	public Fine(int loanID, int fixedFine) {
+	public Fine(String loanID, int fixedFine) {
 		this.loanID = loanID;
 		this.fixedFine = fixedFine;
 		lastDay = Calendar.DAY_OF_YEAR;
@@ -130,7 +130,7 @@ public class Fine implements Serializable {
 	 * Returns associated ID
 	 * @return loanID
 	 */
-	public int getLoanID() {
+	public String getLoanID() {
 		return loanID;
 	}
 	

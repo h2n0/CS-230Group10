@@ -145,6 +145,7 @@ public class CopyEditController {
                                 if(maxId == 0) {
                                         maxId = 1;
                                 }
+                                copyID = Integer.toString( maxId + 1);
                                 String type = "";
                                 if(isLaptop) {
                                         type = "Laptop";
@@ -153,7 +154,7 @@ public class CopyEditController {
                                 } else {
                                         type = "Dvd";
                                 }
-                                Copy toAdd = new Copy(resourceID, Copy.Status.AVAILABLE, type
+                                Copy toAdd = new Copy(copyID,resourceID, Copy.Status.AVAILABLE, type
                                                 , enteredDuration);
                                 DatabaseManager.saveRecord(toAdd, "copy");
                                 Stage currentStage = (Stage)incorrectLabel.getScene().getWindow();
@@ -167,14 +168,17 @@ public class CopyEditController {
                                 } else {
                                         type = "Dvd";
                                 }
-                                Copy oldCopy = new Copy(resourceID, status, type
+                                Copy oldCopy = new Copy(copyID,resourceID, status, type
                                                 , duration);
                                 if(duration != enteredDuration) {
-                                        Copy newCopy = new Copy(resourceID, status, type
+                                        Copy newCopy 
+                                        = new Copy(copyID,resourceID, status, type
                                                 , enteredDuration);
-                                        DatabaseManager.editRecord(oldCopy, newCopy, "copy");
+                                        DatabaseManager
+                                        .editRecord(oldCopy, newCopy, "copy");
                                 } else {
-                                        Stage currentStage = (Stage)incorrectLabel.getScene().getWindow();
+                                        Stage currentStage = (Stage)incorrectLabel
+                                                        .getScene().getWindow();
                                         currentStage.close();
                                 }
                               

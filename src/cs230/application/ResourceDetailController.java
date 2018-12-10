@@ -824,11 +824,21 @@ public class ResourceDetailController {
                         maxId++;
                         nextId = Integer.toString(maxId);
                 }
+                boolean canLoan = true;
+                for(Loan loan: loanTable)
+                {
+                        if(loan.getUserName().equals(inputUsername) 
+                                        && loan.getDueDate()
+                                        .isBefore(LocalDate.now()))
+                        {
+                                canLoan = false;
+                        }
+                }
 
                 if (exists) {
                         borrowingUser = (User)DatabaseManager
                                         .searchRecord(borrowingUser, "user");
-                        if(borrowingUser.getBalance()> 0)
+                        if(borrowingUser.getBalance()> 0 && canLoan)
                         {
                                 if (showedResource.checkQueue() == 0) {
                                         loanResource(nextId, inputUsername);
