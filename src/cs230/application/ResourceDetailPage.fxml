@@ -20,7 +20,7 @@
             <HBox prefHeight="66.0" prefWidth="404.0">
                <children>
                   <Button fx:id="loanButton" mnemonicParsing="false" onAction="#handleLoanAction" text="Loan book" />
-                  <Button fx:id="returnShowButton" mnemonicParsing="false" onAction="#handleReturnAction" text="Book Return" />
+                  <Button fx:id="returnShowButton" mnemonicParsing="false" onAction="#handleReturnShowAction" text="Book Return" />
                </children>
             </HBox>
             <VBox fx:id="showLoanCreate" prefHeight="110.0" prefWidth="404.0">
@@ -28,6 +28,17 @@
                   <Label prefHeight="17.0" prefWidth="112.0" text="Enter the username: " />
                   <TextField fx:id="userLoanTextBox" />
                   <Label fx:id="userNotFoundLoanLabel" prefHeight="17.0" prefWidth="103.0" text="User not found" />
+                  <VBox fx:id="reserveOptions" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Do you want to reserve it?" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="reserveYesButton" mnemonicParsing="false" text="Yes" />
+                              <Button fx:id="reserveNoButton" mnemonicParsing="false" text="No" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                   <Label fx:id="noCopiesLabel" text="No copies found" />
                   <HBox prefHeight="25.0" prefWidth="404.0">
                      <children>
@@ -41,12 +52,14 @@
                <children>
                   <Label prefHeight="17.0" prefWidth="112.0" text="Enter the username: " />
                   <TextField fx:id="returnUsernameTextBox" />
+                  <Label text="Enter the copy ID: " />
+                  <TextField fx:id="returnCopyIdTextBox" />
                   <Label fx:id="userNotFoundReturnLabel" prefHeight="17.0" prefWidth="103.0" text="User not found" />
                   <Label fx:id="noLoanFoundLabel" text="No loan found" />
                   <HBox prefHeight="36.0" prefWidth="404.0">
                      <children>
-                        <Button fx:id="returnButton" mnemonicParsing="false" text="Return" />
-                        <Button fx:id="returnCancelButton" mnemonicParsing="false" text="Cancel" />
+                        <Button fx:id="returnButton" mnemonicParsing="false" onAction="#handleReturnSaveAction" text="Return" />
+                        <Button fx:id="returnCancelButton" mnemonicParsing="false" onAction="#handleReturnSaveAction" text="Cancel" />
                      </children>
                   </HBox>
                </children>

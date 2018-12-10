@@ -18,12 +18,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 /**
- * All of the interactions between the user and the AvatarDraw window happen here 
+ * All of the interactions between the user and the AvatarDraw window happen
+ * here
+ * 
  * @author 964552
  *
  */
 public class AvatarDrawController {
-	
+
 	private final int bigBrush = 10;
 	private final int smallBrush = 3;
 	private final int bigLine = 10;
@@ -45,7 +47,7 @@ public class AvatarDrawController {
 	private int currentLineSize;
 	private boolean usingBrush;
 	private int lx, ly;
-	
+
 	/*
 	 * Called when the scene loads
 	 */
@@ -66,7 +68,6 @@ public class AvatarDrawController {
 		// Make sure something is on the canvas so the user isn't confused
 		bufferToFX();
 	}
-	
 
 	/**
 	 * Called when the user clicks the save button
@@ -84,22 +85,18 @@ public class AvatarDrawController {
 		// Try and save, show the user a message based on the result
 		try {
 			ImageIO.write(newAvatar, "png", out);
-			JOptionPane.showMessageDialog(null, "Avatar has been saved", 
-					"AvatarDraw", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Avatar has been saved", "AvatarDraw", JOptionPane.INFORMATION_MESSAGE);
 		} catch (IOException e1) {
-			JOptionPane.showMessageDialog(null, "Unable to save avatar", 
-					"AvatarDraw", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Unable to save avatar", "AvatarDraw", JOptionPane.ERROR_MESSAGE);
 			e1.printStackTrace();
 		}
-		
-		
 		/*
-		User oldUser = PassInfo.getCurrentUser();
-		User newUser = PassInfo.getCurrentUser();
-		newUser.setAvatarFilePath(path);
-		DatabaseManager.editRecord(oldUser, newUser, "user");
-		PassInfo.setCurrentUser(newUser);
-		*/
+		 * User oldUser = PassInfo.getCurrentUser();
+		 * User newUser = PassInfo.getCurrentUser();
+		 * newUser.setAvatarFilePath(path);
+		 * DatabaseManager.editRecord(oldUser, newUser, "user");
+		 * PassInfo.setCurrentUser(newUser);
+		 */
 	}
 
 	/*
@@ -149,7 +146,7 @@ public class AvatarDrawController {
 		// Brus size selection
 		int xo = 16;
 		int s = 16;
-		int yo  = 16;
+		int yo = 16;
 		if (this.mx >= xo && this.mx <= xo + s) {
 			if (this.my >= yo && this.my <= yo + s) {
 				this.brushSize = this.bigBrush;
@@ -158,7 +155,7 @@ public class AvatarDrawController {
 				this.brushSize = this.smallBrush;
 				this.usingBrush = true;
 			}
-			
+
 			yo += 72;
 			if (this.my >= yo && this.my <= yo + s) {
 				this.currentLineSize = this.bigLine;
@@ -167,12 +164,12 @@ public class AvatarDrawController {
 				this.currentLineSize = this.smallLine;
 				this.usingBrush = false;
 			}
-			
+
 		}
 
-		if(this.usingBrush) {
+		if (this.usingBrush) {
 			paintOnImage();
-		}else { // Using the line tool
+		} else { // Using the line tool
 			drawLineOnImage();
 		}
 		bufferToFX();
@@ -205,7 +202,8 @@ public class AvatarDrawController {
 		int iy = my - (300 - this.imageHeight) / 2;
 
 		boolean valid = !(ix < 0 || iy < 0 || ix >= this.imageWidth || iy >= this.imageWidth);
-		if(!valid)return;
+		if (!valid)
+			return;
 
 		// Check if we are inside the "image"
 		if (valid && this.usingBrush) {
@@ -214,27 +212,29 @@ public class AvatarDrawController {
 
 		bufferToFX();
 	}
-	
+
 	/**
 	 * Helper function to draw lines based on the Xiaolin Wu Line drawing function
-	 * see https://en.wikipedia.org/wiki/Xiaolin_Wu's_line_algorithm for more details
+	 * see https://en.wikipedia.org/wiki/Xiaolin_Wu's_line_algorithm for more
+	 * details
 	 */
 	private void drawLineOnImage() {
 		int ix = mx - (400 - this.imageWidth) / 2;
 		int iy = my - (300 - this.imageHeight) / 2;
-		
+
 		boolean valid = !(ix < 0 || iy < 0 || ix >= this.imageWidth || iy >= this.imageWidth);
-		if(!valid)return;
-		
-		if(lx == -1 || ly == -1) {
+		if (!valid)
+			return;
+
+		if (lx == -1 || ly == -1) {
 			lx = ix;
 			ly = iy;
-		}else {// Set a second position and draw
+		} else {// Set a second position and draw
 			int x0 = lx;
 			int y0 = ly;
 			int x1 = ix;
 			int y1 = iy;
-			
+
 			int w = x1 - x0;
 			int h = y1 - y0;
 			int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
@@ -267,7 +267,8 @@ public class AvatarDrawController {
 			}
 			int numerator = longest / 2;
 			for (int i = 0; i <= longest; i++) {
-				circle(x0, y0, this.currentLineSize==this.bigLine?this.bigLine:this.smallLine, this.pallet[this.palletIndex]);
+				circle(x0, y0, this.currentLineSize == this.bigLine ? this.bigLine : this.smallLine,
+						this.pallet[this.palletIndex]);
 				numerator += shortest;
 				if (!(numerator < longest)) {
 					numerator -= longest;
@@ -278,11 +279,11 @@ public class AvatarDrawController {
 					y0 += dy2;
 				}
 			}
-			
+
 			lx = -1;
 			ly = -1;
 		}
-		
+
 		bufferToFX();
 	}
 
@@ -345,11 +346,11 @@ public class AvatarDrawController {
 				this.ctx.fillRect(xo + (s * i) + (spacing * i), yo + s + 4, s, 2);
 			}
 		}
-		
+
 		xo = 16;
 		yo = 16;
 		int s = 16;
-		
+
 		// Draw the brush size section
 		this.ctx.setFill(Color.GRAY);
 		this.ctx.fillRect(xo - 8, yo - 8, 56 * 2, 56);
@@ -358,7 +359,7 @@ public class AvatarDrawController {
 		this.ctx.fillOval(xo, yo, s, s);
 		this.ctx.setFill(Color.BLACK);
 		if (this.brushSize == this.bigBrush && this.usingBrush) {
-			this.ctx.fillOval(xo + (s/4), yo + (s/4), (s/2), (s/2));
+			this.ctx.fillOval(xo + (s / 4), yo + (s / 4), (s / 2), (s / 2));
 		}
 		this.ctx.fillText("Big brush", xo + s + 4, 28);
 
@@ -366,11 +367,10 @@ public class AvatarDrawController {
 		this.ctx.fillOval(xo, yo + 20, s, s);
 		this.ctx.setFill(Color.BLACK);
 		if (this.brushSize == this.smallBrush && this.usingBrush) {
-			this.ctx.fillOval(xo + (s/4), yo + 20 + (s/4), s/2, s/2);
+			this.ctx.fillOval(xo + (s / 4), yo + 20 + (s / 4), s / 2, s / 2);
 		}
-		this.ctx.fillText("Small brush", xo + s + 4,48);
-		
-		
+		this.ctx.fillText("Small brush", xo + s + 4, 48);
+
 		yo += 72;
 		// Line selection tool
 		this.ctx.setFill(Color.GRAY);
@@ -380,7 +380,7 @@ public class AvatarDrawController {
 		this.ctx.fillOval(xo, yo, s, s);
 		this.ctx.setFill(Color.BLACK);
 		if (this.currentLineSize == this.bigLine && !this.usingBrush) {
-			this.ctx.fillOval(xo + s/4, yo + s/4, s/2, s/2);
+			this.ctx.fillOval(xo + s / 4, yo + s / 4, s / 2, s / 2);
 		}
 		this.ctx.fillText("Big line", xo + s + 4, yo + 12);
 
@@ -388,7 +388,7 @@ public class AvatarDrawController {
 		this.ctx.fillOval(xo, yo + 20, s, s);
 		this.ctx.setFill(Color.BLACK);
 		if (this.currentLineSize == this.smallLine && !this.usingBrush) {
-			this.ctx.fillOval(xo + s/4, yo + 20 + (s/4), s/2, s/2);
+			this.ctx.fillOval(xo + s / 4, yo + 20 + (s / 4), s / 2, s / 2);
 		}
 		this.ctx.fillText("Small line", xo + s + 4, yo + 34);
 

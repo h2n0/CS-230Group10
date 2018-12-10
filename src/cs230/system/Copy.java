@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 /**
  * Copy class stores the information for each copy
- * @author 963257
+ * @author 963257 & 960689
  * @version 1.1
  */
 
@@ -20,24 +20,37 @@ public class Copy implements Serializable {
         private String resourceType;
         //duration of the loan, in days
         private int loanDuration;
-        //cost for this copy to be overdue per day
+        //daily increase of resource
         private double overdueCost;
+        //max of the fine
+        private double overdueMax;
 
         /**
 	     * Constructs a copy entity
+	     * @param ID The Id of this copy
          * @param resourceID the identifier for the resource
          * @param status says if the copy is available, on loan, or overdue
          * @param resourceType if the copy is a Book, DVD, or Laptop
          * @param loanDuration how long you can borrow the copy for
-         * @param overdueCost cost per day for this copy to be overdue
 	     */
-        public Copy(String resourceID, Status status, String resourceType, int loanDuration, double overdueCost) {
+        public Copy(String ID, String resourceID, Status status,
+                    String resourceType, int loanDuration) {
                 this.resourceID = resourceID;
                 this.status = status;
                 this.resourceType = resourceType;
                 this.loanDuration = loanDuration;
-                this.overdueCost = overdueCost;
-	    }
+                switch(resourceType) {
+                        case "book":
+                        case "dvd":
+                                overdueCost = 2.00;
+                                overdueMax = 25.00;
+                                break;
+                        case "laptop":
+                                overdueCost = 10.00;
+                                overdueMax = 100.00;
+                                break;
+                }
+        }
 	
         /**
 	     * Constructs only the candidate keys of the copy for database
@@ -115,21 +128,9 @@ public class Copy implements Serializable {
                 return loanDuration;
 	    }
 
-        /**
-         * Sets the cost per day for this copy to be overdue
-         * @param overdueCost The cost per day for this copy to be overdue
-         */
-        public void setoverdueCost(double overdueCost) {
-                this.overdueCost = overdueCost;
-        }
-
-        /**
-         * Gets the cost per day for this copy to be overdue
-         * @return The cost per day for this copy to be overdue
-         */
-        public double getoverdueCost() {
-                return overdueCost;
-        }
+	    public double getOverdueCost() {
+                return this.overdueCost;
+            }
         
         /**
 	     * Saves this copy to the database
@@ -162,5 +163,5 @@ public class Copy implements Serializable {
                 AVAILABLE,
                 ON_LOAN,
                 OVERDUE
-	    }
+        }
 }

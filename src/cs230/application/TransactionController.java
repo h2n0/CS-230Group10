@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import cs230.system.Address;
 import cs230.system.Copy;
@@ -19,20 +20,32 @@ import cs230.system.User;
  * @version 1.2
  */
 public class TransactionController  {
-        //Table containing all the transactions
+        //Table containing all the fines
         @FXML private TableView<Transaction> tableView;
-        //transactionID column in table
+        //transactionID column in fines table
         @FXML private TableColumn<Transaction, Integer> transactionID;
-        //date column in table
+        //date column in fines table
         @FXML private TableColumn<Transaction, Date> date;
-        //type column in table
+        //type column in fines table
         @FXML private TableColumn<Transaction, String> type;
-        //amount column in table
+        //amount column in fines table
         @FXML private TableColumn<Transaction, Double> amount;
-        //copy column in table
+        //copy column in fines table
         @FXML private TableColumn<Transaction, Copy> copy;
-        //days overdue column in table
+        //days overdue column in fines table
         @FXML private TableColumn<Transaction, Integer> daysOverdue;
+        
+
+        //Table containing all the transactions
+        @FXML private TableView<Transaction> tableViewPayment;
+        //transactionID column in table
+        @FXML private TableColumn<Transaction, Integer> transactionIDPayment;
+        //date column in table
+        @FXML private TableColumn<Transaction, Date> datePayment;
+        //type column in table
+        @FXML private TableColumn<Transaction, String> typePayment;
+        //amount column in table
+        @FXML private TableColumn<Transaction, Double> amountPayment;
     
     	/**
 	     * Overrides the initialise function so when the window is open the
@@ -41,38 +54,51 @@ public class TransactionController  {
         @SuppressWarnings("unchecked")
 		@FXML
     	public void initialize() {
-        		Address address = new Address("30", "Canal Terrace", "Swansea", "SA9 2LP");
-        		User user = new User("admin", "Scott", "Simmons", "07535537447",
-                    address,
-                    10.0, "\\Database\\Images" +
-                    "\\Harry_Potter_and_the_Philosopher" +
-                    "'s_Stone_Book_Cover.jpg");
-        		SharedData.setUser(user);
-        	
-                //get all the users using the DatabaseManager
-                ArrayList<Transaction> allHistory = new ArrayList<Transaction>();
                 try {
-                        allHistory = (ArrayList<Transaction>) DatabaseManager.getTable("transaction");
+                        System.out.println("Hello World!");
+                        //get all the users using the DatabaseManager
+                        ArrayList<Transaction> allPayments =
+                                (ArrayList<Transaction>) DatabaseManager.getTable("transaction");
+                        ArrayList<Transaction> allFines =
+                                (ArrayList<Transaction>) DatabaseManager.getTable("transaction");
+                        System.out.println("Length: " + allPayments.size());
+                        //remove transactions if they arent for the current user
+                        allPayments.removeIf(s -> (!s.getUser().getName().equals(SharedData.getUsername())));
+                        allFines.removeIf(s -> (!s.getUser().getName().equals(SharedData.getUsername())));
+
+                        // Spereate fines from payments in two for loops
+                        for (Iterator<Transaction> iterator =
+                             allPayments.iterator(); iterator.hasNext();) {
+                                Transaction trans = iterator.next();
+                                if (trans.getType().equals("fine")) {
+                                        iterator.remove();
+                                }
+                        }
+
+                        for (Iterator<Transaction> iterator =
+                             allFines.iterator(); iterator.hasNext();) {
+                                Transaction trans = iterator.next();
+                                if (trans.getType().equals("payment")) {
+                                        iterator.remove();
+                                }
+                        }
+
+                        PopulateFineTable(allFines);
+                        PopulatePaymentTable(allPayments);
 	    	    } catch(Exception e){
 	    	            e.printStackTrace();
 	            }
-
-	            //remove users if they have a balance of 0
-                allHistory.removeIf(s -> (s.getUser()!=SharedData.getUser()));
-		
-                //populate the table with the users above
-                PopulateTransactionTable(allHistory);
+                
         }
     
         /**
          * Populates the table on the window with a users transaction history
          * @param historyList a list of transaction history
          */
-        private void PopulateTransactionTable(ArrayList<Transaction> historyList) {
+        private void PopulateFineTable(ArrayList<Transaction> historyList) {
                 //prepare the columns to accept values
-        	    transactionID.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("transactionID"));
+                transactionID.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("transactionID"));
                 date.setCellValueFactory(new PropertyValueFactory<Transaction, Date>("date"));
-                type.setCellValueFactory(new PropertyValueFactory<Transaction, String>("type"));
                 amount.setCellValueFactory(new PropertyValueFactory<Transaction, Double>("amount"));
                 copy.setCellValueFactory(new PropertyValueFactory<Transaction, Copy>("copy"));
                 daysOverdue.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("daysOverdue"));
@@ -81,6 +107,24 @@ public class TransactionController  {
                 if (historyList != null){
                         //populate the columns
                         tableView.getItems().setAll(historyList);
+                }
+        
+        }
+        
+        /**
+         * Populates the table on the window with a users transaction history
+         * @param historyList a list of transaction history
+         */
+        private void PopulatePaymentTable(ArrayList<Transaction> historyList) {
+                //prepare the columns to accept values
+                transactionIDPayment.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("transactionID"));
+                datePayment.setCellValueFactory(new PropertyValueFactory<Transaction, Date>("date"));
+                amountPayment.setCellValueFactory(new PropertyValueFactory<Transaction, Double>("amount"));
+        
+                //if the list of users isnt null
+                if (historyList != null){
+                        //populate the columns
+                        tableViewPayment.getItems().setAll(historyList);
                 }
         
         }

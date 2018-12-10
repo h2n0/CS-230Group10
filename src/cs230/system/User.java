@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @version 2.0
  */
 public class User implements Serializable {
+
 	// Default serial ID
 	private static final long serialVersionUID = 1L;
 	// The user's username
@@ -46,6 +47,15 @@ public class User implements Serializable {
 		this.address = address;
 		this.balance = balance;
 		this.avatarFilePath = avatarFilePath;
+	}
+
+	/**
+	 * Constructor to copy a user
+	 * 
+	 * @param username the username of the user
+	 */
+	public void User(User user) {
+		this.username = user.getName();
 	}
 
 	/**

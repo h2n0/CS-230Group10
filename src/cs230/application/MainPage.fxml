@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane centerShape="false" prefHeight="600.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.MainPageController">
+   <center>
+      <ScrollPane fx:id="mainContent" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" vbarPolicy="ALWAYS" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <VBox fx:id="sideOptions" prefHeight="544.0" prefWidth="109.0" styleClass="mainSideBox" BorderPane.alignment="CENTER">
+         <children>
+            <Hyperlink fx:id="dashboardLink" onAction="#toMainpage" styleClass="mainSideLink" text="Dashboard">
+               <font>
+                  <Font size="13.0" />
+               </font></Hyperlink>
+            <Hyperlink id="cs230.system.Fine" fx:id="fineLink" onAction="#handleFineAction" styleClass="mainSideLink" text="Fines">
+               <font>
+                  <Font size="13.0" />
+               </font></Hyperlink>
+            <Hyperlink fx:id="createResLink" onAction="#handleCreateRes" text="Create Resource">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="transactionLink" onAction="#handleViewTrans" text="View Transaction History" wrapText="true">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink fx:id="addUserLink" onAction="#handleAddUser" text="Add User">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </VBox>
+   </left>
+   <top>
+   <HBox prefHeight="60.0" prefWidth="750.0" styleClass="mainTopBox" stylesheets="@application.css">
+               <children>
+			   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                        <HBox layoutY="10.0" prefHeight="46.0" prefWidth="750.0">
+                           <children>
+                              <ImageView fx:id="userImage" fitHeight="68.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin></ImageView>
+                              <VBox prefHeight="68.0" prefWidth="171.0">
+                                 <children>
+                                    <Hyperlink fx:id="username" prefHeight="27.0" prefWidth="169.0" text="Username" />
+                                    <Label fx:id="balance" prefHeight="27.0" prefWidth="166.0" text="Balance" textFill="RED">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding></Label>
+                                 </children>
+                              </VBox>
+                              <TextField fx:id="searchBox">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                              </TextField>
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="25.0" prefWidth="66.0" text="Search" />
+                              <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
+                        <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="55.0" text="Logout">
+                           <HBox.margin>
+                              <Insets left="90.0" />
+                           </HBox.margin>
+                        </Button>
+                           </children>
+                        </HBox>
+               </children></AnchorPane>
+			</children>
+            </HBox>
+   </top>
+</BorderPane>

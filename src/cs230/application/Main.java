@@ -1,10 +1,11 @@
 package cs230.application;
-	
-import java.util.Date;
-import java.util.Timer;
 
-import cs230.system.UpdateDatabase;
-//import cs230.system.UpdateDatabase;
+import java.util.ArrayList;
+
+import cs230.system.DatabaseManager;
+import cs230.system.Librarian;
+import cs230.system.SharedData;
+import cs230.system.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,44 +14,47 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
 public class Main extends Application {
+
 	@Override
 	public void start(Stage primaryStage) {
-		//try setting up the scheduler for the database update
-		try {
-			//get todays date
-			Date today = new Date();
-			
-			//long delay is time in milliseconds between the scheduled code 
-			//43200000 milliseconds is 12hrs
-			long delay = 43200000;
-			
-			//set a new timer and load in updateDB and set to run everyday at midday
-			Timer timer = new Timer();
-			timer.schedule(new UpdateDatabase(), today, delay );
-			
-		} catch (Exception e){
-			System.out.println("database update failed");
-		}
-		
-		//launch the login window to start the program
-		try {
-			AnchorPane root = FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
-			primaryStage.initStyle(StageStyle.UNDECORATED);
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.setMinWidth(400d);
-			primaryStage.setMinHeight(400d);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
+		// try setting up the scheduler for the database update
+		// launch the login window to start the program
+		ArrayList<User> userList = (ArrayList<User>) DatabaseManager.getTable("user");
+		ArrayList<Librarian> librarianList = (ArrayList<Librarian>) DatabaseManager.getTable("librarian");
+		if ((userList == null || userList.isEmpty()) && (librarianList == null || librarianList.isEmpty())) {
+			SharedData.setIsFirstRun(true);
+			try {
+				VBox root = FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/NewUser.fxml"));
+				primaryStage.initStyle(StageStyle.UNDECORATED);
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.centerOnScreen();
+				primaryStage.show();
+				primaryStage.centerOnScreen();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				AnchorPane root = FXMLLoader
+						.load(getClass().getClassLoader().getResource("cs230/application/Login.fxml"));
+				primaryStage.initStyle(StageStyle.UNDECORATED);
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(
+						getClass().getClassLoader().getResource("cs230/application/application.css").toExternalForm());
+				primaryStage.setScene(scene);
+				primaryStage.centerOnScreen();
+				primaryStage.show();
+				primaryStage.centerOnScreen();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 }

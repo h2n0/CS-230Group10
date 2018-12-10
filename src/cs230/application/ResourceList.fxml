@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="475.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.ResourceListController">
+<VBox prefHeight="706.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -18,16 +18,37 @@
                   <Font size="29.0" />
                </font>
             </Label>
-            <Button fx:id="addResourceButton" onAction="#handleAddResourceButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Add resource" visible="false"/>
          </children>
       </HBox>
-      <TableView fx:id="tableView" editable="true" prefHeight="352.0" prefWidth="546.0">
+      <TableView fx:id="tableViewBook" editable="true" prefHeight="352.0" prefWidth="546.0">
         <columns>
-          <TableColumn fx:id="resourceID" prefWidth="102.39996182918549" text="ResourceID" />
-          <TableColumn fx:id="title" prefWidth="237.59998321533203" text="Title" />
-          <TableColumn fx:id="year" prefWidth="122.39996337890625" text="Year" />
-          <TableColumn fx:id="details" prefWidth="125.60006713867188" text="Details" />
+          <TableColumn fx:id="resourceIDBook" prefWidth="102.39996182918549" text="ResourceID" />
+          <TableColumn fx:id="titleBook" prefWidth="237.59998321533203" text="Title" />
+          <TableColumn fx:id="yearBook" prefWidth="122.39996337890625" text="Year" />
+          <TableColumn fx:id="detailsBook" prefWidth="125.60006713867188" text="Details" />
         </columns>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TableView>
+      <TableView fx:id="tableViewDvd" editable="true" prefHeight="352.0" prefWidth="546.0">
+         <columns>
+            <TableColumn fx:id="resourceIDDvd" prefWidth="102.39996182918549" text="ResourceID" />
+            <TableColumn fx:id="titleDvd" prefWidth="237.59998321533203" text="Title" />
+            <TableColumn fx:id="yearDvd" prefWidth="122.39996337890625" text="Year" />
+            <TableColumn fx:id="detailsDvd" prefWidth="125.60006713867188" text="Details" />
+         </columns>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TableView>
+      <TableView fx:id="tableViewLaptop" editable="true" prefHeight="352.0" prefWidth="546.0">
+         <columns>
+            <TableColumn fx:id="resourceIDLaptop" prefWidth="102.39996182918549" text="ResourceID" />
+            <TableColumn fx:id="titleLaptop" prefWidth="237.59998321533203" text="Title" />
+            <TableColumn fx:id="yearLaptop" prefWidth="122.39996337890625" text="Year" />
+            <TableColumn fx:id="detailsLaptop" prefWidth="125.60006713867188" text="Details" />
+         </columns>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

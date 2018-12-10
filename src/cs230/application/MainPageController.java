@@ -3,8 +3,10 @@ package cs230.application;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import cs230.system.Book;
 import cs230.system.DatabaseManager;
-import cs230.system.Resource;
+import cs230.system.Dvd;
+import cs230.system.Laptop;
 import cs230.system.SharedData;
 import cs230.system.User;
 import javafx.beans.value.ChangeListener;
@@ -24,9 +26,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * @author 901306 & Scott (960689)
+ */
 public class MainPageController {
 
 	private static final String COMBOBOX_ALL = "All";
@@ -41,8 +47,8 @@ public class MainPageController {
 	private VBox sideOptions;
 
 	@FXML
-	private Label username;
-
+	private Hyperlink username;
+	
 	@FXML
 	private Label balance;
 
@@ -68,7 +74,13 @@ public class MainPageController {
 	private Hyperlink fineLink;
 
 	@FXML
+	private Hyperlink transactionLink;
+
+	@FXML
 	private Hyperlink createResLink;
+
+	@FXML
+	private Hyperlink addUserLink;
 
 	@FXML
 	private ScrollPane mainContent;
@@ -78,16 +90,53 @@ public class MainPageController {
 	@FXML
 	public void initialize() {
 		setResourceLinks();
-//                username.textProperty().set(currentUser.getName());
-//                balance.textProperty().set(Double.toString(currentUser.getBalance()));
-//                userImage = new ImageView(currentUser.getAvatarFilePath());
+		balance.textProperty().set(Double.toString(SharedData.getBalance()));
+		if (SharedData.getIsLibrarian()) {
+			username.setOnAction(e -> loadLibrarianInfo());
+			addUserLink.setVisible(true);
+			createResLink.setVisible(true);
+		} else {
+			username.setOnAction(e -> loadUserInfo());
+			addUserLink.setVisible(false);
+			createResLink.setVisible(false);
+		}
+
 		updateComboBox();
 		username.setText(SharedData.getUsername());
+		balance.textProperty().set("Balance: " + Double.toString(SharedData.getBalance()));
+		userImage.setImage(SharedData.getAvatar());
+		// userImage = new ImageView(SharedData.getAvatar());
 		currentResourceSelection = COMBOBOX_ALL;
 	}
 
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
+	}
+
+	private void loadLibrarianInfo() {
+		VBox root;
+		try {
+			root = FXMLLoader
+					.load(getClass().getClassLoader().getResource("cs230/application/Librarian" + "AccountView.fxml"));
+			// mainContent.setPrefHeight(listPage.getPrefHeight());
+			// mainContent.setPrefWidth(listPage.getPrefWidth());
+			mainContent.setContent(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void loadUserInfo() {
+		VBox root;
+		try {
+			root = FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application" + "/AccountView.fxml"));
+			// mainContent.setPrefHeight(listPage.getPrefHeight());
+			// mainContent.setPrefWidth(listPage.getPrefWidth());
+			mainContent.setContent(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private User currentUser;
@@ -123,19 +172,18 @@ public class MainPageController {
 		TitledPane resources = new TitledPane();
 		resources.setText("View Resource");
 		VBox resourceChoices = new VBox();
-		Hyperlink allChoice = new Hyperlink();
-		allChoice.setText("All resources");
-		allChoice.setOnAction(e -> loadAllPage());
 		Hyperlink laptopChoice = new Hyperlink();
 		laptopChoice.setText("Laptops");
-		laptopChoice.setOnAction(e -> loadLaptopPage());
+		ArrayList<Laptop> laptopList = (ArrayList<Laptop>) DatabaseManager.getTable("laptop");
+		laptopChoice.setOnAction(e -> loadLaptopPage(laptopList));
 		Hyperlink bookChoice = new Hyperlink();
+		ArrayList<Book> bookList = (ArrayList<Book>) DatabaseManager.getTable("book");
 		bookChoice.setText("Books");
-		bookChoice.setOnAction(e -> loadBookPage());
+		bookChoice.setOnAction(e -> loadBookPage(bookList));
 		Hyperlink dvdChoice = new Hyperlink();
 		dvdChoice.setText("DVDs");
-		dvdChoice.setOnAction(e -> loadDVDPage());
-		resourceChoices.getChildren().add(allChoice);
+		ArrayList<Dvd> dvdList = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
+		dvdChoice.setOnAction(e -> loadDVDPage(dvdList));
 		resourceChoices.getChildren().add(laptopChoice);
 		resourceChoices.getChildren().add(bookChoice);
 		resourceChoices.getChildren().add(dvdChoice);
@@ -145,56 +193,57 @@ public class MainPageController {
 
 	@FXML
 	private void handleSearch(ActionEvent event) {
-		ArrayList<Resource> resources = getResourceList();
-		if (currentResourceSelection.equals(COMBOBOX_BOOK)) {
-			resources.removeIf(r -> r.getType() != "book");
-		} else if (currentResourceSelection.equals(COMBOBOX_LAPTOP)) {
-			resources.removeIf(r -> r.getType() != "Laptop");
-		} else if (currentResourceSelection.equals(COMBOBOX_DVD)) {
-			resources.removeIf(r -> r.getType() != "Dvd");
+		if (!searchBox.getText().equals(null)) {
+			if (currentResourceSelection.equals(COMBOBOX_DVD)) {
+				ArrayList<Dvd> dvdList = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
+				loadDVDPage(dvdList);
+			} else if (currentResourceSelection.equals(COMBOBOX_LAPTOP)) {
+				ArrayList<Laptop> laptopList = (ArrayList<Laptop>) DatabaseManager.getTable("laptop");
+				loadLaptopPage(laptopList);
+			} else if (currentResourceSelection.equals(COMBOBOX_BOOK)) {
+				ArrayList<Book> bookList = (ArrayList<Book>) DatabaseManager.getTable("book");
+				loadBookPage(bookList);
+			}
 		}
-		if (!searchBox.textProperty().equals(null)) {
-			resources.removeIf(r -> r.getTitle().contains((CharSequence) searchBox.textProperty()));
-		}
-		loadListPage(resources);
 	}
 
-	private void loadAllPage() {
-		loadListPage(getResourceList());
-	}
-
-	private void loadDVDPage() {
-		ArrayList<Resource> resources = getResourceList();
-		resources.removeIf(r -> r.getType().equals("Dvd"));
-		loadListPage(resources);
-	}
-
-	private void loadBookPage() {
-		ArrayList<Resource> resources = getResourceList();
-		resources.removeIf(r -> r.getType().equals("book"));
-		loadListPage(resources);
-	}
-
-	private void loadLaptopPage() {
-		ArrayList<Resource> resources = getResourceList();
-		resources.removeIf(r -> r.getType().equals("Laptop"));
-		loadListPage(resources);
-	}
-
-	private void loadListPage(ArrayList<Resource> resources) {
-		VBox root;
+	private void loadDVDPage(ArrayList<Dvd> dvdList) {
 		try {
-			root = FXMLLoader.load(getClass().getClassLoader().getResource("cs230/application/ResourceList.fxml"));
-			// mainContent.setPrefHeight(listPage.getPrefHeight());
-			// mainContent.setPrefWidth(listPage.getPrefWidth());
+			ResourceListController controller = new ResourceListController();
+			controller.setDvdToShow(dvdList);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourceList.fxml"));
+			loader.setController(controller);
+			VBox root = loader.load();
 			mainContent.setContent(root);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private ArrayList<Resource> getResourceList() {
-		return (ArrayList<Resource>) DatabaseManager.getTable("Resource");
+	private void loadBookPage(ArrayList<Book> bookList) {
+		try {
+			ResourceListController controller = new ResourceListController();
+			controller.setbookToShow(bookList);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourceList.fxml"));
+			loader.setController(controller);
+			VBox root = loader.load();
+			mainContent.setContent(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void loadLaptopPage(ArrayList<Laptop> laptopList) {
+		try {
+			ResourceListController controller = new ResourceListController();
+			controller.setLaptopToShow(laptopList);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("ResourceList.fxml"));
+			loader.setController(controller);
+			VBox root = loader.load();
+			mainContent.setContent(root);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -225,6 +274,7 @@ public class MainPageController {
 			Stage stage = (Stage) logOutButton.getScene().getWindow();
 
 			stage.setScene(scene);
+			stage.centerOnScreen();
 
 		} catch (IOException e) {
 			System.exit(0);
@@ -245,21 +295,43 @@ public class MainPageController {
 				e.printStackTrace();
 			}
 		} else {
-			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(
-						getClass().getClassLoader().getResource("cs230/application/UserMainPage.fxml"));
-				VBox mainPage = fxmlLoader.load();
-				mainContent.setPrefHeight(mainPage.getPrefHeight());
-				mainContent.setPrefWidth(mainPage.getPrefWidth());
-				mainContent.setContent(mainPage);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			// To implement
 		}
 	}
 
 	@FXML
 	private void handleCreateRes(ActionEvent event) {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(
+					getClass().getClassLoader().getResource("cs230/application/CreateResourceView.fxml"));
+			BorderPane createResource = fxmlLoader.load();
+			mainContent.setContent(createResource);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
+	@FXML
+	private void handleViewTrans(ActionEvent event) {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(
+					getClass().getClassLoader().getResource("cs230/application/Transaction.fxml"));
+			VBox viewTrans = fxmlLoader.load();
+			mainContent.setContent(viewTrans);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	private void handleAddUser(ActionEvent event) {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(
+					getClass().getClassLoader().getResource("cs230/application/NewUser.fxml"));
+			VBox viewAddUser = fxmlLoader.load();
+			mainContent.setContent(viewAddUser);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

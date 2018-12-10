@@ -1,18 +1,25 @@
 package cs230.application;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import cs230.system.DatabaseManager;
 import cs230.system.Loan;
 import cs230.system.Resource;
 import cs230.system.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 
+/**
+ * @author Jack
+ */
 public class LibrarianMainpageController {
         @FXML
         private TableColumn<Loan,String> copyIdColumn;
@@ -31,6 +38,11 @@ public class LibrarianMainpageController {
         
         @FXML
         public void initialize() {
+                ArrayList<Loan> loanList 
+                = (ArrayList<Loan>) DatabaseManager.getTable("loan");
+                loanList.removeIf(l -> (l.getDueDate() == null 
+                                && l.getDueDate().isAfter(LocalDate.now())));
+                
                 
         }
         
@@ -42,25 +54,26 @@ public class LibrarianMainpageController {
                                 new PropertyValueFactory<Loan, String>("resourceID"));
                 borrowerColumn.setCellValueFactory(
                                 new PropertyValueFactory<Loan, String>("copyID"));
-                infoColumn.setCellFactory(ActionButtonTableCell.<Loan>forTableColumn("Copy Info", (Loan l) -> loadCopy(l)));
+                infoColumn.setCellFactory(ActionButtonTableCell
+                                .<Loan>forTableColumn("Copy Info",
+                                                (Loan l) -> loadCopy(l)));
         }
         
         private Loan loadCopy(Loan l)
         {
+                Popup popup = new Popup();
+                CopyHistoryController controller =
+                                new CopyHistoryController();
+                controller.setCopyId(l.getCopyID());
+                FXMLLoader loader = new 
+                                FXMLLoader(getClass().getResource("Copy.fxml"));
+                loader.setController(controller);
                 try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(
-                                getClass().getClassLoader().getResource("cs230/application/Copy.fxml"));
-                        VBox listPage = fxmlLoader.load();
-                        ResourceListController controller = fxmlLoader.<ResourceListController>getController();
-                        //controller.setListToShow(resources);
-                        //mainContent.setPrefHeight(listPage.getPrefHeight());
-                        //mainContent.setPrefWidth(listPage.getPrefWidth());
-                        //mainContent.setContent(listPage);
-                        return l;
-                } catch(IOException e) {
+                        popup.getContent().add((Parent)loader.load());
+                } catch (IOException e) {
                         e.printStackTrace();
-                        return null;
                 }
+                return l;  
         }
 
 }

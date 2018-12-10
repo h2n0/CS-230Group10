@@ -82,6 +82,10 @@ public class Loan {
 		this.status = false;
 	}
 
+	/**
+	 * checks if two loans are equal
+	 * @param obj the loan to compare against this
+	 */
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -137,6 +141,14 @@ public class Loan {
 	public LocalDate getDueDate() {
 		return dueDate;
 	}
+	
+	/**
+     * Sets the date that this resource is due back
+     * @param The due date
+     */
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate =  dueDate;
+    }
 
 	/**
 	 * Returns the date this resource was borrowed on

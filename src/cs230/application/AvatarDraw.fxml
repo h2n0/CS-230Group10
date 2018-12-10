@@ -6,9 +6,9 @@
 
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.AvatarDrawController">
-   <children>
-      <Canvas fx:id="canvas" height="300.0" onMouseClicked="#canvasClick" onMouseDragged="#mouseMove" onMouseMoved="#mouseMove" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" width="400.0" />
-      <Button layoutX="63.0" layoutY="339.0" mnemonicParsing="false" onAction="#saveAvatar" text="Save" />
-      <Button layoutX="272.0" layoutY="339.0" mnemonicParsing="false" onAction="#leaveDialog" text="Cancel" />
-   </children>
+    <children>
+        <Canvas fx:id="canvas" height="300.0" onMouseClicked="#canvasClick" onMouseDragged="#mouseMove" onMouseMoved="#mouseMove" onMousePressed="#mouseDown" onMouseReleased="#mouseUp" width="400.0" />
+        <Button layoutX="63.0" layoutY="339.0" mnemonicParsing="false" onAction="#saveAvatar" text="Save" />
+        <Button layoutX="272.0" layoutY="339.0" mnemonicParsing="false" onAction="#leaveDialog" text="Cancel" />
+    </children>
 </Pane>

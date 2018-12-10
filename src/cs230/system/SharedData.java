@@ -1,6 +1,8 @@
 package cs230.system;
 
-import java.util.ArrayList;
+import javafx.scene.image.Image;
+
+import java.io.File;
 
 /**
  * This class stores session information such as username to be used by each GUI
@@ -13,6 +15,7 @@ public class SharedData {
         // User currently logged in
         private static User activeUser;
         private static boolean isLibrarian;
+        private static boolean isFirstRun;
 
         /**
          * Sets the current active user and checks if they are a librarian
@@ -21,14 +24,6 @@ public class SharedData {
          */
         public static void setUser(User user) {
                 activeUser = user;
-//                ArrayList<User> allLibrarians = (ArrayList<User>) DatabaseManager.getTable("librarian");
-//                allLibrarians.removeIf(l -> !l.getName().equals(activeUser.getName()));
-//                if (allLibrarians.size()>0) {
-//                        isLibrarian = false;
-//                } else {
-//                        isLibrarian = true;
-//                }
-                isLibrarian = true;
         }
 
         /**
@@ -73,4 +68,39 @@ public class SharedData {
         public static boolean getIsLibrarian() {
                 return isLibrarian;
         }
+        
+        /**
+         * Gets whether it is first run.
+         * 
+         * @return True/False depending if it is first run
+         */
+        public static boolean getIsFirstRun() {
+                return isFirstRun;
+        }
+        
+        /**
+         * Sets whether it is first run.
+         * 
+         * @param firstRun Whether it is first run or not
+         */
+        public static void setIsFirstRun(boolean firstRun) {
+                isFirstRun = firstRun;
+        }
+
+        /**
+         * Returns the user's avatar image
+         * @return The active user's avatar
+         */
+        public static Image getAvatar() {
+                File file = new File(activeUser.getAvatarFilePath());
+                return new Image(file.toURI().toString());
+        }
+
+        /**
+         * set the librarian to boolean input
+         * @param b the boolean if a 
+         */
+		public static void setIsLibrarian(boolean b ) {
+			isLibrarian = b;
+		}
 }
