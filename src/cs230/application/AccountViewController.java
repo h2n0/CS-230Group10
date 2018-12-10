@@ -69,7 +69,7 @@ public class AccountViewController {
     private Button cancell4;
 
     /**
-     * 
+     * sets all window features to be invisible
      * @param event event to trigger code
      */
     @FXML
@@ -92,6 +92,11 @@ public class AccountViewController {
 		addresstxt.setVisible(false);
     }
 
+    /**
+     * set the relevant features to be visible so 
+     * user can edit address
+     * @param event even to trigger this code
+     */
     @FXML
     void editFieldAddress(MouseEvent event) {
 		addresstxt.setVisible(true);
@@ -104,6 +109,11 @@ public class AccountViewController {
 		cancell4.setVisible(true);
     }
 
+    /**
+     * set the relevant features to be visible so 
+     * user can edit first name
+     * @param event even to trigger this code
+     */
     @FXML
     void editFieldFname(MouseEvent event) {
 		firstNametxt.setVisible(true);
@@ -116,6 +126,11 @@ public class AccountViewController {
 		cancell1.setVisible(true);
     }
 
+    /**
+     * set the relevant features to be visible so 
+     * user can edit last name
+     * @param event even to trigger this code
+     */
     @FXML
     void editFieldLastName(MouseEvent event) {
 		lastNametxt.setVisible(true);
@@ -128,6 +143,11 @@ public class AccountViewController {
 		cancell2.setVisible(true);
     }
 
+    /**
+     * set the relevant features to be visible so 
+     * user can edit phone number
+     * @param event even to trigger this code
+     */
     @FXML
     void editFieldMbNum(MouseEvent event) {
 		mobNumtxt.setVisible(true);
@@ -139,32 +159,44 @@ public class AccountViewController {
 		saveMobNum.setVisible(true);
 		cancell3.setVisible(true);
     }
-
+    
+    /**
+     * saves the address
+     * @param event even to trigger this code
+     */
     @FXML
     void saveAdress(MouseEvent event) {
 		address.setText(addresstxt.getText());
 		cancell(event);
     }
 
+    /**
+     * saves the first name
+     * @param event even to trigger this code
+     */
     @FXML
     void saveFirstName(MouseEvent event) {
 		firstName.setText(firstNametxt.getText());
 		cancell(event);
     }
 
+    /**
+     * saves the last name
+     * @param event even to trigger this code
+     */
     @FXML
     void saveLastName(MouseEvent event) {
 		lastName.setText(lastNametxt.getText());
 		cancell(event);
     }
 
+    /**
+     * saves the phone number
+     * @param event even to trigger this code
+     */
     @FXML
     void saveMobNum(MouseEvent event) {
 		mobileNumber.setText(mobNumtxt.getText());
 		cancell(event);
-    }
-
-    @FXML
-    void initialize() {
     }
 }
