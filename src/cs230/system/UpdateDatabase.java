@@ -42,7 +42,7 @@ public class UpdateDatabase extends TimerTask {
                                 Copy c = (Copy) DatabaseManager.searchRecord(tempCopy, "copy");
 
                                 //get how much each day overdue costs
-                                Double overdueAmount = c.getoverdueCost();
+                                Double overdueAmount = c.getOverdueCost();
 
                                 //calculate the new balance
                                 Double newBalance = u.getBalance() + overdueAmount;

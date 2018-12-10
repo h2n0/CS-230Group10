@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -110,13 +111,19 @@ public class NewUserController {
         @FXML
         public void initialize () {
                 staffEditArea.setVisible(false);
-                String path = new File("").getAbsolutePath();
-                image1 = new ImageView(path + "/Assets/image1.png");
-                image2 = new ImageView(path + "/Assets/image2.png");
-                image3 = new ImageView(path + "/Assets/image3.png");
-                image4 = new ImageView(path + "/Assets/image4.png");
-                image5 = new ImageView(path + "/Assets/image5.png");
-                image6 = new ImageView(path + "/Assets/image6.png");
+                File file = new File("Database\\avatars\\image1.png");
+                Image image = new Image(file.toURI().toString());
+                image1.setImage(image);
+                //image2 = new ImageView(path + "\\Database\\avatars\\image2" +
+                //        ".png");
+                //image3 = new ImageView(path + "\\Database\\avatars\\image3" +
+                //        ".png");
+                //image4 = new ImageView(path + "\\Database\\avatars\\image4" +
+                //        ".png");
+                //image5 = new ImageView(path + "\\Database\\avatars\\image5" +
+                //        ".png");
+                //image6 = new ImageView(path + "\\Database\\avatars\\image6" +
+                //       ".png");
                 Pane root = null;
                 try {
                     // Initalise and load FXML for the main page

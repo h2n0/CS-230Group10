@@ -70,6 +70,9 @@ public class MainPageController {
 
         @FXML
         private Hyperlink createResLink;
+
+        @FXML
+        private Hyperlink addUserLink;
 		
         @FXML
         private ScrollPane mainContent;
@@ -294,6 +297,18 @@ public class MainPageController {
                                 new FXMLLoader(getClass().getClassLoader().getResource("cs230/application/Transaction.fxml"));
                         VBox viewTrans = fxmlLoader.load();
                         mainContent.setContent(viewTrans);
+                } catch(IOException e) {
+                        e.printStackTrace();
+                }
+        }
+
+        @FXML
+        private void handleAddUser(ActionEvent event) {
+                try {
+                        FXMLLoader fxmlLoader =
+                                new FXMLLoader(getClass().getClassLoader().getResource("cs230/application/NewUser.fxml"));
+                        VBox viewAddUser = fxmlLoader.load();
+                        mainContent.setContent(viewAddUser);
                 } catch(IOException e) {
                         e.printStackTrace();
                 }

@@ -83,7 +83,7 @@ public class CopyEditController {
         
         /**
          * Sets the copyID to be shown
-         * @param copyId The copy's ID
+         * @param copyID The copy's ID
          */
         public void setCopyID(String copyID) {
                 this.copyID = copyID;
@@ -153,7 +153,8 @@ public class CopyEditController {
                                 } else {
                                         type = "Dvd";
                                 }
-                                Copy toAdd = new Copy(resourceID, Copy.Status.AVAILABLE, type
+                                Copy toAdd = new Copy(copyID ,resourceID,
+                                        Copy.Status.AVAILABLE, type
                                                 , enteredDuration);
                                 DatabaseManager.saveRecord(toAdd, "copy");
                                 Stage currentStage = (Stage)incorrectLabel.getScene().getWindow();
@@ -167,10 +168,13 @@ public class CopyEditController {
                                 } else {
                                         type = "Dvd";
                                 }
-                                Copy oldCopy = new Copy(resourceID, status, type
+                                Copy oldCopy = new Copy(copyID, resourceID,
+                                        Copy.Status.AVAILABLE, type
                                                 , duration);
                                 if(duration != enteredDuration) {
-                                        Copy newCopy = new Copy(resourceID, status, type
+                                        Copy newCopy = new Copy(copyID,
+                                                resourceID,
+                                                Copy.Status.AVAILABLE, type
                                                 , enteredDuration);
                                         DatabaseManager.editRecord(oldCopy, newCopy, "copy");
                                 } else {

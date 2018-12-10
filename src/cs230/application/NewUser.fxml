@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox fx:id="rootVBox" prefHeight="644.0" prefWidth="1193.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="rootVBox" prefHeight="644.0" prefWidth="1193.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs230.application.NewUserController">
    <children>
       <Button fx:id="switchToUser" mnemonicParsing="false" onAction="#handleSwitchUser" text="Switch To User" />
       <Button fx:id="switchToLibrarian" mnemonicParsing="false" onAction="#handleSwitchLibrarian" text="Switch To Librarian" />
@@ -73,32 +72,32 @@
       <VBox fx:id="drawAvatarBox" prefHeight="200.0" prefWidth="100.0" />
       <HBox fx:id="defaultAvatarBox" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="image1Button" mnemonicParsing="false" onAction="#image1SelectedButton" prefHeight="32.0" prefWidth="45.0">
+            <Button fx:id="image1Button" mnemonicParsing="false" onAction="#handleImage1SelectedButton" prefHeight="32.0" prefWidth="45.0">
                <graphic>
                   <ImageView fx:id="image1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button fx:id="image2Button" mnemonicParsing="false" onAction="#image2SelectedButton">
+            <Button fx:id="image2Button" mnemonicParsing="false" onAction="#handleImage2SelectedButton">
                <graphic>
                   <ImageView fx:id="image2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button fx:id="image3Button" mnemonicParsing="false" onAction="#image3SelectedButton">
+            <Button fx:id="image3Button" mnemonicParsing="false" onAction="#handleImage3SelectedButton">
                <graphic>
                   <ImageView fx:id="image3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button fx:id="image4Button" mnemonicParsing="false" onAction="#image4SelectedButton">
+            <Button fx:id="image4Button" mnemonicParsing="false" onAction="#handleImage4SelectedButton">
                <graphic>
                   <ImageView fx:id="image4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button fx:id="image5Button" mnemonicParsing="false" onAction="#image5SelectedButton">
+            <Button fx:id="image5Button" mnemonicParsing="false" onAction="#handleImage5SelectedButton">
                <graphic>
                   <ImageView fx:id="image5" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Button>
-            <Button fx:id="image6Button" mnemonicParsing="false" onAction="#image6SelectedButton">
+            <Button fx:id="image6Button" mnemonicParsing="false" onAction="#handleImage6SelectedButton">
                <graphic>
                   <ImageView fx:id="image6" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>

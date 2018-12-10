@@ -385,7 +385,6 @@ public class ResourceDetailController {
                 Popup popup = new Popup();
                 ResourceCopyPageController controller =
                                 new ResourceCopyPageController();
-                controller.setCopyId(c.getID());
                 FXMLLoader loader = new 
                                 FXMLLoader(getClass().getResource("Copy.fxml"));
                 loader.setController(controller);

@@ -39,6 +39,11 @@
                   <Font size="13.0" />
                </font>
             </Hyperlink>
+            <Hyperlink fx:id="addUserLink" onAction="#handleAddUser" text="Add User">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Hyperlink>
          </children>
       </VBox>
    </left>
@@ -66,12 +71,15 @@
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="40.0" />
+                           </HBox.margin>
                               </TextField>
                               <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" prefHeight="25.0" prefWidth="66.0" text="Search" />
                               <ComboBox fx:id="resourcePicker" prefHeight="25.0" prefWidth="125.0" promptText="Resource Type" visibleRowCount="4" />
                         <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="55.0" text="Logout">
                            <HBox.margin>
-                              <Insets left="160.0" />
+                              <Insets left="120.0" />
                            </HBox.margin>
                         </Button>
                            </children>

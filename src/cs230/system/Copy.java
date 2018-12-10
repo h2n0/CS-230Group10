@@ -20,6 +20,10 @@ public class Copy implements Serializable {
         private String resourceType;
         //duration of the loan, in days
         private int loanDuration;
+        //daily increase of resource
+        private double overdueCost;
+        //max of the fine
+        private double overdueMax;
 
         /**
 	     * Constructs a copy entity
@@ -29,12 +33,23 @@ public class Copy implements Serializable {
          * @param loanDuration how long you can borrow the copy for
 	     */
         public Copy(String ID, String resourceID, Status status,
-                    String resourceType, int loanDuration, double overdueCost) {
+                    String resourceType, int loanDuration) {
                 this.resourceID = resourceID;
                 this.status = status;
                 this.resourceType = resourceType;
                 this.loanDuration = loanDuration;
-	    }
+                switch(resourceType) {
+                        case "book":
+                        case "dvd":
+                                overdueCost = 2.00;
+                                overdueMax = 25.00;
+                                break;
+                        case "laptop":
+                                overdueCost = 10.00;
+                                overdueMax = 100.00;
+                                break;
+                }
+        }
 	
         /**
 	     * Constructs only the candidate keys of the copy for database
@@ -111,6 +126,10 @@ public class Copy implements Serializable {
         public int getLoanDuration() {
                 return loanDuration;
 	    }
+
+	    public double getOverdueCost() {
+                return this.overdueCost;
+            }
         
         /**
 	     * Saves this copy to the database
