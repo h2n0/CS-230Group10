@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class Address implements Serializable {
 	    private static final long serialVersionUID = 1L;
 	    //the house name or number
-	    private String houseNumorName;
+	    private String houseNumberName;
 	    //The road name
 	    private String roadName;
 	    //The city name
@@ -21,13 +21,13 @@ public class Address implements Serializable {
 	    
 	    /**
 	     * Constructor
-	     * @param houseNumorName The house name or number
+	     * @param houseNumborName The house name or number
 	     * @param roadName The name of the road
 	     * @param city The name of the city
 	     * @param postcode The postcode
 	     */
-	    public Address(String houseNumorName, String roadName, String city, String postcode) {
-	            this.houseNumorName = houseNumorName;
+	    public Address(String houseNumberName, String roadName, String city, String postcode) {
+	            this.houseNumberName = houseNumberName;
 	            this.roadName = roadName;
 	            this.city = city;
 	            this.postcode = postcode;
@@ -37,15 +37,15 @@ public class Address implements Serializable {
 	     * Sets the house name or number
 	     * @param houseNumorName The house name or number
 	     */
-	    public void setHouseNumorName(String houseNumorName) {
-	            this.houseNumorName = houseNumorName;
+	    public void setHouseNumberName(String houseNumberName) {
+	            this.houseNumberName = houseNumberName;
 	    }
 	    /**
 	     * Gets the house name or number
 	     * @return The house name or number
 	     */
-	    public String getHouseNumorName() {
-	            return houseNumorName;
+	    public String getHouseNumberName() {
+	            return houseNumberName;
 	    }
 
 	    /**
@@ -116,7 +116,7 @@ public class Address implements Serializable {
 	            String letterOrSpace = "([a-zA-Z[\\p{Blank}]])*";
 	            
 	            //letterOrSpace or a number any amount of times
-	            Boolean validHouseNumorName = Pattern.matches(letterOrSpace, houseNumorName) || Pattern.matches("\\d*", houseNumorName);
+	            Boolean validHouseNumorName = Pattern.matches(letterOrSpace, houseNumberName) || Pattern.matches("\\d*", houseNumberName);
 	            
 	            //letterOrSpace
 	            Boolean validRoadName = Pattern.matches(letterOrSpace, roadName);

@@ -22,7 +22,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainPageController {
@@ -81,19 +80,19 @@ public class MainPageController {
         @FXML
         public void initialize() {
                 setResourceLinks();
-//                balance.textProperty()
-//                .set(Double.toString(currentUser.getBalance()));
-//                if(SharedData.getIsLibrarian())
-//                {
-//                        username.setOnAction(e -> loadLibrarianInfo()); 
-//                }
- //               else
- //               {
-//                        username.setOnAction(e -> loadUserInfo()); 
- //               }
+                balance.textProperty()
+                .set(Double.toString(currentUser.getBalance()));
+                if(SharedData.getIsLibrarian())
+                {
+                        username.setOnAction(e -> loadLibrarianInfo()); 
+                }
+                else
+                {
+                        username.setOnAction(e -> loadUserInfo()); 
+                }
                 
                 updateComboBox();
-//                username.setText(SharedData.getUsername());
+                username.setText(SharedData.getUsername());
                 //userImage = new ImageView(SharedData.getAvatar());
                 currentResourceSelection = COMBOBOX_ALL;
         }
@@ -109,6 +108,8 @@ public class MainPageController {
                                         getClass().getClassLoader()
                                         .getResource("cs230/application/Librarian"
                                                         + "AccountView.fxml"));
+                        LibrarianAccountViewController controller = new LibrarianAccountViewController();
+                        controller.setLibrarian((Librarian) SharedData.getUser());
                         //mainContent.setPrefHeight(listPage.getPrefHeight());
                         //mainContent.setPrefWidth(listPage.getPrefWidth());
                         mainContent.setContent(root);
@@ -127,6 +128,8 @@ public class MainPageController {
                                                         + "/AccountView.fxml"));
                         //mainContent.setPrefHeight(listPage.getPrefHeight());
                         //mainContent.setPrefWidth(listPage.getPrefWidth());
+                        AccountViewController controller = new AccountViewController();
+                        controller.setUser(SharedData.getUser());
                         mainContent.setContent(root);
                 } catch (IOException e) {
                         e.printStackTrace();

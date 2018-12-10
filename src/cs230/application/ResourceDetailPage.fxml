@@ -33,13 +33,14 @@
                         <Label text="Do you want to reserve it?" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="reserveYesButton" mnemonicParsing="false" text="Yes" />
-                              <Button fx:id="reserveNoButton" mnemonicParsing="false" text="No" />
+                              <Button fx:id="reserveYesButton" mnemonicParsing="false" onAction="#handlereserveYes" text="Yes" />
+                              <Button fx:id="reserveNoButton" mnemonicParsing="false" onAction="#handleReserveNo" text="No" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                   <Label fx:id="noCopiesLabel" text="No copies found" />
+                  <Label fx:id="userCannotLoanLabel" text="This user cannot have loans" />
                   <HBox prefHeight="25.0" prefWidth="404.0">
                      <children>
                         <Button fx:id="saveLoanButton" mnemonicParsing="false" onAction="#handleLoanSaveAction" text="Save Loan" />
@@ -120,7 +121,7 @@
                         <TableColumn fx:id="moreInfoColumn" prefWidth="90.0" />
                     </columns>
                   </TableView>
-                  <Button mnemonicParsing="false" text="Edit " />
+                  <Button fx:id="newCopyButton" mnemonicParsing="false" onAction="#handleNewCopy" text="New" />
                </children>
             </HBox>
             <GridPane id="bookDetails" fx:id="bookGrid" prefHeight="160.0" prefWidth="324.0">

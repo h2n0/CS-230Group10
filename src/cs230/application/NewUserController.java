@@ -185,7 +185,8 @@ public class NewUserController {
         }
         @FXML
         private void handleSwitchButton (ActionEvent event) {
-                defaultAvatarBox.setVisible(!defaultAvatarBox.visibleProperty().get());
+                defaultAvatarBox.setVisible(!defaultAvatarBox.visibleProperty()
+                                .get());
                 drawAvatarBox.setVisible(!drawAvatarBox.visibleProperty().get());
                 if (drawAvatarBox.visibleProperty().get()) {
                         String path = new File("").getAbsolutePath();

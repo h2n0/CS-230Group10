@@ -39,7 +39,7 @@ public class LibrarianMainpageController {
                 = (ArrayList<Loan>) DatabaseManager.getTable("loan");
                 loanList.removeIf(l -> (l.getDueDate() == null 
                                 && l.getDueDate().isAfter(LocalDate.now())));
-                
+                populateListTable(loanList);
                 
         }
         

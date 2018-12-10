@@ -47,7 +47,6 @@
                <children>
 			   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#handleLogout" prefHeight="25.0" prefWidth="55.0" text="Logout" AnchorPane.rightAnchor="0.0" />
                         <HBox layoutY="10.0" prefHeight="46.0" prefWidth="750.0">
                            <children>
                               <ImageView fx:id="userImage" fitHeight="68.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true" />

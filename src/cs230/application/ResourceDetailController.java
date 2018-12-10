@@ -282,6 +282,7 @@ public class ResourceDetailController {
                 } else {
                         addBookGui();
                 }
+                // Set librarian stuff to not be visible for users
                 if (!SharedData.getIsLibrarian()) {
                         saveButton.visibleProperty().set(false);
                         editButton.visibleProperty().set(false);
@@ -289,6 +290,8 @@ public class ResourceDetailController {
                         changeThumbnailButton.visibleProperty().set(false);
                         copyTable.visibleProperty().set(false);
                         loanButton.setVisible(true);
+                        newCopyButton.setVisible(true);
+                        returnShowButton.setVisible(true);
                 } else {
                         saveButton.visibleProperty().set(true);
                         editButton.visibleProperty().set(true);
@@ -296,6 +299,8 @@ public class ResourceDetailController {
                         changeThumbnailButton.visibleProperty().set(true);
                         copyTable.visibleProperty().set(true);
                         loanButton.setVisible(true);
+                        newCopyButton.setVisible(false);
+                        returnShowButton.setVisible(false);
                 }
         }
 
@@ -307,6 +312,7 @@ public class ResourceDetailController {
                 shownResourceId = id;
         }
 
+        //Sets the resource info based on it's input 
         private void setResourceInfo(String resourceId) {
                 ArrayList<Dvd> allDvds = new ArrayList<Dvd>();
                 allDvds = (ArrayList<Dvd>) DatabaseManager.getTable("dvd");
@@ -340,6 +346,7 @@ public class ResourceDetailController {
                                 .equals(resourceId)));
         }
 
+        // Initialise the gui 
         private void initializeGui() {
                 showLoanCreate.setVisible(false);
                 showReturnBox.setVisible(false);
